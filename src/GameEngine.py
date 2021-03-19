@@ -16,6 +16,6 @@ class GameEngine:
                 self.handle(event) 
     
     def handle(self, event):
-        if event == pg.QUIT:
+        if event.type == pg.QUIT:
             self.running = False
             pg.quit()
