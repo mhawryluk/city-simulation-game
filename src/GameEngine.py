@@ -13,12 +13,9 @@ class GameEngine:
         while self.running:
             pg.display.update()
             for event in pg.event.get():
-                self.handle(event)
-                
-             
+                self.handle(event) 
     
     def handle(self, event):
         if event == pg.QUIT:
             self.running = False
             pg.quit()
-        

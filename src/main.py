@@ -1,4 +1,4 @@
-import GameEngine
+from GameEngine import *
 
 def main():
     game_engine = GameEngine()
