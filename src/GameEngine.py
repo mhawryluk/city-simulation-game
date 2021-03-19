@@ -39,3 +39,6 @@ class SaveManager:
     def __init__(self):
         pass
 
+    def generate_game_save_source(self):
+        pass
+
