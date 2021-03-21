@@ -20,13 +20,9 @@ class GameEngine:
         self.FPS = 60
         self.clock = pg.time.Clock()
 
-<<<<<<< HEAD
         self.save_manager = SaveManager()
-        self.game_mode = mm.MainMenu(self.WINDOW, self.save_manager)
-=======
-        #self.game_mode = MainMenu(self.WINDOW)
+        #self.game_mode = mm.MainMenu(self.WINDOW, self.save_manager)
         self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
->>>>>>> a8348588cf2c08e76e1718a09ae930b3fe0101d3
 
     def run(self):
         self.running = True
