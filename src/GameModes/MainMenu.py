@@ -1,6 +1,5 @@
 from GameModes.GameMode import *
 
-
 class MainMenu(GameMode):
     def update(self):
         pass
