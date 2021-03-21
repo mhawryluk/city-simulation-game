@@ -34,3 +34,6 @@ class CitySpace:
     def add_move_speed(self, move_speed):
         self.move_speed = (
             self.move_speed[0] + move_speed[0], self.move_speed[1] + move_speed[1])
+
+    def zoom(self, zoom_value):
+        self.scale += zoom_value
