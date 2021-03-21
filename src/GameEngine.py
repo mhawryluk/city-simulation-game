@@ -1,8 +1,13 @@
 import pygame as pg
+from GameModes.MainMenu import *
+from GameModes.GameWindow import *
+
 
 class GameEngine:
     def __init__(self):
         self.running = False
+        pg.init()
+        pg.display.set_caption('City Simulation Game')
 
         self.MEASUREMENTS = (1000, 600)
         self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
@@ -10,11 +15,11 @@ class GameEngine:
         self.clock = pg.time.Clock()
         #self.save = SaveManager()
 
-        self.game_mode = MainMenu(self.WINDOW)
+        #self.game_mode = MainMenu(self.WINDOW)
+        self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
 
     def run(self):
         self.running = True
-        
 
         while self.running:
             self.clock.tick(self.FPS)
@@ -41,4 +46,3 @@ class SaveManager:
 
     def generate_game_save_source(self):
         pass
-
