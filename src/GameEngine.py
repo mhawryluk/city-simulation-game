@@ -1,23 +1,35 @@
 import pygame as pg
+<<<<<<< HEAD
 import os
 import json as js
 import GameModes.MainMenu as mm
+=======
+from GameModes.MainMenu import *
+from GameModes.GameWindow import *
+
+>>>>>>> a8348588cf2c08e76e1718a09ae930b3fe0101d3
 
 class GameEngine:
     def __init__(self):
         self.running = False
+        pg.init()
+        pg.display.set_caption('City Simulation Game')
 
         self.MEASUREMENTS = (1000, 600)
         self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
         self.FPS = 60
         self.clock = pg.time.Clock()
 
+<<<<<<< HEAD
         self.save_manager = SaveManager()
         self.game_mode = mm.MainMenu(self.WINDOW, self.save_manager)
+=======
+        #self.game_mode = MainMenu(self.WINDOW)
+        self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
+>>>>>>> a8348588cf2c08e76e1718a09ae930b3fe0101d3
 
     def run(self):
         self.running = True
-        
 
         while self.running:
             self.clock.tick(self.FPS)
