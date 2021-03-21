@@ -1,13 +1,9 @@
 import pygame as pg
-<<<<<<< HEAD
 import os
 import json as js
 import GameModes.MainMenu as mm
-=======
-from GameModes.MainMenu import *
 from GameModes.GameWindow import *
 
->>>>>>> a8348588cf2c08e76e1718a09ae930b3fe0101d3
 
 class GameEngine:
     def __init__(self):
@@ -55,10 +51,10 @@ class SaveManager:
 
         if not os.path.isfile(settings_file):
             self.generate_base_settings(settings_file)
-       
+
         with open(settings_file, 'r') as settings:
             self.active_settings = js.load(settings)
-            
+
         self.load_save(self.active_settings.get('active_save', None))
 
     def generate_base_settings(self, settings_file):
@@ -82,4 +78,3 @@ class SaveManager:
 
     def save(self):
         pass
-
