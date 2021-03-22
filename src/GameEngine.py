@@ -76,6 +76,7 @@ class SaveManager:
         save_id = settings['saves_amount'] + 1
         if save_id >= settings['max_saves_amount']:
             #error
+            pass
         else:
             settings['saves_amount'] = save_id
             self.active_save = {'name':name, 'id':save_id}
