@@ -17,8 +17,8 @@ class GameEngine:
         self.clock = pg.time.Clock()
 
         self.save_manager = SaveManager()
-        #self.game_mode = mm.MainMenu(self.WINDOW, self.save_manager)
-        self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
+        self.game_mode = mm.MainMenu(self.WINDOW, self.save_manager)
+        #self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
 
     def run(self):
         self.running = True
