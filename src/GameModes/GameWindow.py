@@ -5,7 +5,8 @@ from City.CitySpace import *
 class GameWindow(GameMode):
     def __init__(self, window, save, height, width):
         super().__init__(window, save)
-        self.city_space = CitySpace(height, width)
+        self.city_space = CitySpace(
+            width, height, window.get_width(), window.get_height())
         self.SCROLL_SPEED = 5
 
     def update(self):
@@ -25,10 +26,14 @@ class GameWindow(GameMode):
                 self.city_space.add_move_speed((0, self.SCROLL_SPEED))
 
         if event.type == pg.MOUSEBUTTONUP:
+            if event.button == 1:
+                self.city_space.select_lot(pg.mouse.get_pos())
             if event.button == 4:
                 self.city_space.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                self.city_space.select_lot(pg.mouse.get_pos())
             # zooming out
             if event.button == 5:
                 self.city_space.zoom(-self.SCROLL_SPEED)
