@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from SaveManager import SaveManager
+from GameEngineTools.SaveManager import SaveManager
 
 class GameMode(ABC):
     @abstractmethod

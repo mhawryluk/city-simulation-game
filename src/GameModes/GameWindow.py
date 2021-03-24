@@ -1,6 +1,6 @@
 from GameModes.GameMode import *
 from City.CitySpace import *
-from SaveManager import SaveManager
+from GameEngineTools.SaveManager import SaveManager
 
 
 class GameWindow(GameMode):
