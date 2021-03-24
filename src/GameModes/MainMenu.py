@@ -13,34 +13,36 @@ class MainMenu(GameMode):
 
         self.background = None
         self.menu = None
+        self.save_menu = None
+        self.save_menu_active = False
         self.play_button = None
         self.save_button = None
 
         self.create_menu_window()
 
-    @classmethod
     def create_menu_window(self):
-    
         width, height = self.WINDOW.get_size()
 
         self.background = pg.image.load(os.path.join('Assets', 'menu_background.jpg'))
         self.background = pg.transform.scale(self.background, self.WINDOW.get_size())
 
-        self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=pgmen.themes.THEME_SOLARIZED, 
+        self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=self.get_theme(), 
+        mouse_enabled=True, mouse_motion_selection=True)
+        self.save_menu = pgmen.Menu(title='Saves', width=width*0.48, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
 
-        if(self.save.has_active_save()):
+        self.save_menu.add_button('Back', self.change_save_menu_status)
+
+        if(not self.save_manager.has_active_save()):
             self.play_button = self.menu.add.button('Play', self.play)
-            self.save_button = self.menu.add_button('Choose save', self.save_menu)
+            self.save_button = self.menu.add_button('Choose save', self.change_save_menu_status)
         else:
             self.play_button = None
-            self.save_button = self.menu.add_button('Create save', self.save_menu)
+            self.save_button = self.menu.add_button('Create save', self.change_save_menu_status)
     
-    @classmethod
-    def save_menu(self):
-        print("Save")
+    def change_save_menu_status(self):
+        self.save_menu_active = not self.save_menu_active
 
-    @classmethod
     def play(self):
         #configure save
         #self.change_mode = True  
@@ -50,11 +52,27 @@ class MainMenu(GameMode):
         self.draw()        
 
     def handle(self, event):
-        if self.menu.is_enabled():
+        if self.save_menu_active:
+            self.save_menu.update([event])
+        elif self.menu.is_enabled():
             self.menu.update([event])
-            self.draw()
+
+        self.draw()
 
     def draw(self):
         self.WINDOW.blit(self.background, (0,0))
-        self.menu.draw(self.WINDOW)
+        if self.save_menu_active:
+            self.save_menu.draw(self.WINDOW)
+        else:
+            self.menu.draw(self.WINDOW)
+        
         pg.display.update()
+
+    def get_theme(self):
+        theme = pgmen.themes.THEME_SOLARIZED.copy()
+        theme.widget_font = pgmen.font.FONT_FRANCHISE
+        theme.cursor_color = (0, 0, 0)
+        theme.widget_border_color = (0, 0, 0)
+        theme.widget_border_width = 2
+        return theme
+
