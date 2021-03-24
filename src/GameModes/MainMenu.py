@@ -9,7 +9,7 @@ class MainMenu(GameMode):
         self.save_manager = save
         self.change_mode = False
         self.redraw = True
-        self.WINDOW = WINDOW
+        self.window = WINDOW
 
         self.background = None
         self.menu = None
@@ -21,10 +21,10 @@ class MainMenu(GameMode):
         self.create_menu_window()
 
     def create_menu_window(self):
-        width, height = self.WINDOW.get_size()
+        width, height = self.window.get_size()
 
         self.background = pg.image.load(os.path.join('Assets', 'menu_background.jpg'))
-        self.background = pg.transform.scale(self.background, self.WINDOW.get_size())
+        self.background = pg.transform.scale(self.background, self.window.get_size())
 
         self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
@@ -44,9 +44,7 @@ class MainMenu(GameMode):
         self.save_menu_active = not self.save_menu_active
 
     def play(self):
-        #configure save
-        #self.change_mode = True  
-        print("PLAY")  
+        self.change_mode = True 
 
     def update(self):
         self.draw()        
@@ -60,11 +58,11 @@ class MainMenu(GameMode):
         self.draw()
 
     def draw(self):
-        self.WINDOW.blit(self.background, (0,0))
+        self.window.blit(self.background, (0,0))
         if self.save_menu_active:
-            self.save_menu.draw(self.WINDOW)
+            self.save_menu.draw(self.window)
         else:
-            self.menu.draw(self.WINDOW)
+            self.menu.draw(self.window)
         
         pg.display.update()
 

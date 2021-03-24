@@ -9,6 +9,7 @@ class GameWindow(GameMode):
         self.city_space = CitySpace(
             width, height, window.get_width(), window.get_height())
         self.SCROLL_SPEED = 5
+        self.change_mode = False
 
     def update(self):
         self.city_space.update()

@@ -34,9 +34,9 @@ class GameEngine:
                     pg.quit()
                 else:
                     self.game_mode.handle(event)
-
                     if self.game_mode.change_mode:
                         self.change_mode()
 
     def change_mode(self):
-        pass
+        print('game_mode_change')
+        self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
