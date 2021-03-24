@@ -1,10 +1,11 @@
 from GameModes.GameMode import *
+from SaveManager import SaveManager
 import pygame as pg
 import pygame_menu as pgmen
 import os
 
 class MainMenu(GameMode):
-    def __init__(self, WINDOW, save):
+    def __init__(self, WINDOW, save: SaveManager):
         self.save_manager = save
         self.change_mode = False
         self.redraw = True
@@ -13,9 +14,11 @@ class MainMenu(GameMode):
         self.background = None
         self.menu = None
         self.play_button = None
+        self.save_button = None
 
         self.create_menu_window()
 
+    @classmethod
     def create_menu_window(self):
     
         width, height = self.WINDOW.get_size()
@@ -26,20 +29,25 @@ class MainMenu(GameMode):
         self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=pgmen.themes.THEME_SOLARIZED, 
         mouse_enabled=True, mouse_motion_selection=True)
 
-        self.play_button = self.menu.add.button('Play', self.play)
+        if(self.save.has_active_save()):
+            self.play_button = self.menu.add.button('Play', self.play)
+            self.save_button = self.menu.add_button('Choose save', self.save_menu)
+        else:
+            self.play_button = None
+            self.save_button = self.menu.add_button('Create save', self.save_menu)
+    
+    @classmethod
+    def save_menu(self):
+        print("Save")
 
-    def redraw_needed(self):
-        self.redraw = not self.redraw
-        return not self.redraw
-
-    def update(self):
-        self.draw()
-        
-
+    @classmethod
     def play(self):
         #configure save
         #self.change_mode = True  
-        print("PLAY")          
+        print("PLAY")  
+
+    def update(self):
+        self.draw()        
 
     def handle(self, event):
         if self.menu.is_enabled():
