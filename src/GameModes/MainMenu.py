@@ -14,9 +14,15 @@ class MainMenu(GameMode):
         self.background = None
         self.menu = None
         self.save_menu = None
+        self.settings_menu = None
+
         self.save_menu_active = False
+        self.settings_menu_active = False
+
         self.play_button = None
         self.save_button = None
+        self.settings_button = None
+        self.quit_button = None
 
         self.create_menu_window()
 
@@ -28,10 +34,8 @@ class MainMenu(GameMode):
 
         self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
-        self.save_menu = pgmen.Menu(title='Saves', width=width*0.48, height=height*0.85, theme=self.get_theme(), 
-        mouse_enabled=True, mouse_motion_selection=True)
-
-        self.save_menu.add_button('Back', self.change_save_menu_status)
+        self.make_save_menu(width, height)
+        self.make_settings_menu(width, height)
 
         if(not self.save_manager.has_active_save()):
             self.play_button = self.menu.add.button('Play', self.play)
@@ -39,9 +43,27 @@ class MainMenu(GameMode):
         else:
             self.play_button = None
             self.save_button = self.menu.add_button('Create save', self.change_save_menu_status)
+
+        self.settings_button = self.menu.add_button('Settings', self.change_settings_menu_status)
+        self.quit_button = self.menu.add_button('Quit', pgmen.events.PYGAME_QUIT)
+    
+    def make_save_menu(self, width, height):
+        self.save_menu = pgmen.Menu(title='Saves', width=width*0.48, height=height*0.85, theme=self.get_theme(), 
+        mouse_enabled=True, mouse_motion_selection=True)
+
+        self.save_menu.add_button('Back', self.change_save_menu_status)
+
+    def make_settings_menu(self, width, height):
+        self.settings_menu = pgmen.Menu(title='Settings', width=width*0.52, height=height*0.85, theme=self.get_theme(), 
+        mouse_enabled=True, mouse_motion_selection=True)
+
+        self.settings_menu.add_button('Back', self.change_settings_menu_status)
     
     def change_save_menu_status(self):
         self.save_menu_active = not self.save_menu_active
+
+    def change_settings_menu_status(self):
+        self.settings_menu_active = not self.settings_menu_active
 
     def play(self):
         self.change_mode = True 
@@ -61,6 +83,8 @@ class MainMenu(GameMode):
         self.window.blit(self.background, (0,0))
         if self.save_menu_active:
             self.save_menu.draw(self.window)
+        elif self.settings_menu_active:
+            self.settings_menu.draw(self.window)
         else:
             self.menu.draw(self.window)
         
