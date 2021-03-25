@@ -28,7 +28,10 @@ class CitySpace:
         for x in range(self.width):
             self.lots.append([])
             for y in range(self.height):
-                self.lots[x].append(Lot(x, y, LotType.GRASS))
+                if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
+                    self.lots[x].append(Lot(x, y, LotType.WATER))
+                else:
+                    self.lots[x].append(Lot(x, y, LotType.GRASS))
 
     def update(self):
         self.pov_x += self.move_speed[0]

@@ -24,5 +24,5 @@ class Lot:
             window.blit(picture, (x, y))
 
         # border
-        pg.draw.rect(window,
-                     (0, 50, 0), (x, y, scale, scale), 2)
+        # pg.draw.rect(window,
+        #              (0, 50, 0), (x, y, scale, scale), 2)
