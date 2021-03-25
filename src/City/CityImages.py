@@ -13,7 +13,9 @@ class CityImages:
         self.additional_images = {
             LotType.GRASS: [
                 pg.image.load(os.path.join('Assets', 'hills.png')),
-                pg.image.load(os.path.join('Assets', 'flowers.png'))
+                pg.image.load(os.path.join('Assets', 'flowers.png')),
+                pg.image.load(os.path.join('Assets', 'small_hills.png')),
+                pg.image.load(os.path.join('Assets', 'stones.png'))
             ],
             LotType.WATER: [
                 pg.image.load(os.path.join('Assets', 'island.png'))
@@ -21,7 +23,7 @@ class CityImages:
 
         self.frequency = {
             LotType.GRASS: 0.1,
-            LotType.WATER: 0.01
+            LotType.WATER: 0.005
         }
 
     def get_images(self, lot_type):
