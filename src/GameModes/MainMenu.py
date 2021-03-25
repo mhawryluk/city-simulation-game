@@ -6,64 +6,81 @@ import os
 
 class MainMenu(GameMode):
     def __init__(self, WINDOW, save: SaveManager):
-        self.save_manager = save
+        super().__init__(WINDOW, save)
         self.change_mode = False
-        self.redraw = True
-        self.window = WINDOW
 
-        self.background = None
         self.menu = None
         self.save_menu = None
         self.settings_menu = None
-
-        self.save_menu_active = False
-        self.settings_menu_active = False
+        self.warrning_menu = None
 
         self.play_button = None
         self.save_button = None
         self.settings_button = None
         self.quit_button = None
 
-        self.create_menu_window()
-
-    def create_menu_window(self):
-        width, height = self.window.get_size()
-
         self.background = pg.image.load(os.path.join('Assets', 'menu_background.jpg'))
         self.background = pg.transform.scale(self.background, self.window.get_size())
 
+        self.make_main_menu()
+
+    def make_main_menu(self):
+        width, height = self.window.get_size()
+
         self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
-        self.make_save_menu(width, height)
-        self.make_settings_menu(width, height)
 
         if(not self.save_manager.has_active_save()):
             self.play_button = self.menu.add.button('Play', self.play)
-            self.save_button = self.menu.add_button('Choose save', self.change_save_menu_status)
+            self.save_button = self.menu.add.button('Choose save', self.change_save_menu_status)
         else:
             self.play_button = None
-            self.save_button = self.menu.add_button('Create save', self.change_save_menu_status)
+            self.save_button = self.menu.add.button('Create save', self.change_save_menu_status)
 
-        self.settings_button = self.menu.add_button('Settings', self.change_settings_menu_status)
-        self.quit_button = self.menu.add_button('Quit', pgmen.events.PYGAME_QUIT)
+        self.settings_button = self.menu.add.button('Settings', self.change_settings_menu_status)
+        self.quit_button = self.menu.add.button('Quit', self.quit_screen)
     
     def make_save_menu(self, width, height):
         self.save_menu = pgmen.Menu(title='Saves', width=width*0.48, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
 
-        self.save_menu.add_button('Back', self.change_save_menu_status)
+        self.save_menu.add.button('Back', self.change_save_menu_status)
 
     def make_settings_menu(self, width, height):
         self.settings_menu = pgmen.Menu(title='Settings', width=width*0.52, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
 
-        self.settings_menu.add_button('Back', self.change_settings_menu_status)
+        self.settings_menu.add.button('Back', self.change_settings_menu_status)
+
+    def create_warning_menu(self, message, if_yes, if_no, parent_width, parent_height):
+        theme = self.get_theme()
+        theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_UNDERLINE
+        warning = pgmen.Menu(title=message, width=parent_width, height=parent_height*0.4, theme=theme,
+        mouse_enabled=True, mouse_motion_selection=True)
+        warning.add.button('YES', if_yes)
+        warning.add.button('NO', if_no)
+        return warning
+
+    def close_warning_menu(self):
+        self.warrning_menu = None
     
     def change_save_menu_status(self):
-        self.save_menu_active = not self.save_menu_active
+        if self.save_menu:
+            self.save_menu = None
+        else:
+            width, height = self.window.get_size()
+            self.make_save_menu(width, height)
 
     def change_settings_menu_status(self):
-        self.settings_menu_active = not self.settings_menu_active
+        if self.settings_menu:
+            self.settings_menu = None
+        else:
+            width, height = self.window.get_size()
+            self.make_settings_menu(width, height)
+
+    def quit_screen(self):
+        width, height = self.menu.get_size()
+        self.warrning_menu = self.create_warning_menu('Do you really want to quit?', pgmen.events.PYGAME_QUIT, self.close_warning_menu, width, height)
 
     def play(self):
         self.change_mode = True 
@@ -72,21 +89,28 @@ class MainMenu(GameMode):
         self.draw()        
 
     def handle(self, event):
-        if self.save_menu_active:
+        if self.warrning_menu:
+            self.warrning_menu.update([event])
+        elif self.save_menu:
             self.save_menu.update([event])
-        elif self.menu.is_enabled():
+        elif self.settings_menu:
+            self.settings_menu.update([event])
+        else:
             self.menu.update([event])
 
         self.draw()
 
     def draw(self):
         self.window.blit(self.background, (0,0))
-        if self.save_menu_active:
+        if self.save_menu:
             self.save_menu.draw(self.window)
-        elif self.settings_menu_active:
+        elif self.settings_menu:
             self.settings_menu.draw(self.window)
         else:
             self.menu.draw(self.window)
+
+        if self.warrning_menu:
+            self.warrning_menu.draw(self.window)
         
         pg.display.update()
 
