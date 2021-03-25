@@ -6,7 +6,7 @@ class Lot:
     def __init__(self, x, y, type):
         self.x = x
         self.y = y
-        self.picture = Lot.city_images.get_image(type)
+        self.pictures = Lot.city_images.get_images(type)
         self.selected = False
         self.hovered = False
 
@@ -17,8 +17,9 @@ class Lot:
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
 
-        picture = pg.transform.scale(self.picture, (scale, scale))
-        window.blit(picture, (x, y))
+        for picture in self.pictures:
+            pic = pg.transform.scale(picture, (scale, scale))
+            window.blit(pic, (x, y))
 
         if self.selected or self.hovered:
             alpha = pg.Surface((scale, scale))
