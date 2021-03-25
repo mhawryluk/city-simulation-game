@@ -8,6 +8,7 @@ class Lot:
         self.y = y
         self.picture = Lot.city_images.get_image(type)
         self.selected = False
+        self.hovered = False
 
     def draw(self, scale, pov, window):
         x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
@@ -16,12 +17,17 @@ class Lot:
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
 
-        if self.selected:
-            pg.draw.rect(window,
-                         (255, 0, 0), (x, y, scale, scale))
-        else:
-            picture = pg.transform.scale(self.picture, (scale, scale))
-            window.blit(picture, (x, y))
+        picture = pg.transform.scale(self.picture, (scale, scale))
+        window.blit(picture, (x, y))
+
+        if self.selected or self.hovered:
+            alpha = pg.Surface((scale, scale))
+            alpha.set_alpha(128)
+            if self.selected:
+                alpha.fill((0, 0, 0))
+            elif self.hovered:
+                alpha.fill((255, 255, 255))
+            window.blit(alpha, (x, y))
 
         # border
         # pg.draw.rect(window,

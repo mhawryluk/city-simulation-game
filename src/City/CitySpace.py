@@ -22,6 +22,7 @@ class CitySpace:
         self.reset_lots()
         self.move_speed = (0, 0)
         self.selected_lot = None
+        self.hovered_lot = None
 
     def reset_lots(self):
         self.lots = []
@@ -44,6 +45,15 @@ class CitySpace:
         self.pov_y = min(self.pov_y, self.scale*self.height//2)
         self.pov_y = max(self.pov_y, self.window_height -
                          self.scale*self.height//2)
+
+        # hovered lot highlighting:
+        hovered_lot = self.get_clicked_lot(pg.mouse.get_pos())
+        hovered_lot.hovered = True
+
+        if self.hovered_lot and self.hovered_lot != hovered_lot:
+            self.hovered_lot.hovered = False
+
+        self.hovered_lot = hovered_lot
 
     def draw(self, window):
         # draw lots
