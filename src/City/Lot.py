@@ -7,29 +7,31 @@ class Lot:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+        self.scale = 50
 
         # todo: move picture loading and scaling
-        self.picture = pg.image.load(
-            os.path.join('Assets', 'field.png'))
+        self.picture = pg.transform.scale(pg.image.load(
+            os.path.join('Assets', 'field.png')), (self.scale, self.scale))
 
         self.selected = False
 
     def draw(self, scale, pov, window):
-        if not(-scale <= pov[0] + scale*self.x < window.get_width() and -scale <= pov[1]+scale*self.y < window.get_height()):
+        x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
+        y = pov[1] - scale*Lot.map_dimensions[1]//2 + scale*self.y
+
+        if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
 
         if self.selected:
             pg.draw.rect(window,
-                         (255, 0, 0), (pov[0] + scale*self.x, pov[1]+scale*self.y, scale, scale))
+                         (255, 0, 0), (x, y, scale, scale))
         else:
-            if self.picture is None:
-                pg.draw.rect(window,
-                             (0, 255, 0), (pov[0] + scale*self.x, pov[1]+scale*self.y, scale, scale))
-            else:
+            if (scale != self.scale):
                 self.picture = pg.transform.scale(self.picture, (scale, scale))
-                window.blit(
-                    self.picture, (pov[0] + scale*self.x, pov[1]+scale*self.y, scale, scale))
+                self.scale = scale
 
-            # border
+            window.blit(self.picture, (x, y))
+
+        # border
         pg.draw.rect(window,
-                     (0, 0, 0), (pov[0] + scale*self.x, pov[1]+scale*self.y, scale, scale), 2)
+                     (0, 50, 0), (x, y, scale, scale), 2)

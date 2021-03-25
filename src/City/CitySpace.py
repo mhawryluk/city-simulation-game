@@ -8,13 +8,15 @@ class CitySpace:
         self.window_width = window_width
         self.height = height
         self.width = width
-        self.pov_x = -height // 2
-        self.pov_y = -width // 2
+        self.pov_x = window_width // 2
+        self.pov_y = window_height // 2
         self.roads = []
         self.scale = 50
         self.reset_lots()
         self.move_speed = (0, 0)
         self.selected_lot = None
+        Lot.map_dimensions = (width, height)
+        Lot.window_dimensions = (window_width, window_height)
 
     def reset_lots(self):
         self.lots = []
@@ -26,11 +28,14 @@ class CitySpace:
     def update(self):
         self.pov_x += self.move_speed[0]
         self.pov_y += self.move_speed[1]
-        self.pov_x = max(self.window_width - self.width*self.scale, self.pov_x)
-        self.pov_x = min(0, self.pov_x)
-        self.pov_y = max(self.window_height - self.height *
-                         self.scale, self.pov_y)
-        self.pov_y = min(0, self.pov_y)
+
+        # border:
+        self.pov_x = max(self.pov_x, self.window_width -
+                         self.scale*self.width//2)
+        self.pov_x = min(self.pov_x, self.scale*self.width//2)
+        self.pov_y = min(self.pov_y, self.scale*self.height//2)
+        self.pov_y = max(self.pov_y, self.window_height -
+                         self.scale*self.height//2)
 
     def draw(self, window):
         # draw lots
@@ -54,4 +59,4 @@ class CitySpace:
         self.selected_lot = self.get_clicked_lot(mouse_pos)
 
     def get_clicked_lot(self, mouse_pos):
-        return self.lots[(mouse_pos[0] - self.pov_x) // self.scale][(mouse_pos[1] - self.pov_y) // self.scale]
+        return self.lots[(mouse_pos[0] - self.pov_x + self.scale*self.width//2) // self.scale][(mouse_pos[1] - self.pov_y + self.scale*self.height//2) // self.scale]
