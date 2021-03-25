@@ -1,9 +1,16 @@
 from City.Lot import *
+from City.LotType import *
+from City.CityImages import *
 
 
 class CitySpace:
 
     def __init__(self, width, height, window_width, window_height):
+
+        self.city_images = CityImages()
+        Lot.city_images = self.city_images
+        Lot.map_dimensions = (width, height)
+        Lot.window_dimensions = (window_width, window_height)
         self.window_height = window_height
         self.window_width = window_width
         self.height = height
@@ -15,15 +22,13 @@ class CitySpace:
         self.reset_lots()
         self.move_speed = (0, 0)
         self.selected_lot = None
-        Lot.map_dimensions = (width, height)
-        Lot.window_dimensions = (window_width, window_height)
 
     def reset_lots(self):
         self.lots = []
         for x in range(self.width):
             self.lots.append([])
             for y in range(self.height):
-                self.lots[x].append(Lot(x, y))
+                self.lots[x].append(Lot(x, y, LotType.GRASS))
 
     def update(self):
         self.pov_x += self.move_speed[0]

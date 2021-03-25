@@ -3,16 +3,10 @@ import os
 
 
 class Lot:
-
-    def __init__(self, x, y):
+    def __init__(self, x, y, type):
         self.x = x
         self.y = y
-        self.scale = 50
-
-        # todo: move picture loading and scaling
-        self.picture = pg.transform.scale(pg.image.load(
-            os.path.join('Assets', 'field.png')), (self.scale, self.scale))
-
+        self.picture = Lot.city_images.get_image(type)
         self.selected = False
 
     def draw(self, scale, pov, window):
@@ -26,11 +20,8 @@ class Lot:
             pg.draw.rect(window,
                          (255, 0, 0), (x, y, scale, scale))
         else:
-            if (scale != self.scale):
-                self.picture = pg.transform.scale(self.picture, (scale, scale))
-                self.scale = scale
-
-            window.blit(self.picture, (x, y))
+            picture = pg.transform.scale(self.picture, (scale, scale))
+            window.blit(picture, (x, y))
 
         # border
         pg.draw.rect(window,
