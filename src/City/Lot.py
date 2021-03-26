@@ -33,3 +33,5 @@ class Lot:
             # border
         pg.draw.rect(window,
                      (0, 0, 0), (pov[0] + scale*self.x, pov[1]+scale*self.y, scale, scale), 2)
+
+
