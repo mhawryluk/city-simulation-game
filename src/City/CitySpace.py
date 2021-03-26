@@ -1,6 +1,7 @@
 from City.Lot import *
 from City.LotType import *
 from City.CityImages import *
+from City.RoadSystem import *
 
 
 class CitySpace:
@@ -17,7 +18,7 @@ class CitySpace:
         self.width = width
         self.pov_x = window_width // 2
         self.pov_y = window_height // 2
-        self.roads = []
+        self.road_system = RoadSystem(width, height)
         self.scale = 50
         self.reset_lots()
         self.move_speed = (0, 0)
@@ -60,6 +61,8 @@ class CitySpace:
         for row in self.lots:
             for lot in row:
                 lot.draw(self.scale, (self.pov_x, self.pov_y), window)
+
+        self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
 
     def add_move_speed(self, move_speed):
         self.move_speed = (
