@@ -30,7 +30,7 @@ class MainMenu(GameMode):
         self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
 
-        if(not self.save_manager.has_active_save()):
+        if(self.save_manager.has_active_save()):
             self.play_button = self.menu.add.button('Play', self.play)
             self.save_button = self.menu.add.button('Choose save', self.change_save_menu_status)
         else:
@@ -41,8 +41,34 @@ class MainMenu(GameMode):
         self.quit_button = self.menu.add.button('Quit', self.quit_screen)
     
     def make_save_menu(self, width, height):
+
+        def switch_save(selected_value, *args, **kwargs):
+            item, _ = selected_value
+            id = int(item[1])
+            self.save_manager.activate_save(id)
+
         self.save_menu = pgmen.Menu(title='Saves', width=width*0.48, height=height*0.85, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
+
+        items = self.save_manager.list_saves()
+        self.save_menu.add.selector(
+            title='Active save',
+            items=items,
+            onreturn=switch_save,
+            onchange=switch_save
+        )
+
+        def delete_save():
+            self.save_manager.delete_save()
+
+        self.save_menu.add.button('Delete save', delete_save)
+
+        def create_save():
+            pass
+
+        #input menu
+
+        self.save_menu.add.button('Create save', create_save)
 
         self.save_menu.add.button('Back', self.change_save_menu_status)
 

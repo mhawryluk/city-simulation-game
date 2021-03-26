@@ -77,6 +77,7 @@ class SaveManager:
 
     def activate_save(self, save_id):
         self.sm_data['active_save'] = save_id
+        self.save_save_manager_data()
 
     def load_save(self, save_id):
         try:
@@ -92,3 +93,11 @@ class SaveManager:
         save_path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
         with open(save_path, 'w') as save_file:
             js.dump(save_data, save_file)
+
+    def list_saves(self):
+        list_of_saves = []
+        free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
+        save_ids = [str(id) for id in range(1, self.sm_data['max_save_id'] + 1) if not id in free_save_id]
+        for key in save_ids:
+            list_of_saves.append( (self.sm_data[key], key) )
+        return list_of_saves
