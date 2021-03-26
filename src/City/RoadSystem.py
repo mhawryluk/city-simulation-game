@@ -1,11 +1,30 @@
 import os
 import pygame as pg
+from random import randint
 
 
 class RoadSystem:
     def __init__(self, map_width, map_height):
-        self.vertical = {(20, 20), (21, 20)}
-        self.horizontal = {(20, 20), (21, 20), (22, 20)}
+        self.vertical = set()
+        self.horizontal = set()
+
+        # random streets (to delete later!)
+        x = 25
+        y = 25
+        for _ in range(80):
+            self.add_rode("vertical", (x, y))
+            self.add_rode("horizontal", (x, y))
+            x += randint(-1, 1)
+            y += randint(-1, 1)
+            if x > 39:
+                x = 39
+            if x < 11:
+                x = 11
+            if y > 39:
+                y = 39
+            if y < 11:
+                y = 11
+
         self.vertical_picture = pg.image.load(
             os.path.join('Assets', 'street_vertical.png'))
         self.horizontal_picture = pg.image.load(
