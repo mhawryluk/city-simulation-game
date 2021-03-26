@@ -54,29 +54,38 @@ class SaveManager:
                 'created' : strftime("%Y-%m-%d %H:%M:%S", gmtime())
             }) #generate base save presets in dict
             self.save()
+            self.set_active_save()
             return 'Save ' + name + ' created successfully'
 
-    def delete_save(self, save_id):
-        max_save_id = self.sm_data['max_save_id']
-        free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
-        if save_id > max_save_id or save_id in free_save_id:
-            return 'Error! No such save exists!'
+    def set_active_save(self):
+        if self.sm_data['max_save_id'] == 0:
+            self.sm_data['active_save'] = None
         else:
-            free_save_id.append(save_id)
-            while max_save_id in free_save_id:
-                max_save_id -= 1
-            print(free_save_id)
-            free_save_id = [id for id in free_save_id if id < max_save_id]
-            self.sm_data['max_save_id'] = max_save_id
-            self.sm_data['free_save_id_list'] = free_save_id
-            del self.sm_data[str(save_id)]
-            path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
-            os.remove(path)
-            self.save_save_manager_data()
-            return 'Save deleted successfully'
-
+            ind = 1
+            while ind in self.sm_data['free_save_id_list']:
+                ind += 1
+            self.activate_save(ind)
+    
     def activate_save(self, save_id):
         self.sm_data['active_save'] = save_id
+        self.save_save_manager_data()
+
+    def delete_save(self):
+        save_id = self.sm_data['active_save']
+
+        max_save_id = self.sm_data['max_save_id']
+        free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
+        free_save_id.append(save_id)
+        while max_save_id in free_save_id:
+            max_save_id -= 1
+        print(free_save_id)
+        free_save_id = [id for id in free_save_id if id < max_save_id]
+        self.sm_data['max_save_id'] = max_save_id
+        self.sm_data['free_save_id_list'] = free_save_id
+        del self.sm_data[str(save_id)]
+        path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
+        os.remove(path)
+        self.set_active_save()
         self.save_save_manager_data()
 
     def load_save(self, save_id):
@@ -99,5 +108,5 @@ class SaveManager:
         free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
         save_ids = [str(id) for id in range(1, self.sm_data['max_save_id'] + 1) if not id in free_save_id]
         for key in save_ids:
-            list_of_saves.append( (self.sm_data[key], key) )
+            list_of_saves.append( ('Save name: [' + self.sm_data[key] + ']\n id: ' + str(key), key) )
         return list_of_saves

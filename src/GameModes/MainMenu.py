@@ -41,39 +41,45 @@ class MainMenu(GameMode):
         self.quit_button = self.menu.add.button('Quit', self.quit_screen)
     
     def make_save_menu(self, width, height):
+        self.save_menu = pgmen.Menu(title='Saves', width=width, height=height, theme=self.get_theme(), 
+            mouse_enabled=True, mouse_motion_selection=True)
+        are_saves_active = self.save_manager.has_active_save()
 
-        def switch_save(selected_value, *args, **kwargs):
-            item, _ = selected_value
-            id = int(item[1])
-            self.save_manager.activate_save(id)
+        if are_saves_active:
+            def switch_save(selected_value, *args, **kwargs):
+                item, _ = selected_value
+                id = int(item[1])
+                self.save_manager.activate_save(id)
 
-        self.save_menu = pgmen.Menu(title='Saves', width=width*0.48, height=height*0.85, theme=self.get_theme(), 
-        mouse_enabled=True, mouse_motion_selection=True)
+            items = self.save_manager.list_saves()
+            self.save_menu.add.selector(
+                title='Active save',
+                items=items,
+                onreturn=switch_save,
+                onchange=switch_save
+            )
 
-        items = self.save_manager.list_saves()
-        self.save_menu.add.selector(
-            title='Active save',
-            items=items,
-            onreturn=switch_save,
-            onchange=switch_save
-        )
+            def delete_save():
+                self.save_manager.delete_save()
+                self.update(redraw=True)
 
-        def delete_save():
-            self.save_manager.delete_save()
-
-        self.save_menu.add.button('Delete save', delete_save)
+            self.save_menu.add.button('Delete save', delete_save)
 
         def create_save():
-            pass
+            name = txt_input.get_value()
+            if len(name) == 0:
+                pass
+            else:
+                self.save_manager.create_save(name)
+                self.update(redraw=True)
 
-        #input menu
-
+        txt_input = self.save_menu.add.text_input(title='New saave name: ')
         self.save_menu.add.button('Create save', create_save)
 
         self.save_menu.add.button('Back', self.change_save_menu_status)
 
     def make_settings_menu(self, width, height):
-        self.settings_menu = pgmen.Menu(title='Settings', width=width*0.52, height=height*0.85, theme=self.get_theme(), 
+        self.settings_menu = pgmen.Menu(title='Settings', width=width, height=height, theme=self.get_theme(), 
         mouse_enabled=True, mouse_motion_selection=True)
 
         self.settings_menu.add.button('Back', self.change_settings_menu_status)
@@ -96,6 +102,7 @@ class MainMenu(GameMode):
         else:
             width, height = self.window.get_size()
             self.make_save_menu(width, height)
+        self.update(redraw=True)
 
     def change_settings_menu_status(self):
         if self.settings_menu:
@@ -111,8 +118,8 @@ class MainMenu(GameMode):
     def play(self):
         self.change_mode = True 
 
-    def update(self):
-        self.draw()        
+    def update(self, redraw=False):
+        self.draw(redraw)        
 
     def handle(self, event):
         if self.warrning_menu:
@@ -126,13 +133,22 @@ class MainMenu(GameMode):
 
         self.draw()
 
-    def draw(self):
+    def draw(self, redraw=False):
         self.window.blit(self.background, (0,0))
         if self.save_menu:
+            if redraw:
+                width, height = self.save_menu.get_size()
+                self.make_save_menu(width, height)
             self.save_menu.draw(self.window)
         elif self.settings_menu:
+            if redraw:
+                width, height = self.settings_menu.get_size()
+                self.make_settings_menu(width, height)
             self.settings_menu.draw(self.window)
         else:
+            if redraw:
+                width, height = self.menu.get_size()
+                self.make_main_menu()
             self.menu.draw(self.window)
 
         if self.warrning_menu:
