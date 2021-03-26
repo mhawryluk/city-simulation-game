@@ -108,5 +108,5 @@ class SaveManager:
         free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
         save_ids = [str(id) for id in range(1, self.sm_data['max_save_id'] + 1) if not id in free_save_id]
         for key in save_ids:
-            list_of_saves.append( ('Save name: [' + self.sm_data[key] + ']\n id: ' + str(key), key) )
+            list_of_saves.append( ('[ ' + self.sm_data[key] + ' ] id: ' + str(key), key) )
         return list_of_saves

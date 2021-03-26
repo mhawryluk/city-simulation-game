@@ -87,7 +87,7 @@ class MainMenu(GameMode):
     def create_warning_menu(self, message, if_yes, if_no, parent_width, parent_height):
         theme = self.get_theme()
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_UNDERLINE
-        warning = pgmen.Menu(title=message, width=parent_width, height=parent_height*0.4, theme=theme,
+        warning = pgmen.Menu(title=message, width=parent_width, height=parent_height*0.6, theme=theme,
         mouse_enabled=True, mouse_motion_selection=True)
         warning.add.button('YES', if_yes)
         warning.add.button('NO', if_no)
@@ -157,10 +157,16 @@ class MainMenu(GameMode):
         pg.display.update()
 
     def get_theme(self):
-        theme = pgmen.themes.THEME_SOLARIZED.copy()
+        theme = pgmen.themes.THEME_DARK.copy()
+        theme.title_font = pgmen.font.FONT_FRANCHISE
+        theme.title_font_size = 70
+        theme.title_background_color = (0, 0, 0)
+        theme.background_color = (35, 35, 35)
         theme.widget_font = pgmen.font.FONT_FRANCHISE
-        theme.cursor_color = (0, 0, 0)
-        theme.widget_border_color = (0, 0, 0)
-        theme.widget_border_width = 2
+        theme.cursor_color = (200, 75, 100)
+        theme.widget_border_color = (220, 50, 60)
+        theme.widget_border_width = 3
+        theme.widget_font_size = 44
+        theme.widget_padding = 20
         return theme
 
