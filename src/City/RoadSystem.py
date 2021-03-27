@@ -49,7 +49,8 @@ class RoadSystem:
         for pos_x, pos_y in self.vertical:
             x = pov[0] - scale*self.map_width//2 + scale*pos_x
             y = pov[1] - scale*self.map_height//2 + scale*pos_y
-            window.blit(picture, (x, y))
+            if -scale < x < window.get_width() and -scale < y < window.get_height():
+                window.blit(picture, (x, y))
 
         picture = pg.transform.scale(
             self.horizontal_picture, (scale, scale//5))
@@ -57,4 +58,44 @@ class RoadSystem:
         for pos_x, pos_y in self.horizontal:
             x = pov[0] - scale*self.map_width//2 + scale*pos_x
             y = pov[1] - scale*self.map_height//2 + scale*pos_y
-            window.blit(picture, (x, y))
+            if -scale < x < window.get_width() and -scale < y < window.get_height():
+                window.blit(picture, (x, y))
+
+    def highlight_roads(self, pov, scale, window):
+        alpha = pg.Surface((scale//4, scale))
+        alpha.set_alpha(100)
+
+        alpha.fill((220,220,220))
+        for pos_x in range(self.map_width):
+            for pos_y in range(self.map_height):
+                if not (pos_x, pos_y) in self.vertical:
+                    x = pov[0] - scale*self.map_width//2 + scale*pos_x
+                    y = pov[1] - scale*self.map_height//2 + scale*pos_y
+                    if -scale < x < window.get_width() and -scale < y < window.get_height():
+                        window.blit(alpha, (x, y))
+        
+        alpha.fill((105,105,105))
+        for pos_x, pos_y in self.vertical:
+            x = pov[0] - scale*self.map_width//2 + scale*pos_x
+            y = pov[1] - scale*self.map_height//2 + scale*pos_y
+            if -scale < x < window.get_width() and -scale < y < window.get_height():
+                window.blit(alpha, (x, y))
+
+        alpha = pg.Surface((scale, scale//4))
+        alpha.set_alpha(100)
+
+        alpha.fill((220,220,220))
+        for pos_x in range(self.map_width):
+            for pos_y in range(self.map_height):
+                if not (pos_x, pos_y) in self.horizontal:
+                    x = pov[0] - scale*self.map_width//2 + scale*pos_x
+                    y = pov[1] - scale*self.map_height//2 + scale*pos_y
+                    if -scale < x < window.get_width() and -scale < y < window.get_height():
+                        window.blit(alpha, (x, y))
+
+        alpha.fill((105,105,105))
+        for pos_x, pos_y in self.horizontal:
+            x = pov[0] - scale*self.map_width//2 + scale*pos_x
+            y = pov[1] - scale*self.map_height//2 + scale*pos_y
+            if -scale < x < window.get_width() and -scale < y < window.get_height():
+                window.blit(alpha, (x, y))

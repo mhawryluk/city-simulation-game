@@ -2,6 +2,7 @@ from City.Lot import *
 from City.LotType import *
 from City.CityImages import *
 from City.RoadSystem import *
+import pygame as pg
 
 
 class CitySpace:
@@ -63,13 +64,19 @@ class CitySpace:
 
         self.hovered_lot = hovered_lot
 
-    def draw(self, window):
+    def draw(self, window, mode):
         # draw lots
         for row in self.lots:
             for lot in row:
                 lot.draw(self.scale, (self.pov_x, self.pov_y), window)
 
         self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
+        if mode == "road_placing":
+            alpha = pg.Surface((self.window_width, self.window_height))
+            alpha.set_alpha(128)
+            alpha.fill((192,192,192))
+            window.blit(alpha, (0,0))
+            self.road_system.highlight_roads((self.pov_x, self.pov_y), self.scale, window)
 
     def add_move_speed(self, move_speed):
         self.move_speed = (

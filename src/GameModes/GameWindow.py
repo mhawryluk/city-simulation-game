@@ -12,7 +12,8 @@ class GameWindow(GameMode):
         self.SCROLL_SPEED = 5
         self.change_mode = False
         self.menu_panel = GameWindowPanel(
-            120, self.window.get_height())
+            120, self.window.get_height(), self)
+        self.mode = "game_mode"
 
     def update(self):
         self.city_space.update()
@@ -65,5 +66,5 @@ class GameWindow(GameMode):
 
     def draw(self):
         self.window.fill((0, 0, 0))
-        self.city_space.draw(self.window)
+        self.city_space.draw(self.window, mode=self.mode)
         self.menu_panel.draw(self.window)
