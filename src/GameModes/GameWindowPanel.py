@@ -14,8 +14,6 @@ class GameWindowPanel:
                                mouse_enabled=True, mouse_motion_selection=True)
         self.play_button = self.menu.add.button("play", self.play)
         self.road_button = self.menu.add.button("add road", self.add_road)
-        self.delete_road_button = self.menu.add.button(
-            "delete roads", self.delete_roads)
         self.select_area_button = self.menu.add.button(
             "select area", self.select_area)
         self.stats_button = self.menu.add.button(
@@ -28,9 +26,6 @@ class GameWindowPanel:
     def add_road(self):
         print("add road")
         self.game_window.mode = "road_placing"
-
-    def delete_roads(self):
-        print("delete road")
 
     def select_area(self):
         print("select area")

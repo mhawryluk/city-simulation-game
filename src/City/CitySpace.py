@@ -77,9 +77,10 @@ class CitySpace:
         if mode == "road_placing":
             alpha = pg.Surface((self.window_width, self.window_height))
             alpha.set_alpha(128)
-            alpha.fill((192,192,192))
-            window.blit(alpha, (0,0))
-            self.road_system.highlight_roads((self.pov_x, self.pov_y), self.scale, window)
+            alpha.fill((192, 192, 192))
+            window.blit(alpha, (0, 0))
+            self.road_system.highlight_roads(
+                (self.pov_x, self.pov_y), self.scale, window)
 
     def add_move_speed(self, move_speed):
         self.move_speed = (
@@ -97,13 +98,20 @@ class CitySpace:
         self.selected_lot = self.get_clicked_lot(mouse_pos)
 
     def get_clicked_lot(self, mouse_pos):
-        x = (mouse_pos[0] - self.pov_x + self.scale*self.width//2) // self.scale
-        y = (mouse_pos[1] - self.pov_y + self.scale*self.height//2) // self.scale
+        x = (mouse_pos[0] - self.pov_x +
+             self.scale*self.width//2) // self.scale
+        y = (mouse_pos[1] - self.pov_y +
+             self.scale*self.height//2) // self.scale
         return self.lots[x][y]
 
     def get_clicked_road(self, mouse_pos):
         if mouse_pos is None:
             return
-        x = round((mouse_pos[0] - self.pov_x + self.scale*self.width//2) / self.scale)
-        y = round((mouse_pos[1] - self.pov_y + self.scale*self.height//2) / self.scale)
+        x = round((mouse_pos[0] - self.pov_x +
+                  self.scale*self.width//2) / self.scale)
+        y = round((mouse_pos[1] - self.pov_y +
+                  self.scale*self.height//2) / self.scale)
         return (x, y)
+
+    def road_clicked(self):
+        self.road_system.road_clicked()
