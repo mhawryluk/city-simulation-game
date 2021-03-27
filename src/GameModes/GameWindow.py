@@ -19,8 +19,6 @@ class GameWindow(GameMode):
         self.draw()
 
     def handle(self, event):
-        self.menu_panel.handle(event)
-
         if event.type == pg.KEYDOWN:
             # moving across the map
             if event.key == pg.K_d:
@@ -33,20 +31,26 @@ class GameWindow(GameMode):
                 self.city_space.add_move_speed((0, self.SCROLL_SPEED))
 
         if event.type == pg.MOUSEBUTTONUP:
-            if event.button == 1:
-                self.city_space.select_lot(pg.mouse.get_pos())
-            if event.button == 4:
-                self.city_space.zoom(self.SCROLL_SPEED)
+            if pg.mouse.get_pos()[0] > self.menu_panel.width:
+                if event.button == 1:
+                    self.city_space.select_lot(pg.mouse.get_pos())
+                if event.button == 4:
+                    self.city_space.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                self.city_space.select_lot(pg.mouse.get_pos())
-            # zooming out
-            if event.button == 5:
-                self.city_space.zoom(-self.SCROLL_SPEED)
+            if pg.mouse.get_pos()[0] > self.menu_panel.width:
+                if event.button == 1:
+                    self.city_space.select_lot(pg.mouse.get_pos())
+                # zooming out
+                if event.button == 5:
+                    self.city_space.zoom(-self.SCROLL_SPEED)
+        if event.type == pg.MOUSEMOTION:
+            if pg.mouse.get_pos()[0] > self.menu_panel.width:
+                self.city_space.hovered(pg.mouse.get_pos())
+            else:
+                self.city_space.hovered(None)
 
         if event.type == pg.KEYUP:
-
             # moving across the map
             if event.key == pg.K_d:
                 self.city_space.add_move_speed((self.SCROLL_SPEED, 0))
@@ -56,6 +60,8 @@ class GameWindow(GameMode):
                 self.city_space.add_move_speed((-self.SCROLL_SPEED, 0))
             elif event.key == pg.K_w:
                 self.city_space.add_move_speed((0, -self.SCROLL_SPEED))
+
+        self.menu_panel.handle(event)
 
     def draw(self):
         self.window.fill((0, 0, 0))

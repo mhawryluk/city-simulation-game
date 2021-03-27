@@ -47,8 +47,15 @@ class CitySpace:
         self.pov_y = max(self.pov_y, self.window_height -
                          self.scale*self.height//2)
 
-        # hovered lot highlighting:
-        hovered_lot = self.get_clicked_lot(pg.mouse.get_pos())
+    def hovered(self, pos):
+        '''hovered lot highlighting:'''
+        if pos is None:
+            if self.hovered_lot:
+                self.hovered_lot.hovered = False
+            self.hovered_lot = None
+            return
+
+        hovered_lot = self.get_clicked_lot(pos)
         hovered_lot.hovered = True
 
         if self.hovered_lot and self.hovered_lot != hovered_lot:
