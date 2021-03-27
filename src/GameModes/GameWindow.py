@@ -1,6 +1,7 @@
 from GameModes.GameMode import *
 from City.CitySpace import *
 from GameEngineTools.SaveManager import SaveManager
+from GameModes.GameWindowPanel import *
 
 
 class GameWindow(GameMode):
@@ -10,6 +11,8 @@ class GameWindow(GameMode):
             width, height, window.get_width(), window.get_height())
         self.SCROLL_SPEED = 5
         self.change_mode = False
+        self.menu_panel = GameWindowPanel(
+            100, self.window.get_height())
 
     def update(self):
         self.city_space.update()
@@ -55,3 +58,4 @@ class GameWindow(GameMode):
     def draw(self):
         self.window.fill((0, 0, 0))
         self.city_space.draw(self.window)
+        self.menu_panel.draw(self.window)
