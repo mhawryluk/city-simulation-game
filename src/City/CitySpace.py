@@ -8,7 +8,6 @@ import pygame as pg
 class CitySpace:
 
     def __init__(self, width, height, window_width, window_height):
-
         self.city_images = CityImages()
         Lot.city_images = self.city_images
         Lot.map_dimensions = (width, height)

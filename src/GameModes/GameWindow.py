@@ -39,10 +39,8 @@ class GameWindow(GameMode):
                     self.city_space.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
-
             if event.button == pg.BUTTON_RIGHT:
                 self.city_space.road_system.hovered_direction *= -1
-                
             elif pg.mouse.get_pos()[0] > self.menu_panel.width:
                 if event.button == 1:
                     self.city_space.select_lot(pg.mouse.get_pos())

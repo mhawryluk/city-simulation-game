@@ -43,9 +43,9 @@ class RoadSystem:
             self.horizontal.remove(pos)
 
     def add_rode(self, direction, pos):
-        if direction == "vertical":
+        if direction == VERTICAL:
             self.vertical.add(pos)
-        elif direction == "horizontal":
+        elif direction == HORIZONTAL:
             self.horizontal.add(pos)
 
     def draw(self, pov, scale, window):
