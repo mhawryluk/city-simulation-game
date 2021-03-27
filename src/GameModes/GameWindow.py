@@ -12,13 +12,15 @@ class GameWindow(GameMode):
         self.SCROLL_SPEED = 5
         self.change_mode = False
         self.menu_panel = GameWindowPanel(
-            100, self.window.get_height())
+            120, self.window.get_height())
 
     def update(self):
         self.city_space.update()
         self.draw()
 
     def handle(self, event):
+        self.menu_panel.handle(event)
+
         if event.type == pg.KEYDOWN:
             # moving across the map
             if event.key == pg.K_d:
