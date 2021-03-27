@@ -48,21 +48,25 @@ class CitySpace:
         self.pov_y = max(self.pov_y, self.window_height -
                          self.scale*self.height//2)
 
-    def hovered(self, pos):
+    def hovered(self, pos, mode):
         '''hovered lot highlighting:'''
-        if pos is None:
-            if self.hovered_lot:
+        if mode == "road_placing":
+            self.road_system.hovered_road = self.get_clicked_road(pos)
+
+        else:
+            if pos is None:
+                if self.hovered_lot:
+                    self.hovered_lot.hovered = False
+                self.hovered_lot = None
+                return
+
+            hovered_lot = self.get_clicked_lot(pos)
+            hovered_lot.hovered = True
+
+            if self.hovered_lot and self.hovered_lot != hovered_lot:
                 self.hovered_lot.hovered = False
-            self.hovered_lot = None
-            return
 
-        hovered_lot = self.get_clicked_lot(pos)
-        hovered_lot.hovered = True
-
-        if self.hovered_lot and self.hovered_lot != hovered_lot:
-            self.hovered_lot.hovered = False
-
-        self.hovered_lot = hovered_lot
+            self.hovered_lot = hovered_lot
 
     def draw(self, window, mode):
         # draw lots
@@ -94,4 +98,13 @@ class CitySpace:
         self.selected_lot = self.get_clicked_lot(mouse_pos)
 
     def get_clicked_lot(self, mouse_pos):
-        return self.lots[(mouse_pos[0] - self.pov_x + self.scale*self.width//2) // self.scale][(mouse_pos[1] - self.pov_y + self.scale*self.height//2) // self.scale]
+        x = (mouse_pos[0] - self.pov_x + self.scale*self.width//2) // self.scale
+        y = (mouse_pos[1] - self.pov_y + self.scale*self.height//2) // self.scale
+        return self.lots[x][y]
+
+    def get_clicked_road(self, mouse_pos):
+        if mouse_pos is None:
+            return
+        x = round((mouse_pos[0] - self.pov_x + self.scale*self.width//2) / self.scale)
+        y = round((mouse_pos[1] - self.pov_y + self.scale*self.height//2) / self.scale)
+        return (x, y)

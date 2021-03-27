@@ -39,17 +39,22 @@ class GameWindow(GameMode):
                     self.city_space.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
-            if pg.mouse.get_pos()[0] > self.menu_panel.width:
+
+            if event.button == pg.BUTTON_RIGHT:
+                self.city_space.road_system.hovered_direction *= -1
+                
+            elif pg.mouse.get_pos()[0] > self.menu_panel.width:
                 if event.button == 1:
                     self.city_space.select_lot(pg.mouse.get_pos())
                 # zooming out
                 if event.button == 5:
                     self.city_space.zoom(-self.SCROLL_SPEED)
+
         if event.type == pg.MOUSEMOTION:
             if pg.mouse.get_pos()[0] > self.menu_panel.width:
-                self.city_space.hovered(pg.mouse.get_pos())
+                self.city_space.hovered(pg.mouse.get_pos(), self.mode)
             else:
-                self.city_space.hovered(None)
+                self.city_space.hovered(None, self.mode)
 
         if event.type == pg.KEYUP:
             # moving across the map

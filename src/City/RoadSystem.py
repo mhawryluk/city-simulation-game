@@ -2,6 +2,8 @@ import os
 import pygame as pg
 from random import randint
 
+VERTICAL = 1
+HORIZONTAL = -1
 
 class RoadSystem:
     def __init__(self, map_width, map_height):
@@ -31,6 +33,8 @@ class RoadSystem:
             os.path.join('Assets', 'street_horizontal.png'))
         self.map_width = map_width
         self.map_height = map_height
+        self.hovered_road = None
+        self.hovered_direction = VERTICAL
 
     def remove_rode(self, direction, pos):
         if direction == "vertical":
@@ -99,3 +103,23 @@ class RoadSystem:
             y = pov[1] - scale*self.map_height//2 + scale*pos_y
             if -scale < x < window.get_width() and -scale < y < window.get_height():
                 window.blit(alpha, (x, y))
+        
+        # hovered
+        if self.hovered_road and self.hovered_direction == HORIZONTAL:
+            alpha.fill((255, 0, 0))
+            x = pov[0] - scale*self.map_width//2 + scale*self.hovered_road[0]
+            y = pov[1] - scale*self.map_height//2 + scale*self.hovered_road[1]
+            if -scale < x < window.get_width() and -scale < y < window.get_height():
+                window.blit(alpha, (x, y))
+
+        alpha = pg.Surface((scale//4, scale))
+        alpha.set_alpha(100)
+        alpha.fill((255,0,0))
+        if self.hovered_road and self.hovered_direction == VERTICAL:
+            alpha.fill((255, 0, 0))
+            x = pov[0] - scale*self.map_width//2 + scale*self.hovered_road[0]
+            y = pov[1] - scale*self.map_height//2 + scale*self.hovered_road[1]
+            if -scale < x < window.get_width() and -scale < y < window.get_height():
+                window.blit(alpha, (x, y))
+
+
