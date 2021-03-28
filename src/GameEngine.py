@@ -13,7 +13,7 @@ class GameEngine:
 
         self.MEASUREMENTS = (1980, 1080)
         self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
-        self.FPS = 60
+        self.FPS = 100
         self.clock = pg.time.Clock()
 
         self.save_manager = SaveManager()
