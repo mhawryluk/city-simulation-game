@@ -68,6 +68,8 @@ class CitySpace:
             self.hovered_lot = hovered_lot
 
     def draw(self, window, mode):
+
+        self.city_images.rescale(self.scale)
         # draw lots
         for row in self.lots:
             for lot in row:

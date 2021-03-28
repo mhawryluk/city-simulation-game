@@ -1,14 +1,16 @@
 import pygame as pg
 import os
+from random import randint
 
 
 class Lot:
     def __init__(self, x, y, type):
+        self.type = type
         self.x = x
         self.y = y
-        self.pictures = Lot.city_images.get_images(type)
         self.selected = False
         self.hovered = False
+        self.seed = randint(0, 5000)
 
     def draw(self, scale, pov, window):
         x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
@@ -17,9 +19,8 @@ class Lot:
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
 
-        for picture in self.pictures:
-            pic = pg.transform.scale(picture, (scale, scale))
-            window.blit(pic, (x, y))
+        for picture in Lot.city_images.get_images(self.type, self.seed):
+            window.blit(picture, (x, y))
 
         if self.selected or self.hovered:
             alpha = pg.Surface((scale, scale))

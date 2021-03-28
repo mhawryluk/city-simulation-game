@@ -11,9 +11,9 @@ class GameEngine:
         pg.init()
         pg.display.set_caption('City Simulation Game')
 
-        self.MEASUREMENTS = (1980, 1080)
+        self.MEASUREMENTS = (1200, 800)
         self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
-        self.FPS = 100
+        self.FPS = 60
         self.clock = pg.time.Clock()
 
         self.save_manager = SaveManager()
@@ -38,5 +38,4 @@ class GameEngine:
                         self.change_mode()
 
     def change_mode(self):
-        print('game_mode_change')
         self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
