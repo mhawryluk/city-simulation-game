@@ -9,7 +9,7 @@ class GameWindow(GameMode):
         super().__init__(window, save)
         self.city_space = CitySpace(
             width, height, window.get_width(), window.get_height())
-        self.SCROLL_SPEED = 5
+        self.SCROLL_SPEED = 20
         self.change_mode = False
         self.menu_panel = GameWindowPanel(
             120, self.window.get_height(), self)
