@@ -9,7 +9,7 @@ class GameWindow(GameMode):
         super().__init__(window, save)
         self.city_space = CitySpace(
             width, height, window.get_width(), window.get_height())
-        self.SCROLL_SPEED = 20
+        self.SCROLL_SPEED = 15
         self.change_mode = False
         self.menu_panel = GameWindowPanel(
             120, self.window.get_height(), self)
@@ -51,8 +51,9 @@ class GameWindow(GameMode):
                 if event.button == 1:
                     self.city_space.select_lot(pg.mouse.get_pos())
                 # zooming out
-                if event.button == 5:
-                    self.city_space.zoom(-self.SCROLL_SPEED)
+
+            if event.button == 5:
+                self.city_space.zoom(-self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEMOTION:
             if pg.mouse.get_pos()[0] > self.menu_panel.width:
