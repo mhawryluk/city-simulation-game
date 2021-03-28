@@ -11,7 +11,7 @@ class GameEngine:
         pg.init()
         pg.display.set_caption('City Simulation Game')
 
-        self.MEASUREMENTS = (1000, 600)
+        self.MEASUREMENTS = (1980, 1080)
         self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
         self.FPS = 60
         self.clock = pg.time.Clock()

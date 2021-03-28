@@ -10,6 +10,7 @@ class RoadSystem:
     def __init__(self, map_width, map_height):
         self.vertical = set()
         self.horizontal = set()
+        self.road_width_ratio = 0.1666
 
         self.vertical_picture = pg.image.load(
             os.path.join('Assets', 'street_vertical.png'))
@@ -33,7 +34,8 @@ class RoadSystem:
             self.horizontal.add(pos)
 
     def draw(self, pov, scale, window):
-        picture = pg.transform.scale(self.vertical_picture, (scale//5, scale))
+        picture = pg.transform.scale(
+            self.vertical_picture, (int(scale*self.road_width_ratio), int(scale+scale*self.road_width_ratio)))
         for pos_x, pos_y in self.vertical:
             x = pov[0] - scale*self.map_width//2 + scale*pos_x
             y = pov[1] - scale*self.map_height//2 + scale*pos_y
@@ -41,7 +43,7 @@ class RoadSystem:
                 window.blit(picture, (x, y))
 
         picture = pg.transform.scale(
-            self.horizontal_picture, (scale, scale//5))
+            self.horizontal_picture, (int(scale + scale*self.road_width_ratio), int(scale*self.road_width_ratio)))
 
         for pos_x, pos_y in self.horizontal:
             x = pov[0] - scale*self.map_width//2 + scale*pos_x
@@ -50,7 +52,7 @@ class RoadSystem:
                 window.blit(picture, (x, y))
 
     def highlight_roads(self, pov, scale, window):
-        alpha = pg.Surface((scale//4, scale))
+        alpha = pg.Surface((scale//5, scale))
         alpha.set_alpha(100)
 
         alpha.fill((220, 220, 220))
@@ -69,7 +71,7 @@ class RoadSystem:
             if -scale < x < window.get_width() and -scale < y < window.get_height():
                 window.blit(alpha, (x, y))
 
-        alpha = pg.Surface((scale, scale//4))
+        alpha = pg.Surface((scale, scale//5))
         alpha.set_alpha(100)
 
         alpha.fill((220, 220, 220))
@@ -96,7 +98,7 @@ class RoadSystem:
             if -scale < x < window.get_width() and -scale < y < window.get_height():
                 window.blit(alpha, (x, y))
 
-        alpha = pg.Surface((scale//4, scale))
+        alpha = pg.Surface((scale//5, scale))
         alpha.set_alpha(100)
         alpha.fill((255, 0, 0))
         if self.hovered_road and self.hovered_direction == VERTICAL:
