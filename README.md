@@ -6,8 +6,8 @@ project for Python programming class
 - [x] zarys implementacji klas (deklaracja nazw i dziedziczenia)
 - [x] game engine - funkcje do zarządzania grą (game loop, obsługa menu, interakcji gracza z programem)
 - [x] mapa (grid: pola to działki do budowy budynków, krawędzie to drogi), wraz z wizualizacją
-- [ ] główne menu i okno gry (mapa i menu jej dotyczące)
-- [ ] ulice (budowanie)
+- [x] główne menu i okno gry (mapa i menu jej dotyczące)
+- [x] ulice (budowanie)
 
 #### (29.03 - 18.04):
 - [ ] implementacja budynków (wraz z mechanizmami budowania i wizualizacją)

@@ -1,0 +1,3 @@
+
+class Hospital(Constrcut):
+    pass

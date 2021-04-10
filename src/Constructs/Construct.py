@@ -1,0 +1,4 @@
+
+class Construct:
+    pass
+
