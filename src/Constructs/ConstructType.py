@@ -1,8 +1,9 @@
 from enum import Enum, auto
-from ZoneConstructs import *
-from SpecialConstructs import *
+from .ZoneConstructs import *
+from .SpecialConstructs import *
 
-class ConstantType(Enum):
+
+class ConstructType(Enum):
     FAMILY_HOUSE = auto()
     BLOCK = auto()
     SMALL_SHOP = auto()
@@ -36,22 +37,21 @@ class ConstantType(Enum):
     WASTE_STORAGE = auto()
     WASTE_PROCESSING_PLANT = auto()
     COAL_POWER_PLANT = auto()
-    WATER_POWER+PLANT = auto()
+    WATER_POWER_PLANT = auto()
     NUCLEAR_POWER_PLANT = auto()
     DAM = auto()
     WATER_PUMP = auto()
     SWEWAGE_PUMP = auto()
     SEWAGE_PROCESSING_STATION = auto()
 
-
     ATTRIBUTES = {
-        FAMILY_HOUSE:{
-            'max_level':2
+        FAMILY_HOUSE: {
+            'max_level': 2
         }
     }
 
     CONSTRUCTORS = {
-        FAMILY_HOUSE:FamilyHouse
+        FAMILY_HOUSE: FamilyHouse
     }
 
     def get_info(self, type):
@@ -59,11 +59,3 @@ class ConstantType(Enum):
 
     def new_object(self, type):
         return CONSTRUCTORS[type](ATTRIBUTES[type])
-
-
-
-
-
-
-
-

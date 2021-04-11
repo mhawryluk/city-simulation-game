@@ -1,8 +1,8 @@
 import pygame as pg
 import pygame_menu as pgmen
 from .GameWindow import *
-from .BuildModePanel import *
-from .Panel import *
+from .BuildModePanel import BuildModePanel
+from .Panel import Panel
 
 
 class GameWindowPanel(Panel):
@@ -59,6 +59,7 @@ class GameWindowPanel(Panel):
         if self.game_window.mode == "build_mode":
             self.game_window.mode = "game_mode"
             self.build_mode_panel.disable()
+            self.build_mode_panel.buy_building_panel.disable()
         else:
             self.game_window.mode = "build_mode"
             self.build_mode_panel.enable()
@@ -68,17 +69,15 @@ class GameWindowPanel(Panel):
         # self.game_window.save_manager.save()
 
     def draw(self, window):
-        self.menu.draw(window)
+        super().draw(window)
         self.build_mode_panel.draw(window)
 
     def handle(self, event):
-        return self.menu.update([event]) or self.build_mode_panel.handle(event)
+        super().handle(event)
+        self.build_mode_panel.handle(event)
 
     def collide(self):
-        position = self.menu.get_position()
-        mouse_pos = pg.mouse.get_pos()
-
-        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
+        if super().collide():
             return True
 
         return self.build_mode_panel.collide()

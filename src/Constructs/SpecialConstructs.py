@@ -1,3 +1,5 @@
+from .Construct import Construct
 
-class Hospital(Constrcut):
+
+class Hospital(Construct):
     pass

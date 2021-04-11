@@ -23,3 +23,29 @@ class Panel:
         theme.widget_font_size = 30
         # theme.widget_padding = 5
         return theme
+
+    def draw(self, window):
+        if self.menu.is_enabled():
+            self.menu.draw(window)
+
+    def handle(self, event):
+        if self.menu.is_enabled():
+            self.menu.update([event])
+
+    def enable(self):
+        self.menu.enable()
+
+    def disable(self):
+        self.menu.disable()
+
+    def collide(self):
+        if not self.menu.is_enabled():
+            return False
+
+        position = self.menu.get_position()
+        mouse_pos = pg.mouse.get_pos()
+
+        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
+            return True
+
+        return False
