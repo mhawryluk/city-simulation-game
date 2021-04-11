@@ -8,15 +8,20 @@ from .Panel import *
 class GameWindowPanel(Panel):
     def __init__(self, width, height, game_window):
         super().__init__(width, height, game_window)
-        self.build_mode_panel = BuildModePanel(
-            width*2, height//4, ((width)/game_window.city_space.window_width*100, 50), game_window)
-        self.build_mode_panel.disable()
-
         self.menu = pgmen.Menu(title='CITY SIMULATION GAME',
                                width=width, height=height,
                                position=(0, 0),
                                theme=self.get_theme(),
                                mouse_enabled=True, mouse_motion_selection=True)
+
+        # BUILD MODE PANEL
+        window_width = game_window.city_space.window_width
+        window_height = game_window.city_space.window_height
+        self.build_mode_panel = BuildModePanel(
+            width=window_width - width, height=height//8,
+            position=(100, 100),
+            game_window=game_window)
+        self.build_mode_panel.disable()
 
         # BUTTONS
         self.play_button = self.menu.add.button("play", self.play)
@@ -68,3 +73,12 @@ class GameWindowPanel(Panel):
 
     def handle(self, event):
         return self.menu.update([event]) or self.build_mode_panel.handle(event)
+
+    def collide(self):
+        position = self.menu.get_position()
+        mouse_pos = pg.mouse.get_pos()
+
+        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
+            return True
+
+        return self.build_mode_panel.collide()
