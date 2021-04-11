@@ -1,22 +1,19 @@
 import pygame_menu as pgmen
 import pygame as pg
 from .Panel import *
+import os
 
 
 class BuildModePanel(Panel):
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
 
-        self.menu = pgmen.Menu(title='BUILD MODE',
+        self.menu = pgmen.Menu(title='BUILD - BUY',
                                width=width, height=height,
                                position=position,
                                rows=1, columns=15,
                                theme=self.get_theme(),
                                mouse_enabled=True, mouse_motion_selection=True)
-
-        print(position)
-        print(self.menu.get_position())
-        print(self.menu.get_rect())
 
         # BUTTONS
         self.residential_zone_button = self.menu.add.button(
@@ -25,6 +22,10 @@ class BuildModePanel(Panel):
             "industrial zone", self.industrial_zone)
         self.commercial_zone_button = self.menu.add.button(
             "commercial zone", self.commercial_zone)
+        self.buy_building_button = self.menu.add.button(
+            "buy a building", self.buy_building)
+        self.bulldoze_button = self.menu.add.button(
+            "bulldoze", self.bulldoze)
 
     def draw(self, window):
         if self.menu.is_enabled():
@@ -48,6 +49,12 @@ class BuildModePanel(Panel):
 
     def commercial_zone(self):
         print("commercial")
+        pass
+
+    def buy_building(self):
+        pass
+
+    def bulldoze(self):
         pass
 
     def get_theme(self):
