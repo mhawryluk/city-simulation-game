@@ -2,7 +2,7 @@ from GameModes.GameWindow import *
 from GameEngineTools.SaveManager import SaveManager
 import pygame as pg
 import os
-import GameModes.MainMenu as mm
+from GameModes.MainMenu import *
 
 
 class GameEngine:
@@ -15,10 +15,8 @@ class GameEngine:
         self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
         self.FPS = 60
         self.clock = pg.time.Clock()
-
         self.save_manager = SaveManager()
-        self.game_mode = mm.MainMenu(self.WINDOW, self.save_manager)
-        #self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
+        self.game_mode = MainMenu(self.WINDOW, self.save_manager)
 
     def run(self):
         self.running = True
@@ -38,4 +36,8 @@ class GameEngine:
                         self.change_mode()
 
     def change_mode(self):
-        self.game_mode = GameWindow(self.WINDOW, None, 50, 50)
+        if isinstance(self.game_mode, MainMenu):
+            self.game_mode = GameWindow(
+                self.WINDOW, self.game_mode.save_manager, 50, 50)
+        else:
+            self.game_mode = MainMenu(self.WINDOW, self.save_manager)

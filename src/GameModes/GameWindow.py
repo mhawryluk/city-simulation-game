@@ -50,8 +50,8 @@ class GameWindow(GameMode):
             else:
                 if event.button == 1:
                     self.city_space.select_lot(pg.mouse.get_pos())
-                # zooming out
 
+            # zooming out
             if event.button == 5:
                 self.city_space.zoom(-self.SCROLL_SPEED)
 

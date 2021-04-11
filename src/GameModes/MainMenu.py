@@ -13,7 +13,7 @@ class MainMenu(GameMode):
         self.menu = None
         self.save_menu = None
         self.settings_menu = None
-        self.warrning_menu = None
+        self.warning_menu = None
 
         self.play_button = None
         self.save_button = None
@@ -102,7 +102,7 @@ class MainMenu(GameMode):
         return warning
 
     def close_warning_menu(self):
-        self.warrning_menu = None
+        self.warning_menu = None
 
     def change_save_menu_status(self):
         if self.save_menu:
@@ -121,7 +121,7 @@ class MainMenu(GameMode):
 
     def quit_screen(self):
         width, height = self.menu.get_size()
-        self.warrning_menu = self.create_warning_menu(
+        self.warning_menu = self.create_warning_menu(
             'Do you really want to quit?', pgmen.events.PYGAME_QUIT, self.close_warning_menu, width, height)
 
     def play(self):
@@ -131,8 +131,8 @@ class MainMenu(GameMode):
         self.draw(redraw)
 
     def handle(self, event):
-        if self.warrning_menu:
-            self.warrning_menu.update([event])
+        if self.warning_menu:
+            self.warning_menu.update([event])
         elif self.save_menu:
             self.save_menu.update([event])
         elif self.settings_menu:
@@ -160,8 +160,8 @@ class MainMenu(GameMode):
                 self.make_main_menu()
             self.menu.draw(self.window)
 
-        if self.warrning_menu:
-            self.warrning_menu.draw(self.window)
+        if self.warning_menu:
+            self.warning_menu.draw(self.window)
 
         pg.display.update()
 
