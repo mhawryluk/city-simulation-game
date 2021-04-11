@@ -1,4 +1,4 @@
-from GameModes.GameMode import *
+from .GameMode import *
 from GameEngineTools.SaveManager import SaveManager
 import pygame as pg
 import pygame_menu as pgmen

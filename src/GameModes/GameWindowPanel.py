@@ -1,13 +1,16 @@
 import pygame as pg
 import pygame_menu as pgmen
-from GameModes.GameWindow import *
+from .GameWindow import *
+from .BuildModePanel import *
+from .Panel import *
 
 
-class GameWindowPanel:
+class GameWindowPanel(Panel):
     def __init__(self, width, height, game_window):
-        self.height = height
-        self.width = width
-        self.game_window = game_window
+        super().__init__(width, height, game_window)
+        self.build_mode_panel = BuildModePanel(
+            width*2, height//4, ((width)/game_window.city_space.window_width*100, 50), game_window)
+        self.build_mode_panel.disable()
 
         self.menu = pgmen.Menu(title='CITY SIMULATION GAME',
                                width=width, height=height,
@@ -48,7 +51,12 @@ class GameWindowPanel:
         pass
 
     def build_mode(self):
-        self.game_window.mode = "build_mode" if self.game_window.mode != "build_mode" else "game_mode"
+        if self.game_window.mode == "build_mode":
+            self.game_window.mode = "game_mode"
+            self.build_mode_panel.disable()
+        else:
+            self.game_window.mode = "build_mode"
+            self.build_mode_panel.enable()
 
     def save(self):
         pass
@@ -56,21 +64,7 @@ class GameWindowPanel:
 
     def draw(self, window):
         self.menu.draw(window)
+        self.build_mode_panel.draw(window)
 
     def handle(self, event):
-        self.menu.update([event])
-
-    def get_theme(self):
-        theme = pgmen.themes.THEME_DARK.copy()
-        theme.title_font = pgmen.font.FONT_FRANCHISE
-        theme.title_font_size = 30
-        theme.title_background_color = (0, 0, 0)
-        theme.background_color = (0, 0, 0, 50)
-        theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
-        theme.widget_font = pgmen.font.FONT_FRANCHISE
-        theme.cursor_color = (200, 75, 100)
-        # theme.widget_border_color = (220, 50, 60)
-        # theme.widget_border_width = 5
-        theme.widget_font_size = 20
-        # theme.widget_padding = 5
-        return theme
+        return self.menu.update([event]) or self.build_mode_panel.handle(event)

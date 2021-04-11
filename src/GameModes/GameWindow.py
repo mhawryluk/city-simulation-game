@@ -1,7 +1,7 @@
-from GameModes.GameMode import *
+from .GameMode import *
+from .GameWindowPanel import *
 from City.CitySpace import *
 from GameEngineTools.SaveManager import SaveManager
-from GameModes.GameWindowPanel import *
 
 
 class GameWindow(GameMode):
@@ -20,6 +20,8 @@ class GameWindow(GameMode):
         self.draw()
 
     def handle(self, event):
+        self.menu_panel.handle(event)
+
         if event.type == pg.KEYDOWN:
             # moving across the map
             if event.key == pg.K_d:
@@ -71,8 +73,6 @@ class GameWindow(GameMode):
                 self.city_space.add_move_speed((-self.SCROLL_SPEED, 0))
             elif event.key == pg.K_w:
                 self.city_space.add_move_speed((0, -self.SCROLL_SPEED))
-
-        self.menu_panel.handle(event)
 
     def draw(self):
         self.window.fill((0, 0, 0))
