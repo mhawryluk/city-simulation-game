@@ -1,4 +1,4 @@
-from .Construct import Construct
+from Construct import Construct
 
 
 class FamilyHouse(Construct):
