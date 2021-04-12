@@ -9,12 +9,13 @@ class Panel:
         self.game_window = game_window
 
     def get_theme(self):
+        greyness = 60
         theme = pgmen.themes.THEME_DARK.copy()
         theme.widget_font = pg.font.SysFont("segoeuisymbol", 80)
         theme.title_font = pgmen.font.FONT_FRANCHISE
         theme.title_font_size = 40
-        theme.title_background_color = (0, 0, 0)
-        theme.background_color = (0, 0, 0, 70)
+        theme.title_background_color = (greyness, greyness, greyness)
+        theme.background_color = (greyness, greyness, greyness, 70)
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)

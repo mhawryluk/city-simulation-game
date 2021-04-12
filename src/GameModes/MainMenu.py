@@ -3,6 +3,7 @@ from GameEngineTools.SaveManager import SaveManager
 import pygame as pg
 import pygame_menu as pgmen
 import os
+from random import choice
 
 
 class MainMenu(GameMode):
@@ -20,8 +21,11 @@ class MainMenu(GameMode):
         self.settings_button = None
         self.quit_button = None
 
+        backgrounds = ['menu_background1.jpg', 'menu_background2.png',
+                       'menu_background3.png', 'menu_background2.png', 'menu_background4.jpg']
+
         self.background = pg.image.load(
-            os.path.join('Assets', 'menu_background.jpg'))
+            os.path.join('Assets', choice(backgrounds)))
         self.background = pg.transform.scale(
             self.background, self.window.get_size())
 
@@ -169,12 +173,13 @@ class MainMenu(GameMode):
         theme = pgmen.themes.THEME_DARK.copy()
         theme.title_font = pgmen.font.FONT_FRANCHISE
         theme.title_font_size = 70
-        theme.title_background_color = (0, 0, 0)
-        theme.background_color = (35, 35, 35)
+        theme.title_background_color = (35, 35, 35)
+        theme.background_color = (35, 35, 35, 60)
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)
-        theme.widget_border_color = (220, 50, 60)
+        #theme.widget_border_color = (220, 50, 60)
         theme.widget_border_width = 3
+        theme.widget_background_color = (35, 35, 35)
         theme.widget_font_size = 44
         theme.widget_padding = 20
         return theme
