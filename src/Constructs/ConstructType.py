@@ -105,199 +105,199 @@ class ConstructType(Enum):
             }
         }
     }
-    FACTORY = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Factory
-    }
+    # FACTORY = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Factory
+    # }
 
-    POLICE_OUTPOST = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': PoliceOutpost
-    }
-    POLICE_STATION = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': PoliceStation
-    }
-    COURTHOUSE = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Courthouse
-    }
-    PRISON = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Prison
-    }
-    FIRE_STATION = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': FireStation
-    }
-    CLINIC = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Clinic
-    }
-    HOSPITAL = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Hospital
-    }
-    NURSERY = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Nursery
-    }
-    KINDERGARTEN = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Kindergarten
-    }
-    PRIMARY_SCHOOL = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': PrimarySchool
-    }
-    SECONDARY_SCHOOL = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': SecondarySchool
-    }
-    HIGH_SCHOOL = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': HighSchool
-    }
-    COLLEGE = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': CollegeHouse
-    }
-    UNIVERSITY = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': UniversityHouse
-    }
-    PUBLIC_LIBRARY = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': PublicLibrary
-    }
+    # POLICE_OUTPOST = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': PoliceOutpost
+    # }
+    # POLICE_STATION = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': PoliceStation
+    # }
+    # COURTHOUSE = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Courthouse
+    # }
+    # PRISON = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Prison
+    # }
+    # FIRE_STATION = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': FireStation
+    # }
+    # CLINIC = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Clinic
+    # }
+    # HOSPITAL = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Hospital
+    # }
+    # NURSERY = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Nursery
+    # }
+    # KINDERGARTEN = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Kindergarten
+    # }
+    # PRIMARY_SCHOOL = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': PrimarySchool
+    # }
+    # SECONDARY_SCHOOL = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': SecondarySchool
+    # }
+    # HIGH_SCHOOL = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': HighSchool
+    # }
+    # COLLEGE = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': CollegeHouse
+    # }
+    # UNIVERSITY = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': UniversityHouse
+    # }
+    # PUBLIC_LIBRARY = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': PublicLibrary
+    # }
 
-    MUSEUM = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Museum
-    }
-    PARK = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Park
-    }
-    WATER_PARK = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': WaterPark
-    }
-    DOG_PARK = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': DogPark
-    }
-    STATUE = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Statue
-    }
-    AMUSEMENT_PARK = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': AmusementPark
-    }
+    # MUSEUM = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Museum
+    # }
+    # PARK = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Park
+    # }
+    # WATER_PARK = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': WaterPark
+    # }
+    # DOG_PARK = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': DogPark
+    # }
+    # STATUE = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Statue
+    # }
+    # AMUSEMENT_PARK = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': AmusementPark
+    # }
 
-    LANDFILL = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Landfill
-    }
-    WASTE_STORAGE = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': WasteStorage
-    }
-    WASTE_PROCESSING_PLANT = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': WasteProcessingPlant
-    }
-    POWER_PLANT = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': CoalPowerPlant,
-        'types': {
-            0: 'coal',
-            1: 'oil',
-            2: 'nuclear'
-        }
-    }
-    WATER_POWER_PLANT = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': CoalPowerPlant
-    }
-    DAM = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': Dam
-    }
-    WATER_PUMP = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': WaterPump
-    }
-    SWEWAGE_PUMP = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': SewagePump
-    }
-    SEWAGE_PROCESSING_STATION = {
-        'max_level': 2,
-        'cost': 1000,
-        'constructor': SewageProcessingStation,
-        'type': {
-            0: {
-                'name': 'standard',
-                'description': 'Station destined to process sewage produced by cisty buildings.',
-                'pollution_level': 0.75,
-                'range': 5,
-                'energy_consumption': 1
-            },
-            1: {
-                'name': 'industrial',
-                'description': 'Expanded sewage treatement station with double the processing power of the regular variant.',
-                'pollution_level': 0.75,
-                'range': 10,
-                'energy_consumption': 2
-            },
-            2: {
-                'name': 'economical',
-                'description': 'More economical version of the sewage treatment station. Decreases pollution by one third.',
-                'pollution_level': 0.5,
-                'range': 10,
-                'energy_consumption': 4
-            },
-            3: {
-                'name': 'advanced_economical',
-                'description': 'State of the art seweage treatment facility - 20% larger processing power and 50% smaller pollution.',
-                'pollution_level': 0.25,
-                'range': 12,
-                'energy_consumption': 6
-            }
-        }
-    }
+    # LANDFILL = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Landfill
+    # }
+    # WASTE_STORAGE = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': WasteStorage
+    # }
+    # WASTE_PROCESSING_PLANT = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': WasteProcessingPlant
+    # }
+    # POWER_PLANT = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': CoalPowerPlant,
+    #     'types': {
+    #         0: 'coal',
+    #         1: 'oil',
+    #         2: 'nuclear'
+    #     }
+    # }
+    # WATER_POWER_PLANT = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': CoalPowerPlant
+    # }
+    # DAM = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': Dam
+    # }
+    # WATER_PUMP = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': WaterPump
+    # }
+    # SWEWAGE_PUMP = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': SewagePump
+    # }
+    # SEWAGE_PROCESSING_STATION = {
+    #     'max_level': 2,
+    #     'cost': 1000,
+    #     'constructor': SewageProcessingStation,
+    #     'type': {
+    #         0: {
+    #             'name': 'standard',
+    #             'description': 'Station destined to process sewage produced by cisty buildings.',
+    #             'pollution_level': 0.75,
+    #             'range': 5,
+    #             'energy_consumption': 1
+    #         },
+    #         1: {
+    #             'name': 'industrial',
+    #             'description': 'Expanded sewage treatement station with double the processing power of the regular variant.',
+    #             'pollution_level': 0.75,
+    #             'range': 10,
+    #             'energy_consumption': 2
+    #         },
+    #         2: {
+    #             'name': 'economical',
+    #             'description': 'More economical version of the sewage treatment station. Decreases pollution by one third.',
+    #             'pollution_level': 0.5,
+    #             'range': 10,
+    #             'energy_consumption': 4
+    #         },
+    #         3: {
+    #             'name': 'advanced_economical',
+    #             'description': 'State of the art seweage treatment facility - 20% larger processing power and 50% smaller pollution.',
+    #             'pollution_level': 0.25,
+    #             'range': 12,
+    #             'energy_consumption': 6
+    #         }
+    #     }
+    # }
 
     def get_info(type):
         return type.value
