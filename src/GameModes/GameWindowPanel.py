@@ -1,8 +1,8 @@
 import pygame as pg
 import pygame_menu as pgmen
-from .GameWindow import *
-from .BuildModePanel import BuildModePanel
-from .Panel import Panel
+from GameModes.GameWindow import *
+from GameModes.BuildModePanel import BuildModePanel
+from GameModes.Panel import Panel
 
 
 class GameWindowPanel(Panel):

@@ -1,7 +1,7 @@
 import pygame_menu as pgmen
 import pygame as pg
-from .Panel import *
-from .BuyBuildingPanel import BuyBuildingPanel
+from GameModes.Panel import *
+from GameModes.BuyBuildingPanel import BuyBuildingPanel
 
 import os
 

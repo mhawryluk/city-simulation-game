@@ -1,5 +1,5 @@
-from .GameMode import *
-from .GameWindowPanel import *
+from GameModes.GameMode import *
+from GameModes.GameWindowPanel import *
 from City.CitySpace import *
 from GameEngineTools.SaveManager import SaveManager
 
