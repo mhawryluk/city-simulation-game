@@ -1,7 +1,7 @@
 import pygame_menu as pgmen
 import pygame as pg
-from .Panel import *
-from .BuyBuildingPanel import BuyBuildingPanel
+from GameModes.Panel import *
+from GameModes.BuyBuildingPanel import BuyBuildingPanel
 
 import os
 
@@ -44,24 +44,19 @@ class BuildModePanel(Panel):
         self.buy_building_panel.draw(window)
 
     def residential_zone(self):
-        pass
+        self.game_window.set_zoning("residential")
 
     def industrial_zone(self):
-        pass
+        self.game_window.set_zoning("industrial")
 
     def commercial_zone(self):
-        print("commercial")
-        pass
+        self.game_window.set_zoning("commercial")
 
     def buy_building(self):
         self.buy_building_panel.menu.toggle()
 
     def bulldoze(self):
         pass
-
-    def get_theme(self):
-        theme = super().get_theme()
-        return theme
 
     def collide(self):
         if super().collide():

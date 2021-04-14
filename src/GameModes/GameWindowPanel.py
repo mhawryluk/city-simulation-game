@@ -1,8 +1,8 @@
 import pygame as pg
 import pygame_menu as pgmen
-from .GameWindow import *
-from .BuildModePanel import BuildModePanel
-from .Panel import Panel
+from GameModes.GameWindow import *
+from GameModes.BuildModePanel import BuildModePanel
+from GameModes.Panel import Panel
 
 
 class GameWindowPanel(Panel):
@@ -18,7 +18,7 @@ class GameWindowPanel(Panel):
         window_width = game_window.city_space.window_width
         window_height = game_window.city_space.window_height
         self.build_mode_panel = BuildModePanel(
-            width=window_width - width, height=height//8,
+            width=window_width - width, height=height//10,
             position=(100, 100),
             game_window=game_window)
         self.build_mode_panel.disable()
@@ -57,16 +57,16 @@ class GameWindowPanel(Panel):
 
     def build_mode(self):
         if self.game_window.mode == "build_mode":
-            self.game_window.mode = "game_mode"
             self.build_mode_panel.disable()
             self.build_mode_panel.buy_building_panel.disable()
+            self.game_window.game_resume()
         else:
             self.game_window.mode = "build_mode"
             self.build_mode_panel.enable()
 
     def save(self):
-        pass
-        # self.game_window.save_manager.save()
+        return
+        self.game_window.save_manager.save()
 
     def draw(self, window):
         super().draw(window)

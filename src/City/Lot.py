@@ -4,13 +4,18 @@ from random import randint
 
 
 class Lot:
-    def __init__(self, x, y, type):
+    zone_highlighting = False
+
+    def __init__(self, x, y, type, arguments=None):
+        if arguments:
+            pass
         self.type = type
         self.x = x
         self.y = y
         self.selected = False
         self.hovered = False
         self.seed = randint(0, 5000)
+        self.zone_type_color = None
 
     def draw(self, scale, pov, window):
         x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
@@ -22,15 +27,23 @@ class Lot:
         for picture in Lot.city_images.get_images(self.type, self.seed):
             window.blit(picture, (x, y))
 
-        if self.selected or self.hovered:
+        if self.selected or self.hovered or (Lot.zone_highlighting and self.zone_type_color):
             alpha = pg.Surface((scale, scale))
             alpha.set_alpha(128)
-            if self.selected:
+
+            if Lot.zone_highlighting and self.zone_type_color:
+                alpha.fill(self.zone_type_color)
+            elif self.selected:
                 alpha.fill((0, 0, 0))
             elif self.hovered:
                 alpha.fill((255, 255, 255))
+
             window.blit(alpha, (x, y))
 
-        # border
-        # pg.draw.rect(window,
-        #              (0, 50, 0), (x, y, scale, scale), 2)
+    def set_zone(self, zone_type):
+        if zone_type == 'residential':
+            self.zone_type_color = (0, 255, 0)
+        elif zone_type == 'commercial':
+            self.zone_type_color = (0, 0, 255)
+        elif zone_type == 'industrial':
+            self.zone_type_color = (255, 0, 0)

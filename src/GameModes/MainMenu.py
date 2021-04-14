@@ -1,4 +1,4 @@
-from .GameMode import *
+from GameModes.GameMode import *
 from GameEngineTools.SaveManager import SaveManager
 import pygame as pg
 import pygame_menu as pgmen
@@ -174,7 +174,9 @@ class MainMenu(GameMode):
         theme = pgmen.themes.THEME_DARK.copy()
         theme.title_font = pgmen.font.FONT_FRANCHISE
         theme.title_font_size = 70
-        theme.title_background_color = (35, 35, 35)
+        theme.title_background_color = (0, 0, 0)
+        theme.title_font_color = (255, 255, 255)
+        theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.background_color = (35, 35, 35, 60)
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)
@@ -183,4 +185,5 @@ class MainMenu(GameMode):
         theme.widget_background_color = (35, 35, 35)
         theme.widget_font_size = 44
         theme.widget_padding = 20
+        theme.widget_alignment = pgmen.locals.ALIGN_CENTER
         return theme

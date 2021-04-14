@@ -1,7 +1,7 @@
-from .Lot import *
-from .LotType import *
-from .CityImages import *
-from .RoadSystem import *
+from City.Lot import *
+from City.LotType import *
+from City.CityImages import *
+from City.RoadSystem import *
 import pygame as pg
 
 
@@ -24,6 +24,7 @@ class CitySpace:
         self.move_speed = (0, 0)
         self.selected_lot = None
         self.hovered_lot = None
+        self.zone = set()
 
     def reset_lots(self):
         self.lots = []
@@ -76,6 +77,7 @@ class CitySpace:
                 lot.draw(self.scale, (self.pov_x, self.pov_y), window)
 
         self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
+
         if mode == "road_placing":
             alpha = pg.Surface((self.window_width, self.window_height))
             alpha.set_alpha(128)
@@ -109,6 +111,7 @@ class CitySpace:
     def get_clicked_road(self, mouse_pos):
         if mouse_pos is None:
             return
+
         x = round((mouse_pos[0] - self.pov_x +
                   self.scale*self.width//2) / self.scale)
         y = round((mouse_pos[1] - self.pov_y +
@@ -117,3 +120,8 @@ class CitySpace:
 
     def road_clicked(self):
         self.road_system.road_clicked()
+
+    def add_to_zone(self, zone_type):
+        clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
+        clicked_lot.set_zone(zone_type)
+        self.zone.add(clicked_lot)

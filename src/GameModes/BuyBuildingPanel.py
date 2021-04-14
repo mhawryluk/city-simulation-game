@@ -1,4 +1,4 @@
-from .Panel import *
+from GameModes.Panel import *
 import pygame_menu as pgmen
 from Constructs.ConstructType import ConstructType
 
