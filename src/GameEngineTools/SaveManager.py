@@ -89,11 +89,15 @@ class SaveManager:
         self.set_active_save()
         self.save_save_manager_data()
 
-    def load_save(self, save_id):
-        pass #load from file
+    def load_save(self):
+        save_id = self.sm_data['active_save']
+        save_path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
+        save_name = self.sm_data[str(save_id)]
+        with open(save_path, 'r') as save_file:
+            save_data = js.load(save_file)
+        self.active_save = (save_id, save_name, save_data)
 
     def save(self):
-        print(self.active_save)
         save_id, save_name, save_data = self.active_save
         save_data['last_saved'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         self.sm_data[str(save_id)] = save_name
@@ -111,3 +115,6 @@ class SaveManager:
             list_of_saves.append(
                 ('[ ' + self.sm_data[key] + ' ] id: ' + str(key), key))
         return list_of_saves
+
+    def get_gameplay_data(self):
+        return self.active_save[2]

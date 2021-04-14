@@ -65,7 +65,6 @@ class GameWindowPanel(Panel):
             self.build_mode_panel.enable()
 
     def save(self):
-        return
         self.game_window.save_manager.save()
 
     def draw(self, window):
