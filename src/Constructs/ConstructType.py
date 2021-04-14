@@ -89,18 +89,45 @@ class ConstructType(Enum):
         'constructor':SmallShop,
         'type':{
             0:{
-                'name':'small_shop',
+                'name':'small shop',
+                'description':'Small shop.',
                 'employees':3,
-                'income':1000
+                'income':1000,
+                'energy_consumption':10,
+                'water_consumption':5,
+                'waste_production':20,
+                'resident_happiness_multiplier':1.1
             },
             1:{
-
+                'name':'shop',
+                'description':'Larger shop.',
+                'employees':10,
+                'income':2000,
+                'energy_consumption':20,
+                'water_consumption':10,
+                'waste_production':40,
+                'resident_happiness_multiplier':1.2,
+                'upgrade_cost':2000
             },
             2:{
-
+                'name':'shopping mall',
+                'description':'Medium size shopping mall.',
+                'employees':50,
+                'income':10000,
+                'energy_consumption':100,
+                'water_consumption':75,
+                'waste_production':250,
+                'resident_happiness_multiplier':1.35
             },
             3:{
-
+                'name':'small_shop',
+                'description':'Big and well known shopping mall.',
+                'employees':200,
+                'income':50000,
+                'energy_consumption':500,
+                'water_consumption':300,
+                'waste_production':1000,
+                'resident_happiness_multiplier':1.5
             }
         }
     }

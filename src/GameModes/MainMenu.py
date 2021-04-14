@@ -130,6 +130,7 @@ class MainMenu(GameMode):
 
     def play(self):
         self.change_mode = True
+        self.save_manager.load_save()
 
     def update(self, redraw=False):
         self.draw(redraw)

@@ -89,10 +89,7 @@ class SaveManager:
         self.save_save_manager_data()
 
     def load_save(self, save_id):
-        try:
-            pass
-        except:
-            pass
+        pass #load from file
 
     def save(self):
         save_id, save_name, save_data = self.active_save
