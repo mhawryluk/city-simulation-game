@@ -48,11 +48,12 @@ class SaveManager:
 
         if self.sm_data['max_save_id'] + 1 >= self.sm_data['max_saves_amount'] and len(free_save_id) == 0:
             return 'You have reached your save limit'
-        else: 
-            self.sm_data['max_save_id'] = max(save_id, self.sm_data['max_save_id'])
+        else:
+            self.sm_data['max_save_id'] = max(
+                save_id, self.sm_data['max_save_id'])
             self.active_save = (save_id, name, {
-                'created' : strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            }) #generate base save presets in dict
+                'created': strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            })  # generate base save presets in dict
             self.save()
             self.set_active_save()
             return 'Save ' + name + ' created successfully'
@@ -65,7 +66,7 @@ class SaveManager:
             while ind in self.sm_data['free_save_id_list']:
                 ind += 1
             self.activate_save(ind)
-    
+
     def activate_save(self, save_id):
         self.sm_data['active_save'] = save_id
         self.save_save_manager_data()
@@ -95,6 +96,7 @@ class SaveManager:
             pass
 
     def save(self):
+        print(self.active_save)
         save_id, save_name, save_data = self.active_save
         save_data['last_saved'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         self.sm_data[str(save_id)] = save_name
@@ -106,7 +108,9 @@ class SaveManager:
     def list_saves(self):
         list_of_saves = []
         free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
-        save_ids = [str(id) for id in range(1, self.sm_data['max_save_id'] + 1) if not id in free_save_id]
+        save_ids = [str(id) for id in range(
+            1, self.sm_data['max_save_id'] + 1) if not id in free_save_id]
         for key in save_ids:
-            list_of_saves.append( ('[ ' + self.sm_data[key] + ' ] id: ' + str(key), key) )
+            list_of_saves.append(
+                ('[ ' + self.sm_data[key] + ' ] id: ' + str(key), key))
         return list_of_saves

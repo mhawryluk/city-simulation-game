@@ -1,14 +1,14 @@
 from enum import Enum, auto
-from Constructs.ZoneConstructs import *
-from Constructs.SpecialConstructs import *
 
 
 class ConstructType(Enum):
     FAMILY_HOUSE = {
         'max_level': 2,
         'cost': 1000,
-        'constructor': FamilyHouse,
-        'type': {
+        'simulation_handler': None,
+        'zone': 'residential',
+        'range': (0, 0),
+        'level': {
             0: {
                 'name': 'small house',
                 'capacity': 3,  # in people
@@ -28,7 +28,7 @@ class ConstructType(Enum):
                 'taxation': 3000
             },
             2: {
-                'name': 'lerge residence',
+                'name': 'large residence',
                 'capacity': 7,
                 'base_resident_happiness': 0.65,
                 'energy_consumption': 14,
@@ -41,7 +41,6 @@ class ConstructType(Enum):
     BLOCK = {
         'max_level': 3,
         'cost': 5000,
-        'constructor': Block,
         'type': {
             0: {
                 'name': 'regular block',
@@ -87,7 +86,6 @@ class ConstructType(Enum):
     SHOP = {
         'max_level': 4,
         'cost': 1000,
-        'constructor': SmallShop,
         'type': {
             0: {
                 'name': 'small_shop',
@@ -104,6 +102,11 @@ class ConstructType(Enum):
 
             }
         }
+    }
+
+    HOSPITAL = {
+        'max_level': 2,
+        'cost': 1000,
     }
     # FACTORY = {
     #     'max_level': 2,
@@ -141,11 +144,7 @@ class ConstructType(Enum):
     #     'cost': 1000,
     #     'constructor': Clinic
     # }
-    # HOSPITAL = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': Hospital
-    # }
+
     # NURSERY = {
     #     'max_level': 2,
     #     'cost': 1000,
@@ -301,10 +300,3 @@ class ConstructType(Enum):
 
     def get_info(type):
         return type.value
-
-    def new_object(type):
-        return type.value['constructor'](ConstructType.get_info(type))
-
-
-a = ConstructType.new_object(ConstructType.FAMILY_HOUSE)
-print(a.attributes)

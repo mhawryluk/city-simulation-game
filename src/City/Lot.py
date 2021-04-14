@@ -6,7 +6,9 @@ from random import randint
 class Lot:
     zone_highlighting = False
 
-    def __init__(self, x, y, type):
+    def __init__(self, x, y, type, arguments=None):
+        if arguments:
+            pass
         self.type = type
         self.x = x
         self.y = y
