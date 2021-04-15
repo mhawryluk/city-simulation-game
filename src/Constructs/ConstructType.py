@@ -16,7 +16,8 @@ class ConstructType(Enum):
                 'energy_consumption': 3,  # in units
                 'water_consumption': 5,  # in units
                 'waste_production': 6.5,  # in units
-                'taxation': 2000  # in dollars; per person; multiply by happiness to get actual income
+                'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
             },
             1: {
                 'name': 'family house',
@@ -25,7 +26,8 @@ class ConstructType(Enum):
                 'energy_consumption': 7,
                 'water_consumption': 10,
                 'waste_production': 10,
-                'taxation': 3000
+                'taxation': 3000,
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house1.png'))
             },
             2: {
                 'name': 'large residence',
@@ -34,7 +36,8 @@ class ConstructType(Enum):
                 'energy_consumption': 14,
                 'water_consumption': 16,
                 'waste_production': 17,
-                'taxation': 4000
+                'taxation': 4000,
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house2.png'))
             }
         }
     }
@@ -49,7 +52,8 @@ class ConstructType(Enum):
                 'energy_consumption': 99,  # in units
                 'water_consumption': 90,  # in units
                 'waste_production': 180,  # in units
-                'taxation': 420  # in dollars; per person; multiply by happiness+1 to get actual income
+                'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
             },
             1: {
                 'name': 'big block',
@@ -59,7 +63,8 @@ class ConstructType(Enum):
                 'water_consumption': 200,
                 'waste_production': 400,
                 'taxation': 600,
-                'upgrade_cost': 10000
+                'upgrade_cost': 10000,
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
             },
             2: {
                 'name': 'high end block',
@@ -69,17 +74,8 @@ class ConstructType(Enum):
                 'water_consumption': 210,
                 'waste_production': 400,
                 'taxation': 1000,
-                'upgrade_cost': 10000
-            },
-            3: {  # to balance
-                'name': 'lerge_residence',
-                'capacity': 50,
-                'base_resident_happiness': 0.85,
-                'energy_consumption': 400,
-                'water_consumption': 300,
-                'waste_production': 420,
-                'taxation': 10000,
-                'upgrade_cost': 500000
+                'upgrade_cost': 10000,
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
             }
         }
     }

@@ -1,10 +1,9 @@
 
 class Construct:
     def __init__(self, construct_type):
-        self.attributes = attributes.copy()
         self.construct_level = 0
-        self.type = construct_type
         self.human_resources = 0
+        self.type = construct_type
     
     def level_up(self, level_up_by):
         prev = self.construct_level
@@ -15,3 +14,6 @@ class Construct:
         prev = self.construct_level
         self.construct_level = max(0, self.construct_level - delevel_by)
         return prev - self.construct_level
+
+    def get_image(self):
+        pass
