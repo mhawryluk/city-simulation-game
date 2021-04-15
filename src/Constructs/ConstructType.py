@@ -128,8 +128,32 @@ class ConstructType(Enum):
     }
 
     HOSPITAL = {
-        'max_level': 2,
+        'max_level': 1,
         'cost': 1000,
+        'type':{
+            0: {
+                'name':'clinic',
+                'description':'Small clinic.',
+                'patients':10,
+                'income':-1000,
+                'energy_consumption':50,
+                'water_consumption':30,
+                'waste_production':100,
+                'resident_happiness_multiplier':1.45
+                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png'))
+            },
+            1:{
+                'name':'hospital',
+                'description':'Small hospital. Can house more people.',
+                'patients':200,
+                'income':-10000,
+                'energy_consumption':500,
+                'water_consumption':300,
+                'waste_production':1000,
+                'resident_happiness_multiplier':1.75
+                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png'))
+            }
+        }
     }
     # FACTORY = {
     #     'max_level': 2,
@@ -161,11 +185,6 @@ class ConstructType(Enum):
     #     'max_level': 2,
     #     'cost': 1000,
     #     'constructor': FireStation
-    # }
-    # CLINIC = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': Clinic
     # }
 
     # NURSERY = {

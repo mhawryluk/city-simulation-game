@@ -3,6 +3,7 @@ class Construct:
     def __init__(self, construct_type):
         self.construct_level = 0
         self.human_resources = 0
+        self.users = 0
         self.type = construct_type
     
     def level_up(self, level_up_by):
