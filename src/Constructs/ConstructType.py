@@ -84,6 +84,7 @@ class ConstructType(Enum):
     SHOP = {
         'max_level': 4,
         'cost': 1000,
+        'zone': 'commercial',
         'level': {
             0: {
                 'name': 'small shop',

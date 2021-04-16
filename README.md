@@ -34,3 +34,4 @@ project for Python programming class
 - [ ] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
 - [ ] dźwięki gry
 - [ ] menu opcji
+- [ ] zonetypes - zmienić ze stringów w enumy/stałe
