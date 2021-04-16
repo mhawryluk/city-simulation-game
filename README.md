@@ -21,3 +21,16 @@ project for Python programming class
 - [ ] opcje zarządzania miastem i budynkami (w tym ulepszenia)
 - [ ] system potrzeb i zadowolenia mieszkańców
 - [ ] komunikaty dotyczące stanu miasta, statystyki oraz mechanizmy symulujące ekonomię
+
+
+## obecne TODO:
+- [ ] kolejność rysowania (ulice zasłaniają domy)
+- [ ] ustawianie strefy klikając, na razie jest tylko przeciągając
+- [ ] każdy dom wygląda tak samo -> losowe przydzielanie obrazków
+- [ ] zapis mapy do save-a
+- [ ] kupowanie budynków specjalnych
+- [ ] obrobić obrazki budynków/znaleźć lepsze
+- [ ] poprawić UI
+- [ ] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
+- [ ] dźwięki gry
+- [ ] menu opcji
