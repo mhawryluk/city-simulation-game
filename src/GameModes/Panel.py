@@ -73,6 +73,10 @@ class Panel:
         '''returns all panels attached to this panel'''
         return []
 
+    def disable_subpanels(self):
+        for panel in self.get_subpanels():
+            panel.disable_all_panels()
+
     def disable_all_panels(self):
         self.menu.disable()
         for panel in self.get_subpanels():

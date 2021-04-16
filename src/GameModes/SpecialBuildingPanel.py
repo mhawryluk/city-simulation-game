@@ -1,25 +1,23 @@
-from GameModes.Panel import *
-import pygame_menu as pgmen
+from GameModes.Panel import Panel
 from Constructs.ConstructType import ConstructType
+import pygame_menu as pgmen
 
 
-class BuyBuildingPanel(Panel):
+class BuySpecialBuildingPanel(Panel):
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
         self.BUY_WINDOW_WIDTH = 500
         self.BUY_WINDOW_HEIGHT = 500
         self.BUY_WINDOW_POSITION = (100, 50)
-        
+
         self.enabled_window = None
         self.game_window = game_window
-        self.menu = pgmen.Menu(title='BUY A BUILDING',
+        self.menu = pgmen.Menu(title='special building',
                                width=width, height=height,
                                position=position,
-                               rows=50, columns=2,
+                               rows=1, columns=4,
                                theme=self.get_theme(),
-                               enabled=False,
-                               mouse_enabled=True, mouse_motion_selection=True)
-
+                               enabled=False, mouse_motion_selection=True)
         for construct in ConstructType:
             if not construct.value.get('zone', None):
                 self.menu.add.button(

@@ -56,12 +56,26 @@ class GameWindowPanel(Panel):
         self.game_window.zoning = False
 
     def stats(self):
+        enabled = self.stat_panel.is_enabled()
+        self.game_window.mode = self.game_window.mode if self.game_window.mode != "road_placing" else "game_mode"
+
         self.disable_subpanels()
         self.stat_panel.menu.toggle()
 
+        if enabled:
+            self.stat_panel.disable()
+        else:
+            self.stat_panel.enable()
+
     def options(self):
+        enabled = self.option_panel.is_enabled()
+        self.game_window.mode = self.game_window.mode if self.game_window.mode != "road_placing" else "game_mode"
+
         self.disable_subpanels()
-        self.option_panel.menu.toggle()
+        if enabled:
+            self.option_panel.disable()
+        else:
+            self.option_panel.enable()
 
     def build_mode(self):
         for panel in self.get_subpanels():
@@ -71,7 +85,7 @@ class GameWindowPanel(Panel):
         self.game_window.toggle_zone_highlighting()
 
         if self.game_window.mode == "build_mode":
-            self.build_mode_panel.buy_building_panel.disable()
+            self.build_mode_panel.special_building_panel.disable()
             self.game_window.game_resume()
         else:
             self.game_window.mode = "build_mode"
