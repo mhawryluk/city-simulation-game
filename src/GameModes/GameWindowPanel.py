@@ -19,7 +19,7 @@ class GameWindowPanel(Panel):
         window_width = game_window.city_space.window_width
         window_height = game_window.city_space.window_height
         self.build_mode_panel = BuildModePanel(
-            width=window_width - width, height=height//10,
+            width=window_width - width, height=height//15,
             position=(100, 100),
             game_window=game_window)
 
@@ -36,10 +36,6 @@ class GameWindowPanel(Panel):
             "stats", self.stats)
         self.options_button = self.menu.add.button(
             "options", self.options)
-        self.save_button = self.menu.add.button(
-            "save", self.save)
-        self.main_menu_button = self.menu.add.button(
-            "main menu", self.main_menu)
 
     def play(self):
         self.game_window.mode = "game_mode"
@@ -59,9 +55,6 @@ class GameWindowPanel(Panel):
     def stats(self):
         pass
 
-    def main_menu(self):
-        self.game_window.change_mode = True
-
     def options(self):
         self.build_mode_panel.disable_all_panels()
         self.option_panel.menu.toggle()
@@ -75,9 +68,6 @@ class GameWindowPanel(Panel):
             self.game_window.game_resume()
         else:
             self.game_window.mode = "build_mode"
-
-    def save(self):
-        self.game_window.save_manager.save()
 
     def get_subpanels(self):
         return [self.build_mode_panel, self.option_panel]

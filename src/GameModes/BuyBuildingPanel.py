@@ -9,6 +9,7 @@ class BuyBuildingPanel(Panel):
         self.BUY_WINDOW_WIDTH = 500
         self.BUY_WINDOW_HEIGHT = 500
         self.BUY_WINDOW_POSITION = (100, 50)
+        
         self.enabled_window = None
         self.game_window = game_window
         self.menu = pgmen.Menu(title='BUY A BUILDING',

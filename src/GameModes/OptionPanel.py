@@ -11,3 +11,14 @@ class OptionPanel(Panel):
                                theme=self.get_theme(),
                                mouse_enabled=True, mouse_motion_selection=True,
                                enabled=False)
+
+        self.save_button = self.menu.add.button(
+            "save", self.save)
+        self.main_menu_button = self.menu.add.button(
+            "main menu", self.main_menu)
+
+    def main_menu(self):
+        self.game_window.change_mode = True
+
+    def save(self):
+        self.game_window.save_manager.save()

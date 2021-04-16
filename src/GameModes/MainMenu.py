@@ -21,8 +21,8 @@ class MainMenu(GameMode):
         self.settings_button = None
         self.quit_button = None
 
-        backgrounds = ['menu_background1.jpg', 'menu_background2.png',
-                       'menu_background3.png', 'menu_background2.png', 'menu_background4.jpg']
+        backgrounds = ['menu_background1.jpg', 'menu_background3.png',
+                       'menu_background2.png', 'menu_background4.jpg']
 
         self.background = pg.image.load(
             os.path.join('Assets', 'MenuBackgrounds', choice(backgrounds)))
