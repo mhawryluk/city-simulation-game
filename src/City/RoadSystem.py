@@ -13,9 +13,9 @@ class RoadSystem:
         self.road_width_ratio = 0.1666
 
         self.vertical_picture = pg.image.load(
-            os.path.join('Assets', 'street_vertical.png'))
+            os.path.join('Assets', 'Streets', 'street_vertical.png'))
         self.horizontal_picture = pg.image.load(
-            os.path.join('Assets', 'street_horizontal.png'))
+            os.path.join('Assets', 'Streets', 'street_horizontal.png'))
         self.map_width = map_width
         self.map_height = map_height
         self.hovered_road = None

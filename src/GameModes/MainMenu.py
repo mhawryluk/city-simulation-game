@@ -25,7 +25,7 @@ class MainMenu(GameMode):
                        'menu_background3.png', 'menu_background2.png', 'menu_background4.jpg']
 
         self.background = pg.image.load(
-            os.path.join('Assets', choice(backgrounds)))
+            os.path.join('Assets', 'MenuBackgrounds', choice(backgrounds)))
         self.background = pg.transform.scale(
             self.background, self.window.get_size())
 

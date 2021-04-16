@@ -7,18 +7,20 @@ from random import random, choice, seed
 class CityImages:
     def __init__(self):
         self.main_images = {
-            LotType.GRASS: pg.image.load(os.path.join('Assets', 'grass.png')),
-            LotType.WATER: pg.image.load(os.path.join('Assets', 'water.png'))}
+            LotType.GRASS: pg.image.load(os.path.join('Assets', 'LotType', 'grass.png')),
+            LotType.WATER: pg.image.load(os.path.join('Assets', 'LotType', 'water.png'))}
 
         self.additional_images = {
             LotType.GRASS: [
-                pg.image.load(os.path.join('Assets', 'hills.png')),
-                pg.image.load(os.path.join('Assets', 'flowers.png')),
-                pg.image.load(os.path.join('Assets', 'small_hills.png')),
-                pg.image.load(os.path.join('Assets', 'stones.png'))
+                pg.image.load(os.path.join('Assets', 'LotType', 'hills.png')),
+                pg.image.load(os.path.join(
+                    'Assets', 'LotType', 'flowers.png')),
+                pg.image.load(os.path.join(
+                    'Assets', 'LotType', 'small_hills.png')),
+                pg.image.load(os.path.join('Assets', 'LotType', 'stones.png'))
             ],
             LotType.WATER: [
-                pg.image.load(os.path.join('Assets', 'island.png'))
+                pg.image.load(os.path.join('Assets', 'LotType', 'island.png'))
             ]}
 
         self.frequency = {
