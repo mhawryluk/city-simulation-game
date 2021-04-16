@@ -42,6 +42,7 @@ class GameWindowPanel(Panel):
 
     def add_road(self):
         self.game_window.mode = "road_placing" if self.game_window.mode != "road_placing" else "game_mode"
+        self.game_window.zoning = False
 
     def select_area(self):
         pass
@@ -56,13 +57,14 @@ class GameWindowPanel(Panel):
         pass
 
     def build_mode(self):
+        self.build_mode_panel.menu.toggle()
+        self.game_window.toggle_zone_highlighting()
+
         if self.game_window.mode == "build_mode":
-            self.build_mode_panel.disable()
             self.build_mode_panel.buy_building_panel.disable()
             self.game_window.game_resume()
         else:
             self.game_window.mode = "build_mode"
-            self.build_mode_panel.enable()
 
     def save(self):
         self.game_window.save_manager.save()

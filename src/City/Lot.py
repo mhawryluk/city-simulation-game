@@ -1,6 +1,7 @@
 import pygame as pg
 import os
 from random import randint
+from Constructs.ConstructType import ConstructType
 
 
 class Lot:
@@ -16,6 +17,8 @@ class Lot:
         self.hovered = False
         self.seed = randint(0, 5000)
         self.zone_type_color = None
+        self.construct = None
+        self.construct_level = 0
 
     def draw(self, scale, pov, window):
         x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
@@ -24,16 +27,29 @@ class Lot:
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
 
+        # lot type pictures
         for picture in Lot.city_images.get_images(self.type, self.seed):
             window.blit(picture, (x, y))
 
-        if self.selected or self.hovered or (Lot.zone_highlighting and self.zone_type_color):
+        # zone highlighting
+        if Lot.zone_highlighting and self.zone_type_color:
+            alpha = pg.Surface((scale, scale))
+            alpha.set_alpha(128)
+            alpha.fill(self.zone_type_color)
+            window.blit(alpha, (x, y))
+
+        # construct
+        if self.construct:
+            pic = pg.transform.scale(
+                self.construct.value['level'][self.construct_level]['image'], (scale, scale))
+            window.blit(pic, (x, y))
+
+        # mouse selection
+        if self.selected or self.hovered:
             alpha = pg.Surface((scale, scale))
             alpha.set_alpha(128)
 
-            if Lot.zone_highlighting and self.zone_type_color:
-                alpha.fill(self.zone_type_color)
-            elif self.selected:
+            if self.selected:
                 alpha.fill((0, 0, 0))
             elif self.hovered:
                 alpha.fill((255, 255, 255))
@@ -42,8 +58,12 @@ class Lot:
 
     def set_zone(self, zone_type):
         if zone_type == 'residential':
-            self.zone_type_color = (0, 255, 0)
+            self.zone_type_color = (61, 143, 102)
+            self.construct = ConstructType.FAMILY_HOUSE
+
         elif zone_type == 'commercial':
-            self.zone_type_color = (0, 0, 255)
+            self.zone_type_color = (92, 153, 214)
+            # self.construct = ConstructType.SHOP
+
         elif zone_type == 'industrial':
-            self.zone_type_color = (255, 0, 0)
+            self.zone_type_color = (173, 102, 31)

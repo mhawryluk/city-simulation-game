@@ -16,7 +16,7 @@ class Panel:
         theme.title_font_size = 40
         theme.title_font_color = (230, 230, 230, 80)
         theme.title_background_color = (greyness, greyness, greyness)
-        theme.background_color = (greyness, greyness, greyness, 70)
+        theme.background_color = (greyness, greyness, greyness, 250)
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)

@@ -95,15 +95,15 @@ class GameWindow(GameMode):
     def set_zoning(self, zoning_type):
         if not self.zoning:
             self.zoning = True
-            Lot.zone_highlighting = True
             self.zoning_type = zoning_type
         elif self.zoning_type != zoning_type:
             self.zoning_type = zoning_type
         else:
             self.zoning = False
-            Lot.zone_highlighting = False
 
     def game_resume(self):
-        Lot.zone_highlighting = False
         self.zoning = False
         self.game_mode = 'game_mode'
+
+    def toggle_zone_highlighting(self):
+        Lot.zone_highlighting = not Lot.zone_highlighting

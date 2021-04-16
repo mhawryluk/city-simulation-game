@@ -1,4 +1,6 @@
 from enum import Enum, auto
+import pygame as pg
+import os
 
 
 class ConstructType(Enum):
@@ -17,7 +19,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,  # in units
                 'waste_production': 6.5,  # in units
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
+                'image': pg.image.load(os.path.join('Assets', 'House', 'H01.png'))
             },
             1: {
                 'name': 'family house',
@@ -37,14 +39,14 @@ class ConstructType(Enum):
                 'water_consumption': 16,
                 'waste_production': 17,
                 'taxation': 4000,
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house2.png'))
+                'image': pg.image.load(os.path.join('Assets', 'House', 'house3.png'))
             }
         }
     }
     BLOCK = {
         'max_level': 3,
         'cost': 5000,
-        'type': {
+        'level': {
             0: {
                 'name': 'regular block',
                 'capacity': 90,  # in people
@@ -53,7 +55,7 @@ class ConstructType(Enum):
                 'water_consumption': 90,  # in units
                 'waste_production': 180,  # in units
                 'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
+                'image': pg.image.load(os.path.join('Assets', 'House', 'H01.png'))
             },
             1: {
                 'name': 'big block',
@@ -80,49 +82,49 @@ class ConstructType(Enum):
         }
     }
     SHOP = {
-        'max_level':4,
-        'cost':1000,
-        'type':{
-            0:{
-                'name':'small shop',
-                'description':'Small shop.',
-                'employees':3,
-                'income':1000,
-                'energy_consumption':10,
-                'water_consumption':5,
-                'waste_production':20,
-                'resident_happiness_multiplier':1.1
+        'max_level': 4,
+        'cost': 1000,
+        'level': {
+            0: {
+                'name': 'small shop',
+                'description': 'Small shop.',
+                'employees': 3,
+                'income': 1000,
+                'energy_consumption': 10,
+                'water_consumption': 5,
+                'waste_production': 20,
+                'resident_happiness_multiplier': 1.1
             },
-            1:{
-                'name':'shop',
-                'description':'Larger shop.',
-                'employees':10,
-                'income':2000,
-                'energy_consumption':20,
-                'water_consumption':10,
-                'waste_production':40,
-                'resident_happiness_multiplier':1.2,
-                'upgrade_cost':2000
+            1: {
+                'name': 'shop',
+                'description': 'Larger shop.',
+                'employees': 10,
+                'income': 2000,
+                'energy_consumption': 20,
+                'water_consumption': 10,
+                'waste_production': 40,
+                'resident_happiness_multiplier': 1.2,
+                'upgrade_cost': 2000
             },
-            2:{
-                'name':'shopping mall',
-                'description':'Medium size shopping mall.',
-                'employees':50,
-                'income':10000,
-                'energy_consumption':100,
-                'water_consumption':75,
-                'waste_production':250,
-                'resident_happiness_multiplier':1.35
+            2: {
+                'name': 'shopping mall',
+                'description': 'Medium size shopping mall.',
+                'employees': 50,
+                'income': 10000,
+                'energy_consumption': 100,
+                'water_consumption': 75,
+                'waste_production': 250,
+                'resident_happiness_multiplier': 1.35
             },
-            3:{
-                'name':'small_shop',
-                'description':'Big and well known shopping mall.',
-                'employees':200,
-                'income':50000,
-                'energy_consumption':500,
-                'water_consumption':300,
-                'waste_production':1000,
-                'resident_happiness_multiplier':1.5
+            3: {
+                'name': 'small_shop',
+                'description': 'Big and well known shopping mall.',
+                'employees': 200,
+                'income': 50000,
+                'energy_consumption': 500,
+                'water_consumption': 300,
+                'waste_production': 1000,
+                'resident_happiness_multiplier': 1.5
             }
         }
     }
@@ -130,27 +132,27 @@ class ConstructType(Enum):
     HOSPITAL = {
         'max_level': 1,
         'cost': 1000,
-        'type':{
+        'level': {
             0: {
-                'name':'clinic',
-                'description':'Small clinic.',
-                'patients':10,
-                'income':-1000,
-                'energy_consumption':50,
-                'water_consumption':30,
-                'waste_production':100,
-                'resident_happiness_multiplier':1.45
+                'name': 'clinic',
+                'description': 'Small clinic.',
+                'patients': 10,
+                'income': -1000,
+                'energy_consumption': 50,
+                'water_consumption': 30,
+                'waste_production': 100,
+                'resident_happiness_multiplier': 1.45,
                 'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png'))
             },
-            1:{
-                'name':'hospital',
-                'description':'Small hospital. Can house more people.',
-                'patients':200,
-                'income':-10000,
-                'energy_consumption':500,
-                'water_consumption':300,
-                'waste_production':1000,
-                'resident_happiness_multiplier':1.75
+            1: {
+                'name': 'hospital',
+                'description': 'Small hospital. Can house more people.',
+                'patients': 200,
+                'income': -10000,
+                'energy_consumption': 500,
+                'water_consumption': 300,
+                'waste_production': 1000,
+                'resident_happiness_multiplier': 1.75,
                 'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png'))
             }
         }
