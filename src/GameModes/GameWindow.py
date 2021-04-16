@@ -3,6 +3,8 @@ from GameModes.GameWindowPanel import *
 from City.CitySpace import *
 from City.Lot import *
 from GameEngineTools.SaveManager import SaveManager
+from GameEngineTools.SimulationEngine import *
+from GameEngineTools.PlayerStatusTracker import *
 
 
 class GameWindow(GameMode):
@@ -18,6 +20,8 @@ class GameWindow(GameMode):
         self.button_down = False
         self.zoning = False
         self.zoning_type = None
+        self.simulator = SimulationEngine()
+        self.player_status = PlayerStatus()
 
     def update(self):
         self.city_space.update()
@@ -83,7 +87,8 @@ class GameWindow(GameMode):
         if event.type == pg.MOUSEMOTION:
             if self.zoning:
                 if self.button_down:
-                    self.city_space.add_to_zone(self.zoning_type)
+                    if self.simulator.can_buy(zone=self.zoning_type):
+                        self.city_space.add_to_zone(self.zoning_type)
             else:
                 self.city_space.hovered(pg.mouse.get_pos(), self.mode)
 

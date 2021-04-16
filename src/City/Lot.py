@@ -2,6 +2,7 @@ import pygame as pg
 import os
 from random import randint
 from Constructs.ConstructType import ConstructType
+from City.LotType import LotType
 
 
 class Lot:
@@ -67,3 +68,6 @@ class Lot:
 
         elif zone_type == 'industrial':
             self.zone_type_color = (173, 102, 31)
+
+    def can_place(self):
+        return self.construct is None and self.type == LotType.GRASS

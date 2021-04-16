@@ -122,5 +122,6 @@ class CitySpace:
 
     def add_to_zone(self, zone_type):
         clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
-        clicked_lot.set_zone(zone_type)
+        if clicked_lot.can_place():
+            clicked_lot.set_zone(zone_type)
         self.zone.add(clicked_lot)
