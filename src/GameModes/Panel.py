@@ -7,7 +7,6 @@ class Panel:
         self.width = width
         self.height = height
         self.game_window = game_window
-        self.subpanels = []
 
     def get_theme(self):
         theme = pgmen.themes.THEME_DARK.copy()
@@ -28,15 +27,29 @@ class Panel:
         if self.menu.is_enabled():
             self.menu.draw(window)
 
+        for panel in self.get_subpanels():
+            if not panel is None:
+                panel.draw(window)
+
     def handle(self, event):
         if self.menu.is_enabled():
             self.menu.update([event])
+
+        for panel in self.get_subpanels():
+            if panel:
+                panel.handle(event)
+
+    def is_enabled(self):
+        return self.menu.is_enabled()
 
     def enable(self):
         self.menu.enable()
 
     def disable(self):
         self.menu.disable()
+        for panel in self.get_subpanels():
+            if panel:
+                panel.disable()
 
     def collide(self):
         if not self.menu.is_enabled():
@@ -57,4 +70,11 @@ class Panel:
         return False
 
     def get_subpanels(self):
+        '''returns all panels attached to this panel'''
         return []
+
+    def disable_all_panels(self):
+        self.menu.disable()
+        for panel in self.get_subpanels():
+            if not panel is None:
+                panel.disable_all_panels()

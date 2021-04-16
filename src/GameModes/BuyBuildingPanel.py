@@ -39,20 +39,9 @@ class BuyBuildingPanel(Panel):
 
         return func
 
-    def handle(self, event):
-        super().handle(event)
-        if self.enabled_window:
-            self.enabled_window.handle(event)
-
     def disable(self):
-        if self.enabled_window:
-            self.enabled_window.disable()
-            self.enabled_window = None
-
-    def draw(self, window):
-        super().draw(window)
-        if self.enabled_window:
-            self.enabled_window.draw(window)
+        super().disable()
+        self.enabled_window = None
 
     def get_subpanels(self):
         return [self.enabled_window]

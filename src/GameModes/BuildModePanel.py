@@ -2,7 +2,6 @@ import pygame_menu as pgmen
 import pygame as pg
 from GameModes.Panel import *
 from GameModes.BuyBuildingPanel import BuyBuildingPanel
-
 import os
 
 
@@ -15,6 +14,7 @@ class BuildModePanel(Panel):
                                position=position,
                                rows=1, columns=15,
                                theme=self.get_theme(),
+                               enabled=False,
                                mouse_enabled=True, mouse_motion_selection=True)
 
         # BUY A BUILDING PANEL
@@ -35,14 +35,6 @@ class BuildModePanel(Panel):
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
 
-    def handle(self, event):
-        super().handle(event)
-        self.buy_building_panel.handle(event)
-
-    def draw(self, window):
-        super().draw(window)
-        self.buy_building_panel.draw(window)
-
     def residential_zone(self):
         self.game_window.set_zoning("residential")
 
@@ -53,7 +45,10 @@ class BuildModePanel(Panel):
         self.game_window.set_zoning("commercial")
 
     def buy_building(self):
-        self.buy_building_panel.menu.toggle()
+        if self.buy_building_panel.is_enabled():
+            self.buy_building_panel.disable()
+        else:
+            self.buy_building_panel.enable()
 
     def bulldoze(self):
         pass

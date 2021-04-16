@@ -2,6 +2,7 @@ import pygame as pg
 import pygame_menu as pgmen
 from GameModes.GameWindow import *
 from GameModes.BuildModePanel import BuildModePanel
+from GameModes.OptionPanel import OptionPanel
 from GameModes.Panel import Panel
 
 
@@ -21,7 +22,10 @@ class GameWindowPanel(Panel):
             width=window_width - width, height=height//10,
             position=(100, 100),
             game_window=game_window)
-        self.build_mode_panel.disable()
+
+        # OPTIONS PANEL
+        self.option_panel = OptionPanel(
+            width=window_width//2, height=window_height//2, game_window=game_window)
 
         # BUTTONS
         self.play_button = self.menu.add.button("play", self.play)
@@ -39,6 +43,11 @@ class GameWindowPanel(Panel):
 
     def play(self):
         self.game_window.mode = "game_mode"
+        if self.game_window.zoning:
+            self.game_window.zoning = False
+            self.game_window.zoning_type = None
+            self.game_window.toggle_zone_highlighting()
+        self.build_mode_panel.disable_all_panels()
 
     def add_road(self):
         self.game_window.mode = "road_placing" if self.game_window.mode != "road_placing" else "game_mode"
@@ -54,7 +63,8 @@ class GameWindowPanel(Panel):
         self.game_window.change_mode = True
 
     def options(self):
-        pass
+        self.build_mode_panel.disable_all_panels()
+        self.option_panel.menu.toggle()
 
     def build_mode(self):
         self.build_mode_panel.menu.toggle()
@@ -69,13 +79,5 @@ class GameWindowPanel(Panel):
     def save(self):
         self.game_window.save_manager.save()
 
-    def draw(self, window):
-        super().draw(window)
-        self.build_mode_panel.draw(window)
-
-    def handle(self, event):
-        super().handle(event)
-        self.build_mode_panel.handle(event)
-
     def get_subpanels(self):
-        return [self.build_mode_panel]
+        return [self.build_mode_panel, self.option_panel]
