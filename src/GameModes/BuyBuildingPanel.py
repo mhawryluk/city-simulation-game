@@ -54,6 +54,9 @@ class BuyBuildingPanel(Panel):
         if self.enabled_window:
             self.enabled_window.draw(window)
 
+    def get_subpanels(self):
+        return [self.enabled_window]
+
 
 class BuyBuildingWindow(Panel):
     def __init__(self, width, height, position, game_window, construct):

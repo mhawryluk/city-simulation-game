@@ -58,7 +58,5 @@ class BuildModePanel(Panel):
     def bulldoze(self):
         pass
 
-    def collide(self):
-        if super().collide():
-            return True
-        return self.buy_building_panel.collide()
+    def get_subpanels(self):
+        return [self.buy_building_panel]

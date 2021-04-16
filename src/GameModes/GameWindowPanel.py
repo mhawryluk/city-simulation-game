@@ -77,8 +77,5 @@ class GameWindowPanel(Panel):
         super().handle(event)
         self.build_mode_panel.handle(event)
 
-    def collide(self):
-        if super().collide():
-            return True
-
-        return self.build_mode_panel.collide()
+    def get_subpanels(self):
+        return [self.build_mode_panel]

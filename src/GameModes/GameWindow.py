@@ -31,7 +31,6 @@ class GameWindow(GameMode):
         self.menu_panel.handle(event)
 
         # KEY EVENTS
-
         if event.type == pg.KEYDOWN:
             # moving across the map
             if event.key == pg.K_d:

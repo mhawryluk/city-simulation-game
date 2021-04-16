@@ -7,6 +7,7 @@ class Panel:
         self.width = width
         self.height = height
         self.game_window = game_window
+        self.subpanels = []
 
     def get_theme(self):
         theme = pgmen.themes.THEME_DARK.copy()
@@ -47,4 +48,13 @@ class Panel:
         if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
             return True
 
+        for panel in self.get_subpanels():
+            if panel is None:
+                continue
+            if panel.collide():
+                return True
+
         return False
+
+    def get_subpanels(self):
+        return []
