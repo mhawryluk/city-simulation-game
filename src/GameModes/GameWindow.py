@@ -103,6 +103,7 @@ class GameWindow(GameMode):
         self.toggle_menu.draw(self.window)
 
     def set_zoning(self, zoning_type):
+        Lot.zone_highlighting = True
         if not self.zoning:
             self.zoning = True
             self.zoning_type = zoning_type

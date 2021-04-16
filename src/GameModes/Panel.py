@@ -11,9 +11,9 @@ class Panel:
     def get_theme(self):
         theme = pgmen.themes.THEME_DARK.copy()
         theme.title = False
-        # theme.title_font = pgmen.font.FONT_FRANCHISE
-        # theme.title_font_size = 40
-        # theme.title_font_color = (230, 230, 230, 80)
+        theme.title_font = pgmen.font.FONT_FRANCHISE
+        theme.title_font_size = 40
+        theme.title_font_color = (230, 230, 230, 80)
         theme.background_color = (48, 51, 107, 200)
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE

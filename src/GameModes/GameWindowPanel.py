@@ -3,6 +3,7 @@ import pygame_menu as pgmen
 from GameModes.GameWindow import *
 from GameModes.BuildModePanel import BuildModePanel
 from GameModes.OptionPanel import OptionPanel
+from GameModes.StatPanel import StatPanel
 from GameModes.Panel import Panel
 
 
@@ -27,6 +28,10 @@ class GameWindowPanel(Panel):
         self.option_panel = OptionPanel(
             width=window_width//2, height=window_height//2, game_window=game_window)
 
+        # STAT PANEL
+        self.stat_panel = StatPanel(
+            width=window_width//2, height=window_height//2, game_window=game_window)
+
         # BUTTONS
         self.play_button = self.menu.add.button("play", self.play)
         self.road_button = self.menu.add.button("add roads", self.add_road)
@@ -43,23 +48,25 @@ class GameWindowPanel(Panel):
             self.game_window.zoning = False
             self.game_window.zoning_type = None
             self.game_window.toggle_zone_highlighting()
-        self.build_mode_panel.disable_all_panels()
+        self.disable_subpanels()
 
     def add_road(self):
+        self.disable_subpanels()
         self.game_window.mode = "road_placing" if self.game_window.mode != "road_placing" else "game_mode"
         self.game_window.zoning = False
 
-    def select_area(self):
-        pass
-
     def stats(self):
-        pass
+        self.disable_subpanels()
+        self.stat_panel.menu.toggle()
 
     def options(self):
-        self.build_mode_panel.disable_all_panels()
+        self.disable_subpanels()
         self.option_panel.menu.toggle()
 
     def build_mode(self):
+        for panel in self.get_subpanels():
+            panel.disable_all_panels()
+
         self.build_mode_panel.menu.toggle()
         self.game_window.toggle_zone_highlighting()
 
@@ -70,4 +77,8 @@ class GameWindowPanel(Panel):
             self.game_window.mode = "build_mode"
 
     def get_subpanels(self):
-        return [self.build_mode_panel, self.option_panel]
+        return [self.build_mode_panel, self.option_panel, self.stat_panel]
+
+    def disable_subpanels(self):
+        for panel in self.get_subpanels():
+            panel.disable_all_panels()

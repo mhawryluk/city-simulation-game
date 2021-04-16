@@ -35,3 +35,4 @@ project for Python programming class
 - [ ] dźwięki gry
 - [ ] menu opcji
 - [ ] zonetypes - zmienić ze stringów w enumy/stałe
+- [ ] chowanie wszystkich paneli przy przyciśnięciu escape
