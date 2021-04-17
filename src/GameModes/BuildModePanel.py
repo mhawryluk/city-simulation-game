@@ -7,6 +7,10 @@ import os
 
 
 class BuildModePanel(Panel):
+    '''
+    panel enabled after clicking build mode
+    '''
+
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
 
@@ -39,6 +43,8 @@ class BuildModePanel(Panel):
             "bulldoze", self.bulldoze)
 
     def special_buildings(self):
+        '''funkcja wywoływana przy przyciśnięciu przycisku "zone building"'''
+
         enabled = self.special_building_panel.is_enabled()
         self.disable_subpanels()
 
@@ -48,6 +54,8 @@ class BuildModePanel(Panel):
             self.special_building_panel.enable()
 
     def zone_buildings(self):
+        '''funkcja wywoływana przy przyciśnięciu przycisku "special building"'''
+
         enabled = self.zone_building_panel.is_enabled()
         self.disable_subpanels()
 
@@ -57,6 +65,7 @@ class BuildModePanel(Panel):
             self.zone_building_panel.enable()
 
     def bulldoze(self):
+        '''TODO'''
         pass
 
     def get_subpanels(self):

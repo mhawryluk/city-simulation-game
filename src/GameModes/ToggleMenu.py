@@ -3,6 +3,8 @@ from GameModes.Panel import Panel
 
 
 class ToggleMenu(Panel):
+    '''menu with one button that hides GamewindowPanel (that one on the left)'''
+
     def __init__(self, width, height, position, game_window, panel):
         super().__init__(width, height, game_window)
         self.subpanel = panel

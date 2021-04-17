@@ -6,6 +6,7 @@ import pygame as pg
 
 
 class CitySpace:
+    '''main class representing the city'''
 
     def __init__(self, width, height, window_width, window_height):
         self.city_images = CityImages()
@@ -14,19 +15,24 @@ class CitySpace:
         Lot.window_dimensions = (window_width, window_height)
         self.window_height = window_height
         self.window_width = window_width
-        self.height = height
-        self.width = width
-        self.pov_x = window_width // 2
+        self.height = height  # liczba pól na wysokość
+        self.width = width  # liczba pól na szerokość
+        self.pov_x = window_width // 2  # pov - punkt origin od którego rysujemy
         self.pov_y = window_height // 2
         self.road_system = RoadSystem(width, height)
-        self.scale = 50
+        self.scale = 50  # określa przybliżenie
         self.reset_lots()
-        self.move_speed = (0, 0)
-        self.selected_lot = None
-        self.hovered_lot = None
+        self.move_speed = (0, 0)  # dodawane do pov w każdej klatce
+        self.selected_lot = None  # kwadrat zaznaczony myszką
+        self.hovered_lot = None  # kwadrat nad którym znajduje się myszka
         self.zone = set()
 
     def reset_lots(self):
+        '''
+        definiuje pustą mapę, tworzy Loty
+        zastąpić wczytywaniem z save'a
+        '''
+
         self.lots = []
         for x in range(self.width):
             self.lots.append([])
@@ -37,6 +43,8 @@ class CitySpace:
                     self.lots[x].append(Lot(x, y, LotType.GRASS))
 
     def update(self):
+        '''przesuwa mapę w każdej klatce'''
+
         self.pov_x += self.move_speed[0]
         self.pov_y += self.move_speed[1]
 
@@ -157,7 +165,8 @@ class CitySpace:
             self.zone.add(clicked_lot)
 
     def buy_construct(self, construct) -> bool:
-        '''return True if managed to buy'''
+        '''zwraca True jeśli powiódł się zakup budynku'''
+
         clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
         if clicked_lot.can_place():
             clicked_lot.set_construct(construct)

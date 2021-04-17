@@ -8,6 +8,8 @@ from GameModes.Panel import Panel
 
 
 class GameWindowPanel(Panel):
+    '''main panel on the left side'''
+
     def __init__(self, width, height, game_window):
         super().__init__(width, height, game_window)
         self.menu = pgmen.Menu(title='CITY SIMULATION GAME',
@@ -98,7 +100,3 @@ class GameWindowPanel(Panel):
 
     def get_subpanels(self):
         return [self.build_mode_panel, self.option_panel, self.stat_panel]
-
-    def disable_subpanels(self):
-        for panel in self.get_subpanels():
-            panel.disable_all_panels()

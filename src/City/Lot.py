@@ -11,6 +11,7 @@ class Lot:
     def __init__(self, x, y, type, arguments=None):
         if arguments:
             pass
+
         self.type = type
         self.x = x
         self.y = y
@@ -82,4 +83,5 @@ class Lot:
         self.zone_type_color = None
 
     def can_place(self):
+        '''zwraca True jeśli można ustawić construct na tym polu'''
         return self.construct is None and self.type == LotType.GRASS

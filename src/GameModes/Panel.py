@@ -32,6 +32,7 @@ class Panel:
                 panel.draw(window)
 
     def handle(self, event):
+        '''obsługa zdarzeń'''
         if self.menu.is_enabled():
             self.menu.update([event])
 
@@ -52,6 +53,7 @@ class Panel:
                 panel.disable()
 
     def collide(self):
+        '''zwraca True jeśli kursor nachodzi na ten panel'''
         if not self.menu.is_enabled():
             return False
 
@@ -74,10 +76,12 @@ class Panel:
         return []
 
     def disable_subpanels(self):
+        '''chowa wszystkie panele pochodne'''
         for panel in self.get_subpanels():
             panel.disable_all_panels()
 
     def disable_all_panels(self):
+        '''chowa wszystkie panele począwszy od tego, na którym wywołujemy i wszystkie pochodne'''
         self.menu.disable()
         for panel in self.get_subpanels():
             if not panel is None:

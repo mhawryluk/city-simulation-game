@@ -12,19 +12,27 @@ import pygame as pg
 class GameWindow(GameMode):
     def __init__(self, window, save, height, width):
         super().__init__(window, save)
-        self.city_space = CitySpace(
-            width, height, window.get_width(), window.get_height())
+
+        # constants
         self.SCROLL_SPEED = 15
+
+        # current state variables
         self.change_mode = False
-        self.menu_panel = GameWindowPanel(
-            120, self.window.get_height(), self)
         self.mode = "game_mode"
         self.button_down = False
         self.zoning = False
         self.zoning_type = None
-        self.construct_to_buy = None
+        self.construct_to_buy = None  # construct - wciśnięto buy ale jeszcze nie postawiono
+
+        # befriended classes
+        self.city_space = CitySpace(
+            width, height, window.get_width(), window.get_height())
         self.simulator = SimulationEngine()
         self.player_status = PlayerStatus()
+
+        # panels
+        self.menu_panel = GameWindowPanel(
+            120, self.window.get_height(), self)
         self.toggle_menu = ToggleMenu(
             width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
 
@@ -120,9 +128,9 @@ class GameWindow(GameMode):
         else:
             self.zoning = False
 
+    def toggle_zone_highlighting(self):
+        Lot.zone_highlighting = not Lot.zone_highlighting
+
     def game_resume(self):
         self.zoning = False
         self.game_mode = 'game_mode'
-
-    def toggle_zone_highlighting(self):
-        Lot.zone_highlighting = not Lot.zone_highlighting

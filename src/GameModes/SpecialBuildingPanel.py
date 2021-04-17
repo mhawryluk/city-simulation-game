@@ -24,6 +24,7 @@ class BuySpecialBuildingPanel(Panel):
                     construct.name, self.building_window_function(construct))
 
     def building_window_function(self, construct):
+        '''zwraca funkcje wywoływane przy kilnięciu na przycisk'''
         def func():
             if not self.enabled_window or self.enabled_window.construct != construct:
                 if self.enabled_window:

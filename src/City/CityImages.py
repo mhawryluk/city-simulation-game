@@ -5,6 +5,8 @@ from random import random, choice, seed
 
 
 class CityImages:
+    '''singleton containing scaled and original background lot images'''
+
     def __init__(self):
         self.main_images = {
             LotType.GRASS: pg.image.load(os.path.join('Assets', 'LotType', 'grass.png')),
