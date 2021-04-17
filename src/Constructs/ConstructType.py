@@ -29,6 +29,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_production': 5,
                 'taxation': 3000,
+                'upgrade_cost': 800,
                 'images': [os.path.join('Assets', 'House', 'H05.png')]
             },
             2: {
@@ -39,6 +40,7 @@ class ConstructType(Enum):
                 'water_consumption': 10,
                 'waste_production': 8,
                 'taxation': 4000,
+                'upgrade_cost': 1000,
                 'images': [os.path.join('Assets', 'House', 'H04.png'), os.path.join('Assets', 'House', 'H06.png')]
             }
         }
@@ -88,37 +90,44 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'small shop',
-                'description': 'Small shop.',
                 'employees': 3,
                 'income': 1000,
+                'products': 2,
                 'energy_consumption': 10,
                 'water_consumption': 5,
                 'waste_production': 20,
                 'resident_happiness_multiplier': 1.1,
-                'images': [os.path.join('Assets', 'Shop', 'SH0.png')]
+                'images': [os.path.join('Assets', 'Shop', 'SH0.png'), os.path.join('Assets', 'Shop', 'SH1.png'), os.path.join('Assets', 'Shop', 'SH2.png')]
             },
             1: {
                 'name': 'shop',
-                'description': 'Larger shop.',
+                'description': 'Larger shop, meant to sustain a larger neighbourhood, be it of houses of city blocks.',
                 'employees': 10,
                 'income': 2000,
+                'products': 5,
                 'energy_consumption': 20,
                 'water_consumption': 10,
                 'waste_production': 40,
                 'resident_happiness_multiplier': 1.2,
                 'upgrade_cost': 2000,
-                'images': [os.path.join('Assets', 'Shop', 'SH1.png'), os.path.join('Assets', 'Shop', 'SH2.png')]
-            },
-            2: {
-                'name': 'shopping mall',
-                'description': 'Medium size shopping mall.',
-                'employees': 50,
-                'income': 10000,
-                'energy_consumption': 100,
-                'water_consumption': 75,
-                'waste_production': 250,
-                'resident_happiness_multiplier': 1.35,
                 'images': [os.path.join('Assets', 'Shop', 'SH3.png')]
+            }
+        }
+    }
+    FACTORY = {
+        'max_level': 0,
+        'cost': 1000,
+        'level': {
+            0: {
+                'name': 'factory',
+                'employees': 50,
+                'income': -6000,
+                'products': 15,
+                'energy_consumption': 100,
+                'water_consumption': 20,
+                'waste_production': 70,
+                'resident_happiness_multiplier': 0.35,
+                'images': [os.path.join('Assets', 'Shop', 'SH0.png'), os.path.join('Assets', 'Shop', 'SH1.png'), os.path.join('Assets', 'Shop', 'SH2.png')]
             }
         }
     }
@@ -135,7 +144,7 @@ class ConstructType(Enum):
                 'energy_consumption': 50,
                 'water_consumption': 30,
                 'waste_production': 100,
-                'resident_happiness_multiplier': 1.45,
+                'resident_happiness_multiplier': 1.6,
                 'images': [os.path.join('Assets', 'SpecialBuildings', 'hospital.png')]
             },
             1: {
@@ -146,161 +155,315 @@ class ConstructType(Enum):
                 'energy_consumption': 500,
                 'water_consumption': 300,
                 'waste_production': 1000,
-                'resident_happiness_multiplier': 1.75,
-                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png')),
-                'image_path': os.path.join('Assets', 'SpecialBuildings', 'hospital.png')
+                'resident_happiness_multiplier': 1.9,
+                'upgrade_cost': 10000,
+                'image': [os.path.join('Assets', 'SpecialBuildings', 'hospital.png')]
             }
         }
     }
-    # FACTORY = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': Factory
-    # }
 
-    # POLICE_OUTPOST = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': PoliceOutpost
-    # }
     # POLICE_STATION = {
-    #     'max_level': 2,
+    #     'max_level': 1,
     #     'cost': 1000,
-    #     'constructor': PoliceStation
-    # }
-    # COURTHOUSE = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': Courthouse
+    #     'level': {
+    #         0: {
+    #             'name': 'Police outpost.',
+    #             'description': ,
+    #             'policemen': 5,
+    #             'income': 500,
+    #             'energy_consumption': 10,
+    #             'water_consumption': 5,
+    #             'waste_production': 5,
+    #             'resident_happiness_multiplier': 1.7,
+    #             'images': []
+    #         },
+    #         1: {
+    #             'name': 'Police station',
+    #             'description': ,
+    #             'policemen': 20,
+    #             'income': 1000,
+    #             'energy_consumption': 50,
+    #             'water_consumption': 20,
+    #             'waste_production': 20,
+    #             'resident_happiness_multiplier': 1.8,
+    #             'upgrade_cost': 10000,
+    #             'images': []
+    #         }
+    #     }
     # }
     # PRISON = {
-    #     'max_level': 2,
+    #     'max_level': 0,
     #     'cost': 1000,
-    #     'constructor': Prison
+    #     'level':{
+    #         0:{
+    #             'name':'prison',
+    #             'employees': 50,
+    #             'inmates': 200,
+    #             'income': -5000,
+    #             'energy_consumption': 150,
+    #             'water_consumption': 250,
+    #             'waste_production': 200,
+    #             'resident_happiness_multiplier': 1.7
+    #         }
+    #     }
     # }
     # FIRE_STATION = {
-    #     'max_level': 2,
+    #     'max_level': 1,
     #     'cost': 1000,
-    #     'constructor': FireStation
+    #     'level':{
+    #         0:{
+    #             'name': 'firemen outpost',
+    #             'description': ,
+    #             'firemen': 5,
+    #             'income': -500,
+    #             'energy_consumption': 20,
+    #             'water_consumption': 100,
+    #             'waste_production': 20,
+    #             'range': 8,
+    #             'resident_happiness_multiplier': 1.8,
+    #             'images': []
+    #         },
+    #         1:{
+    #             'name': 'fire station',
+    #             'description': ,
+    #             'firemen': 20,
+    #             'income': -2000,
+    #             'energy_consumption': 80,
+    #             'water_consumption': 400,
+    #             'waste_production': 80,
+    #             'range': 20,
+    #             'upgrade_cost': 10000,
+    #             'resident_happiness_multiplier': 1.9,
+    #             'images': []
+    #         }
+    #     }
     # }
 
-    # NURSERY = {
-    #     'max_level': 2,
+    # SCHOOL = {
+    #     'max_level': 0,
     #     'cost': 1000,
-    #     'constructor': Nursery
-    # }
-    # KINDERGARTEN = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': Kindergarten
-    # }
-    # PRIMARY_SCHOOL = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': PrimarySchool
-    # }
-    # SECONDARY_SCHOOL = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': SecondarySchool
-    # }
-    # HIGH_SCHOOL = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': HighSchool
-    # }
-    # COLLEGE = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': CollegeHouse
+    #     'level':{
+    #         0:{
+    #             'name': 'school',
+    #             'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
+    #             'teachers': 30,
+    #             'students':4000,
+    #             'income': -1000,
+    #             'energy_consumption': 500,
+    #             'water_consumption': 500,
+    #             'waste_production': 500,
+    #             'city_income_multiplier': 1.01,
+    #             'resident_happiness_multiplier': 1.5,
+    #             'images': []
+    #         }
+    #     }
     # }
     # UNIVERSITY = {
-    #     'max_level': 2,
+    #     'max_level': 0,
     #     'cost': 1000,
-    #     'constructor': UniversityHouse
-    # }
-    # PUBLIC_LIBRARY = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': PublicLibrary
+    #     'level':{
+    #         0:{
+    #             'name': 'school',
+    #             'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
+    #             'teachers': 500,
+    #             'students':40000,
+    #             'income': -10000,
+    #             'energy_consumption': 1000,
+    #             'water_consumption': 1000,
+    #             'waste_production': 1000,
+    #             'city_income_multiplier': 1.05,
+    #             'resident_happiness_multiplier': 1.9,
+    #             'images': []
+    #         }
+    #     }
     # }
 
     # MUSEUM = {
-    #     'max_level': 2,
+    #     'max_level': 0,
     #     'cost': 1000,
-    #     'constructor': Museum
+    #     'level':{
+    #         0:{
+    #             'name': 'museum',
+    #             'description': 'A multi-themed museum.',
+    #             'employees': 50,
+    #             'income': 10000,
+    #             'energy_consumption': 100,
+    #             'water_consumption': 50,
+    #             'waste_production': 60,
+    #             'resident_happiness_multiplier': 1.7,
+    #             'images': []
+    #         }
+    #     }
     # }
-    # PARK = {
-    #     'max_level': 2,
+    # PARK = { #upgraded to dog park
+    #     'max_level': 1,
     #     'cost': 1000,
-    #     'constructor': Park
-    # }
-    # WATER_PARK = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': WaterPark
-    # }
-    # DOG_PARK = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': DogPark
+    #     'level':{
+    #         0:{
+    #             'name': 'park',
+    #             'description': 'A perfect place for people to relax.',
+    #             'gardeners': 2,
+    #             'income': -200,
+    #             'energy_consumption': 2,
+    #             'water_consumption': 100,
+    #             'waste_production': 50,
+    #             'resident_happiness_multiplier': 1.5,
+    #             'images': []
+    #         },
+    #         1:{
+    #             'name': 'dog park',
+    #             'description': 'Perfect place to rela and walk your pupils <3',
+    #             'gardeners': 5,
+    #             'income': -200,
+    #             'energy_consumption': 5,
+    #             'water_consumption': 110,
+    #             'waste_production': 60,
+    #             'resident_happiness_multiplier': 2,
+    #             'upgrade_cost': 8000,
+    #             'images': []
+    #         }
+    #     }
     # }
     # STATUE = {
-    #     'max_level': 2,
+    #     'max_level': 0,
     #     'cost': 1000,
-    #     'constructor': Statue
+    #     'level':{
+    #         0:{
+    #             'name': 'statue',
+    #             'description': 'Beauftiful statue - truly a sight to behold.',
+    #             'resident_happiness_multiplier': 1.6,
+    #             'images': []
+    #         }
+    #     }
     # }
-    # AMUSEMENT_PARK = {
-    #     'max_level': 2,
+    # AMUSEMENT_PARK = { #upgraded to water park
+    #     'max_level': 1,
     #     'cost': 1000,
-    #     'constructor': AmusementPark
+    #     'level':{
+    #         0:{
+    #             'name': 'amusement park',
+    #             'description': 'An amusement park - increases resident happyness.',
+    #             'employees': 100,
+    #             'customers': 1000,
+    #             'income': 50000,
+    #             'energy_consumption': 5000,
+    #             'water_consumption': 1000,
+    #             'waste_production': ,
+    #             'resident_happiness_multiplier': 2,
+    #             'images': []
+    #         },
+    #         0:{
+    #             'name': 'water park',
+    #             'description': 'An amusement park enriched with big pools and water slides - greatly increases resident happyness.',
+    #             'employees': 100,
+    #             'customers': 1000,
+    #             'income': 100000,
+    #             'energy_consumption': 5000,
+    #             'water_consumption': 10000,
+    #             'waste_production': 1200,
+    #             'resident_happiness_multiplier': 3,
+    #             'upgrade_cost': 100000,
+    #             'images': []
+    #         }
+    #     }
     # }
 
-    # LANDFILL = {
-    #     'max_level': 2,
+    # LANDFILL = { #upgraded to waste processing plant
+    #     'max_level': 1,
     #     'cost': 1000,
-    #     'constructor': Landfill
-    # }
-    # WASTE_STORAGE = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': WasteStorage
-    # }
-    # WASTE_PROCESSING_PLANT = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': WasteProcessingPlant
+    #     'level':{
+    #         0:{
+    #             'name': 'landfill',
+    #             'description': 'Building to store the waste.',
+    #             'employees': 10,
+    #             'income': -1000,
+    #             'waste_consumption': 500,
+    #             'resident_happiness_multiplier': 0.2,
+    #             'pollution': 0.9,
+    #             'images': []
+    #         },
+    #         0:{
+    #             'name': 'waste processing station',
+    #             'description': 'Disposes of the waste and turns it into power.',
+    #             'employees': [50],
+    #             'income': -5000,
+    #             'energy_production': 1000,
+    #             'waste_consumption': 1000,
+    #             'resident_happiness_multiplier': 1.0,
+    #             'pollution': 0.2,
+    #             'upgrade_cost': 50000,
+    #             'images': []
+    #         }
+    #     }
     # }
     # POWER_PLANT = {
     #     'max_level': 2,
-    #     'cost': 1000,
+    #     'cost': 5000,
     #     'constructor': CoalPowerPlant,
     #     'types': {
-    #         0: 'coal',
-    #         1: 'oil',
-    #         2: 'nuclear'
+    #         0: {
+    #             'name': 'coal power plant',
+    #             'description': 'A power plant which uses coal and converts heat to electrical power.',
+    #             'maintenance': 50,
+    #             'income': -1000,
+    #             'energy_production': 1000,
+    #             'resident_happiness_multiplier': 0.5,
+    #             'images': []
+    #         },
+    #         1: {
+    #             'name': 'sun power plant',
+    #             'description': "Much more economical power plant with increased energy production - uses sunlight to create electricity.",
+    #             'maintenance': 50,
+    #             'income': -10000,
+    #             'energy_production': 8000,
+    #             'resident_happiness_multiplier': 1.5,
+    #             'upgrade_cost': 100000,
+    #             'images': []
+    #         },
+    #         2: {
+    #             'name': 'nuclear power plant',
+    #             'description': "High tech, state of the art facility. Produces large amounts of energy but reduces residents happiness and risks critical failure.",
+    #             'income': -100000,
+    #             'maintenance': 100,
+    #             'energy_production': 100000,
+    #             'upgrade_cost': 1000000,
+    #             'resident_happiness_multiplier': 0.8,
+    #             'images': []
+    #         }
     #     }
-    # }
-    # WATER_POWER_PLANT = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': CoalPowerPlant
-    # }
-    # DAM = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': Dam
     # }
     # WATER_PUMP = {
     #     'max_level': 2,
     #     'cost': 1000,
-    #     'constructor': WaterPump
+    #     'level':{
+    #         0:{
+    #             'name': 'water pump',
+    #             'description': 'Increases water amount in the storage and provides water for all residents in range.',
+    #             'income': -1000,
+    #             'energy_consumption': 100,
+    #             'water_productioin': 1000,
+    #             'resident_happiness_multiplier': 1.1,
+    #             'images': []
+    #         }
+    #     }
     # }
-    # SWEWAGE_PUMP = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': SewagePump
-    # }
+    # # SWEWAGE_PUMP = {
+    # #     'max_level': 2,
+    # #     'cost': 1000,
+    # #     'level':{
+    # #         0:{
+    # #             'name': ,
+    # #             'description': ,
+    # #             'patients': ,
+    # #             'income': ,
+    # #             'energy_consumption': ,
+    # #             'water_consumption': ,
+    # #             'waste_production': ,
+    # #             'resident_happiness_multiplier': ,
+    # #             'images': []
+    # #         }
+    # #     }
+    # # }
     # SEWAGE_PROCESSING_STATION = {
     #     'max_level': 2,
     #     'cost': 1000,
@@ -318,24 +481,21 @@ class ConstructType(Enum):
     #             'description': 'Expanded sewage treatement station with double the processing power of the regular variant.',
     #             'pollution_level': 0.75,
     #             'range': 10,
-    #             'energy_consumption': 2
+    #             'energy_consumption': 2,
+    #             'upgrade_cost': 10000,
+    #             'images': []
     #         },
     #         2: {
     #             'name': 'economical',
     #             'description': 'More economical version of the sewage treatment station. Decreases pollution by one third.',
     #             'pollution_level': 0.5,
     #             'range': 10,
-    #             'energy_consumption': 4
-    #         },
-    #         3: {
-    #             'name': 'advanced_economical',
-    #             'description': 'State of the art seweage treatment facility - 20% larger processing power and 50% smaller pollution.',
-    #             'pollution_level': 0.25,
-    #             'range': 12,
-    #             'energy_consumption': 6
+    #             'energy_consumption': 4,
+    #             'upgrade_cost': 50000,
+    #             'images': []
     #         }
     #     }
-    # }
+    }
 
     def get_info(self, type):
         return type.value
