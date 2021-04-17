@@ -143,7 +143,8 @@ class ConstructType(Enum):
                 'water_consumption': 30,
                 'waste_production': 100,
                 'resident_happiness_multiplier': 1.45,
-                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png'))
+                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png')),
+                'image_path': os.path.join('Assets', 'SpecialBuildings', 'hospital.png')
             },
             1: {
                 'name': 'hospital',
@@ -154,7 +155,8 @@ class ConstructType(Enum):
                 'water_consumption': 300,
                 'waste_production': 1000,
                 'resident_happiness_multiplier': 1.75,
-                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png'))
+                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png')),
+                'image_path': os.path.join('Assets', 'SpecialBuildings', 'hospital.png')
             }
         }
     }
@@ -343,5 +345,5 @@ class ConstructType(Enum):
     #     }
     # }
 
-    def get_info(type):
+    def get_info(self, type):
         return type.value

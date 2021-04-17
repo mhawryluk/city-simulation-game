@@ -31,7 +31,7 @@ class BuySpecialBuildingPanel(Panel):
 
                 self.enabled_window = BuyBuildingWindow(
                     self.BUY_WINDOW_WIDTH, self.BUY_WINDOW_HEIGHT,
-                    self.BUY_WINDOW_POSITION, self.game_window, construct)
+                    self.BUY_WINDOW_POSITION, self.game_window, construct, self)
 
             else:
                 self.disable()
@@ -47,16 +47,33 @@ class BuySpecialBuildingPanel(Panel):
 
 
 class BuyBuildingWindow(Panel):
-    def __init__(self, width, height, position, game_window, construct):
+    def __init__(self, width, height, position, game_window, construct, panel):
         super().__init__(width, height, game_window)
         self.construct = construct
+        self.parent_panel = panel
         self.menu = pgmen.Menu(title=construct.value['level'][0]['name'], width=width,
-                               height=height, position=position, rows=10, columns=1,
+                               height=height, position=position, rows=15, columns=1,
                                theme=self.get_theme(), enabled=True)
+
+        # IMAGE & INFO
+        info = construct.value['level'][0]
+        self.menu.add.image(info['image_path'], scale=(0.5, 0.5))
+
+        for key, value in info.items():
+            if key == 'image' or key == 'image_path':
+                continue
+            self.menu.add.label(f'{key.replace("_", " ")}: {value}')
+
+        self.menu.add.label(f'COST: {construct.value["cost"]}')
+
+        # BUTTONS
         self.menu.add.button('BUY', self.buy)
 
     def buy(self):
-        pass
+        if self.game_window.simulator.can_buy(self.construct):
+            self.game_window.construct_to_buy = self.construct
+            self.parent_panel.disable_all_panels()
+            self.parent_panel.enabled_window = None
 
     def disable(self):
         self.menu.disable()

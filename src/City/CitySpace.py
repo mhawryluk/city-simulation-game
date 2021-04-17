@@ -68,7 +68,7 @@ class CitySpace:
 
             self.hovered_lot = hovered_lot
 
-    def draw(self, window, mode):
+    def draw(self, window, mode, construct_to_buy):
         self.city_images.rescale(self.scale)
         # draw lots
         for row in self.lots:
@@ -84,6 +84,25 @@ class CitySpace:
             window.blit(alpha, (0, 0))
             self.road_system.highlight_roads(
                 (self.pov_x, self.pov_y), self.scale, window)
+
+        # faded picture of a construct to be placed and bought
+        elif construct_to_buy:
+            lot = self.get_clicked_lot(pg.mouse.get_pos())
+            image = construct_to_buy.value['level'][0]['image']
+            image = pg.transform.scale(image, (self.scale, self.scale))
+            window.blit(image, lot.get_draw_position(
+                (self.pov_x, self.pov_y), self.scale))
+
+            alpha = pg.Surface((self.scale, self.scale))
+            alpha.set_alpha(128)
+
+            if not lot.can_place():
+                alpha.fill((255, 0, 0))
+            else:
+                alpha.fill((50, 50, 50))
+
+            window.blit(alpha, lot.get_draw_position(
+                (self.pov_x, self.pov_y), self.scale))
 
     def add_move_speed(self, move_speed):
         self.move_speed = (
@@ -124,4 +143,12 @@ class CitySpace:
         clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
         if clicked_lot.can_place():
             clicked_lot.set_zone(zone_type)
-        self.zone.add(clicked_lot)
+            self.zone.add(clicked_lot)
+
+    def buy_construct(self, construct) -> bool:
+        '''return True if managed to buy'''
+        clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
+        if clicked_lot.can_place():
+            clicked_lot.set_construct(construct)
+            return True
+        return False

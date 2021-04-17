@@ -78,10 +78,16 @@ class GameWindowPanel(Panel):
             self.option_panel.enable()
 
     def build_mode(self):
+        enabled = self.build_mode_panel.is_enabled()
+
         for panel in self.get_subpanels():
             panel.disable_all_panels()
 
-        self.build_mode_panel.menu.toggle()
+        if enabled:
+            self.build_mode_panel.disable()
+        else:
+            self.build_mode_panel.enable()
+
         self.game_window.toggle_zone_highlighting()
 
         if self.game_window.mode == "build_mode":

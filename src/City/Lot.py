@@ -22,8 +22,7 @@ class Lot:
         self.construct_level = 0
 
     def draw(self, scale, pov, window):
-        x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
-        y = pov[1] - scale*Lot.map_dimensions[1]//2 + scale*self.y
+        x, y = self.get_draw_position(pov, scale)
 
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
@@ -57,6 +56,9 @@ class Lot:
 
             window.blit(alpha, (x, y))
 
+    def get_draw_position(self, pov, scale):
+        return pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x, pov[1] - scale*Lot.map_dimensions[1]//2 + scale*self.y
+
     def set_zone(self, zone_type):
         if zone_type == 'residential':
             self.zone_type_color = (61, 143, 102)
@@ -68,6 +70,10 @@ class Lot:
 
         elif zone_type == 'industrial':
             self.zone_type_color = (173, 102, 31)
+    
+    def set_construct(self, construct):
+        self.construct = construct
+        self.zone_type_color = None
 
     def can_place(self):
         return self.construct is None and self.type == LotType.GRASS

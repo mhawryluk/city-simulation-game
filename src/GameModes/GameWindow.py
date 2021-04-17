@@ -22,6 +22,7 @@ class GameWindow(GameMode):
         self.button_down = False
         self.zoning = False
         self.zoning_type = None
+        self.construct_to_buy = None
         self.simulator = SimulationEngine()
         self.player_status = PlayerStatus()
         self.toggle_menu = ToggleMenu(
@@ -67,12 +68,17 @@ class GameWindow(GameMode):
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = False
+
+            # zooming in
             if event.button == 4:
                 self.city_space.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
+                if self.construct_to_buy:
+                    if self.city_space.buy_construct(self.construct_to_buy):
+                        self.construct_to_buy = None
 
             if self.mode == 'road_placing':
                 if event.button == pg.BUTTON_RIGHT:
@@ -94,11 +100,13 @@ class GameWindow(GameMode):
                     if self.simulator.can_buy(zone=self.zoning_type):
                         self.city_space.add_to_zone(self.zoning_type)
             else:
-                self.city_space.hovered(pg.mouse.get_pos(), self.mode)
+                self.city_space.hovered(
+                    pg.mouse.get_pos(), self.mode)
 
     def draw(self):
         self.window.fill((0, 0, 0))
-        self.city_space.draw(self.window, mode=self.mode)
+        self.city_space.draw(self.window, mode=self.mode,
+                             construct_to_buy=self.construct_to_buy)
         self.menu_panel.draw(self.window)
         self.toggle_menu.draw(self.window)
 
