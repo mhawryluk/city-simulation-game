@@ -1,23 +1,40 @@
-from GameModes.GameMode import *
-from GameModes.GameWindowPanel import *
-from City.CitySpace import *
-from City.Lot import *
+from GameModes.GameMode import GameMode
+from GameModes.GameWindowPanel import GameWindowPanel
+from GameModes.ToggleMenu import ToggleMenu
+from City.CitySpace import CitySpace
+from City.Lot import Lot
 from GameEngineTools.SaveManager import SaveManager
+from GameEngineTools.SimulationEngine import *
+from GameEngineTools.PlayerStatusTracker import *
+import pygame as pg
 
 
 class GameWindow(GameMode):
     def __init__(self, window, save, height, width):
         super().__init__(window, save)
-        self.city_space = CitySpace(
-            width, height, window.get_width(), window.get_height())
+
+        # constants
         self.SCROLL_SPEED = 15
+
+        # current state variables
         self.change_mode = False
-        self.menu_panel = GameWindowPanel(
-            120, self.window.get_height(), self)
         self.mode = "game_mode"
         self.button_down = False
         self.zoning = False
         self.zoning_type = None
+        self.construct_to_buy = None  # construct - wciśnięto buy ale jeszcze nie postawiono
+
+        # befriended classes
+        self.city_space = CitySpace(
+            width, height, window.get_width(), window.get_height())
+        self.simulator = SimulationEngine()
+        self.player_status = PlayerStatus()
+
+        # panels
+        self.menu_panel = GameWindowPanel(
+            120, self.window.get_height(), self)
+        self.toggle_menu = ToggleMenu(
+            width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
 
     def update(self):
         self.city_space.update()
@@ -25,9 +42,9 @@ class GameWindow(GameMode):
 
     def handle(self, event):
         self.menu_panel.handle(event)
+        self.toggle_menu.handle(event)
 
         # KEY EVENTS
-
         if event.type == pg.KEYDOWN:
             # moving across the map
             if event.key == pg.K_d:
@@ -51,7 +68,7 @@ class GameWindow(GameMode):
                 self.city_space.add_move_speed((0, -self.SCROLL_SPEED))
 
         # MOUSE EVENTS
-        if self.menu_panel.collide():
+        if self.menu_panel.collide() or self.toggle_menu.collide():
             self.city_space.hovered(None, self.mode)
             self.button_down = False
             return
@@ -59,12 +76,17 @@ class GameWindow(GameMode):
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = False
+
+            # zooming in
             if event.button == 4:
                 self.city_space.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
+                if self.construct_to_buy:
+                    if self.city_space.buy_construct(self.construct_to_buy):
+                        self.construct_to_buy = None
 
             if self.mode == 'road_placing':
                 if event.button == pg.BUTTON_RIGHT:
@@ -83,16 +105,21 @@ class GameWindow(GameMode):
         if event.type == pg.MOUSEMOTION:
             if self.zoning:
                 if self.button_down:
-                    self.city_space.add_to_zone(self.zoning_type)
+                    if self.simulator.can_buy(zone=self.zoning_type):
+                        self.city_space.add_to_zone(self.zoning_type)
             else:
-                self.city_space.hovered(pg.mouse.get_pos(), self.mode)
+                self.city_space.hovered(
+                    pg.mouse.get_pos(), self.mode)
 
     def draw(self):
         self.window.fill((0, 0, 0))
-        self.city_space.draw(self.window, mode=self.mode)
+        self.city_space.draw(self.window, mode=self.mode,
+                             construct_to_buy=self.construct_to_buy)
         self.menu_panel.draw(self.window)
+        self.toggle_menu.draw(self.window)
 
     def set_zoning(self, zoning_type):
+        Lot.zone_highlighting = True
         if not self.zoning:
             self.zoning = True
             self.zoning_type = zoning_type
@@ -101,9 +128,9 @@ class GameWindow(GameMode):
         else:
             self.zoning = False
 
+    def toggle_zone_highlighting(self):
+        Lot.zone_highlighting = not Lot.zone_highlighting
+
     def game_resume(self):
         self.zoning = False
         self.game_mode = 'game_mode'
-
-    def toggle_zone_highlighting(self):
-        Lot.zone_highlighting = not Lot.zone_highlighting

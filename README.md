@@ -28,10 +28,12 @@ project for Python programming class
 - [ ] ustawianie strefy klikając, na razie jest tylko przeciągając
 - [ ] każdy dom wygląda tak samo -> losowe przydzielanie obrazków
 - [ ] zapis mapy do save-a
-- [ ] kupowanie budynków specjalnych
+- [x] kupowanie budynków specjalnych
 - [ ] obrobić obrazki budynków/znaleźć lepsze
 - [ ] poprawić UI
 - [ ] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
 - [ ] dźwięki gry
 - [ ] menu opcji
 - [ ] zonetypes - zmienić ze stringów w enumy/stałe
+- [ ] chowanie wszystkich paneli przy przyciśnięciu escape
+- [ ] zoom nie działa prawidłowo?

@@ -2,6 +2,7 @@ import pygame as pg
 import os
 from random import randint
 from Constructs.ConstructType import ConstructType
+from City.LotType import LotType
 
 
 class Lot:
@@ -10,6 +11,7 @@ class Lot:
     def __init__(self, x, y, type, arguments=None):
         if arguments:
             pass
+
         self.type = type
         self.x = x
         self.y = y
@@ -20,9 +22,8 @@ class Lot:
         self.construct = None
         self.construct_level = 0
 
-    def draw(self, scale, pov, window):
-        x = pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x
-        y = pov[1] - scale*Lot.map_dimensions[1]//2 + scale*self.y
+    def draw_background(self, scale, pov, window):
+        x, y = self.get_draw_position(pov, scale)
 
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
             return
@@ -38,12 +39,6 @@ class Lot:
             alpha.fill(self.zone_type_color)
             window.blit(alpha, (x, y))
 
-        # construct
-        if self.construct:
-            pic = pg.transform.scale(
-                self.construct.value['level'][self.construct_level]['image'], (scale, scale))
-            window.blit(pic, (x, y))
-
         # mouse selection
         if self.selected or self.hovered:
             alpha = pg.Surface((scale, scale))
@@ -56,6 +51,21 @@ class Lot:
 
             window.blit(alpha, (x, y))
 
+    def draw_construct(self, scale, pov, window):
+        x, y = self.get_draw_position(pov, scale)
+
+        if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
+            return
+
+        # construct
+        if self.construct:
+            pic = pg.transform.scale(
+                self.construct.value['level'][self.construct_level]['image'], (scale, scale))
+            window.blit(pic, (x, y))
+
+    def get_draw_position(self, pov, scale):
+        return pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x, pov[1] - scale*Lot.map_dimensions[1]//2 + scale*self.y
+
     def set_zone(self, zone_type):
         if zone_type == 'residential':
             self.zone_type_color = (61, 143, 102)
@@ -67,3 +77,11 @@ class Lot:
 
         elif zone_type == 'industrial':
             self.zone_type_color = (173, 102, 31)
+
+    def set_construct(self, construct):
+        self.construct = construct
+        self.zone_type_color = None
+
+    def can_place(self):
+        '''zwraca True jeśli można ustawić construct na tym polu'''
+        return self.construct is None and self.type == LotType.GRASS

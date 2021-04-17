@@ -11,9 +11,9 @@ class Panel:
     def get_theme(self):
         theme = pgmen.themes.THEME_DARK.copy()
         theme.title = False
-        # theme.title_font = pgmen.font.FONT_FRANCHISE
-        # theme.title_font_size = 40
-        # theme.title_font_color = (230, 230, 230, 80)
+        theme.title_font = pgmen.font.FONT_FRANCHISE
+        theme.title_font_size = 40
+        theme.title_font_color = (230, 230, 230, 80)
         theme.background_color = (48, 51, 107, 200)
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE
@@ -27,17 +27,33 @@ class Panel:
         if self.menu.is_enabled():
             self.menu.draw(window)
 
+        for panel in self.get_subpanels():
+            if not panel is None:
+                panel.draw(window)
+
     def handle(self, event):
+        '''obsługa zdarzeń'''
         if self.menu.is_enabled():
             self.menu.update([event])
+
+        for panel in self.get_subpanels():
+            if panel:
+                panel.handle(event)
+
+    def is_enabled(self):
+        return self.menu.is_enabled()
 
     def enable(self):
         self.menu.enable()
 
     def disable(self):
         self.menu.disable()
+        for panel in self.get_subpanels():
+            if panel:
+                panel.disable()
 
     def collide(self):
+        '''zwraca True jeśli kursor nachodzi na ten panel'''
         if not self.menu.is_enabled():
             return False
 
@@ -47,4 +63,26 @@ class Panel:
         if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
             return True
 
+        for panel in self.get_subpanels():
+            if panel is None:
+                continue
+            if panel.collide():
+                return True
+
         return False
+
+    def get_subpanels(self):
+        '''returns all panels attached to this panel'''
+        return []
+
+    def disable_subpanels(self):
+        '''chowa wszystkie panele pochodne'''
+        for panel in self.get_subpanels():
+            panel.disable_all_panels()
+
+    def disable_all_panels(self):
+        '''chowa wszystkie panele począwszy od tego, na którym wywołujemy i wszystkie pochodne'''
+        self.menu.disable()
+        for panel in self.get_subpanels():
+            if not panel is None:
+                panel.disable_all_panels()

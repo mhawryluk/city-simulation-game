@@ -6,6 +6,7 @@ import pygame as pg
 
 
 class CitySpace:
+    '''main class representing the city'''
 
     def __init__(self, width, height, window_width, window_height):
         self.city_images = CityImages()
@@ -14,19 +15,24 @@ class CitySpace:
         Lot.window_dimensions = (window_width, window_height)
         self.window_height = window_height
         self.window_width = window_width
-        self.height = height
-        self.width = width
-        self.pov_x = window_width // 2
+        self.height = height  # liczba pól na wysokość
+        self.width = width  # liczba pól na szerokość
+        self.pov_x = window_width // 2  # pov - punkt origin od którego rysujemy
         self.pov_y = window_height // 2
         self.road_system = RoadSystem(width, height)
-        self.scale = 50
+        self.scale = 50  # określa przybliżenie
         self.reset_lots()
-        self.move_speed = (0, 0)
-        self.selected_lot = None
-        self.hovered_lot = None
+        self.move_speed = (0, 0)  # dodawane do pov w każdej klatce
+        self.selected_lot = None  # kwadrat zaznaczony myszką
+        self.hovered_lot = None  # kwadrat nad którym znajduje się myszka
         self.zone = set()
 
     def reset_lots(self):
+        '''
+        definiuje pustą mapę, tworzy Loty
+        zastąpić wczytywaniem z save'a
+        '''
+
         self.lots = []
         for x in range(self.width):
             self.lots.append([])
@@ -37,6 +43,8 @@ class CitySpace:
                     self.lots[x].append(Lot(x, y, LotType.GRASS))
 
     def update(self):
+        '''przesuwa mapę w każdej klatce'''
+
         self.pov_x += self.move_speed[0]
         self.pov_y += self.move_speed[1]
 
@@ -68,15 +76,45 @@ class CitySpace:
 
             self.hovered_lot = hovered_lot
 
-    def draw(self, window, mode):
+    def draw(self, window, mode, construct_to_buy):
+        # rescaling
         self.city_images.rescale(self.scale)
+
         # draw lots
         for row in self.lots:
             for lot in row:
-                lot.draw(self.scale, (self.pov_x, self.pov_y), window)
+                lot.draw_background(
+                    self.scale, (self.pov_x, self.pov_y), window)
 
+        # faded picture of a construct to be placed and bought
+        if construct_to_buy:
+            lot = self.get_clicked_lot(pg.mouse.get_pos())
+            image = construct_to_buy.value['level'][0]['image']
+            image = pg.transform.scale(image, (self.scale, self.scale))
+            window.blit(image, lot.get_draw_position(
+                (self.pov_x, self.pov_y), self.scale))
+
+            alpha = pg.Surface((self.scale, self.scale))
+            alpha.set_alpha(128)
+
+            if not lot.can_place():
+                alpha.fill((255, 0, 0))
+            else:
+                alpha.fill((50, 50, 50))
+
+            window.blit(alpha, lot.get_draw_position(
+                (self.pov_x, self.pov_y), self.scale))
+
+        # roads
         self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
 
+        # constructs
+        for row in self.lots:
+            for lot in row:
+                lot.draw_construct(
+                    self.scale, (self.pov_x, self.pov_y), window)
+
+        # road placing drawing effect
         if mode == "road_placing":
             alpha = pg.Surface((self.window_width, self.window_height))
             alpha.set_alpha(128)
@@ -122,5 +160,15 @@ class CitySpace:
 
     def add_to_zone(self, zone_type):
         clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
-        clicked_lot.set_zone(zone_type)
-        self.zone.add(clicked_lot)
+        if clicked_lot.can_place():
+            clicked_lot.set_zone(zone_type)
+            self.zone.add(clicked_lot)
+
+    def buy_construct(self, construct) -> bool:
+        '''zwraca True jeśli powiódł się zakup budynku'''
+
+        clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
+        if clicked_lot.can_place():
+            clicked_lot.set_construct(construct)
+            return True
+        return False
