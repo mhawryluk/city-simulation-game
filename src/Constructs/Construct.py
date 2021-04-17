@@ -11,7 +11,7 @@ class Construct:
         self.image = None
         self.past_images = []
         self.choose_image()
-        print(self, self.past_images[-1])
+        #print(self, self.past_images[-1])
     
     def choose_image(self):
         seed(time())
