@@ -74,7 +74,7 @@ class Lot:
 
         elif zone_type == 'commercial':
             self.zone_type_color = (92, 153, 214)
-            # self.construct = ConstructType.SHOP
+            self.construct = Construct(ConstructType.SHOP)
 
         elif zone_type == 'industrial':
             self.zone_type_color = (173, 102, 31)

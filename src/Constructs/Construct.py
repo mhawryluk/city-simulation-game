@@ -1,4 +1,4 @@
-from random import randint
+from random import choice
 import pygame as pg
 
 class Construct:
@@ -10,10 +10,10 @@ class Construct:
         self.image = None
         self.past_images = []
         self.choose_image()
+        print(self, self.past_images[-1])
     
     def choose_image(self):
-        ind = randint(0, len(self.type.value['level'][self.construct_level]['images']) - 1 )
-        path = self.type.value['level'][self.construct_level]['images'][ind]
+        path = choice(self.type.value['level'][self.construct_level]['images'])
         self.past_images.append(path)
         self.image = pg.image.load(path)
     

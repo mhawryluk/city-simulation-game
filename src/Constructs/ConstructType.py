@@ -16,30 +16,30 @@ class ConstructType(Enum):
                 'capacity': 3,  # in people
                 'base_resident_happiness': 0.45,  # in percentage
                 'energy_consumption': 3,  # in units
-                'water_consumption': 5,  # in units
-                'waste_production': 6.5,  # in units
+                'water_consumption': 3,  # in units
+                'waste_production': 3,  # in units
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
-                'images': [os.path.join('Assets', 'House', 'H01.png')]
+                'images': [os.path.join('Assets', 'House', 'H01.png'), os.path.join('Assets', 'House', 'H02.png'), os.path.join('Assets', 'House', 'H03.png')]
             },
             1: {
                 'name': 'family house',
                 'capacity': 5,
                 'base_resident_happiness': 0.55,
-                'energy_consumption': 7,
-                'water_consumption': 10,
-                'waste_production': 10,
+                'energy_consumption': 6,
+                'water_consumption': 5,
+                'waste_production': 5,
                 'taxation': 3000,
-                'images': [os.path.join('Assets', 'House', 'house1.png')]
+                'images': [os.path.join('Assets', 'House', 'H05.png')]
             },
             2: {
                 'name': 'large residence',
                 'capacity': 7,
                 'base_resident_happiness': 0.65,
-                'energy_consumption': 14,
-                'water_consumption': 16,
-                'waste_production': 17,
+                'energy_consumption': 10,
+                'water_consumption': 10,
+                'waste_production': 8,
                 'taxation': 4000,
-                'images': [os.path.join('Assets', 'House', 'house3.png')]
+                'images': [os.path.join('Assets', 'House', 'H04.png'), os.path.join('Assets', 'House', 'H06.png')]
             }
         }
     }
@@ -94,7 +94,8 @@ class ConstructType(Enum):
                 'energy_consumption': 10,
                 'water_consumption': 5,
                 'waste_production': 20,
-                'resident_happiness_multiplier': 1.1
+                'resident_happiness_multiplier': 1.1,
+                'images': [os.path.join('Assets', 'Shop', 'SH0.png')]
             },
             1: {
                 'name': 'shop',
@@ -105,7 +106,8 @@ class ConstructType(Enum):
                 'water_consumption': 10,
                 'waste_production': 40,
                 'resident_happiness_multiplier': 1.2,
-                'upgrade_cost': 2000
+                'upgrade_cost': 2000,
+                'images': [os.path.join('Assets', 'Shop', 'SH1.png'), os.path.join('Assets', 'Shop', 'SH2.png')]
             },
             2: {
                 'name': 'shopping mall',
@@ -115,7 +117,8 @@ class ConstructType(Enum):
                 'energy_consumption': 100,
                 'water_consumption': 75,
                 'waste_production': 250,
-                'resident_happiness_multiplier': 1.35
+                'resident_happiness_multiplier': 1.35,
+                'images': [os.path.join('Assets', 'Shop', 'SH3.png')]
             }
         }
     }
