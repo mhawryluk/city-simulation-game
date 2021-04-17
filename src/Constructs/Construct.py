@@ -1,4 +1,5 @@
-from random import choice
+from random import choice, seed
+from time import time
 import pygame as pg
 
 class Construct:
@@ -13,6 +14,7 @@ class Construct:
         print(self, self.past_images[-1])
     
     def choose_image(self):
+        seed(time())
         path = choice(self.type.value['level'][self.construct_level]['images'])
         self.past_images.append(path)
         self.image = pg.image.load(path)
