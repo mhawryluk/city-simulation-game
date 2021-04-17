@@ -69,24 +69,17 @@ class CitySpace:
             self.hovered_lot = hovered_lot
 
     def draw(self, window, mode, construct_to_buy):
+        # rescaling
         self.city_images.rescale(self.scale)
+
         # draw lots
         for row in self.lots:
             for lot in row:
-                lot.draw(self.scale, (self.pov_x, self.pov_y), window)
-
-        self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
-
-        if mode == "road_placing":
-            alpha = pg.Surface((self.window_width, self.window_height))
-            alpha.set_alpha(128)
-            alpha.fill((192, 192, 192))
-            window.blit(alpha, (0, 0))
-            self.road_system.highlight_roads(
-                (self.pov_x, self.pov_y), self.scale, window)
+                lot.draw_background(
+                    self.scale, (self.pov_x, self.pov_y), window)
 
         # faded picture of a construct to be placed and bought
-        elif construct_to_buy:
+        if construct_to_buy:
             lot = self.get_clicked_lot(pg.mouse.get_pos())
             image = construct_to_buy.value['level'][0]['image']
             image = pg.transform.scale(image, (self.scale, self.scale))
@@ -103,6 +96,24 @@ class CitySpace:
 
             window.blit(alpha, lot.get_draw_position(
                 (self.pov_x, self.pov_y), self.scale))
+
+        # roads
+        self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
+
+        # constructs
+        for row in self.lots:
+            for lot in row:
+                lot.draw_construct(
+                    self.scale, (self.pov_x, self.pov_y), window)
+
+        # road placing drawing effect
+        if mode == "road_placing":
+            alpha = pg.Surface((self.window_width, self.window_height))
+            alpha.set_alpha(128)
+            alpha.fill((192, 192, 192))
+            window.blit(alpha, (0, 0))
+            self.road_system.highlight_roads(
+                (self.pov_x, self.pov_y), self.scale, window)
 
     def add_move_speed(self, move_speed):
         self.move_speed = (

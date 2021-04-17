@@ -21,7 +21,7 @@ class Lot:
         self.construct = None
         self.construct_level = 0
 
-    def draw(self, scale, pov, window):
+    def draw_background(self, scale, pov, window):
         x, y = self.get_draw_position(pov, scale)
 
         if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
@@ -38,12 +38,6 @@ class Lot:
             alpha.fill(self.zone_type_color)
             window.blit(alpha, (x, y))
 
-        # construct
-        if self.construct:
-            pic = pg.transform.scale(
-                self.construct.value['level'][self.construct_level]['image'], (scale, scale))
-            window.blit(pic, (x, y))
-
         # mouse selection
         if self.selected or self.hovered:
             alpha = pg.Surface((scale, scale))
@@ -55,6 +49,18 @@ class Lot:
                 alpha.fill((255, 255, 255))
 
             window.blit(alpha, (x, y))
+
+    def draw_construct(self, scale, pov, window):
+        x, y = self.get_draw_position(pov, scale)
+
+        if not (-scale <= x < Lot.window_dimensions[0] and -scale <= y < Lot.window_dimensions[1]):
+            return
+
+        # construct
+        if self.construct:
+            pic = pg.transform.scale(
+                self.construct.value['level'][self.construct_level]['image'], (scale, scale))
+            window.blit(pic, (x, y))
 
     def get_draw_position(self, pov, scale):
         return pov[0] - scale*Lot.map_dimensions[0]//2 + scale*self.x, pov[1] - scale*Lot.map_dimensions[1]//2 + scale*self.y
@@ -70,7 +76,7 @@ class Lot:
 
         elif zone_type == 'industrial':
             self.zone_type_color = (173, 102, 31)
-    
+
     def set_construct(self, construct):
         self.construct = construct
         self.zone_type_color = None
