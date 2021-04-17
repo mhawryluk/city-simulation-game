@@ -162,35 +162,35 @@ class ConstructType(Enum):
         }
     }
 
-    # POLICE_STATION = {
-    #     'max_level': 1,
-    #     'cost': 1000,
-    #     'level': {
-    #         0: {
-    #             'name': 'Police outpost.',
-    #             'description': ,
-    #             'policemen': 5,
-    #             'income': 500,
-    #             'energy_consumption': 10,
-    #             'water_consumption': 5,
-    #             'waste_production': 5,
-    #             'resident_happiness_multiplier': 1.7,
-    #             'images': []
-    #         },
-    #         1: {
-    #             'name': 'Police station',
-    #             'description': ,
-    #             'policemen': 20,
-    #             'income': 1000,
-    #             'energy_consumption': 50,
-    #             'water_consumption': 20,
-    #             'waste_production': 20,
-    #             'resident_happiness_multiplier': 1.8,
-    #             'upgrade_cost': 10000,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    POLICE_STATION = {
+        'max_level': 1,
+        'cost': 1000,
+        'level': {
+            0: {
+                'name': 'Police outpost.',
+                'description': 'Smaller scale police outpost.',
+                'policemen': 5,
+                'income': 500,
+                'energy_consumption': 10,
+                'water_consumption': 5,
+                'waste_production': 5,
+                'resident_happiness_multiplier': 1.7,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'police0.png')]
+            },
+            1: {
+                'name': 'Police station',
+                'description': 'Local police headquarters.',
+                'policemen': 20,
+                'income': 1000,
+                'energy_consumption': 50,
+                'water_consumption': 20,
+                'waste_production': 20,
+                'resident_happiness_multiplier': 1.8,
+                'upgrade_cost': 10000,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'policel.png')]
+            }
+        }
+    }
     # PRISON = {
     #     'max_level': 0,
     #     'cost': 1000,
@@ -495,7 +495,7 @@ class ConstructType(Enum):
     #             'images': []
     #         }
     #     }
-    }
+    # }
 
     def get_info(self, type):
         return type.value
