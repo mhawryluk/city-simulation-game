@@ -89,7 +89,7 @@ class CitySpace:
         # faded picture of a construct to be placed and bought
         if construct_to_buy:
             lot = self.get_clicked_lot(pg.mouse.get_pos())
-            image = construct_to_buy.value['level'][0]['image']
+            image = pg.image.load(construct_to_buy.value['level'][0]['images'][0])
             image = pg.transform.scale(image, (self.scale, self.scale))
             window.blit(image, lot.get_draw_position(
                 (self.pov_x, self.pov_y), self.scale))

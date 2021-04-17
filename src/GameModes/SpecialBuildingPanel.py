@@ -58,10 +58,10 @@ class BuyBuildingWindow(Panel):
 
         # IMAGE & INFO
         info = construct.value['level'][0]
-        self.menu.add.image(info['image_path'], scale=(0.5, 0.5))
+        self.menu.add.image(info['images'][0], scale=(0.5, 0.5))
 
         for key, value in info.items():
-            if key == 'image' or key == 'image_path':
+            if key == 'images':
                 continue
             self.menu.add.label(f'{key.replace("_", " ")}: {value}')
 

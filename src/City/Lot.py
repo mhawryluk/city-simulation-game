@@ -2,6 +2,7 @@ import pygame as pg
 import os
 from random import randint
 from Constructs.ConstructType import ConstructType
+from Constructs.Construct import Construct
 from City.LotType import LotType
 
 
@@ -60,7 +61,7 @@ class Lot:
         # construct
         if self.construct:
             pic = pg.transform.scale(
-                self.construct.value['level'][self.construct_level]['image'], (scale, scale))
+                self.construct.image, (scale, scale))
             window.blit(pic, (x, y))
 
     def get_draw_position(self, pov, scale):
@@ -69,7 +70,7 @@ class Lot:
     def set_zone(self, zone_type):
         if zone_type == 'residential':
             self.zone_type_color = (61, 143, 102)
-            self.construct = ConstructType.FAMILY_HOUSE
+            self.construct = Construct(ConstructType.FAMILY_HOUSE)
 
         elif zone_type == 'commercial':
             self.zone_type_color = (92, 153, 214)
@@ -79,7 +80,7 @@ class Lot:
             self.zone_type_color = (173, 102, 31)
 
     def set_construct(self, construct):
-        self.construct = construct
+        self.construct = Construct(construct)
         self.zone_type_color = None
 
     def can_place(self):

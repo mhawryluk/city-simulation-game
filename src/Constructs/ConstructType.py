@@ -19,7 +19,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,  # in units
                 'waste_production': 6.5,  # in units
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
-                'image': pg.image.load(os.path.join('Assets', 'House', 'H01.png'))
+                'images': [os.path.join('Assets', 'House', 'H01.png')]
             },
             1: {
                 'name': 'family house',
@@ -29,7 +29,7 @@ class ConstructType(Enum):
                 'water_consumption': 10,
                 'waste_production': 10,
                 'taxation': 3000,
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house1.png'))
+                'images': [os.path.join('Assets', 'House', 'house1.png')]
             },
             2: {
                 'name': 'large residence',
@@ -39,7 +39,7 @@ class ConstructType(Enum):
                 'water_consumption': 16,
                 'waste_production': 17,
                 'taxation': 4000,
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house3.png'))
+                'images': [os.path.join('Assets', 'House', 'house3.png')]
             }
         }
     }
@@ -55,7 +55,7 @@ class ConstructType(Enum):
                 'water_consumption': 90,  # in units
                 'waste_production': 180,  # in units
                 'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
-                'image': pg.image.load(os.path.join('Assets', 'House', 'H01.png'))
+                'images': [os.path.join('Assets', 'House', 'H01.png')]
             },
             1: {
                 'name': 'big block',
@@ -66,7 +66,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 600,
                 'upgrade_cost': 10000,
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
+                'images': [os.path.join('Assets', 'House', 'house0.png')]
             },
             2: {
                 'name': 'high end block',
@@ -77,7 +77,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 1000,
                 'upgrade_cost': 10000,
-                'image': pg.image.load(os.path.join('Assets', 'House', 'house0.png'))
+                'images': [os.path.join('Assets', 'House', 'house0.png')]
             }
         }
     }
@@ -116,16 +116,6 @@ class ConstructType(Enum):
                 'water_consumption': 75,
                 'waste_production': 250,
                 'resident_happiness_multiplier': 1.35
-            },
-            3: {
-                'name': 'small_shop',
-                'description': 'Big and well known shopping mall.',
-                'employees': 200,
-                'income': 50000,
-                'energy_consumption': 500,
-                'water_consumption': 300,
-                'waste_production': 1000,
-                'resident_happiness_multiplier': 1.5
             }
         }
     }
@@ -143,8 +133,7 @@ class ConstructType(Enum):
                 'water_consumption': 30,
                 'waste_production': 100,
                 'resident_happiness_multiplier': 1.45,
-                'image': pg.image.load(os.path.join('Assets', 'SpecialBuildings', 'hospital.png')),
-                'image_path': os.path.join('Assets', 'SpecialBuildings', 'hospital.png')
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'hospital.png')]
             },
             1: {
                 'name': 'hospital',
