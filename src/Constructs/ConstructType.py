@@ -283,35 +283,35 @@ class ConstructType(Enum):
     #         }
     #     }
     # }
-    # PARK = { #upgraded to dog park
-    #     'max_level': 1,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'park',
-    #             'description': 'A perfect place for people to relax.',
-    #             'gardeners': 2,
-    #             'income': -200,
-    #             'energy_consumption': 2,
-    #             'water_consumption': 100,
-    #             'waste_production': 50,
-    #             'resident_happiness_multiplier': 1.5,
-    #             'images': []
-    #         },
-    #         1:{
-    #             'name': 'dog park',
-    #             'description': 'Perfect place to rela and walk your pupils <3',
-    #             'gardeners': 5,
-    #             'income': -200,
-    #             'energy_consumption': 5,
-    #             'water_consumption': 110,
-    #             'waste_production': 60,
-    #             'resident_happiness_multiplier': 2,
-    #             'upgrade_cost': 8000,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    PARK = { #upgraded to dog park
+        'max_level': 1,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'park',
+                'description': 'A perfect place for people to relax.',
+                'gardeners': 2,
+                'income': -200,
+                'energy_consumption': 2,
+                'water_consumption': 100,
+                'waste_production': 50,
+                'resident_happiness_multiplier': 1.5,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'park0.png')]
+            },
+            1:{
+                'name': 'dog park',
+                'description': 'Perfect place to rela and walk your pupils <3',
+                'gardeners': 5,
+                'income': -200,
+                'energy_consumption': 5,
+                'water_consumption': 110,
+                'waste_production': 60,
+                'resident_happiness_multiplier': 2,
+                'upgrade_cost': 8000,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'park1.png')]
+            }
+        }
+    }
     # STATUE = {
     #     'max_level': 0,
     #     'cost': 1000,
