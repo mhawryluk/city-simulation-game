@@ -137,7 +137,10 @@ class GameWindow(GameMode):
 
     def save(self):
         def compress2save():
-            return {'yolo':'mama'}
+            c2s = {}
+            c2s['city_space'] = self.city_space.compress2save()
+            c2s['player_status'] = self.player_status.compress2save()
+            return c2s
 
         self.save_manager.save(compress2save())
     

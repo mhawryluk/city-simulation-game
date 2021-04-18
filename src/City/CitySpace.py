@@ -8,26 +8,26 @@ import pygame as pg
 class CitySpace:
     '''main class representing the city'''
 
-    def __init__(self, width, height, window_width, window_height):
+    def __init__(self, width, height, window_width, window_height, save_source=None):
         self.city_images = CityImages()
         Lot.city_images = self.city_images
         Lot.map_dimensions = (width, height)
         Lot.window_dimensions = (window_width, window_height)
         self.window_height = window_height
         self.window_width = window_width
-        self.height = height  # liczba pól na wysokość
-        self.width = width  # liczba pól na szerokość
-        self.pov_x = window_width // 2  # pov - punkt origin od którego rysujemy
+        self.height = height  # amount of fields to height
+        self.width = width  # amount of fields to width
+        self.pov_x = window_width // 2  # pov - point of origin from which we're drawing
         self.pov_y = window_height // 2
         self.road_system = RoadSystem(width, height)
-        self.scale = 50  # określa przybliżenie
-        self.reset_lots()
-        self.move_speed = (0, 0)  # dodawane do pov w każdej klatce
-        self.selected_lot = None  # kwadrat zaznaczony myszką
-        self.hovered_lot = None  # kwadrat nad którym znajduje się myszka
+        self.scale = 50  # defines the zoom
+        self.reset_lots(save_source)
+        self.move_speed = (0, 0)  # added to pov in each frame
+        self.selected_lot = None  # square selected with lmb
+        self.hovered_lot = None  # square above which the mouse is currently hovering
         self.zone = set()
 
-    def reset_lots(self):
+    def reset_lots(self, save_source=None):
         '''
         definiuje pustą mapę, tworzy Loty
         zastąpić wczytywaniem z save'a
@@ -172,3 +172,12 @@ class CitySpace:
             clicked_lot.set_construct(construct)
             return True
         return False
+
+    def compress2save(self):
+        c2s = []
+        for row in self.lots:
+            c2s.append([])
+            for lot in row:
+                c2s[-1].append(lot.compress2save())
+
+        return c2s

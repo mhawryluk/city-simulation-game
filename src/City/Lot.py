@@ -86,3 +86,10 @@ class Lot:
     def can_place(self):
         '''zwraca True jeśli można ustawić construct na tym polu'''
         return self.construct is None and self.type == LotType.GRASS
+    
+    def compress2save(self):
+       return {
+            'seed': self.seed,
+            'type_value': self.type.value,
+            'construct': None if self.construct is None else self.construct.compress2save()
+        }

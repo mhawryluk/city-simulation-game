@@ -45,10 +45,10 @@ class Construct:
         return prev - self.construct_level
 
     def compress2save(self):
-        constuct_state = {}
-        construct_state['construct_level'] = self.construct_level 
-        construct_state['human_resouces'] = self.human_resources 
-        construct_state['users'] = self.users 
-        construct_state['type'] = self.type
-        construct_state['images'] = self.past_images
-        return construct_state
+        return {
+            'construct_level': self.construct_level,
+            'human_resouces': self.human_resources,
+            'users': self.users,
+            'type_value': self.type.value,
+            'images': self.past_images
+        }

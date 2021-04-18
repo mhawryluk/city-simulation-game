@@ -1,2 +1,3 @@
 class PlayerStatus:
-    pass
+    def compress2save(self):
+        return {}
