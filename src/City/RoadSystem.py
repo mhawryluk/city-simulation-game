@@ -1,6 +1,7 @@
 import os
 import pygame as pg
 from random import randint
+from City.Lot import Lot
 
 VERTICAL = 1
 HORIZONTAL = -1
@@ -11,6 +12,7 @@ class RoadSystem:
         self.vertical = set()
         self.horizontal = set()
         self.road_width_ratio = 0.1666
+        Lot.road_width_ratio = 0.1666
 
         self.vertical_picture = pg.image.load(
             os.path.join('Assets', 'Streets', 'street_vertical.png'))
@@ -25,7 +27,7 @@ class RoadSystem:
             for road in save_source['vertical']:
                 self.vertical.add(tuple(road))
             for road in save_source['horizontal']:
-                self.horizontal.add(tuple(road)) 
+                self.horizontal.add(tuple(road))
 
     def remove_rode(self, direction, pos):
         if direction == VERTICAL:

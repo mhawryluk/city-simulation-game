@@ -19,12 +19,13 @@ class Lot:
         self.zone_type_color = None
         self.construct = None
         self.construct_level = 0
- 
+
         if not save_source is None:
             self.type = LotType(save_source['type_value'])
             self.seed = save_source['seed']
-            if not save_source['construct'] is None: 
-                self.construct = Construct(None, construct_state=save_source['construct'])
+            if not save_source['construct'] is None:
+                self.construct = Construct(
+                    None, construct_state=save_source['construct'])
 
     def draw_background(self, scale, pov, window):
         x, y = self.get_draw_position(pov, scale)
@@ -43,17 +44,17 @@ class Lot:
             alpha.fill(self.zone_type_color)
             window.blit(alpha, (x, y))
 
-        # mouse selection
-        if self.selected or self.hovered:
-            alpha = pg.Surface((scale, scale))
-            alpha.set_alpha(128)
+        # # mouse selection
+        # if self.selected or self.hovered:
+        #     alpha = pg.Surface((scale, scale))
+        #     alpha.set_alpha(128)
 
-            if self.selected:
-                alpha.fill((0, 0, 0))
-            elif self.hovered:
-                alpha.fill((255, 255, 255))
+        #     if self.hovered:
+        #         alpha.fill((255, 255, 255))
+        #     elif self.selected:
+        #         alpha.fill((0, 0, 0))
 
-            window.blit(alpha, (x, y))
+        #     window.blit(alpha, (x, y))
 
     def draw_construct(self, scale, pov, window):
         x, y = self.get_draw_position(pov, scale)
@@ -63,8 +64,16 @@ class Lot:
 
         # construct
         if self.construct:
+            offset = int(Lot.road_width_ratio*scale)
+            scale = int(scale*(1 - Lot.road_width_ratio))
+            image = self.construct.image
+            width, height = image.get_width(), image.get_height()
+            ratio = scale/width
+            new_width, new_height = int(width*ratio), int(height*ratio)
+            x = x + offset
+            y = y - new_height + scale + offset
             pic = pg.transform.scale(
-                self.construct.image, (scale, scale))
+                self.construct.image, (new_width, new_height))
             window.blit(pic, (x, y))
 
     def get_draw_position(self, pov, scale):
@@ -89,9 +98,9 @@ class Lot:
     def can_place(self):
         '''zwraca True jeśli można ustawić construct na tym polu'''
         return self.construct is None and self.type == LotType.GRASS
-    
+
     def compress2save(self):
-       return {
+        return {
             'seed': self.seed,
             'type_value': self.type.value,
             'construct': None if self.construct is None else self.construct.compress2save()

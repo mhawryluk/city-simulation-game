@@ -22,17 +22,17 @@ class BuildModePanel(Panel):
                                enabled=False,
                                mouse_enabled=True, mouse_motion_selection=True)
 
-        # BUY A BUILDING PANEL
+        # ZONING PANEL
         self.zone_building_panel = ZoningPanel(
             width=width,
             height=height,
             position=(100, 100-100*height/game_window.window.get_height()-0.3), game_window=game_window)
 
-        # BUY A BUILDING PANEL
+        # BUY A SPECIAL BUILDING PANEL
         self.special_building_panel = BuySpecialBuildingPanel(
             width=width,
             height=height,
-            position=(100, 100-100*height/game_window.window.get_height()-0.3), game_window=game_window)
+            position=(100, 100-100*height/game_window.window.get_height()), game_window=game_window)
 
         # BUTTONS
         self.zoning_button = self.menu.add.button(
@@ -52,6 +52,7 @@ class BuildModePanel(Panel):
             self.special_building_panel.disable()
         else:
             self.special_building_panel.enable()
+            self.game_window.zoning = False
 
     def zone_buildings(self):
         '''funkcja wywoływana przy przyciśnięciu przycisku "special building"'''

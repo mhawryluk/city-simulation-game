@@ -12,8 +12,11 @@ class BuySpecialBuildingPanel(Panel):
 
         self.enabled_window = None
         self.game_window = game_window
+        scroll_bar_height = 4
+        position = (position[0], position[1]-100 *
+                    scroll_bar_height/game_window.window.get_height())
         self.menu = pgmen.Menu(title='special building',
-                               width=width, height=height,
+                               width=width, height=height+scroll_bar_height,
                                position=position,
                                rows=1, columns=40,
                                theme=self.get_theme(),
@@ -21,7 +24,7 @@ class BuySpecialBuildingPanel(Panel):
         for construct in ConstructType:
             if not construct.value.get('zone', None):
                 self.menu.add.button(
-                    construct.name, self.building_window_function(construct))
+                    construct.name.replace('_', ' '), self.building_window_function(construct))
 
     def building_window_function(self, construct):
         '''zwraca funkcje wywoływane przy kilnięciu na przycisk'''
