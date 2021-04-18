@@ -12,7 +12,6 @@ class Construct:
             self.type = construct_state['type_value']
             self.image = None
             self.past_images = construct_state['images']
-            print(">>>>", self.past_images[-1])
             self.choose_image(path=self.past_images[-1])
         else:
             self.construct_level = 0

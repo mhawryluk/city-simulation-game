@@ -79,7 +79,6 @@ class SaveManager:
         free_save_id.append(save_id)
         while max_save_id in free_save_id:
             max_save_id -= 1
-        print(free_save_id)
         free_save_id = [id for id in free_save_id if id < max_save_id]
         self.sm_data['max_save_id'] = max_save_id
         self.sm_data['free_save_id_list'] = free_save_id
@@ -118,5 +117,4 @@ class SaveManager:
         return list_of_saves
 
     def get_gameplay_data(self):
-        print(self.active_save[2])
         return self.active_save[2].get('game_state', {})
