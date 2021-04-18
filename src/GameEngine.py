@@ -38,6 +38,6 @@ class GameEngine:
     def change_mode(self):
         if isinstance(self.game_mode, MainMenu):
             self.game_mode = GameWindow(
-                self.WINDOW, self.game_mode.save_manager, 50, 50)
+                self.WINDOW, self.save_manager, 50, 50)
         else:
             self.game_mode = MainMenu(self.WINDOW, self.save_manager)

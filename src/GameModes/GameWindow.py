@@ -10,8 +10,8 @@ import pygame as pg
 
 
 class GameWindow(GameMode):
-    def __init__(self, window, save, height, width):
-        super().__init__(window, save)
+    def __init__(self, window, save_manager, height, width):
+        super().__init__(window, save_manager)
 
         # constants
         self.SCROLL_SPEED = 15
@@ -134,3 +134,11 @@ class GameWindow(GameMode):
     def game_resume(self):
         self.zoning = False
         self.game_mode = 'game_mode'
+
+    def save(self):
+        def compress2save():
+            return {'yolo':'mama'}
+
+        self.save_manager.save(compress2save())
+    
+    

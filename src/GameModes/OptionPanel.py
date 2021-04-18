@@ -20,7 +20,7 @@ class OptionPanel(Panel):
         self.game_window.change_mode = True
 
     def save(self):
-        self.game_window.save_manager.save()
+        self.game_window.save()
 
     def get_theme(self):
         theme = super().get_theme()

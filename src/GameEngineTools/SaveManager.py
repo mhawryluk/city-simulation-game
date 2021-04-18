@@ -97,9 +97,11 @@ class SaveManager:
             save_data = js.load(save_file)
         self.active_save = (save_id, save_name, save_data)
 
-    def save(self):
+    def save(self, game_save_data):
         save_id, save_name, save_data = self.active_save
         save_data['last_saved'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        print(game_save_data)
+        save_data['game_state'] = game_save_data
         self.sm_data[str(save_id)] = save_name
         self.save_save_manager_data()
         save_path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
