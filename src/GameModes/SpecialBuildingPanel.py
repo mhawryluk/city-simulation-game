@@ -56,7 +56,7 @@ class BuyBuildingWindow(Panel):
         self.construct = construct
         self.parent_panel = panel
         self.menu = pgmen.Menu(title=construct.value['level'][0]['name'], width=width,
-                               height=height, position=position, rows=15, columns=1,
+                               height=height, position=position, rows=50, columns=1,
                                theme=self.get_theme(), enabled=True)
 
         # IMAGE & INFO
@@ -66,7 +66,8 @@ class BuyBuildingWindow(Panel):
         for key, value in info.items():
             if key == 'images':
                 continue
-            self.menu.add.label(f'{key.replace("_", " ")}: {value}')
+            self.menu.add.label(
+                f'{key.replace("_", " ")}: {value}', max_char=30)
 
         self.menu.add.label(f'COST: {construct.value["cost"]}')
 

@@ -19,7 +19,8 @@ class CitySpace:
         self.width = width  # amount of fields to width
         self.pov_x = window_width // 2  # pov - point of origin from which we're drawing
         self.pov_y = window_height // 2
-        self.road_system = RoadSystem(width, height, None if save_source is None else save_source['roads'])
+        self.road_system = RoadSystem(
+            width, height, None if save_source is None else save_source['roads'])
         self.scale = 50  # defines the zoom
         self.reset_lots(None if save_source is None else save_source['lots'])
         self.move_speed = (0, 0)  # added to pov in each frame
@@ -46,8 +47,8 @@ class CitySpace:
             for x in range(self.width):
                 self.lots.append([])
                 for y in range(self.height):
-                        self.lots[x].append(Lot(x, y, None, save_source=save_source[x][y]))
-
+                    self.lots[x].append(
+                        Lot(x, y, None, save_source=save_source[x][y]))
 
     def update(self):
         '''przesuwa mapę w każdej klatce'''
@@ -96,12 +97,20 @@ class CitySpace:
         # faded picture of a construct to be placed and bought
         if construct_to_buy:
             lot = self.get_clicked_lot(pg.mouse.get_pos())
-            image = pg.image.load(construct_to_buy.value['level'][0]['images'][0])
-            image = pg.transform.scale(image, (self.scale, self.scale))
-            window.blit(image, lot.get_draw_position(
-                (self.pov_x, self.pov_y), self.scale))
+            image = pg.image.load(
+                construct_to_buy.value['level'][0]['images'][0])
+            x, y = lot.get_draw_position((self.pov_x, self.pov_y), self.scale)
 
-            alpha = pg.Surface((self.scale, self.scale))
+            offset = int(Lot.road_width_ratio*self.scale)
+            scale = int(self.scale*(1 - Lot.road_width_ratio))
+            width, height = image.get_width(), image.get_height()
+            ratio = scale/width
+            new_width, new_height = int(width*ratio), int(height*ratio)
+            x = x + offset
+            y = y - new_height + scale + offset
+            image = pg.transform.scale(image, (new_width, new_height))
+
+            alpha = pg.Surface((scale, scale))
             alpha.set_alpha(128)
 
             if not lot.can_place():
@@ -109,8 +118,8 @@ class CitySpace:
             else:
                 alpha.fill((50, 50, 50))
 
-            window.blit(alpha, lot.get_draw_position(
-                (self.pov_x, self.pov_y), self.scale))
+            window.blit(image, (x, y))
+            window.blit(alpha, (x, y))
 
         # roads
         self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)

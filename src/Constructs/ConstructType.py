@@ -117,6 +117,7 @@ class ConstructType(Enum):
     FACTORY = {
         'max_level': 0,
         'cost': 1000,
+        'zone': 'industrial',
         'level': {
             0: {
                 'name': 'factory',
