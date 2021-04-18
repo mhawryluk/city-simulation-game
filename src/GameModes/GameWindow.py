@@ -14,7 +14,6 @@ class GameWindow(GameMode):
         super().__init__(window, save_manager)
 
         saved_data = save_manager.get_gameplay_data()
-        print(saved_data)
 
         # constants
         self.SCROLL_SPEED = 15

@@ -210,8 +210,8 @@ class ConstructType(Enum):
     FIRE_STATION = {
         'max_level': 0,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'fire station',
                 'description': 'A fire station. Keeps people hape that tere is a way for their house to be saved from nurning down.',
                 'firemen': 20,
@@ -230,12 +230,12 @@ class ConstructType(Enum):
     SCHOOL = {
         'max_level': 0,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'school',
                 'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
                 'teachers': 30,
-                'students':4000,
+                'students': 4000,
                 'income': -1000,
                 'energy_consumption': 500,
                 'water_consumption': 500,
@@ -249,12 +249,12 @@ class ConstructType(Enum):
     UNIVERSITY = {
         'max_level': 0,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'school',
                 'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
                 'teachers': 500,
-                'students':40000,
+                'students': 40000,
                 'income': -10000,
                 'energy_consumption': 1000,
                 'water_consumption': 1000,
@@ -283,11 +283,11 @@ class ConstructType(Enum):
     #         }
     #     }
     # }
-    PARK = { #upgraded to dog park
+    PARK = {  # upgraded to dog park
         'max_level': 1,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'park',
                 'description': 'A perfect place for people to relax.',
                 'gardeners': 2,
@@ -298,7 +298,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 1.5,
                 'images': [os.path.join('Assets', 'SpecialBuildings', 'park0.png')]
             },
-            1:{
+            1: {
                 'name': 'dog park',
                 'description': 'Perfect place to rela and walk your pupils <3',
                 'gardeners': 5,
@@ -315,14 +315,14 @@ class ConstructType(Enum):
     STATUE = {
         'max_level': 0,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'statue',
                 'description': 'Beauftiful statue - truly a sight to behold.',
                 'resident_happiness_multiplier': 1.6,
                 'images': [
-                    os.path.join('Assets', 'SpecialBuildings', 'statue0.png'), 
-                    os.path.join('Assets', 'SpecialBuildings', 'statue1.png'), 
+                    os.path.join('Assets', 'SpecialBuildings', 'statue0.png'),
+                    os.path.join('Assets', 'SpecialBuildings', 'statue1.png'),
                     os.path.join('Assets', 'SpecialBuildings', 'statue2.png'),
                     os.path.join('Assets', 'SpecialBuildings', 'statue3.png')
                 ]
@@ -361,11 +361,11 @@ class ConstructType(Enum):
     #     }
     # }
 
-    LANDFILL = { #upgraded to waste processing plant
+    LANDFILL = {  # upgraded to waste processing plant
         'max_level': 1,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'landfill',
                 'description': 'Building to store the waste.',
                 'employees': 10,
@@ -375,7 +375,7 @@ class ConstructType(Enum):
                 'pollution': 0.9,
                 'images': [os.path.join('Assets', 'SpecialBuildings', 'landfill.png')]
             },
-            0:{
+            0: {
                 'name': 'waste processing station',
                 'description': 'Disposes of the waste and turns it into power.',
                 'employees': [50],
@@ -385,7 +385,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 1.0,
                 'pollution': 0.2,
                 'upgrade_cost': 50000,
-                'images': [os.path.join('Assets', 'SpecialBuildings', 'wasteproces.png')]
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'wasteprocess.png')]
             }
         }
     }
@@ -428,15 +428,15 @@ class ConstructType(Enum):
     WATER_PUMP = {
         'max_level': 2,
         'cost': 1000,
-        'level':{
-            0:{
+        'level': {
+            0: {
                 'name': 'water pump',
                 'description': 'Increases water amount in the storage and provides water for all residents in range.',
                 'income': -1000,
                 'energy_consumption': 100,
                 'water_productioin': 1000,
                 'resident_happiness_multiplier': 1.1,
-                'images': [os.path.join('Assets', 'SpecialBuildings', 'waterpump.png')]
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'waterpipe.png')]
             }
         }
     }

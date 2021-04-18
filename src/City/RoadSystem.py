@@ -23,7 +23,6 @@ class RoadSystem:
 
         if not save_source is None:
             for road in save_source['vertical']:
-                print(road)
                 self.vertical.add(tuple(road))
             for road in save_source['horizontal']:
                 self.horizontal.add(tuple(road)) 
