@@ -15,7 +15,7 @@ class BuySpecialBuildingPanel(Panel):
         self.menu = pgmen.Menu(title='special building',
                                width=width, height=height,
                                position=position,
-                               rows=1, columns=4,
+                               rows=1, columns=40,
                                theme=self.get_theme(),
                                enabled=False, mouse_motion_selection=True)
         for construct in ConstructType:
