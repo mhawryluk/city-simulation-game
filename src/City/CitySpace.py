@@ -19,9 +19,9 @@ class CitySpace:
         self.width = width  # amount of fields to width
         self.pov_x = window_width // 2  # pov - point of origin from which we're drawing
         self.pov_y = window_height // 2
-        self.road_system = RoadSystem(width, height)
+        self.road_system = RoadSystem(width, height, None if save_source is None else save_source['roads'])
         self.scale = 50  # defines the zoom
-        self.reset_lots(save_source)
+        self.reset_lots(None if save_source is None else save_source['lots'])
         self.move_speed = (0, 0)  # added to pov in each frame
         self.selected_lot = None  # square selected with lmb
         self.hovered_lot = None  # square above which the mouse is currently hovering
@@ -34,13 +34,20 @@ class CitySpace:
         '''
 
         self.lots = []
-        for x in range(self.width):
-            self.lots.append([])
-            for y in range(self.height):
-                if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
-                    self.lots[x].append(Lot(x, y, LotType.WATER))
-                else:
-                    self.lots[x].append(Lot(x, y, LotType.GRASS))
+        if save_source is None:
+            for x in range(self.width):
+                self.lots.append([])
+                for y in range(self.height):
+                    if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
+                        self.lots[x].append(Lot(x, y, LotType.WATER))
+                    else:
+                        self.lots[x].append(Lot(x, y, LotType.GRASS))
+        else:
+            for x in range(self.width):
+                self.lots.append([])
+                for y in range(self.height):
+                        self.lots[x].append(Lot(x, y, None, save_source=save_source[x][y]))
+
 
     def update(self):
         '''przesuwa mapę w każdej klatce'''
@@ -174,10 +181,13 @@ class CitySpace:
         return False
 
     def compress2save(self):
-        c2s = []
+        c2s = {
+            'lots': [],
+            'roads': self.road_system.compress2save()
+        }
         for row in self.lots:
-            c2s.append([])
+            c2s['lots'].append([])
             for lot in row:
-                c2s[-1].append(lot.compress2save())
+                c2s['lots'][-1].append(lot.compress2save())
 
         return c2s

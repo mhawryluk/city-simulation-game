@@ -13,6 +13,9 @@ class GameWindow(GameMode):
     def __init__(self, window, save_manager, height, width):
         super().__init__(window, save_manager)
 
+        saved_data = save_manager.get_gameplay_data()
+        print(saved_data)
+
         # constants
         self.SCROLL_SPEED = 15
 
@@ -26,9 +29,10 @@ class GameWindow(GameMode):
 
         # befriended classes
         self.city_space = CitySpace(
-            width, height, window.get_width(), window.get_height())
+            width, height, window.get_width(), window.get_height(),
+            save_source=saved_data.get('city_space', None))
         self.simulator = SimulationEngine()
-        self.player_status = PlayerStatus()
+        self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
 
         # panels
         self.menu_panel = GameWindowPanel(

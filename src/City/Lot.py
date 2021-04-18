@@ -9,10 +9,7 @@ from City.LotType import LotType
 class Lot:
     zone_highlighting = False
 
-    def __init__(self, x, y, type, arguments=None):
-        if arguments:
-            pass
-
+    def __init__(self, x, y, type, save_source=None):
         self.type = type
         self.x = x
         self.y = y
@@ -22,6 +19,12 @@ class Lot:
         self.zone_type_color = None
         self.construct = None
         self.construct_level = 0
+ 
+        if not save_source is None:
+            self.type = LotType(save_source['type_value'])
+            self.seed = save_source['seed']
+            if not save_source['construct'] is None: 
+                self.construct = Construct(None, construct_state=save_source['construct'])
 
     def draw_background(self, scale, pov, window):
         x, y = self.get_draw_position(pov, scale)

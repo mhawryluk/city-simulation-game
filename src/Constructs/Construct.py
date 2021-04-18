@@ -1,5 +1,6 @@
 from random import choice, seed
 from time import time
+from Constructs.ConstructType import ConstructType
 import pygame as pg
 
 class Construct:
@@ -8,15 +9,16 @@ class Construct:
             self.construct_level = construct_state['construct_level']
             self.human_resources = construct_state['human_resouces']
             self.users = construct_state['users']
-            self.type = construct_state['type']
+            self.type = construct_state['type_value']
             self.image = None
             self.past_images = construct_state['images']
+            print(">>>>", self.past_images[-1])
             self.choose_image(path=self.past_images[-1])
         else:
             self.construct_level = 0
             self.human_resources = 0
             self.users = 0
-            self.type = construct_type
+            self.type = construct_type.value
             self.image = None
             self.past_images = []
             self.choose_image()
@@ -24,7 +26,7 @@ class Construct:
     def choose_image(self, path=None):
         if path is None:
             seed(time())
-            path = choice(self.type.value['level'][self.construct_level]['images'])
+            path = choice(self.type['level'][self.construct_level]['images'])
             self.past_images.append(path)
         self.image = pg.image.load(path)
 
@@ -49,6 +51,6 @@ class Construct:
             'construct_level': self.construct_level,
             'human_resouces': self.human_resources,
             'users': self.users,
-            'type_value': self.type.value,
+            'type_value': self.type,
             'images': self.past_images
         }

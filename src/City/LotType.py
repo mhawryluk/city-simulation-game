@@ -8,3 +8,4 @@ class LotType(Enum):
     SAND = 4
     HOUSE = 5
     BUILDING = 6
+        

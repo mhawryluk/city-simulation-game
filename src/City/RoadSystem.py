@@ -7,7 +7,7 @@ HORIZONTAL = -1
 
 
 class RoadSystem:
-    def __init__(self, map_width, map_height):
+    def __init__(self, map_width, map_height, save_source=None):
         self.vertical = set()
         self.horizontal = set()
         self.road_width_ratio = 0.1666
@@ -20,6 +20,13 @@ class RoadSystem:
         self.map_height = map_height
         self.hovered_road = None
         self.hovered_direction = VERTICAL
+
+        if not save_source is None:
+            for road in save_source['vertical']:
+                print(road)
+                self.vertical.add(tuple(road))
+            for road in save_source['horizontal']:
+                self.horizontal.add(tuple(road)) 
 
     def remove_rode(self, direction, pos):
         if direction == VERTICAL:
@@ -117,3 +124,9 @@ class RoadSystem:
             self.remove_rode(HORIZONTAL, self.hovered_road)
         else:
             self.add_rode(self.hovered_direction, self.hovered_road)
+
+    def compress2save(self):
+        return {
+            'vertical': list(self.vertical),
+            'horizontal': list(self.horizontal)
+        }

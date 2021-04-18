@@ -100,7 +100,6 @@ class SaveManager:
     def save(self, game_save_data):
         save_id, save_name, save_data = self.active_save
         save_data['last_saved'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        print(game_save_data)
         save_data['game_state'] = game_save_data
         self.sm_data[str(save_id)] = save_name
         self.save_save_manager_data()
@@ -119,4 +118,5 @@ class SaveManager:
         return list_of_saves
 
     def get_gameplay_data(self):
-        return self.active_save[2]
+        print(self.active_save[2])
+        return self.active_save[2].get('game_state', {})
