@@ -312,18 +312,23 @@ class ConstructType(Enum):
             }
         }
     }
-    # STATUE = {
-    #     'max_level': 0,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'statue',
-    #             'description': 'Beauftiful statue - truly a sight to behold.',
-    #             'resident_happiness_multiplier': 1.6,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    STATUE = {
+        'max_level': 0,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'statue',
+                'description': 'Beauftiful statue - truly a sight to behold.',
+                'resident_happiness_multiplier': 1.6,
+                'images': [
+                    os.path.join('Assets', 'SpecialBuildings', 'statue0.png'), 
+                    os.path.join('Assets', 'SpecialBuildings', 'statue1.png'), 
+                    os.path.join('Assets', 'SpecialBuildings', 'statue2.png'),
+                    os.path.join('Assets', 'SpecialBuildings', 'statue3.png')
+                ]
+            }
+        }
+    }
     # AMUSEMENT_PARK = { #upgraded to water park
     #     'max_level': 1,
     #     'cost': 1000,
