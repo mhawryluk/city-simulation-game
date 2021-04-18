@@ -207,76 +207,64 @@ class ConstructType(Enum):
     #         }
     #     }
     # }
-    # FIRE_STATION = {
-    #     'max_level': 1,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'firemen outpost',
-    #             'description': ,
-    #             'firemen': 5,
-    #             'income': -500,
-    #             'energy_consumption': 20,
-    #             'water_consumption': 100,
-    #             'waste_production': 20,
-    #             'range': 8,
-    #             'resident_happiness_multiplier': 1.8,
-    #             'images': []
-    #         },
-    #         1:{
-    #             'name': 'fire station',
-    #             'description': ,
-    #             'firemen': 20,
-    #             'income': -2000,
-    #             'energy_consumption': 80,
-    #             'water_consumption': 400,
-    #             'waste_production': 80,
-    #             'range': 20,
-    #             'upgrade_cost': 10000,
-    #             'resident_happiness_multiplier': 1.9,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    FIRE_STATION = {
+        'max_level': 0,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'fire station',
+                'description': ,
+                'firemen': 20,
+                'income': -2000,
+                'energy_consumption': 80,
+                'water_consumption': 400,
+                'waste_production': 80,
+                'range': 20,
+                'upgrade_cost': 10000,
+                'resident_happiness_multiplier': 1.9,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'firestation.png')]
+            }
+        }
+    }
 
-    # SCHOOL = {
-    #     'max_level': 0,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'school',
-    #             'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
-    #             'teachers': 30,
-    #             'students':4000,
-    #             'income': -1000,
-    #             'energy_consumption': 500,
-    #             'water_consumption': 500,
-    #             'waste_production': 500,
-    #             'city_income_multiplier': 1.01,
-    #             'resident_happiness_multiplier': 1.5,
-    #             'images': []
-    #         }
-    #     }
-    # }
-    # UNIVERSITY = {
-    #     'max_level': 0,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'school',
-    #             'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
-    #             'teachers': 500,
-    #             'students':40000,
-    #             'income': -10000,
-    #             'energy_consumption': 1000,
-    #             'water_consumption': 1000,
-    #             'waste_production': 1000,
-    #             'city_income_multiplier': 1.05,
-    #             'resident_happiness_multiplier': 1.9,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    SCHOOL = {
+        'max_level': 0,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'school',
+                'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
+                'teachers': 30,
+                'students':4000,
+                'income': -1000,
+                'energy_consumption': 500,
+                'water_consumption': 500,
+                'waste_production': 500,
+                'city_income_multiplier': 1.01,
+                'resident_happiness_multiplier': 1.5,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'school0.png')]
+            }
+        }
+    }
+    UNIVERSITY = {
+        'max_level': 0,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'school',
+                'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
+                'teachers': 500,
+                'students':40000,
+                'income': -10000,
+                'energy_consumption': 1000,
+                'water_consumption': 1000,
+                'waste_production': 1000,
+                'city_income_multiplier': 1.05,
+                'resident_happiness_multiplier': 1.9,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'school1.png')]
+            }
+        }
+    }
 
     # MUSEUM = {
     #     'max_level': 0,
