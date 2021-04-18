@@ -127,7 +127,7 @@ class ConstructType(Enum):
                 'water_consumption': 20,
                 'waste_production': 70,
                 'resident_happiness_multiplier': 0.35,
-                'images': [os.path.join('Assets', 'Shop', 'SH0.png'), os.path.join('Assets', 'Shop', 'SH1.png'), os.path.join('Assets', 'Shop', 'SH2.png')]
+                'images': [os.path.join('Assets', 'Factory', 'factory.png')]
             }
         }
     }
