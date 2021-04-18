@@ -361,34 +361,34 @@ class ConstructType(Enum):
     #     }
     # }
 
-    # LANDFILL = { #upgraded to waste processing plant
-    #     'max_level': 1,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'landfill',
-    #             'description': 'Building to store the waste.',
-    #             'employees': 10,
-    #             'income': -1000,
-    #             'waste_consumption': 500,
-    #             'resident_happiness_multiplier': 0.2,
-    #             'pollution': 0.9,
-    #             'images': []
-    #         },
-    #         0:{
-    #             'name': 'waste processing station',
-    #             'description': 'Disposes of the waste and turns it into power.',
-    #             'employees': [50],
-    #             'income': -5000,
-    #             'energy_production': 1000,
-    #             'waste_consumption': 1000,
-    #             'resident_happiness_multiplier': 1.0,
-    #             'pollution': 0.2,
-    #             'upgrade_cost': 50000,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    LANDFILL = { #upgraded to waste processing plant
+        'max_level': 1,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'landfill',
+                'description': 'Building to store the waste.',
+                'employees': 10,
+                'income': -1000,
+                'waste_consumption': 500,
+                'resident_happiness_multiplier': 0.2,
+                'pollution': 0.9,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'landfill.png')]
+            },
+            0:{
+                'name': 'waste processing station',
+                'description': 'Disposes of the waste and turns it into power.',
+                'employees': [50],
+                'income': -5000,
+                'energy_production': 1000,
+                'waste_consumption': 1000,
+                'resident_happiness_multiplier': 1.0,
+                'pollution': 0.2,
+                'upgrade_cost': 50000,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'wasteproces.png')]
+            }
+        }
+    }
     # POWER_PLANT = {
     #     'max_level': 2,
     #     'cost': 5000,
