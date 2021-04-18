@@ -57,7 +57,7 @@ class ConstructType(Enum):
                 'water_consumption': 90,  # in units
                 'waste_production': 180,  # in units
                 'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
-                'images': [os.path.join('Assets', 'House', 'H01.png')]
+                'images': [os.path.join('Assets', 'House', 'block0.png'), os.path.join('Assets', 'House', 'block1.png')]
             },
             1: {
                 'name': 'big block',
@@ -68,7 +68,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 600,
                 'upgrade_cost': 10000,
-                'images': [os.path.join('Assets', 'House', 'house0.png')]
+                'images': [os.path.join('Assets', 'House', 'block3.png')]
             },
             2: {
                 'name': 'high end block',
@@ -79,7 +79,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 1000,
                 'upgrade_cost': 10000,
-                'images': [os.path.join('Assets', 'House', 'house0.png')]
+                'images': [os.path.join('Assets', 'House', 'block4.png')]
             }
         }
     }
