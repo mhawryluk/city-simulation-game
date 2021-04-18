@@ -425,38 +425,38 @@ class ConstructType(Enum):
     #         }
     #     }
     # }
-    # WATER_PUMP = {
+    WATER_PUMP = {
+        'max_level': 2,
+        'cost': 1000,
+        'level':{
+            0:{
+                'name': 'water pump',
+                'description': 'Increases water amount in the storage and provides water for all residents in range.',
+                'income': -1000,
+                'energy_consumption': 100,
+                'water_productioin': 1000,
+                'resident_happiness_multiplier': 1.1,
+                'images': [os.path.join('Assets', 'SpecialBuildings', 'waterpump.png')]
+            }
+        }
+    }
+    # SWEWAGE_PUMP = {
     #     'max_level': 2,
     #     'cost': 1000,
     #     'level':{
     #         0:{
-    #             'name': 'water pump',
-    #             'description': 'Increases water amount in the storage and provides water for all residents in range.',
-    #             'income': -1000,
-    #             'energy_consumption': 100,
-    #             'water_productioin': 1000,
-    #             'resident_happiness_multiplier': 1.1,
-    #             'images': []
+    #             'name': ,
+    #             'description': ,
+    #             'patients': ,
+    #             'income': ,
+    #             'energy_consumption': ,
+    #             'water_consumption': ,
+    #             'waste_production': ,
+    #             'resident_happiness_multiplier': ,
+    #             'images': [os.path.join('Assets', 'SpecialBuildings', 's.png')]
     #         }
     #     }
     # }
-    # # SWEWAGE_PUMP = {
-    # #     'max_level': 2,
-    # #     'cost': 1000,
-    # #     'level':{
-    # #         0:{
-    # #             'name': ,
-    # #             'description': ,
-    # #             'patients': ,
-    # #             'income': ,
-    # #             'energy_consumption': ,
-    # #             'water_consumption': ,
-    # #             'waste_production': ,
-    # #             'resident_happiness_multiplier': ,
-    # #             'images': []
-    # #         }
-    # #     }
-    # # }
     # SEWAGE_PROCESSING_STATION = {
     #     'max_level': 2,
     #     'cost': 1000,
