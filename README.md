@@ -10,10 +10,10 @@ project for Python programming class
 - [x] ulice (budowanie)
 
 #### (29.03 - 18.04):
-- [ ] implementacja budynków (wraz z mechanizmami budowania i wizualizacją)
-- [ ] implementacja obszarów zabudowania (ich wyznaczanie i wizualizacja)
-- [ ] mechanika budowy i zakupów (odpowiednie menu oraz mechanizm zapisu mapy)
-- [ ] menu opcji (in-game - dotyczy budowy i zarządzania miastem przez gracza)
+- [x] implementacja budynków (wraz z mechanizmami budowania i wizualizacją)
+- [x] implementacja obszarów zabudowania (ich wyznaczanie i wizualizacja)
+- [x] mechanika budowy i zakupów (odpowiednie menu oraz mechanizm zapisu mapy)
+- [x] menu opcji (in-game - dotyczy budowy i zarządzania miastem przez gracza)
 
 #### (19.04 - 16.05):
 - [ ] symulacja procesów miejskich (odpowiednie funkcje programu symulujące zdarzenia jak ruch uliczny itp)
@@ -24,16 +24,15 @@ project for Python programming class
 
 
 ## obecne TODO:
-- [ ] kolejność rysowania (ulice zasłaniają domy)
 - [ ] ustawianie strefy klikając, na razie jest tylko przeciągając
-- [ ] każdy dom wygląda tak samo -> losowe przydzielanie obrazków
-- [ ] zapis mapy do save-a
-- [x] kupowanie budynków specjalnych
-- [ ] obrobić obrazki budynków/znaleźć lepsze
-- [ ] poprawić UI
+- [ ] dom jest za duży
 - [ ] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
 - [ ] dźwięki gry
-- [ ] menu opcji
+- [ ] menu opcji - więcej opcji wpływających na symulator
 - [ ] zonetypes - zmienić ze stringów w enumy/stałe
 - [ ] chowanie wszystkich paneli przy przyciśnięciu escape
 - [ ] zoom nie działa prawidłowo?
+- [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
+- [ ] okienko z pieniędzmi i satysfakcją 
+- [ ] upgrade
+- [ ] bulldoze

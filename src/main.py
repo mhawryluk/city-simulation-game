@@ -5,4 +5,5 @@ def main():
     game_engine.run()
 
 if __name__ == "__main__":
+    print(__file__)
     main()

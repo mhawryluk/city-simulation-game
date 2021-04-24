@@ -5,5 +5,11 @@ class SimulationEngine:
     def can_buy(self, construct=None, zone=None):
         return True
 
-    def bought(self):
+    def bought(self, construct):
+        pass
+
+    def upgraded(self, construct):
+        pass
+
+    def random_event(self):
         pass
