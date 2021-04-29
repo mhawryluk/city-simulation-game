@@ -3,6 +3,7 @@ from time import time
 from constructs.construct_type import ConstructType
 import pygame as pg
 
+
 class Construct:
     def __init__(self, construct_type, construct_state=None):
         if construct_type is None:
@@ -21,7 +22,7 @@ class Construct:
             self.image = None
             self.past_images = []
             self.choose_image()
-    
+
     def choose_image(self, path=None):
         if path is None:
             seed(time())
@@ -29,10 +30,10 @@ class Construct:
             self.past_images.append(path)
         self.image = pg.image.load(path)
 
-    
     def level_up(self, level_up_by):
         prev = self.construct_level
-        self.construct_level = min(self.attributes['max_level'], self.construct_level + level_up_by)
+        self.construct_level = min(
+            self.attributes['max_level'], self.construct_level + level_up_by)
         if self.construct_level != prev:
             self.choose_image()
         return self.construct_level - prev
