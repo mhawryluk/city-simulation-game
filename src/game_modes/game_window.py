@@ -4,8 +4,8 @@ from game_modes.toggle_menu import ToggleMenu
 from city.city_space import CitySpace
 from city.lot import Lot
 from game_engine_tools.save_manager import SaveManager
-from game_engine_tools.simulation_engine import *
-from game_engine_tools.player_status_tracker import *
+from game_engine_tools.simulation_engine import SimulationEngine
+# from game_engine_tools.player_status_tracker import * 
 import pygame as pg
 
 
@@ -30,8 +30,8 @@ class GameWindow(GameMode):
         self.city_space = CitySpace(
             width, height, window.get_width(), window.get_height(),
             save_source=saved_data.get('city_space', None))
-        self.simulator = SimulationEngine()
-        self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
+        self.simulator = SimulationEngine(save_manager)
+        # self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
 
         # panels
         self.menu_panel = GameWindowPanel(
@@ -142,7 +142,7 @@ class GameWindow(GameMode):
         def compress2save():
             c2s = {}
             c2s['city_space'] = self.city_space.compress2save()
-            c2s['player_status'] = self.player_status.compress2save()
+            c2s['player_status'] = self.simulator.compress2save()
             return c2s
 
         self.save_manager.save(compress2save())

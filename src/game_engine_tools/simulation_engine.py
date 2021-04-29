@@ -1,8 +1,10 @@
-class SimulationEngine:
-    def __init__(self, player_status=None):
-        self.player_status = player_status
+from game_engine_tools.player_status_tracker import PlayerStatus
 
-    def simulate(self):
+class SimulationEngine:
+    def __init__(self, save_manager):
+        self.player_status = PlayerStatus(save_manager.get('player_status', None))
+
+    def simulate_cycle(self):
         pass
 
     def can_buy(self, construct=None, zone=None):
@@ -16,3 +18,6 @@ class SimulationEngine:
 
     def random_event(self):
         pass
+
+    def compress2save(self):
+        return self.player_status.compress2save()
