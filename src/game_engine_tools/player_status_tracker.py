@@ -1,12 +1,13 @@
 class PlayerStatus:
     def __init__(self, save_source=None):
+        self.data = save_source
         if save_source is None:
-            pass #to be impemented
-        else:
-            pass #to be implemented
-        
+            self.data = {
+                'money': 10000
+            }
+
     def compress2save(self):
-        return {} #upgraded when status tracker will be implemented
+        return self.data 
     
     def get_funds(self):
         pass

@@ -40,6 +40,7 @@ class GameWindow(GameMode):
             width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
 
     def update(self):
+        self.simulator.simulate_cycle()
         self.city_space.update()
         self.draw()
 
