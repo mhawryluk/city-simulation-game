@@ -30,7 +30,7 @@ class GameWindow(GameMode):
         self.city_space = CitySpace(
             width, height, window.get_width(), window.get_height(),
             save_source=saved_data.get('city_space', None))
-        self.simulator = SimulationEngine(save_manager)
+        self.simulator = SimulationEngine(saved_data)
         # self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
 
         # panels
