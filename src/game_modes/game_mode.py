@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from GameEngineTools.SaveManager import SaveManager
+from game_engine_tools.save_manager import SaveManager
 
 class GameMode(ABC):
     def __init__(self, WINDOW, save: SaveManager):

@@ -1,8 +1,8 @@
 import os
 import pygame as pg
 from random import randint
-from City.Lot import Lot
-from GameEngineTools import load_asset
+from city.lot import Lot
+from game_engine_tools import load_asset
 
 VERTICAL = 1
 HORIZONTAL = -1

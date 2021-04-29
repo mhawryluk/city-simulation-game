@@ -1,4 +1,4 @@
-from GameModes.Panel import *
+from game_modes.panel import *
 import pygame_menu as pgmen
 
 

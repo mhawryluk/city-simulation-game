@@ -1,5 +1,5 @@
-from GameModes.GameMode import *
-from GameEngineTools.SaveManager import SaveManager
+from game_modes.game_mode import *
+from game_engine_tools.save_manager import SaveManager
 import pygame as pg
 import pygame_menu as pgmen
 import os

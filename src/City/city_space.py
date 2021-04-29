@@ -1,7 +1,7 @@
-from City.Lot import Lot
-from City.LotType import LotType
-from City.CityImages import CityImages
-from City.RoadSystem import RoadSystem
+from city.lot import Lot
+from city.lot_type import LotType
+from city.city_images import CityImages
+from city.road_system import RoadSystem
 import pygame as pg
 
 

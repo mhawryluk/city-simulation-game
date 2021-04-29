@@ -1,11 +1,11 @@
-from GameModes.GameMode import GameMode
-from GameModes.GameWindowPanel import GameWindowPanel
-from GameModes.ToggleMenu import ToggleMenu
-from City.CitySpace import CitySpace
-from City.Lot import Lot
-from GameEngineTools.SaveManager import SaveManager
-from GameEngineTools.SimulationEngine import *
-from GameEngineTools.PlayerStatusTracker import *
+from game_modes.game_mode import GameMode
+from game_modes.game_window_panel import GameWindowPanel
+from game_modes.toggle_menu import ToggleMenu
+from city.city_space import CitySpace
+from city.lot import Lot
+from game_engine_tools.save_manager import SaveManager
+from game_engine_tools.simulation_engine import *
+from game_engine_tools.player_status_tracker import *
 import pygame as pg
 
 

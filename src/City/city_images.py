@@ -1,8 +1,8 @@
-from City.LotType import *
+from city.lot_type import *
 import pygame as pg
 import os
 from random import random, choice, seed
-from GameEngineTools import load_asset
+from game_engine_tools import load_asset
 
 class CityImages:
     '''singleton containing scaled and original background lot images'''

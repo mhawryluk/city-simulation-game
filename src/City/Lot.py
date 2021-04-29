@@ -3,7 +3,7 @@ import os
 from random import randint
 from constructs.construct_type import ConstructType
 from constructs.construct import Construct
-from City.LotType import LotType
+from city.lot_type import LotType
 
 
 class Lot:

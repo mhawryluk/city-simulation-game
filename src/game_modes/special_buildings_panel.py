@@ -1,4 +1,4 @@
-from GameModes.Panel import Panel
+from game_modes.panel import Panel
 from constructs.construct_type import ConstructType
 import pygame_menu as pgmen
 
