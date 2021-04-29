@@ -5,7 +5,7 @@ from city.city_space import CitySpace
 from city.lot import Lot
 from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
-# from game_engine_tools.player_status_tracker import * 
+# from game_engine_tools.player_status_tracker import *
 import pygame as pg
 
 
@@ -147,5 +147,3 @@ class GameWindow(GameMode):
             return c2s
 
         self.save_manager.save(compress2save())
-    
-    

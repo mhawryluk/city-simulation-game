@@ -7,8 +7,8 @@ class PlayerStatus:
             }
 
     def compress2save(self):
-        return self.data 
-    
+        return self.data
+
     def get_funds(self):
         pass
 

@@ -1,4 +1,4 @@
-from city.lot_type import *
+from city.lot_type import LotType
 import pygame as pg
 import os
 from random import random, choice, seed

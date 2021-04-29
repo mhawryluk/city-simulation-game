@@ -1,6 +1,6 @@
 import pygame_menu as pgmen
 import pygame as pg
-from game_modes.panel import *
+from game_modes.panel import Panel
 from game_modes.special_buildings_panel import BuySpecialBuildingPanel
 from game_modes.zoning_panel import ZoningPanel
 import os
