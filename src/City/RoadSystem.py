@@ -2,6 +2,7 @@ import os
 import pygame as pg
 from random import randint
 from City.Lot import Lot
+from GameEngineTools import load_asset
 
 VERTICAL = 1
 HORIZONTAL = -1
@@ -15,9 +16,9 @@ class RoadSystem:
         Lot.road_width_ratio = 0.1666
 
         self.vertical_picture = pg.image.load(
-            os.path.join('Assets', 'Streets', 'street_vertical.png'))
+            load_asset('Streets', 'street_vertical.png'))
         self.horizontal_picture = pg.image.load(
-            os.path.join('Assets', 'Streets', 'street_horizontal.png'))
+            load_asset('Streets', 'street_horizontal.png'))
         self.map_width = map_width
         self.map_height = map_height
         self.hovered_road = None

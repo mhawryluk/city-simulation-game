@@ -1,8 +1,8 @@
-from GameModes.GameWindow import *
+from GameModes.GameWindow import GameWindow
 from GameEngineTools.SaveManager import SaveManager
 import pygame as pg
 import os
-from GameModes.MainMenu import *
+from GameModes.MainMenu import MainMenu
 
 
 class GameEngine:
