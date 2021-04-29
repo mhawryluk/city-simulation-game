@@ -1,5 +1,5 @@
 from GameModes.Panel import Panel
-from Constructs.ConstructType import ConstructType
+from constructs.construct_type import ConstructType
 import pygame_menu as pgmen
 
 

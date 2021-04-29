@@ -1,8 +1,8 @@
 import pygame as pg
 import os
 from random import randint
-from Constructs.ConstructType import ConstructType
-from Constructs.Construct import Construct
+from constructs.construct_type import ConstructType
+from constructs.construct import Construct
 from City.LotType import LotType
 
 

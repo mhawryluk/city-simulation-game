@@ -1,6 +1,6 @@
 from random import choice, seed
 from time import time
-from Constructs.ConstructType import ConstructType
+from constructs.construct_type import ConstructType
 import pygame as pg
 
 class Construct:
