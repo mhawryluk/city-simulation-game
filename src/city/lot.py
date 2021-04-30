@@ -4,6 +4,7 @@ from random import randint
 from constructs.construct_type import ConstructType
 from constructs.construct import Construct
 from city.lot_type import LotType
+from city import ROAD_WIDTH_RATIO
 
 
 class Lot:
@@ -57,8 +58,8 @@ class Lot:
 
         # construct
         if self.construct:
-            offset = int(Lot.road_width_ratio*scale)
-            new_scale = int(scale*(1 - Lot.road_width_ratio))
+            offset = int(ROAD_WIDTH_RATIO*scale)
+            new_scale = int(scale*(1 - ROAD_WIDTH_RATIO))
             image = self.construct.image
             width, height = image.get_width(), image.get_height()
             ratio = new_scale/width

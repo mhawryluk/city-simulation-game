@@ -36,16 +36,17 @@ project for Python programming class
 - [ ] okienko z pieniędzmi i satysfakcją 
 - [ ] upgrade
 - [ ] bulldoze
+- [ ] zapisywanie stref
 
 ## poprawki:
 - [ ] rozdzielić GUI od logiki gry
-- [ ] zoptymalizować kod highlight_roads
+- [x] zoptymalizować kod highlight_roads
 - [x] zastąpić import *
 - [ ] GameEngine - stałe w konstruktorze
 - [ ] WINDOW -> window
 - [ ] MEASUREMENTS -> WINDOW_SIZE
 - [x] __init__.py
-- [ ] road_with_ratio -> zmienić w stałą
+- [x] road_with_ratio -> zmienić w stałą
 - [ ] przenieść wszystko związane z assetami do wspólnej klasy
 - [x] pg.image.load...
 - [ ] CityImages - singleton?
