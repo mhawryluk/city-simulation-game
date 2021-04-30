@@ -42,11 +42,11 @@ project for Python programming class
 - [ ] rozdzielić GUI od logiki gry
 - [x] zoptymalizować kod highlight_roads
 - [x] zastąpić import *
-- [ ] GameEngine - stałe w konstruktorze
-- [ ] WINDOW -> window
-- [ ] MEASUREMENTS -> WINDOW_SIZE
+- [x] GameEngine - stałe w konstruktorze
+- [x] WINDOW -> window
+- [x] MEASUREMENTS -> usunąłem to pole
 - [x] __init__.py
-- [x] road_with_ratio -> zmienić w stałą
+- [x] road_width_ratio -> zmienić w stałą
 - [ ] przenieść wszystko związane z assetami do wspólnej klasy
 - [x] pg.image.load...
 - [ ] CityImages - singleton?

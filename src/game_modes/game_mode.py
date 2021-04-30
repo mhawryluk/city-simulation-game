@@ -3,8 +3,8 @@ from game_engine_tools.save_manager import SaveManager
 
 
 class GameMode(ABC):
-    def __init__(self, WINDOW, save: SaveManager):
-        self.window = WINDOW
+    def __init__(self, window, save: SaveManager):
+        self.window = window
         self.save_manager = save
 
     @abstractmethod

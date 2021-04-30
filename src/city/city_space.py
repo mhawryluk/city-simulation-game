@@ -2,6 +2,7 @@ from city.lot import Lot
 from city.lot_type import LotType
 from city.city_images import CityImages
 from city.road_system import RoadSystem
+from city import ROAD_WIDTH_RATIO
 import pygame as pg
 
 
@@ -101,8 +102,8 @@ class CitySpace:
                 construct_to_buy.value['level'][0]['images'][0])
             x, y = lot.get_draw_position((self.pov_x, self.pov_y), self.scale)
 
-            offset = int(Lot.road_width_ratio*self.scale)
-            scale = int(self.scale*(1 - Lot.road_width_ratio))
+            offset = int(ROAD_WIDTH_RATIO*self.scale)
+            scale = int(self.scale*(1 - ROAD_WIDTH_RATIO))
             width, height = image.get_width(), image.get_height()
             ratio = scale/width
             new_width, new_height = int(width*ratio), int(height*ratio)

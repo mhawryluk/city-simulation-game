@@ -8,8 +8,8 @@ from random import choice
 
 
 class MainMenu(GameMode):
-    def __init__(self, WINDOW, save: SaveManager):
-        super().__init__(WINDOW, save)
+    def __init__(self, window, save: SaveManager):
+        super().__init__(window, save)
         self.change_mode = False
 
         self.menu = None

@@ -1,6 +1,6 @@
 from enum import Enum, auto
 import pygame as pg
-from game_engine_tools import load_asset
+from game_engine_tools import get_asset_path
 
 
 class ConstructType(Enum):
@@ -19,7 +19,7 @@ class ConstructType(Enum):
                 'water_consumption': 3,  # in units
                 'waste_production': 3,  # in units
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
-                'images': [load_asset('House', 'H01.png'), load_asset('House', 'H02.png'), load_asset('House', 'H03.png')]
+                'images': [get_asset_path('House', 'H01.png'), get_asset_path('House', 'H02.png'), get_asset_path('House', 'H03.png')]
             },
             1: {
                 'name': 'family house',
@@ -30,7 +30,7 @@ class ConstructType(Enum):
                 'waste_production': 5,
                 'taxation': 3000,
                 'upgrade_cost': 800,
-                'images': [load_asset('House', 'H05.png')]
+                'images': [get_asset_path('House', 'H05.png')]
             },
             2: {
                 'name': 'large residence',
@@ -41,7 +41,7 @@ class ConstructType(Enum):
                 'waste_production': 8,
                 'taxation': 4000,
                 'upgrade_cost': 1000,
-                'images': [load_asset('House', 'H04.png'), load_asset('House', 'H06.png')]
+                'images': [get_asset_path('House', 'H04.png'), get_asset_path('House', 'H06.png')]
             }
         }
     }
@@ -57,7 +57,7 @@ class ConstructType(Enum):
                 'water_consumption': 90,  # in units
                 'waste_production': 180,  # in units
                 'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
-                'images': [load_asset('House', 'block0.png'), load_asset('House', 'block1.png')]
+                'images': [get_asset_path('House', 'block0.png'), get_asset_path('House', 'block1.png')]
             },
             1: {
                 'name': 'big block',
@@ -68,7 +68,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 600,
                 'upgrade_cost': 10000,
-                'images': [load_asset('House', 'block3.png')]
+                'images': [get_asset_path('House', 'block3.png')]
             },
             2: {
                 'name': 'high end block',
@@ -79,7 +79,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 1000,
                 'upgrade_cost': 10000,
-                'images': [load_asset('House', 'block4.png')]
+                'images': [get_asset_path('House', 'block4.png')]
             }
         }
     }
@@ -97,7 +97,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_production': 20,
                 'resident_happiness_multiplier': 1.1,
-                'images': [load_asset('Shop', 'SH0.png'), load_asset('Shop', 'SH1.png'), load_asset('Shop', 'SH2.png')]
+                'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'), get_asset_path('Shop', 'SH2.png')]
             },
             1: {
                 'name': 'shop',
@@ -110,7 +110,7 @@ class ConstructType(Enum):
                 'waste_production': 40,
                 'resident_happiness_multiplier': 1.2,
                 'upgrade_cost': 2000,
-                'images': [load_asset('Shop', 'SH3.png')]
+                'images': [get_asset_path('Shop', 'SH3.png')]
             }
         }
     }
@@ -128,7 +128,7 @@ class ConstructType(Enum):
                 'water_consumption': 20,
                 'waste_production': 70,
                 'resident_happiness_multiplier': 0.35,
-                'images': [load_asset('Factory', 'factory.png')]
+                'images': [get_asset_path('Factory', 'factory.png')]
             }
         }
     }
@@ -146,7 +146,7 @@ class ConstructType(Enum):
                 'water_consumption': 30,
                 'waste_production': 100,
                 'resident_happiness_multiplier': 1.6,
-                'images': [load_asset('SpecialBuildings', 'hospital.png')]
+                'images': [get_asset_path('SpecialBuildings', 'hospital.png')]
             },
             1: {
                 'name': 'hospital',
@@ -158,7 +158,7 @@ class ConstructType(Enum):
                 'waste_production': 1000,
                 'resident_happiness_multiplier': 1.9,
                 'upgrade_cost': 10000,
-                'image': [load_asset('SpecialBuildings', 'hospital.png')]
+                'image': [get_asset_path('SpecialBuildings', 'hospital.png')]
             }
         }
     }
@@ -176,7 +176,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_production': 5,
                 'resident_happiness_multiplier': 1.7,
-                'images': [load_asset('SpecialBuildings', 'police0.png')]
+                'images': [get_asset_path('SpecialBuildings', 'police0.png')]
             },
             1: {
                 'name': 'Police station',
@@ -188,7 +188,7 @@ class ConstructType(Enum):
                 'waste_production': 20,
                 'resident_happiness_multiplier': 1.8,
                 'upgrade_cost': 10000,
-                'images': [load_asset('SpecialBuildings', 'police1.png')]
+                'images': [get_asset_path('SpecialBuildings', 'police1.png')]
             }
         }
     }
@@ -223,7 +223,7 @@ class ConstructType(Enum):
                 'range': 20,
                 'upgrade_cost': 10000,
                 'resident_happiness_multiplier': 1.9,
-                'images': [load_asset('SpecialBuildings', 'firestation.png')]
+                'images': [get_asset_path('SpecialBuildings', 'firestation.png')]
             }
         }
     }
@@ -243,7 +243,7 @@ class ConstructType(Enum):
                 'waste_production': 500,
                 'city_income_multiplier': 1.01,
                 'resident_happiness_multiplier': 1.5,
-                'images': [load_asset('SpecialBuildings', 'school0.png')]
+                'images': [get_asset_path('SpecialBuildings', 'school0.png')]
             }
         }
     }
@@ -262,7 +262,7 @@ class ConstructType(Enum):
                 'waste_production': 1000,
                 'city_income_multiplier': 1.05,
                 'resident_happiness_multiplier': 1.9,
-                'images': [load_asset('SpecialBuildings', 'school1.png')]
+                'images': [get_asset_path('SpecialBuildings', 'school1.png')]
             }
         }
     }
@@ -297,7 +297,7 @@ class ConstructType(Enum):
                 'water_consumption': 100,
                 'waste_production': 50,
                 'resident_happiness_multiplier': 1.5,
-                'images': [load_asset('SpecialBuildings', 'park0.png')]
+                'images': [get_asset_path('SpecialBuildings', 'park0.png')]
             },
             1: {
                 'name': 'dog park',
@@ -309,7 +309,7 @@ class ConstructType(Enum):
                 'waste_production': 60,
                 'resident_happiness_multiplier': 2,
                 'upgrade_cost': 8000,
-                'images': [load_asset('SpecialBuildings', 'park1.png')]
+                'images': [get_asset_path('SpecialBuildings', 'park1.png')]
             }
         }
     }
@@ -322,10 +322,10 @@ class ConstructType(Enum):
                 'description': 'Beauftiful statue - truly a sight to behold.',
                 'resident_happiness_multiplier': 1.6,
                 'images': [
-                    load_asset('SpecialBuildings', 'statue0.png'),
-                    load_asset('SpecialBuildings', 'statue1.png'),
-                    load_asset('SpecialBuildings', 'statue2.png'),
-                    load_asset('SpecialBuildings', 'statue3.png')
+                    get_asset_path('SpecialBuildings', 'statue0.png'),
+                    get_asset_path('SpecialBuildings', 'statue1.png'),
+                    get_asset_path('SpecialBuildings', 'statue2.png'),
+                    get_asset_path('SpecialBuildings', 'statue3.png')
                 ]
             }
         }
@@ -374,7 +374,7 @@ class ConstructType(Enum):
                 'waste_consumption': 500,
                 'resident_happiness_multiplier': 0.2,
                 'pollution': 0.9,
-                'images': [load_asset('SpecialBuildings', 'landfill.png')]
+                'images': [get_asset_path('SpecialBuildings', 'landfill.png')]
             },
             0: {
                 'name': 'waste processing station',
@@ -386,7 +386,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 1.0,
                 'pollution': 0.2,
                 'upgrade_cost': 50000,
-                'images': [load_asset('SpecialBuildings', 'wasteprocess.png')]
+                'images': [get_asset_path('SpecialBuildings', 'wasteprocess.png')]
             }
         }
     }
@@ -437,7 +437,7 @@ class ConstructType(Enum):
                 'energy_consumption': 100,
                 'water_productioin': 1000,
                 'resident_happiness_multiplier': 1.1,
-                'images': [load_asset('SpecialBuildings', 'waterpipe.png')]
+                'images': [get_asset_path('SpecialBuildings', 'waterpipe.png')]
             }
         }
     }
@@ -454,7 +454,7 @@ class ConstructType(Enum):
     #             'water_consumption': ,
     #             'waste_production': ,
     #             'resident_happiness_multiplier': ,
-    #             'images': [load_asset('SpecialBuildings', 's.png')]
+    #             'images': [get_asset_path('SpecialBuildings', 's.png')]
     #         }
     #     }
     # }

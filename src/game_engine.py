@@ -3,6 +3,7 @@ from game_engine_tools.save_manager import SaveManager
 import pygame as pg
 import os
 from game_modes.main_menu import MainMenu
+from game_engine_tools import FPS, WINDOW_SIZE
 
 
 class GameEngine:
@@ -11,18 +12,16 @@ class GameEngine:
         pg.init()
         pg.display.set_caption('City Simulation Game')
 
-        self.MEASUREMENTS = (1200, 800)
-        self.WINDOW = pg.display.set_mode(self.MEASUREMENTS)
-        self.FPS = 60
+        self.window = pg.display.set_mode(WINDOW_SIZE)
         self.clock = pg.time.Clock()
         self.save_manager = SaveManager()
-        self.game_mode = MainMenu(self.WINDOW, self.save_manager)
+        self.game_mode = MainMenu(self.window, self.save_manager)
 
     def run(self):
         self.running = True
 
         while self.running:
-            self.clock.tick(self.FPS)
+            self.clock.tick(FPS)
             pg.display.update()
             self.game_mode.update()
 
@@ -37,7 +36,6 @@ class GameEngine:
 
     def change_mode(self):
         if isinstance(self.game_mode, MainMenu):
-            self.game_mode = GameWindow(
-                self.WINDOW, self.save_manager, 50, 50)
+            self.game_mode = GameWindow(self.window, self.save_manager, 50, 50)
         else:
-            self.game_mode = MainMenu(self.WINDOW, self.save_manager)
+            self.game_mode = MainMenu(self.window, self.save_manager)
