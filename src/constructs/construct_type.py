@@ -188,7 +188,7 @@ class ConstructType(Enum):
                 'waste_production': 20,
                 'resident_happiness_multiplier': 1.8,
                 'upgrade_cost': 10000,
-                'images': [load_asset('SpecialBuildings', 'policel.png')]
+                'images': [load_asset('SpecialBuildings', 'police1.png')]
             }
         }
     }

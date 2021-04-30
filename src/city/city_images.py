@@ -4,25 +4,24 @@ import os
 from random import random, choice, seed
 from game_engine_tools import load_asset
 
+
 class CityImages:
-    '''singleton containing scaled and original background lot images'''
+    '''scaled and original background lot images'''
 
     def __init__(self):
         self.main_images = {
-            LotType.GRASS: pg.image.load(load_asset('LotType', 'grass.png')),
-            LotType.WATER: pg.image.load(load_asset('LotType', 'water.png'))}
+            LotType.GRASS: load_asset('LotType', 'grass.png'),
+            LotType.WATER: load_asset('LotType', 'water.png')}
 
         self.additional_images = {
             LotType.GRASS: [
-                pg.image.load(load_asset('LotType', 'hills.png')),
-                pg.image.load(os.path.join(
-                    'Assets', 'LotType', 'flowers.png')),
-                pg.image.load(os.path.join(
-                    'Assets', 'LotType', 'small_hills.png')),
-                pg.image.load(load_asset('LotType', 'stones.png'))
+                load_asset('LotType', 'hills.png'),
+                load_asset('LotType', 'flowers.png'),
+                load_asset('LotType', 'small_hills.png'),
+                load_asset('LotType', 'stones.png')
             ],
             LotType.WATER: [
-                pg.image.load(load_asset('LotType', 'island.png'))
+                load_asset('LotType', 'island.png')
             ]}
 
         self.frequency = {

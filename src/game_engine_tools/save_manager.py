@@ -23,7 +23,8 @@ class SaveManager:
         pass
 
     def load_save_manager_data(self):
-        sm_data_file_path = os.path.join('SaveFiles', 'save_manager_data.json')
+        sm_data_file_path = os.path.join(
+            'SaveFiles', 'save_manager_data.json')
 
         if not os.path.isfile(sm_data_file_path):
             self.generate_save_manager_data_to(sm_data_file_path)
@@ -32,7 +33,8 @@ class SaveManager:
             self.sm_data = js.load(sm_data)
 
     def save_save_manager_data(self):
-        sm_data_file_path = os.path.join('SaveFiles', 'save_manager_data.json')
+        sm_data_file_path = os.path.join(
+            'SaveFiles', 'save_manager_data.json')
 
         with open(sm_data_file_path, 'w') as sm_data:
             js.dump(self.sm_data, sm_data)
@@ -90,7 +92,8 @@ class SaveManager:
 
     def load_save(self):
         save_id = self.sm_data['active_save']
-        save_path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
+        save_path = os.path.join(
+            'SaveFiles', 'save' + str(save_id) + '.json')
         save_name = self.sm_data[str(save_id)]
         with open(save_path, 'r') as save_file:
             save_data = js.load(save_file)
@@ -102,7 +105,8 @@ class SaveManager:
         save_data['game_state'] = game_save_data
         self.sm_data[str(save_id)] = save_name
         self.save_save_manager_data()
-        save_path = os.path.join('SaveFiles', 'save' + str(save_id) + '.json')
+        save_path = os.path.join(
+            'SaveFiles', 'save' + str(save_id) + '.json')
         with open(save_path, 'w') as save_file:
             js.dump(save_data, save_file)
 
