@@ -136,6 +136,7 @@ class ConstructType(Enum):
                 'water_consumption': 20,
                 'waste_production': 70,
                 'resident_happiness_multiplier': 0.35,
+                'pollution': 0.6,
                 'images': [get_asset_path('Factory', 'factory.png')]
             }
         }

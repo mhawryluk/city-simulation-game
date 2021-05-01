@@ -11,6 +11,12 @@ class Construct:
             self.human_resources = construct_state['human_resouces']
             self.users = construct_state['users']
             self.type = construct_state['type_value']
+
+            self.happyness = construct_state['happyness']
+            self.burning = construct_state['burning']
+            self.crime_level = construct_state['crime_level']
+            self.waste = construct_state['waste']
+
             self.image = None
             self.past_images = construct_state['images']
             self.choose_image(path=self.past_images[-1])
@@ -19,6 +25,12 @@ class Construct:
             self.human_resources = 0
             self.users = 0
             self.type = construct_type.value
+
+            self.happyness = self.type['level'][0].get('base_resident_happiness', None)
+            self.burning = False
+            self.crime_level = 0
+            self.waste = 0
+
             self.image = None
             self.past_images = []
             self.choose_image()
@@ -52,5 +64,15 @@ class Construct:
             'human_resouces': self.human_resources,
             'users': self.users,
             'type_value': self.type,
+            'happyness': self.happyness,
+            'burning': self.burning,
+            'crime_level': self.crime_level,
+            'waste': self.waste,
             'images': self.past_images
         }
+
+    def get(self, string, else_value):
+        value = self.type.get(string, else_value)
+        if value is else_value:
+            value = self.type['level'][self.construct_level].get(string, else_value)
+        return value
