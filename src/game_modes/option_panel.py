@@ -15,12 +15,17 @@ class OptionPanel(Panel):
             "save", self.save)
         self.main_menu_button = self.menu.add.button(
             "main menu", self.main_menu)
+        self.test_button = self.menu.add.button(
+            "test", self.test)
 
     def main_menu(self):
         self.game_window.change_mode = True
 
     def save(self):
         self.game_window.save()
+
+    def test(self):
+        pass
 
     def get_theme(self):
         theme = super().get_theme()
