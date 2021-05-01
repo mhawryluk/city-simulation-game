@@ -20,6 +20,7 @@ class Lot:
         self.zone_type_color = None
         self.construct = None
         self.construct_level = 0
+        self.affected_by = set()
 
         if not save_source is None:
             self.type = LotType(save_source['type_value'])
