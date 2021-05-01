@@ -3,13 +3,19 @@ from game_engine_tools.player_status_tracker import PlayerStatus
 
 class SimulationEngine:
     def __init__(self, save_data):
-        self.player_status = PlayerStatus(save_data.get('player_status', None))
+        world_state = save_data.get('world_state', {})
+        self.data = world_state.get('world', None)
+        self.player_status = PlayerStatus(world_state.get('player', None))
 
     def simulate_cycle(self):
         pass
 
-    def can_buy(self, construct=None, zone=None):
-        return True
+    def can_buy(self, construct=None, zone=None, level=0):
+        building = construct
+        if building is None:
+            building = zone
+        print(building.value['level'][level]['name'], building.value['level'][level].get('upgrade_cost', building.value['cost']))
+        return self.player_status.data['funds'] >= building.value['level'][level].get('upgrade_cost', building.value['cost'])
 
     def bought(self, construct):
         pass
@@ -21,4 +27,8 @@ class SimulationEngine:
         pass
 
     def compress2save(self):
-        return self.player_status.compress2save()
+        compressed_data = {
+            'world': self.data,
+            'player':self.player_status.compress2save()
+        }
+        return compressed_data

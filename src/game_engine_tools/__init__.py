@@ -10,4 +10,5 @@ def load_asset(*args):
 
 
 def get_asset_path(*args):
-    return os.path.join('Assets', *args)
+    return os.path.join('Assets', *args);
+
