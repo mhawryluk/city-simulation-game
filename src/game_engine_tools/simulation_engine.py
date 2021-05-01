@@ -29,11 +29,18 @@ class SimulationEngine:
     def integrate_cosntruct(self, lot, remove=False):
         construct = lot.construct
         if not construct is None:
-            construct_range = construct.get('range', 0)
-            pollution = construct.get('pollution', 0)
-            happyness_multiplier = construct.get('resident_happiness_multiplier', 1)
+            print(construct.get('name', None), construct.get('range', 0))
+            construct_range = int(construct.get('range', 0))
+            pollution = float(construct.get('pollution', 0))
+            happyness_multiplier = float(construct.get('resident_happiness_multiplier', 1))
 
-            row, col = self.city_space.lots.index(lot)
+            ind = [
+                (i, row.index(lot))
+                for i, row in enumerate(self.city_space.lots)
+                if lot in row
+            ]
+            row, col = ind[0]
+
             size = len(self.city_space.lots)
             for r in range(row-construct_range, row+construct_range+1):
                 for c in range(col-construct_range, col+construct_range+1):

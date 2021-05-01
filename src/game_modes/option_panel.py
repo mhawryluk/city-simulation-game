@@ -17,7 +17,7 @@ class OptionPanel(Panel):
         self.main_menu_button = self.menu.add.button(
             "main menu", self.main_menu)
         self.test_button = self.menu.add.button(
-            "test", test)
+            "test", test(game_window))
 
     def main_menu(self):
         self.game_window.change_mode = True

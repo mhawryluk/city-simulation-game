@@ -1,2 +1,5 @@
-def test():
-    pass
+def test(game_window):
+    def tst():
+        print('TEST')
+        
+    return tst

@@ -17,7 +17,6 @@ class ConstructType(Enum):
         'cost': 1000,
         'simulation_handler': None,
         'zone': 'residential',
-        'range': (0, 0),
         'level': {
             0: {
                 'name': 'small house',

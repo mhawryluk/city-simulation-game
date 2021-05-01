@@ -7,15 +7,15 @@ import pygame as pg
 class Construct:
     def __init__(self, construct_type, construct_state=None):
         if construct_type is None:
-            self.construct_level = construct_state['construct_level']
-            self.human_resources = construct_state['human_resouces']
-            self.users = construct_state['users']
+            self.construct_level = int(construct_state['construct_level'])
+            self.human_resources = int(construct_state['human_resouces'])
+            self.users = int(construct_state['users'])
             self.type = construct_state['type_value']
 
-            self.happyness = construct_state['happyness']
-            self.burning = construct_state['burning']
-            self.crime_level = construct_state['crime_level']
-            self.waste = construct_state['waste']
+            self.happyness = None if  construct_state['happyness'] is None else int(construct_state['happyness'])
+            self.burning = bool(construct_state['burning'])
+            self.crime_level = int(construct_state['crime_level'])
+            self.waste = int(construct_state['waste'])
 
             self.image = None
             self.past_images = construct_state['images']
@@ -74,5 +74,5 @@ class Construct:
     def get(self, string, else_value):
         value = self.type.get(string, else_value)
         if value is else_value:
-            value = self.type['level'][self.construct_level].get(string, else_value)
+            value = self.type['level'][str(self.construct_level)].get(string, else_value)
         return value
