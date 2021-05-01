@@ -1,5 +1,6 @@
 import pygame_menu as pgmen
 from game_modes.panel import Panel
+from test import test
 
 
 class OptionPanel(Panel):
@@ -16,16 +17,13 @@ class OptionPanel(Panel):
         self.main_menu_button = self.menu.add.button(
             "main menu", self.main_menu)
         self.test_button = self.menu.add.button(
-            "test", self.test)
+            "test", test)
 
     def main_menu(self):
         self.game_window.change_mode = True
 
     def save(self):
         self.game_window.save()
-
-    def test(self):
-        pass
 
     def get_theme(self):
         theme = super().get_theme()
