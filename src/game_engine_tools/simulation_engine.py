@@ -1,5 +1,5 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
-
+from constructs.construct_type import get_zone_construct_type
 
 class SimulationEngine:
     def __init__(self, save_data):
@@ -13,8 +13,7 @@ class SimulationEngine:
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct
         if building is None:
-            building = zone
-        print(building.value['level'][level]['name'], building.value['level'][level].get('upgrade_cost', building.value['cost']))
+            building = get_zone_construct_type(zone)
         return self.player_status.data['funds'] >= building.value['level'][level].get('upgrade_cost', building.value['cost'])
 
     def bought(self, construct):
