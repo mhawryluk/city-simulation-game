@@ -181,6 +181,14 @@ class CitySpace:
             clicked_lot.set_zone(zone_type)
             self.zone.add(clicked_lot)
 
+    def bulldoze(self):
+        clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
+        if clicked_lot.construct is None:
+            return None
+
+        clicked_lot.remove_construct()
+        return clicked_lot
+
     def buy_construct(self, construct) -> bool:
         '''zwraca True jeśli powiódł się zakup budynku'''
 

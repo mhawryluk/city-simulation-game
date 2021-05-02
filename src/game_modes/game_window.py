@@ -25,6 +25,7 @@ class GameWindow(GameMode):
         self.button_down = False
         self.zoning = False
         self.zoning_type = None
+        self.bulldozing = False
         self.construct_to_buy = None  # construct - wciśnięto buy ale jeszcze nie postawiono
 
         # befriended classes
@@ -111,11 +112,17 @@ class GameWindow(GameMode):
             if event.button == 5:
                 self.city_space.zoom(-self.SCROLL_SPEED)
 
-        if event.type == pg.MOUSEMOTION:
-            if self.zoning:
-                if self.button_down:
+        if event.type == pg.MOUSEMOTION or event.type or event.type == pg.MOUSEBUTTONDOWN:
+            if self.button_down:
+                if self.zoning:
                     if self.simulator.can_buy(zone=self.zoning_type):
                         self.city_space.add_to_zone(self.zoning_type)
+
+                elif self.bulldozing:
+                    lot = self.city_space.bulldoze()
+                    if lot:
+                        self.simulator.removed_construct(lot)
+
             else:
                 self.city_space.hovered(
                     pg.mouse.get_pos(), self.mode)
