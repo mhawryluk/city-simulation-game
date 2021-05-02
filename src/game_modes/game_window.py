@@ -1,6 +1,7 @@
 from game_modes.game_mode import GameMode
 from game_modes.game_window_panel import GameWindowPanel
 from game_modes.toggle_menu import ToggleMenu
+from game_modes.info_panel import InfoPanel
 from city.city_space import CitySpace
 from city.lot import Lot
 from game_engine_tools.save_manager import SaveManager
@@ -38,6 +39,9 @@ class GameWindow(GameMode):
             120, self.window.get_height(), self)
         self.toggle_menu = ToggleMenu(
             width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
+        self.info_panel = InfoPanel(260, 120, (100, 0), self, self.simulator)
+
+        self.sub_panels = [self.menu_panel, self.toggle_menu, self.info_panel]
 
     def update(self):
         self.simulator.simulate_cycle()
@@ -45,8 +49,8 @@ class GameWindow(GameMode):
         self.draw()
 
     def handle(self, event):
-        self.menu_panel.handle(event)
-        self.toggle_menu.handle(event)
+        for panel in self.sub_panels:
+            panel.handle(event)
 
         # KEY EVENTS
         if event.type == pg.KEYDOWN:
@@ -72,10 +76,11 @@ class GameWindow(GameMode):
                 self.city_space.add_move_speed((0, -self.SCROLL_SPEED))
 
         # MOUSE EVENTS
-        if self.menu_panel.collide() or self.toggle_menu.collide():
-            self.city_space.hovered(None, self.mode)
-            self.button_down = False
-            return
+        for panel in self.sub_panels:
+            if panel.collide():
+                self.city_space.hovered(None, self.mode)
+                self.button_down = False
+                return
 
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == pg.BUTTON_LEFT:
@@ -119,8 +124,9 @@ class GameWindow(GameMode):
         self.window.fill((0, 0, 0))
         self.city_space.draw(self.window, mode=self.mode,
                              construct_to_buy=self.construct_to_buy)
-        self.menu_panel.draw(self.window)
-        self.toggle_menu.draw(self.window)
+
+        for panel in self.sub_panels:
+            panel.draw(self.window)
 
     def set_zoning(self, zoning_type):
         Lot.zone_highlighting = True
@@ -132,8 +138,11 @@ class GameWindow(GameMode):
         else:
             self.zoning = False
 
-    def toggle_zone_highlighting(self):
-        Lot.zone_highlighting = not Lot.zone_highlighting
+    def toggle_zone_highlighting(self, set=None):
+        if set:
+            Lot.zone_highlighting = set
+        else:
+            Lot.zone_highlighting = not Lot.zone_highlighting
 
     def game_resume(self):
         self.zoning = False

@@ -344,7 +344,7 @@ class ConstructType(Enum):
     #     'level':{
     #         0:{
     #             'name': 'amusement park',
-    #             'description': 'An amusement park - increases resident happyness.',
+    #             'description': 'An amusement park - increases resident happiness.',
     #             'employees': 100,
     #             'customers': 1000,
     #             'income': 50000,
@@ -356,7 +356,7 @@ class ConstructType(Enum):
     #         },
     #         0:{
     #             'name': 'water park',
-    #             'description': 'An amusement park enriched with big pools and water slides - greatly increases resident happyness.',
+    #             'description': 'An amusement park enriched with big pools and water slides - greatly increases resident happiness.',
     #             'employees': 100,
     #             'customers': 1000,
     #             'income': 100000,
