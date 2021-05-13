@@ -45,6 +45,7 @@ class SimulationEngine:
             for r in range(row-construct_range, row+construct_range+1):
                 for c in range(col-construct_range, col+construct_range+1):
                     if r >= 0 and row < size and c >= 0 and c < size and (r != row or c != col):
+                        print(r, c)
                         affected_lot = self.city_space.lots[r][c]
                         affected_lot.affected_by.add(construct)
                         if remove:

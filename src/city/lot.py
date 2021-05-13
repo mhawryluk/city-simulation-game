@@ -110,3 +110,6 @@ class Lot:
             'type_value': self.type.value,
             'construct': None if self.construct is None else self.construct.compress2save()
         }
+
+    def show(self):
+        return self.affected_by
