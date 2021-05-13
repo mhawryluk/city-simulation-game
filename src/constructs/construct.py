@@ -12,7 +12,7 @@ class Construct:
             self.users = int(construct_state['users'])
             self.type = construct_state['type_value']
 
-            self.happyness = None if  construct_state['happyness'] is None else int(construct_state['happyness'])
+            self.happiness = None if  construct_state['happiness'] is None else int(construct_state['happiness'])
             self.burning = bool(construct_state['burning'])
             self.crime_level = int(construct_state['crime_level'])
             self.waste = int(construct_state['waste'])
@@ -26,7 +26,7 @@ class Construct:
             self.users = 0
             self.type = construct_type.value
 
-            self.happyness = self.type['level'][0].get('base_resident_happiness', None)
+            self.happiness = self.type['level'][0].get('base_resident_happiness', None)
             self.burning = False
             self.crime_level = 0
             self.waste = 0
@@ -64,7 +64,7 @@ class Construct:
             'human_resouces': self.human_resources,
             'users': self.users,
             'type_value': self.type,
-            'happyness': self.happyness,
+            'happiness': self.happiness,
             'burning': self.burning,
             'crime_level': self.crime_level,
             'waste': self.waste,

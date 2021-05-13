@@ -45,10 +45,12 @@ class GameWindowPanel(Panel):
 
     def play(self):
         self.game_window.mode = "game_mode"
+
         if self.game_window.zoning:
             self.game_window.zoning = False
             self.game_window.zoning_type = None
-            self.game_window.toggle_zone_highlighting()
+
+        self.game_window.toggle_zone_highlighting(False)
         self.disable_subpanels()
 
     def add_road(self):

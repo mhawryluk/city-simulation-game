@@ -100,6 +100,11 @@ class Lot:
         self.construct = Construct(construct)
         self.zone_type_color = None
 
+    def remove_construct(self):
+        self.construct = None
+        self.construct_level = 0
+        self.zone_type_color = None
+
     def can_place(self):
         '''zwraca True jeśli można ustawić construct na tym polu'''
         return self.construct is None and self.type == LotType.GRASS

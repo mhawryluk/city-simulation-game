@@ -1,5 +1,7 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import get_zone_construct_type
+from random import randint
+
 
 class SimulationEngine:
     def __init__(self, city_space, save_data):
@@ -9,7 +11,7 @@ class SimulationEngine:
         self.city_space = city_space
         for row in self.city_space.lots:
             for lot in row:
-                self.integrate_cosntruct(lot)
+                self.integrate_construct(lot)
 
     def simulate_cycle(self):
         pass
@@ -23,16 +25,20 @@ class SimulationEngine:
     def bought(self, construct):
         self.player_status['funds'] -= construct.type['cost']
 
+    def removed_construct(self, lot):
+        pass
+
     def upgraded(self, construct):
         self.player_status['funds'] -= construct.type['level'][level]['upgrade_cost']
 
-    def integrate_cosntruct(self, lot, remove=False):
+    def integrate_construct(self, lot, remove=False):
         construct = lot.construct
         if not construct is None:
-            print(construct.get('name', None), construct.get('range', 0))
+            #print(construct.get('name', None), construct.get('range', 0))
             construct_range = int(construct.get('range', 0))
             pollution = float(construct.get('pollution', 0))
-            happyness_multiplier = float(construct.get('resident_happiness_multiplier', 1))
+            happiness_multiplier = float(construct.get(
+                'resident_happiness_multiplier', 1))
 
             ind = [
                 (i, row.index(lot))
@@ -52,18 +58,21 @@ class SimulationEngine:
                             affected_lot.unpolluted /= (1-pollution)
                         else:
                             affected_lot.unpolluted *= (1-pollution)
-                        if affected_lot.construct != None and affected_lot.construct.happyness != None:
+                        if affected_lot.construct != None and affected_lot.construct.happiness != None:
                             if remove:
-                                affected_lot.construct.happyness /= happyness_multiplier
+                                affected_lot.construct.happiness /= happiness_multiplier
                             else:
-                                affected_lot.construct.happyness *= happyness_multiplier
+                                affected_lot.construct.happiness *= happiness_multiplier
         if not remove:
             for affecting_constructs in list(lot.affected_by):
                 pass
 
+    def get_data(self, key):
+        return self.player_status.data.get(key, -1)
+
     def compress2save(self):
         compressed_data = {
             'world': self.data,
-            'player':self.player_status.compress2save()
+            'player': self.player_status.compress2save()
         }
         return compressed_data
