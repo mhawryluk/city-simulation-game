@@ -29,8 +29,10 @@ class UpgradePanel(Panel):
         self.menu.add.label(
             f'COST: {lot.construct.type["cost"]}')
 
-        # BUTTONS
-        self.menu.add.button('UPGRADE', self.upgrade)
+        if str(lot.construct_level + 1) in lot.construct.type['level']:
+            self.menu.add.label(
+                f'upgrade cost: {lot.construct.type["level"][str(lot.construct_level + 1)]["upgrade_cost"]}')
+            self.menu.add.button('UPGRADE', self.upgrade)
 
         self.menu.force_surface_cache_update()
 
