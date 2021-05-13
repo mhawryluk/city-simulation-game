@@ -79,6 +79,3 @@ class BuyBuildingWindow(Panel):
             self.game_window.construct_to_buy = self.construct
             self.parent_panel.disable_all_panels()
             self.parent_panel.enabled_window = None
-
-    def disable(self):
-        self.menu.disable()

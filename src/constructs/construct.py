@@ -12,7 +12,8 @@ class Construct:
             self.users = int(construct_state['users'])
             self.type = construct_state['type_value']
 
-            self.happiness = None if  construct_state['happiness'] is None else int(construct_state['happiness'])
+            self.happiness = None if construct_state['happiness'] is None else int(
+                construct_state['happiness'])
             self.burning = bool(construct_state['burning'])
             self.crime_level = int(construct_state['crime_level'])
             self.waste = int(construct_state['waste'])
@@ -26,7 +27,8 @@ class Construct:
             self.users = 0
             self.type = construct_type.value
 
-            self.happiness = self.type['level'][0].get('base_resident_happiness', None)
+            self.happiness = self.type['level'][0].get(
+                'base_resident_happiness', None)
             self.burning = False
             self.crime_level = 0
             self.waste = 0
@@ -74,5 +76,6 @@ class Construct:
     def get(self, string, else_value):
         value = self.type.get(string, else_value)
         if value is else_value:
-            value = self.type['level'][str(self.construct_level)].get(string, else_value)
+            value = self.type['level'][str(self.construct_level)].get(
+                string, else_value)
         return value
