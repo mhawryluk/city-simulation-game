@@ -160,8 +160,11 @@ class GameWindow(GameMode):
 
     def set_upgrade_panel(self):
         lot = self.city_space.get_clicked_lot(pg.mouse.get_pos())
-        self.upgrade_panel.set_lot(lot)
-        self.upgrade_panel.enable()
+        if lot.construct:
+            self.upgrade_panel.set_lot(lot)
+            self.upgrade_panel.enable()
+        else:
+            self.upgrade_panel.disable()
 
     def game_resume(self):
         self.zoning = False

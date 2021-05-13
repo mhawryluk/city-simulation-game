@@ -13,6 +13,7 @@ class ToggleMenu(Panel):
         self.menu.add.button("SHOW MENU", self.toggle)
 
     def toggle(self):
+        self.subpanel.disable_subpanels()
         self.subpanel.menu.toggle()
 
     def get_theme(self):

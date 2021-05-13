@@ -16,8 +16,9 @@ class UpgradePanel(Panel):
 
         # IMAGE & INFO
         info = lot.construct.type['level'][str(lot.construct_level)]
+
         self.menu.add.image(
-            info['images'][lot.construct_level], scale=(0.5, 0.5))
+            lot.construct.image_path, scale=(0.5, 0.5))
 
         for key, value in info.items():
             if key == 'images':
@@ -35,3 +36,8 @@ class UpgradePanel(Panel):
 
     def upgrade(self):
         pass
+
+    def get_theme(self):
+        theme = super().get_theme()
+        theme.widget_font_size = 25
+        return theme

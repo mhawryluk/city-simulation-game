@@ -43,6 +43,7 @@ class Construct:
             path = choice(self.type['level'][self.construct_level]['images'])
             self.past_images.append(path)
         self.image = pg.image.load(path)
+        self.image_path = path
 
     def level_up(self, level_up_by):
         prev = self.construct_level

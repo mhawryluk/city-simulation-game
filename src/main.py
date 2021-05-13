@@ -6,7 +6,9 @@ def change_directory():
     if __file__ == 'main.py':
         chdir('..')
     else:
-        chdir(path.dirname(path.dirname(__file__)))
+        dir_name = path.dirname(path.dirname(__file__))
+        if dir_name != '':
+            chdir(dir_name)
 
 
 def main():
@@ -16,5 +18,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print(__file__)
     main()
