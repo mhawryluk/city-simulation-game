@@ -92,4 +92,4 @@ class Construct:
         return level
 
     def like(self, cmp_likeness):
-        return (self.get('likeness', None) == cmp_likeness)
+        return cmp_likeness in self.get('likeness', [])
