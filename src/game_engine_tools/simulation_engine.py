@@ -61,8 +61,8 @@ class SimulationEngine:
                             else:
                                 affected_lot.construct.happiness *= happiness_multiplier
         if not remove and (not lot.construct is None) and lot.construct.like('home'):
-            for affecting_constructs in list(lot.affected_by):
-                pass
+            for affecting_construct in list(lot.affected_by):
+                lot.construct.happiness *= affecting_construct.get('resident_happiness_multiplier', 1)
 
     def get_data(self, key):
         return self.player_status.data.get(key, -1)
