@@ -25,11 +25,8 @@ class SimulationEngine:
     def bought(self, construct):
         self.player_status['funds'] -= construct.type['cost']
 
-    def removed_construct(self, lot):
-        pass
-
     def upgraded(self, construct):
-        self.player_status['funds'] -= construct.type['level'][level]['upgrade_cost']
+        self.player_status['funds'] -= construct.get('upgrade_cost', 0)
 
     def integrate_construct(self, lot, remove=False):
         construct = lot.construct

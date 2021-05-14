@@ -122,7 +122,7 @@ class GameWindow(GameMode):
                 elif self.bulldozing:
                     lot = self.city_space.bulldoze()
                     if lot:
-                        self.simulator.removed_construct(lot)
+                        self.simulator.integrate_construct(lot, remove=True)
 
             else:
                 self.city_space.hovered(
