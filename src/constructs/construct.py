@@ -77,6 +77,16 @@ class Construct:
     def get(self, string, else_value):
         value = self.type.get(string, else_value)
         if value is else_value:
-            value = self.type['level'][str(self.construct_level)].get(
+            level = self.get_level()
+            value = level.get(
                 string, else_value)
         return value
+
+    def get_level(self):
+        level = self.type['level'].get(self.construct_level, None)
+        if level is None:
+            level = self.type['level'].get(str(self.construct_level), None)
+        if level is None:
+            print("Error: invalid construct level structure")
+            print(self.type)
+        return level

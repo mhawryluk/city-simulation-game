@@ -15,7 +15,7 @@ class UpgradePanel(Panel):
         self.menu.clear()
 
         # IMAGE & INFO
-        info = lot.construct.type['level'][str(lot.construct_level)]
+        info = lot.construct.get_level()
 
         self.menu.add.image(
             lot.construct.image_path, scale=(0.5, 0.5))
