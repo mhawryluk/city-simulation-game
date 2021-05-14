@@ -13,6 +13,7 @@ def get_zone_construct_type(zone_type):
 
 class ConstructType(Enum):
     FAMILY_HOUSE = {
+        'likeness': 'home',
         'max_level': 2,
         'cost': 1000,
         'simulation_handler': None,
@@ -53,6 +54,7 @@ class ConstructType(Enum):
         }
     }
     BLOCK = {
+        'likeness': 'home',
         'max_level': 3,
         'cost': 5000,
         'level': {

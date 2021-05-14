@@ -90,3 +90,6 @@ class Construct:
             print("Error: invalid construct level structure")
             print(self.type)
         return level
+
+    def like(self, cmp_likeness):
+        return (self.get('likeness', None) == cmp_likeness)

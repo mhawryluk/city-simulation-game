@@ -1,5 +1,5 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
-from constructs.construct_type import get_zone_construct_type
+from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
 
 
@@ -60,7 +60,7 @@ class SimulationEngine:
                                 affected_lot.construct.happiness /= happiness_multiplier
                             else:
                                 affected_lot.construct.happiness *= happiness_multiplier
-        if not remove:
+        if not remove and (not lot.construct is None) and lot.construct.like('home'):
             for affecting_constructs in list(lot.affected_by):
                 pass
 
