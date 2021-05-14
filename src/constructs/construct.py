@@ -14,7 +14,7 @@ class Construct:
 
             self.happiness = None if construct_state['happiness'] is None else int(
                 construct_state['happiness'])
-            self.burning = bool(construct_state['burning'])
+            self.heat = bool(construct_state['heat'])
             self.crime_level = int(construct_state['crime_level'])
             self.waste = int(construct_state['waste'])
 
@@ -29,7 +29,7 @@ class Construct:
 
             self.happiness = self.type['level'][0].get(
                 'base_resident_happiness', None)
-            self.burning = False
+            self.heat = False
             self.crime_level = 0
             self.waste = 0
 
@@ -68,7 +68,7 @@ class Construct:
             'users': self.users,
             'type_value': self.type,
             'happiness': self.happiness,
-            'burning': self.burning,
+            'heat': self.heat,
             'crime_level': self.crime_level,
             'waste': self.waste,
             'images': self.past_images
