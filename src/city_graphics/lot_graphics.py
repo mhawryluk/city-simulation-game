@@ -45,7 +45,7 @@ class LotGraphics:
         if cls.zone_highlighting and lot.zone_type:
             alpha = pg.Surface((scale, scale))
             alpha.set_alpha(128)
-            alpha.fill(zone_colors[lot.zone_type])
+            alpha.fill(cls.zone_colors[lot.zone_type])
             cls.window.blit(alpha, (x, y))
 
     @classmethod

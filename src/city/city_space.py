@@ -101,7 +101,8 @@ class CitySpace:
             lot = self.get_clicked_lot(pg.mouse.get_pos())
             image = pg.image.load(
                 construct_to_buy.value['level'][0]['images'][0])
-            x, y = lot.get_draw_position((self.pov_x, self.pov_y), self.scale)
+            x, y = LotGraphics.get_draw_position(
+                lot, (self.pov_x, self.pov_y), self.scale)
 
             offset = int(ROAD_WIDTH_RATIO*self.scale)
             scale = int(self.scale*(1 - ROAD_WIDTH_RATIO))
