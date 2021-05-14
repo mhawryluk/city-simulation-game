@@ -1,8 +1,8 @@
 from city_graphics import ROAD_WIDTH_RATIO
+from game_engine_tools import WINDOW_SIZE
 from city_graphics.lot_graphics import LotGraphics
 from city_graphics.road_graphics import RoadGraphics
 from city_graphics.city_images import CityImages
-from game_engine_tools import WINDOW_SIZE
 import pygame as pg
 
 

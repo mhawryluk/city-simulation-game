@@ -2,8 +2,6 @@ from city.lot import Lot
 from city.lot_type import LotType
 from city.road_system import RoadSystem
 from city_graphics.city_space_graphics import CitySpaceGraphics
-from city import ROAD_WIDTH_RATIO
-import pygame as pg
 
 
 class CitySpace:
@@ -23,7 +21,6 @@ class CitySpace:
         definiuje pustą mapę, tworzy Loty
         zastąpić wczytywaniem z save'a
         '''
-
         self.lots = []
         if save_source is None:
             for x in range(self.width):

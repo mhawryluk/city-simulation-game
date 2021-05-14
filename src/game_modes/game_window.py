@@ -109,7 +109,8 @@ class GameWindow(GameMode):
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
                 if self.construct_to_buy:
-                    lot = self.city_space.buy_construct(self.construct_to_buy, self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
+                    lot = self.city_space.buy_construct(
+                        self.construct_to_buy, self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
                     if lot:
                         self.simulator.integrate_construct(lot)
                         self.construct_to_buy = None
@@ -139,7 +140,8 @@ class GameWindow(GameMode):
                             self.simulator.integrate_construct(lot)
 
                 elif self.bulldozing:
-                    lot = self.city_space.bulldoze(self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
+                    lot = self.city_space.bulldoze(
+                        self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
                     if lot:
                         self.simulator.integrate_construct(lot, remove=True)
 

@@ -1,7 +1,6 @@
 from game_modes.game_window import GameWindow
 from game_engine_tools.save_manager import SaveManager
 import pygame as pg
-import os
 from game_modes.main_menu import MainMenu
 from game_engine_tools import FPS, WINDOW_SIZE
 

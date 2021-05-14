@@ -1,10 +1,7 @@
-import pygame as pg
-import os
 from random import randint
 from constructs.construct_type import ConstructType
 from constructs.construct import Construct
 from city.lot_type import LotType
-from city import ROAD_WIDTH_RATIO
 
 
 class Lot:

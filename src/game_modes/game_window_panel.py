@@ -1,4 +1,3 @@
-import pygame as pg
 import pygame_menu as pgmen
 from game_modes.build_mode_panel import BuildModePanel
 from game_modes.option_panel import OptionPanel

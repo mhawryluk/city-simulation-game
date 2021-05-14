@@ -35,11 +35,12 @@ project for Python programming class
 - [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
 - [ ] okienko z pieniędzmi i satysfakcją 
 - [ ] upgrade
-- [ ] bulldoze
+- [ ] bulldoze - wyłączyć przy zmianie trybu
+- [ ] okienko upgrade'u pojawia się np. przy wyburzaniu
 - [ ] zapisywanie stref
 
 ## poprawki:
-- [ ] rozdzielić GUI od logiki gry
+- [x] rozdzielić GUI od logiki gry
 - [x] zoptymalizować kod highlight_roads
 - [x] zastąpić import *
 - [x] GameEngine - stałe w konstruktorze

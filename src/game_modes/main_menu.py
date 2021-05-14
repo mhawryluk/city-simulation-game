@@ -3,7 +3,6 @@ from game_engine_tools.save_manager import SaveManager
 from game_engine_tools import load_asset
 import pygame as pg
 import pygame_menu as pgmen
-import os
 from random import choice
 
 

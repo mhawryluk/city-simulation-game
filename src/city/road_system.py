@@ -1,10 +1,4 @@
-import os
-import pygame as pg
-from random import randint
-from city.lot import Lot
-from city import ROAD_WIDTH_RATIO, VERTICAL, HORIZONTAL
-from game_engine_tools import load_asset
-from itertools import product
+from city import VERTICAL, HORIZONTAL
 
 
 class RoadSystem:

@@ -1,6 +1,6 @@
-from enum import Enum, auto
-import pygame as pg
+from enum import Enum
 from game_engine_tools import get_asset_path
+
 
 def get_zone_construct_type(zone_type):
     if zone_type == 'residential':
