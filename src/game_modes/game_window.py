@@ -5,6 +5,7 @@ from game_modes.info_panel import InfoPanel
 from game_modes.upgrade_panel import UpgradePanel
 from city.city_space import CitySpace
 from city.lot import Lot
+from city_graphics.lot_graphics import LotGraphics
 from game_engine_tools import WINDOW_SIZE
 from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
@@ -20,6 +21,8 @@ class GameWindow(GameMode):
 
         # constants
         self.SCROLL_SPEED = 15
+
+        LotGraphics.window = window
 
         # current state variables
         self.change_mode = False
@@ -147,7 +150,7 @@ class GameWindow(GameMode):
             panel.draw(self.window)
 
     def set_zoning(self, zoning_type):
-        Lot.zone_highlighting = True
+        LotGraphics.zone_highlighting = True
         if not self.zoning:
             self.zoning = True
             self.zoning_type = zoning_type
@@ -158,9 +161,9 @@ class GameWindow(GameMode):
 
     def toggle_zone_highlighting(self, set=None):
         if set:
-            Lot.zone_highlighting = set
+            LotGraphics.zone_highlighting = set
         else:
-            Lot.zone_highlighting = not Lot.zone_highlighting
+            LotGraphics.zone_highlighting = not LotGraphics.zone_highlighting
 
     def set_upgrade_panel(self):
         lot = self.city_space.get_clicked_lot(pg.mouse.get_pos())

@@ -2,6 +2,7 @@ from city.lot import Lot
 from city.lot_type import LotType
 from city.city_images import CityImages
 from city.road_system import RoadSystem
+from city_graphics.lot_graphics import LotGraphics
 from city import ROAD_WIDTH_RATIO
 import pygame as pg
 
@@ -11,8 +12,8 @@ class CitySpace:
 
     def __init__(self, width, height, window_width, window_height, save_source=None):
         self.city_images = CityImages()
-        Lot.city_images = self.city_images
-        Lot.map_dimensions = (width, height)
+        LotGraphics.city_images = self.city_images
+        LotGraphics.map_dimensions = (width, height)
         Lot.window_dimensions = (window_width, window_height)
         self.window_height = window_height
         self.window_width = window_width
@@ -92,8 +93,8 @@ class CitySpace:
         # draw lots
         for row in self.lots:
             for lot in row:
-                lot.draw_background(
-                    self.scale, (self.pov_x, self.pov_y), window)
+                LotGraphics.draw_background(
+                    lot, self.scale, (self.pov_x, self.pov_y))
 
         # faded picture of a construct to be placed and bought
         if construct_to_buy:
@@ -128,8 +129,8 @@ class CitySpace:
         # constructs
         for row in self.lots:
             for lot in row:
-                lot.draw_construct(
-                    self.scale, (self.pov_x, self.pov_y), window)
+                LotGraphics.draw_construct(
+                    lot, self.scale, (self.pov_x, self.pov_y))
 
         # road placing drawing effect
         if mode == "road_placing":
