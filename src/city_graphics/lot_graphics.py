@@ -5,6 +5,9 @@ import pygame as pg
 
 class LotGraphics:
     zone_highlighting = False
+    zone_colors = {'residential': (61, 143, 102),
+                   'commercial': (92, 153, 214),
+                   'industrial': (173, 102, 31)}
 
     @classmethod
     def draw_background(cls, lot, scale, pov):
@@ -39,10 +42,10 @@ class LotGraphics:
             cls.window.blit(pic, (new_x, new_y))
 
         # zone highlighting
-        if cls.zone_highlighting and lot.zone_type_color:
+        if cls.zone_highlighting and lot.zone_type:
             alpha = pg.Surface((scale, scale))
             alpha.set_alpha(128)
-            alpha.fill(lot.zone_type_color)
+            alpha.fill(zone_colors[lot.zone_type])
             cls.window.blit(alpha, (x, y))
 
     @classmethod

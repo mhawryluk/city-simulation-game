@@ -8,8 +8,6 @@ from city import ROAD_WIDTH_RATIO
 
 
 class Lot:
-    zone_highlighting = False
-
     def __init__(self, x, y, type, save_source=None):
         self.type = type
         self.x = x
@@ -17,7 +15,7 @@ class Lot:
         self.selected = False
         self.hovered = False
         self.seed = randint(0, 5000)
-        self.zone_type_color = None
+        self.zone_type = None
         self.construct = None
         self.construct_level = 0
 
@@ -32,26 +30,24 @@ class Lot:
                     None, construct_state=save_source['construct'])
 
     def set_zone(self, zone_type):
+        self.zone_type = zone_type
         if zone_type == 'residential':
-            self.zone_type_color = (61, 143, 102)
             self.construct = Construct(ConstructType.FAMILY_HOUSE)
 
         elif zone_type == 'commercial':
-            self.zone_type_color = (92, 153, 214)
             self.construct = Construct(ConstructType.SHOP)
 
         elif zone_type == 'industrial':
-            self.zone_type_color = (173, 102, 31)
             self.construct = Construct(ConstructType.FACTORY)
 
     def set_construct(self, construct):
         self.construct = Construct(construct)
-        self.zone_type_color = None
+        self.zone_type = None
 
     def remove_construct(self):
         self.construct = None
         self.construct_level = 0
-        self.zone_type_color = None
+        self.zone_type = None
 
     def can_place(self):
         '''zwraca True jeśli można ustawić construct na tym polu'''
