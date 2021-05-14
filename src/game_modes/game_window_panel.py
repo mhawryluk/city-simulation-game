@@ -4,6 +4,7 @@ from game_modes.build_mode_panel import BuildModePanel
 from game_modes.option_panel import OptionPanel
 from game_modes.stat_panel import StatPanel
 from game_modes.panel import Panel
+from game_engine_tools import WINDOW_SIZE
 
 
 class GameWindowPanel(Panel):
@@ -18,20 +19,18 @@ class GameWindowPanel(Panel):
                                mouse_enabled=True, mouse_motion_selection=True)
 
         # BUILD MODE PANEL
-        window_width = game_window.city_space.window_width
-        window_height = game_window.city_space.window_height
         self.build_mode_panel = BuildModePanel(
-            width=window_width - width, height=height//15,
+            width=WINDOW_SIZE[0] - width, height=height//15,
             position=(100, 100),
             game_window=game_window)
 
         # OPTIONS PANEL
         self.option_panel = OptionPanel(
-            width=window_width//2, height=window_height//2, game_window=game_window)
+            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=game_window)
 
         # STAT PANEL
         self.stat_panel = StatPanel(
-            width=window_width//2, height=window_height//2, game_window=game_window)
+            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=game_window)
 
         # BUTTONS
         self.play_button = self.menu.add.button("play", self.play)

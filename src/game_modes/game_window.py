@@ -7,6 +7,7 @@ from city.city_space import CitySpace
 from city.lot import Lot
 from city_graphics.lot_graphics import LotGraphics
 from city_graphics.road_graphics import RoadGraphics
+from city_graphics.city_space_graphics import CitySpaceGraphics
 from game_engine_tools import WINDOW_SIZE
 from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
@@ -37,8 +38,10 @@ class GameWindow(GameMode):
 
         # befriended classes
         self.city_space = CitySpace(
-            width, height, window.get_width(), window.get_height(),
+            width, height,
             save_source=saved_data.get('city_space', None))
+        self.city_graphics = CitySpaceGraphics(self.city_space, width, height)
+
         self.simulator = SimulationEngine(self.city_space, saved_data)
         # self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
 
@@ -57,7 +60,7 @@ class GameWindow(GameMode):
 
     def update(self):
         self.simulator.simulate_cycle()
-        self.city_space.update()
+        self.city_graphics.update()
         self.draw()
 
     def handle(self, event):
@@ -68,29 +71,29 @@ class GameWindow(GameMode):
         if event.type == pg.KEYDOWN:
             # moving across the map
             if event.key == pg.K_d:
-                self.city_space.add_move_speed((-self.SCROLL_SPEED, 0))
+                self.city_graphics.add_move_speed((-self.SCROLL_SPEED, 0))
             elif event.key == pg.K_s:
-                self.city_space.add_move_speed((0, -self.SCROLL_SPEED))
+                self.city_graphics.add_move_speed((0, -self.SCROLL_SPEED))
             elif event.key == pg.K_a:
-                self.city_space.add_move_speed((self.SCROLL_SPEED, 0))
+                self.city_graphics.add_move_speed((self.SCROLL_SPEED, 0))
             elif event.key == pg.K_w:
-                self.city_space.add_move_speed((0, self.SCROLL_SPEED))
+                self.city_graphics.add_move_speed((0, self.SCROLL_SPEED))
 
         if event.type == pg.KEYUP:
             # moving across the map
             if event.key == pg.K_d:
-                self.city_space.add_move_speed((self.SCROLL_SPEED, 0))
+                self.city_graphics.add_move_speed((self.SCROLL_SPEED, 0))
             elif event.key == pg.K_s:
-                self.city_space.add_move_speed((0, self.SCROLL_SPEED))
+                self.city_graphics.add_move_speed((0, self.SCROLL_SPEED))
             elif event.key == pg.K_a:
-                self.city_space.add_move_speed((-self.SCROLL_SPEED, 0))
+                self.city_graphics.add_move_speed((-self.SCROLL_SPEED, 0))
             elif event.key == pg.K_w:
-                self.city_space.add_move_speed((0, -self.SCROLL_SPEED))
+                self.city_graphics.add_move_speed((0, -self.SCROLL_SPEED))
 
         # MOUSE EVENTS
         for panel in self.sub_panels:
             if panel.collide():
-                self.city_space.hovered(None, self.mode)
+                self.city_graphics.hovered(None, self.mode)
                 self.button_down = False
                 return
 
@@ -100,13 +103,13 @@ class GameWindow(GameMode):
 
             # zooming in
             if event.button == 4:
-                self.city_space.zoom(self.SCROLL_SPEED)
+                self.city_graphics.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
                 if self.construct_to_buy:
-                    lot = self.city_space.buy_construct(self.construct_to_buy)
+                    lot = self.city_space.buy_construct(self.construct_to_buy, self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
                     if lot:
                         self.simulator.integrate_construct(lot)
                         self.construct_to_buy = None
@@ -119,34 +122,35 @@ class GameWindow(GameMode):
 
             elif not self.zoning:
                 if event.button == pg.BUTTON_LEFT:
-                    self.city_space.select_lot(pg.mouse.get_pos())
+                    self.city_graphics.select_lot(pg.mouse.get_pos())
                     self.set_upgrade_panel()
 
             # zooming out
             if event.button == 5:
-                self.city_space.zoom(-self.SCROLL_SPEED)
+                self.city_graphics.zoom(-self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEMOTION or event.type or event.type == pg.MOUSEBUTTONDOWN:
             if self.button_down:
                 if self.zoning:
                     if self.simulator.can_buy(zone=self.zoning_type):
-                        lot = self.city_space.add_to_zone(self.zoning_type)
+                        lot = self.city_space.add_to_zone(
+                            self.zoning_type, self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
                         if lot:
                             self.simulator.integrate_construct(lot)
 
                 elif self.bulldozing:
-                    lot = self.city_space.bulldoze()
+                    lot = self.city_space.bulldoze(self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
                     if lot:
                         self.simulator.integrate_construct(lot, remove=True)
 
             else:
-                self.city_space.hovered(
+                self.city_graphics.hovered(
                     pg.mouse.get_pos(), self.mode)
 
     def draw(self):
         self.window.fill((0, 0, 0))
-        self.city_space.draw(self.window, mode=self.mode,
-                             construct_to_buy=self.construct_to_buy)
+        self.city_graphics.draw(mode=self.mode,
+                                construct_to_buy=self.construct_to_buy, window=self.window)
 
         for panel in self.sub_panels:
             panel.draw(self.window)
@@ -168,7 +172,7 @@ class GameWindow(GameMode):
             LotGraphics.zone_highlighting = not LotGraphics.zone_highlighting
 
     def set_upgrade_panel(self):
-        lot = self.city_space.get_clicked_lot(pg.mouse.get_pos())
+        lot = self.city_graphics.get_clicked_lot(pg.mouse.get_pos())
         if lot.construct:
             self.upgrade_panel.set_lot(lot)
             self.upgrade_panel.enable()
