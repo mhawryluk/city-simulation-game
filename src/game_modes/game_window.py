@@ -106,6 +106,7 @@ class GameWindow(GameMode):
                 self.city_graphics.zoom(self.SCROLL_SPEED)
 
         if event.type == pg.MOUSEBUTTONDOWN:
+            bought = False
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
                 if self.construct_to_buy:
@@ -114,6 +115,7 @@ class GameWindow(GameMode):
                     if lot:
                         self.simulator.integrate_construct(lot)
                         self.construct_to_buy = None
+                        bought = True
 
             if self.mode == 'road_placing':
                 if event.button == pg.BUTTON_RIGHT:
@@ -124,7 +126,8 @@ class GameWindow(GameMode):
             elif not self.zoning:
                 if event.button == pg.BUTTON_LEFT:
                     self.city_graphics.select_lot(pg.mouse.get_pos())
-                    self.set_upgrade_panel()
+                    if not self.bulldozing and not bought:
+                        self.set_upgrade_panel()
 
             # zooming out
             if event.button == 5:
