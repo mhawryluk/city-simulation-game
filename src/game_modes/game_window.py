@@ -101,8 +101,9 @@ class GameWindow(GameMode):
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
                 if self.construct_to_buy:
-                    if self.city_space.buy_construct(self.construct_to_buy):
-                        self.simulator.integrate_construct(self)
+                    lot = self.city_space.buy_construct(self.construct_to_buy)
+                    if lot:
+                        self.simulator.integrate_construct(lot)
                         self.construct_to_buy = None
 
             if self.mode == 'road_placing':
@@ -124,7 +125,9 @@ class GameWindow(GameMode):
             if self.button_down:
                 if self.zoning:
                     if self.simulator.can_buy(zone=self.zoning_type):
-                        self.city_space.add_to_zone(self.zoning_type)
+                        lot = self.city_space.add_to_zone(self.zoning_type)
+                        if lot:
+                            self.simulator.integrate_construct(lot)
 
                 elif self.bulldozing:
                     lot = self.city_space.bulldoze()
