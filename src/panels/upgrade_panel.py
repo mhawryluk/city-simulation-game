@@ -1,4 +1,4 @@
-from game_modes.panel import Panel
+from panels.panel import Panel
 from game_engine_tools import WINDOW_SIZE
 import pygame_menu as pgmen
 

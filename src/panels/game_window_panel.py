@@ -1,8 +1,8 @@
 import pygame_menu as pgmen
-from game_modes.build_mode_panel import BuildModePanel
-from game_modes.option_panel import OptionPanel
-from game_modes.stat_panel import StatPanel
-from game_modes.panel import Panel
+from panels.build_mode_panel import BuildModePanel
+from panels.option_panel import OptionPanel
+from panels.stat_panel import StatPanel
+from panels.panel import Panel
 from game_engine_tools import WINDOW_SIZE
 
 
