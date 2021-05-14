@@ -2,8 +2,10 @@ from game_modes.game_mode import GameMode
 from game_modes.game_window_panel import GameWindowPanel
 from game_modes.toggle_menu import ToggleMenu
 from game_modes.info_panel import InfoPanel
+from game_modes.upgrade_panel import UpgradePanel
 from city.city_space import CitySpace
 from city.lot import Lot
+from game_engine_tools import WINDOW_SIZE
 from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
 # from game_engine_tools.player_status_tracker import *
@@ -42,7 +44,11 @@ class GameWindow(GameMode):
             width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
         self.info_panel = InfoPanel(260, 120, (100, 0), self, self.simulator)
 
-        self.sub_panels = [self.menu_panel, self.toggle_menu, self.info_panel]
+        self.upgrade_panel = UpgradePanel(
+            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self)
+
+        self.sub_panels = [self.menu_panel, self.toggle_menu,
+                           self.info_panel, self.upgrade_panel]
 
     def update(self):
         self.simulator.simulate_cycle()
@@ -108,6 +114,7 @@ class GameWindow(GameMode):
             elif not self.zoning:
                 if event.button == pg.BUTTON_LEFT:
                     self.city_space.select_lot(pg.mouse.get_pos())
+                    self.set_upgrade_panel()
 
             # zooming out
             if event.button == 5:
@@ -151,6 +158,14 @@ class GameWindow(GameMode):
             Lot.zone_highlighting = set
         else:
             Lot.zone_highlighting = not Lot.zone_highlighting
+
+    def set_upgrade_panel(self):
+        lot = self.city_space.get_clicked_lot(pg.mouse.get_pos())
+        if lot.construct:
+            self.upgrade_panel.set_lot(lot)
+            self.upgrade_panel.enable()
+        else:
+            self.upgrade_panel.disable()
 
     def game_resume(self):
         self.zoning = False
