@@ -228,7 +228,7 @@ class ConstructType(Enum):
                 'energy_consumption': 80,
                 'water_consumption': 400,
                 'waste_production': 80,
-                'range': 20,
+                'range': 3,
                 'upgrade_cost': 10000,
                 'resident_happiness_multiplier': 1.9,
                 'images': [get_asset_path('SpecialBuildings', 'firestation.png')]
@@ -249,6 +249,7 @@ class ConstructType(Enum):
                 'energy_consumption': 500,
                 'water_consumption': 500,
                 'waste_production': 500,
+                'range': 3,
                 'city_income_multiplier': 1.01,
                 'resident_happiness_multiplier': 1.5,
                 'images': [get_asset_path('SpecialBuildings', 'school0.png')]

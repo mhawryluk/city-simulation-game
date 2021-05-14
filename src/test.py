@@ -4,5 +4,5 @@ def test(game_window):
         for row in game_window.city_space.lots:
             for lot in row:
                 print(lot.show(), end=' ')
-            print()
+            print('---')
     return tst

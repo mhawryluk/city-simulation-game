@@ -31,7 +31,7 @@ class SimulationEngine:
     def integrate_construct(self, lot, remove=False):
         construct = lot.construct
         if not construct is None:
-            #print(construct.get('name', None), construct.get('range', 0))
+            # print(construct.get('name', None), construct.get('range', 0))
             construct_range = int(construct.get('range', 0))
             pollution = float(construct.get('pollution', 0))
             happiness_multiplier = float(construct.get(
@@ -43,12 +43,12 @@ class SimulationEngine:
                 if lot in row
             ]
             row, col = ind[0]
-
+            # print('-->', ind)
             size = len(self.city_space.lots)
             for r in range(row-construct_range, row+construct_range+1):
                 for c in range(col-construct_range, col+construct_range+1):
                     if r >= 0 and row < size and c >= 0 and c < size and (r != row or c != col):
-                        print(r, c)
+                        # print(r, c)
                         affected_lot = self.city_space.lots[r][c]
                         affected_lot.affected_by.add(construct)
                         if remove:
