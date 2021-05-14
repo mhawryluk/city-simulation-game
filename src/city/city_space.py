@@ -3,6 +3,7 @@ from city.lot_type import LotType
 from city.city_images import CityImages
 from city.road_system import RoadSystem
 from city_graphics.lot_graphics import LotGraphics
+from city_graphics.road_graphics import RoadGraphics
 from city import ROAD_WIDTH_RATIO
 import pygame as pg
 
@@ -14,6 +15,7 @@ class CitySpace:
         self.city_images = CityImages()
         LotGraphics.city_images = self.city_images
         LotGraphics.map_dimensions = (width, height)
+        RoadGraphics.map_dimensions = (width, height)
         Lot.window_dimensions = (window_width, window_height)
         self.window_height = window_height
         self.window_width = window_width
@@ -125,7 +127,8 @@ class CitySpace:
             window.blit(alpha, (x, y))
 
         # roads
-        self.road_system.draw((self.pov_x, self.pov_y), self.scale, window)
+        RoadGraphics.draw(self.road_system,
+                          (self.pov_x, self.pov_y), self.scale)
 
         # constructs
         for row in self.lots:
@@ -139,8 +142,8 @@ class CitySpace:
             alpha.set_alpha(128)
             alpha.fill((192, 192, 192))
             window.blit(alpha, (0, 0))
-            self.road_system.highlight_roads(
-                (self.pov_x, self.pov_y), self.scale, window)
+            RoadGraphics.highlight_roads(
+                self.road_system, (self.pov_x, self.pov_y), self.scale)
 
     def add_move_speed(self, move_speed):
         self.move_speed = (

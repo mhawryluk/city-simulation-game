@@ -6,6 +6,7 @@ from game_modes.upgrade_panel import UpgradePanel
 from city.city_space import CitySpace
 from city.lot import Lot
 from city_graphics.lot_graphics import LotGraphics
+from city_graphics.road_graphics import RoadGraphics
 from game_engine_tools import WINDOW_SIZE
 from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
@@ -23,6 +24,7 @@ class GameWindow(GameMode):
         self.SCROLL_SPEED = 15
 
         LotGraphics.window = window
+        RoadGraphics.window = window
 
         # current state variables
         self.change_mode = False
