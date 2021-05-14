@@ -195,6 +195,7 @@ class CitySpace:
         clicked_lot = self.get_clicked_lot(pg.mouse.get_pos())
         if clicked_lot.can_place():
             clicked_lot.set_construct(construct)
+            
             return True
         return False
 
