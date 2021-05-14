@@ -17,15 +17,15 @@ def fire(lot):
 
 
 def security(lot):
-    pass
+    pass # to be implemented
 
 
 def resource_management(lot):
-    pass
+    pass # to be implemented
 
 
 def human_resource_management(lot):
-    pass
+    pass # to be implemented
 
 
 SIMULATIONS = [
