@@ -1,16 +1,16 @@
-def fire():
+def fire(lot):
     pass
 
 
-def security():
+def security(lot):
     pass
 
 
-def resource_management():
+def resource_management(lot):
     pass
 
 
-def human_resource_management():
+def human_resource_management(lot):
     pass
 
 

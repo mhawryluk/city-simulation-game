@@ -15,7 +15,10 @@ class SimulationEngine:
                 self.integrate_construct(lot)
 
     def simulate_cycle(self):
-        pass
+        for row in self.city_space.lots:
+            for lot in row:
+                for simulation in SIMULATIONS:
+                    simulation(lot)
 
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct
