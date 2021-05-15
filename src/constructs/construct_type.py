@@ -146,7 +146,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 0.35,
                 'pollution': 0.6,
                 'temperature_raise': 4,
-                'images': [get_asset_path('Factory', 'factory.png')]
+                'images': [get_asset_path('Factory', 'factory-s-1.png'), get_asset_path('Factory', 'factory-s-2.png')]
             }
         }
     }
