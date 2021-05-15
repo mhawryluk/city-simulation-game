@@ -23,9 +23,9 @@ class ConstructType(Enum):
                 'name': 'small house',
                 'capacity': 3,  # in people
                 'base_resident_happiness': 0.45,  # in percentage
-                'energy_change': -3,  # in units (UNIFY)
+                'energy_change': -3,  # in units 
                 'water_consumption': 3,  # in units (UNIFY)
-                'waste_change': 3,  # in units (UNIFY)
+                'waste_change': 3,  # in units 
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
                 'images': [get_asset_path('House', 'H01.png'), get_asset_path('House', 'H02.png'), get_asset_path('House', 'H03.png')]
             },

@@ -6,22 +6,20 @@ from .simulation_tools import SIMULATIONS, calculate_happyness
 
 class SimulationEngine:
     def __init__(self, city_space, save_data):
-        world_state = save_data.get('world_state', {})
-        self.data = world_state.get('world', {})
-        self.player_status = PlayerStatus(world_state.get('player', None))
+        self.player_status = PlayerStatus(save_data.get('world_state', None))
         self.city_space = city_space
         for row in self.city_space.lots:
             for lot in row:
                 self.integrate_construct(lot)
 
     def simulate_cycle(self):
-        self.data['resident_happyness'] = 1
+        self.player_status.data['resident_happyness'] = 1
         for row in self.city_space.lots:
             for lot in row:
                 for simulation in SIMULATIONS:
                     simulation(lot, self.player_status)
                 # construct_specific_simulation(lot, self.player_status)
-                self.data['resident_happyness'] *= calculate_happyness(lot)
+                self.player_status.data['resident_happyness'] *= calculate_happyness(lot)
 
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct
@@ -82,14 +80,7 @@ class SimulationEngine:
         pass
 
     def get_data(self, key):
-        data = self.data.get(key, None)
-        if data is None:
-            data = self.player_status.data.get(key, None)
-        return data
+        return self.player_status.data.get(key, None)
 
     def compress2save(self):
-        compressed_data = {
-            'world': self.data,
-            'player': self.player_status.compress2save()
-        }
-        return compressed_data
+        return self.player_status.compress2save()
