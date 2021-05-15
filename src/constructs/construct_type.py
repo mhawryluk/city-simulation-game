@@ -23,9 +23,9 @@ class ConstructType(Enum):
                 'name': 'small house',
                 'capacity': 3,  # in people
                 'base_resident_happiness': 0.45,  # in percentage
-                'energy_consumption': 3,  # in units (UNIFY)
+                'energy_change': -3,  # in units (UNIFY)
                 'water_consumption': 3,  # in units (UNIFY)
-                'waste_production': 3,  # in units (UNIFY)
+                'waste_change': 3,  # in units (UNIFY)
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
                 'images': [get_asset_path('House', 'H01.png'), get_asset_path('House', 'H02.png'), get_asset_path('House', 'H03.png')]
             },
@@ -33,9 +33,9 @@ class ConstructType(Enum):
                 'name': 'family house',
                 'capacity': 5,
                 'base_resident_happiness': 0.55,
-                'energy_consumption': 6,
+                'energy_change': -6,
                 'water_consumption': 5,
-                'waste_production': 5,
+                'waste_change': 5,
                 'taxation': 3000,
                 'upgrade_cost': 800,
                 'images': [get_asset_path('House', 'H05.png')]
@@ -44,9 +44,9 @@ class ConstructType(Enum):
                 'name': 'large residence',
                 'capacity': 7,
                 'base_resident_happiness': 0.65,
-                'energy_consumption': 10,
+                'energy_change': -10,
                 'water_consumption': 10,
-                'waste_production': 8,
+                'waste_change': 8,
                 'taxation': 4000,
                 'upgrade_cost': 1000,
                 'images': [get_asset_path('House', 'H04.png'), get_asset_path('House', 'H06.png')]
@@ -63,9 +63,9 @@ class ConstructType(Enum):
                 'name': 'regular block',
                 'capacity': 90,  # in people
                 'base_resident_happiness': 0.2,  # in percentage
-                'energy_consumption': 99,  # in units
+                'energy_change': -99,  # in units
                 'water_consumption': 90,  # in units
-                'waste_production': 180,  # in units
+                'waste_change': 180,  # in units
                 'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
                 'temperature_raise': 2,
                 'images': [get_asset_path('House', 'block0.png'), get_asset_path('House', 'block1.png')]
@@ -74,9 +74,9 @@ class ConstructType(Enum):
                 'name': 'big block',
                 'capacity': 200,
                 'base_resident_happiness': 0.3,
-                'energy_consumption': 230,
+                'energy_change': -230,
                 'water_consumption': 200,
-                'waste_production': 400,
+                'waste_change': 400,
                 'taxation': 600,
                 'upgrade_cost': 10000,
                 'temperature_raise': 2,
@@ -86,9 +86,9 @@ class ConstructType(Enum):
                 'name': 'high end block',
                 'capacity': 200,
                 'base_resident_happiness': 0.5,
-                'energy_consumption': 250,
+                'energy_change': -250,
                 'water_consumption': 210,
-                'waste_production': 400,
+                'waste_change': 400,
                 'taxation': 1000,
                 'upgrade_cost': 10000,
                 'temperature_raise': 3,
@@ -107,9 +107,9 @@ class ConstructType(Enum):
                 'employees': 3,
                 'income': 1000,
                 'products': 2,
-                'energy_consumption': 10,
+                'energy_change': -10,
                 'water_consumption': 5,
-                'waste_production': 20,
+                'waste_change': 20,
                 'resident_happiness_multiplier': 1.1,
                 'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'), get_asset_path('Shop', 'SH2.png')]
             },
@@ -119,9 +119,9 @@ class ConstructType(Enum):
                 'employees': 10,
                 'income': 2000,
                 'products': 5,
-                'energy_consumption': 20,
+                'energy_change': -20,
                 'water_consumption': 10,
-                'waste_production': 40,
+                'waste_change': 40,
                 'resident_happiness_multiplier': 1.2,
                 'upgrade_cost': 2000,
                 'images': [get_asset_path('Shop', 'SH3.png')]
@@ -139,9 +139,9 @@ class ConstructType(Enum):
                 'employees': 50,
                 'income': -6000,
                 'products': 15,
-                'energy_consumption': 100,
+                'energy_change': -100,
                 'water_consumption': 20,
-                'waste_production': 70,
+                'waste_change': 70,
                 'resident_happiness_multiplier': 0.35,
                 'pollution': 0.6,
                 'temperature_raise': 4,
@@ -160,9 +160,9 @@ class ConstructType(Enum):
                 'description': 'Small clinic.',
                 'patients': 10,
                 'income': -1000,
-                'energy_consumption': 50,
+                'energy_change': -50,
                 'water_consumption': 30,
-                'waste_production': 100,
+                'waste_change': 100,
                 'resident_happiness_multiplier': 1.6,
                 'images': [get_asset_path('SpecialBuildings', 'hospital.png')]
             },
@@ -171,9 +171,9 @@ class ConstructType(Enum):
                 'description': 'Small hospital. Can house more people.',
                 'patients': 200,
                 'income': -10000,
-                'energy_consumption': 500,
+                'energy_change': -500,
                 'water_consumption': 300,
-                'waste_production': 1000,
+                'waste_change': 1000,
                 'resident_happiness_multiplier': 1.9,
                 'upgrade_cost': 10000,
                 'image': [get_asset_path('SpecialBuildings', 'hospital.png')]
@@ -191,9 +191,9 @@ class ConstructType(Enum):
                 'description': 'Smaller scale police outpost.',
                 'policemen': 5,
                 'income': 500,
-                'energy_consumption': 10,
+                'energy_change': -10,
                 'water_consumption': 5,
-                'waste_production': 5,
+                'waste_change': 5,
                 'resident_happiness_multiplier': 1.7,
                 'fire_protection': 1,
                 'security': 3,
@@ -204,9 +204,9 @@ class ConstructType(Enum):
                 'description': 'Local police headquarters.',
                 'policemen': 20,
                 'income': 1000,
-                'energy_consumption': 50,
+                'energy_change': -50,
                 'water_consumption': 20,
-                'waste_production': 20,
+                'waste_change': 20,
                 'resident_happiness_multiplier': 1.8,
                 'upgrade_cost': 10000,
                 'fire_protection': 2,
@@ -224,9 +224,9 @@ class ConstructType(Enum):
     #             'employees': 50,
     #             'inmates': 200,
     #             'income': -5000,
-    #             'energy_consumption': 150,
+    #             'energy_change': -150,
     #             'water_consumption': 250,
-    #             'waste_production': 200,
+    #             'waste_change': 200,
     #             'resident_happiness_multiplier': 1.7
     #         }
     #     }
@@ -241,9 +241,9 @@ class ConstructType(Enum):
                 'description': 'A fire station. Keeps people hape that tere is a way for their house to be saved from nurning down.',
                 'firemen': 20,
                 'income': -2000,
-                'energy_consumption': 80,
+                'energy_change': -80,
                 'water_consumption': 400,
-                'waste_production': 80,
+                'waste_change': 80,
                 'range': 3,
                 'upgrade_cost': 10000,
                 'resident_happiness_multiplier': 1.9,
@@ -265,9 +265,9 @@ class ConstructType(Enum):
                 'teachers': 30,
                 'students': 4000,
                 'income': -1000,
-                'energy_consumption': 500,
+                'energy_change': -500,
                 'water_consumption': 500,
-                'waste_production': 500,
+                'waste_change': 500,
                 'range': 3,
                 'city_income_multiplier': 1.01,
                 'resident_happiness_multiplier': 1.5,
@@ -286,9 +286,9 @@ class ConstructType(Enum):
                 'teachers': 500,
                 'students': 40000,
                 'income': -10000,
-                'energy_consumption': 1000,
+                'energy_change': -1000,
                 'water_consumption': 1000,
-                'waste_production': 1000,
+                'waste_change': 1000,
                 'city_income_multiplier': 1.05,
                 'resident_happiness_multiplier': 1.9,
                 'temperature_raise': 2,
@@ -306,9 +306,9 @@ class ConstructType(Enum):
     #             'description': 'A multi-themed museum.',
     #             'employees': 50,
     #             'income': 10000,
-    #             'energy_consumption': 100,
+    #             'energy_change': -100,
     #             'water_consumption': 50,
-    #             'waste_production': 60,
+    #             'waste_change': 60,
     #             'resident_happiness_multiplier': 1.7,
     #             'images': []
     #         }
@@ -324,9 +324,9 @@ class ConstructType(Enum):
                 'description': 'A perfect place for people to relax.',
                 'gardeners': 2,
                 'income': -200,
-                'energy_consumption': 2,
+                'energy_change': -2,
                 'water_consumption': 100,
-                'waste_production': 50,
+                'waste_change': 50,
                 'resident_happiness_multiplier': 1.5,
                 'images': [get_asset_path('SpecialBuildings', 'park0.png')]
             },
@@ -335,9 +335,9 @@ class ConstructType(Enum):
                 'description': 'Perfect place to rela and walk your pupils <3',
                 'gardeners': 5,
                 'income': -200,
-                'energy_consumption': 5,
+                'energy_change': -5,
                 'water_consumption': 110,
-                'waste_production': 60,
+                'waste_change': 60,
                 'resident_happiness_multiplier': 2,
                 'upgrade_cost': 8000,
                 'temperature_raise': 2,
@@ -373,9 +373,9 @@ class ConstructType(Enum):
     #             'employees': 100,
     #             'customers': 1000,
     #             'income': 50000,
-    #             'energy_consumption': 5000,
+    #             'energy_change': -5000,
     #             'water_consumption': 1000,
-    #             'waste_production': ,
+    #             'waste_change': ,
     #             'resident_happiness_multiplier': 2,
     #             'images': []
     #         },
@@ -385,9 +385,9 @@ class ConstructType(Enum):
     #             'employees': 100,
     #             'customers': 1000,
     #             'income': 100000,
-    #             'energy_consumption': 5000,
+    #             'energy_change': -5000,
     #             'water_consumption': 10000,
-    #             'waste_production': 1200,
+    #             'waste_change': 1200,
     #             'resident_happiness_multiplier': 3,
     #             'upgrade_cost': 100000,
     #             'images': []
@@ -405,9 +405,10 @@ class ConstructType(Enum):
                 'description': 'Building to store the waste.',
                 'employees': 10,
                 'income': -1000,
-                'waste_consumption': 500,
+                'waste_change': -500,
                 'resident_happiness_multiplier': 0.2,
                 'pollution': 0.9,
+                'fire_protection': -1,
                 'temperature_raise': 6,
                 'images': [get_asset_path('SpecialBuildings', 'landfill.png')]
             },
@@ -416,8 +417,8 @@ class ConstructType(Enum):
                 'description': 'Disposes of the waste and turns it into power.',
                 'employees': [50],
                 'income': -5000,
-                'energy_production': 1000,
-                'waste_consumption': 1000,
+                'energy_change': 1000,
+                'waste_change': -1000,
                 'resident_happiness_multiplier': 1.0,
                 'pollution': 0.2,
                 'fire_protection': -1,
@@ -437,7 +438,7 @@ class ConstructType(Enum):
                 'description': 'A power plant which uses coal and converts heat to electrical power.',
                 'maintenance': 50,
                 'income': -1000,
-                'energy_production': 2000,
+                'energy_change': 2000,
                 'resident_happiness_multiplier': 0.5,
                 'images': [get_asset_path('SpecialBuildings', 'power_plant.png')]
             }#,
@@ -472,7 +473,7 @@ class ConstructType(Enum):
                 'name': 'water pump',
                 'description': 'Increases water amount in the storage and provides water for all residents in range.',
                 'income': -1000,
-                'energy_consumption': 100,
+                'energy_change': -100,
                 'water_productioin': 1000,
                 'resident_happiness_multiplier': 1.1,
                 'fire_protection': 1,
@@ -490,9 +491,9 @@ class ConstructType(Enum):
     #             'description': ,
     #             'patients': ,
     #             'income': ,
-    #             'energy_consumption': ,
+    #             'energy_change': -,
     #             'water_consumption': ,
-    #             'waste_production': ,
+    #             'waste_change': ,
     #             'resident_happiness_multiplier': ,
     #             'images': [get_asset_path('SpecialBuildings', 's.png')]
     #         }
@@ -508,14 +509,14 @@ class ConstructType(Enum):
     #             'description': 'Station destined to process sewage produced by cisty buildings.',
     #             'pollution_level': 0.75,
     #             'range': 5,
-    #             'energy_consumption': 1
+    #             'energy_change': -1
     #         },
     #         1: {
     #             'name': 'industrial',
     #             'description': 'Expanded sewage treatement station with double the processing power of the regular variant.',
     #             'pollution_level': 0.75,
     #             'range': 10,
-    #             'energy_consumption': 2,
+    #             'energy_change': -2,
     #             'upgrade_cost': 10000,
     #             'images': []
     #         },
@@ -524,7 +525,7 @@ class ConstructType(Enum):
     #             'description': 'More economical version of the sewage treatment station. Decreases pollution by one third.',
     #             'pollution_level': 0.5,
     #             'range': 10,
-    #             'energy_consumption': 4,
+    #             'energy_change': -4,
     #             'upgrade_cost': 50000,
     #             'images': []
     #         }

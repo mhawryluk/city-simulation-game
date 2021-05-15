@@ -2,7 +2,7 @@ from random import randint
 from constructs.construct_type import ConstructType
 
 
-def fire(lot):
+def fire(lot, player_status):
     if lot.construct != None:
         fire_protection = 0
         threshold = lot.construct.heat // HEAT_THRESHOLD
@@ -20,7 +20,7 @@ def fire(lot):
         lot.construct.heat = max(MIN_HEAT, min(MAX_HEAT, lot.construct.heat))
 
 
-def security(lot):
+def security(lot, player_status):
     if lot.construct != None:
         security = 0
         coefficient = lot.construct.get('burglary_appeal', 1)
@@ -32,8 +32,19 @@ def security(lot):
         lot.construct.crime_level = max(MIN_CRIME, min(MAX_CRIME, lot.construct.crime_level))
 
 
-def waste(lot):
-    pass
+def energy(lot, player_status):
+    if lot.construct != None:
+        player_status.data['power'] += lot.construct.get('energy_change', 0)
+
+
+def waste(lot, player_status):
+    if lot.construct != None:
+        player_status.data['waste'] += lot.construct.get('waste_change', 0)
+
+
+def water(lot, player_status):
+    if lot.construct != None:
+        player_status.data['water'] += lot.construct.get('water_change', 0)
 
 
 def construct_specific_simulation(lot, player_status):
@@ -57,7 +68,10 @@ def calculate_happyness(lot):
 
 SIMULATIONS = [
     fire,
-    security
+    security,
+    energy,
+    waste, 
+    water
 ]
 
 
