@@ -1,8 +1,12 @@
-from random import randint
+from random import randint, random
 from constructs.construct_type import ConstructType
 
 
 def set_between(value, min_value, max_value):
+    if max_value is None:
+        max_value = value
+    if min_value is None:
+        min_value = value
     return max(min_value, min(max_value, value))
 
 
@@ -65,6 +69,33 @@ def economy_change(lot, player_status):
         player_status.data['funds'] = set_between(player_status.data['funds'], MIN_MONEY, MAX_MONEY)
 
 
+def health(lot, player_status):
+    if lot.construct != None:
+        player_status.data['health'] += lot.construct.people_involved() * player_status.density()
+        player_status.data['health'] -= lot.construct.get('patients', 0) * HEALING_FACTOR
+        player_status.data['health'] = set_between(player_status.data['health'], MIN_HEALTH, None)
+        if random() < PANDEMIC_CHANCE * player_status.density():
+            for _ in range(PANDEMIC_SEVERITY):
+                lot.constunct.current_event.append('pandemic')
+            player_status.data['health'] *= 1 + PANDEMIC_COEF
+
+
+def produce(lot, player_status):
+    pass
+
+
+def population(lot, player_status):
+    pass
+
+
+def employment(lot, player_status):
+    pass
+
+
+def demand(lot, player_status):
+    pass
+
+
 def construct_specific_simulation(lot, player_status):
     if lot.construct != None:
         # sims common among all constructs
@@ -83,6 +114,8 @@ def update_events(lot):
             lot.current_events.append('burning')
         if lot.construct.crime_level > CRIME_THRESHOLD:
             lot.current_events.append('burglary')
+
+        lot.current_events.remove('pandemic')
 
 
 def calculate_happyness(lot):
@@ -145,6 +178,13 @@ HAPPYNESS_FOR_FULL_TAXES = 2
 MIN_MONEY = 0
 MAX_MONEY = 1e9
 
+
+# health constatnts
+HEALING_FACTOR = 5
+MIN_HEALTH = 0
+PANDEMIC_CHANCE = 0.1
+PANDEMIC_COEF = 0.01
+PANDEMIC_SEVERITY = 3
 
 # events name list
 EVENTS = [
