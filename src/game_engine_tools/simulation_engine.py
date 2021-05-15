@@ -1,7 +1,7 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
-from .simulation_tools import SIMULATIONS
+from .simulation_tools import SIMULATIONS, calculate_happyness
 
 
 class SimulationEngine:
@@ -15,10 +15,12 @@ class SimulationEngine:
                 self.integrate_construct(lot)
 
     def simulate_cycle(self):
+        self.data['resident_happyness'] = 1
         for row in self.city_space.lots:
             for lot in row:
                 for simulation in SIMULATIONS:
                     simulation(lot)
+                self.data['resident_happyness'] *= calculate_happyness(lot)
 
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct
@@ -76,7 +78,10 @@ class SimulationEngine:
         pass
 
     def get_data(self, key):
-        return self.player_status.data.get(key, -1)
+        data = self.data.get(key, None)
+        if data is None:
+            data = self.player_status.data.get(key, None)
+        return data
 
     def compress2save(self):
         compressed_data = {

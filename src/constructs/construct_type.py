@@ -66,6 +66,7 @@ class ConstructType(Enum):
                 'water_consumption': 90,  # in units
                 'waste_production': 180,  # in units
                 'taxation': 420,  # in dollars; per person; multiply by happiness+1 to get actual income
+                'temperature_raise': 2,
                 'images': [get_asset_path('House', 'block0.png'), get_asset_path('House', 'block1.png')]
             },
             1: {
@@ -77,6 +78,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 600,
                 'upgrade_cost': 10000,
+                'temperature_raise': 2,
                 'images': [get_asset_path('House', 'block3.png')]
             },
             2: {
@@ -88,6 +90,7 @@ class ConstructType(Enum):
                 'waste_production': 400,
                 'taxation': 1000,
                 'upgrade_cost': 10000,
+                'temperature_raise': 3,
                 'images': [get_asset_path('House', 'block4.png')]
             }
         }
@@ -138,6 +141,7 @@ class ConstructType(Enum):
                 'waste_production': 70,
                 'resident_happiness_multiplier': 0.35,
                 'pollution': 0.6,
+                'temperature_raise': 4,
                 'images': [get_asset_path('Factory', 'factory.png')]
             }
         }
@@ -186,6 +190,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_production': 5,
                 'resident_happiness_multiplier': 1.7,
+                'fire_protection': 1,
                 'images': [get_asset_path('SpecialBuildings', 'police0.png')]
             },
             1: {
@@ -198,6 +203,7 @@ class ConstructType(Enum):
                 'waste_production': 20,
                 'resident_happiness_multiplier': 1.8,
                 'upgrade_cost': 10000,
+                'fire_protection': 2,
                 'images': [get_asset_path('SpecialBuildings', 'police1.png')]
             }
         }
@@ -233,6 +239,8 @@ class ConstructType(Enum):
                 'range': 3,
                 'upgrade_cost': 10000,
                 'resident_happiness_multiplier': 1.9,
+                'fire_protection': 5,
+                'temperature_raise': 0,
                 'images': [get_asset_path('SpecialBuildings', 'firestation.png')]
             }
         }
@@ -273,6 +281,7 @@ class ConstructType(Enum):
                 'waste_production': 1000,
                 'city_income_multiplier': 1.05,
                 'resident_happiness_multiplier': 1.9,
+                'temperature_raise': 2,
                 'images': [get_asset_path('SpecialBuildings', 'school1.png')]
             }
         }
@@ -320,6 +329,7 @@ class ConstructType(Enum):
                 'waste_production': 60,
                 'resident_happiness_multiplier': 2,
                 'upgrade_cost': 8000,
+                'temperature_raise': 2,
                 'images': [get_asset_path('SpecialBuildings', 'park1.png')]
             }
         }
@@ -332,6 +342,7 @@ class ConstructType(Enum):
                 'name': 'statue',
                 'description': 'Beauftiful statue - truly a sight to behold.',
                 'resident_happiness_multiplier': 1.6,
+                'temperature_raise': 0,
                 'images': [
                     get_asset_path('SpecialBuildings', 'statue0.png'),
                     get_asset_path('SpecialBuildings', 'statue1.png'),
@@ -385,9 +396,10 @@ class ConstructType(Enum):
                 'waste_consumption': 500,
                 'resident_happiness_multiplier': 0.2,
                 'pollution': 0.9,
+                'temperature_raise': 6,
                 'images': [get_asset_path('SpecialBuildings', 'landfill.png')]
             },
-            0: {
+            1: {
                 'name': 'waste processing station',
                 'description': 'Disposes of the waste and turns it into power.',
                 'employees': [50],
@@ -396,47 +408,49 @@ class ConstructType(Enum):
                 'waste_consumption': 1000,
                 'resident_happiness_multiplier': 1.0,
                 'pollution': 0.2,
+                'fire_protection': -1,
                 'upgrade_cost': 50000,
+                'temperature_raise': 3,
                 'images': [get_asset_path('SpecialBuildings', 'wasteprocess.png')]
             }
         }
     }
-    # POWER_PLANT = {
-    #     'max_level': 2,
-    #     'cost': 5000,
-    #     'constructor': CoalPowerPlant,
-    #     'types': {
-    #         0: {
-    #             'name': 'coal power plant',
-    #             'description': 'A power plant which uses coal and converts heat to electrical power.',
-    #             'maintenance': 50,
-    #             'income': -1000,
-    #             'energy_production': 1000,
-    #             'resident_happiness_multiplier': 0.5,
-    #             'images': []
-    #         },
-    #         1: {
-    #             'name': 'sun power plant',
-    #             'description': "Much more economical power plant with increased energy production - uses sunlight to create electricity.",
-    #             'maintenance': 50,
-    #             'income': -10000,
-    #             'energy_production': 8000,
-    #             'resident_happiness_multiplier': 1.5,
-    #             'upgrade_cost': 100000,
-    #             'images': []
-    #         },
-    #         2: {
-    #             'name': 'nuclear power plant',
-    #             'description': "High tech, state of the art facility. Produces large amounts of energy but reduces residents happiness and risks critical failure.",
-    #             'income': -100000,
-    #             'maintenance': 100,
-    #             'energy_production': 100000,
-    #             'upgrade_cost': 1000000,
-    #             'resident_happiness_multiplier': 0.8,
-    #             'images': []
-    #         }
-    #     }
-    # }
+    POWER_PLANT = {
+        'max_level': 2,
+        'cost': 5000,
+        'constructor': CoalPowerPlant,
+        'types': {
+            0: {
+                'name': 'coal power plant',
+                'description': 'A power plant which uses coal and converts heat to electrical power.',
+                'maintenance': 50,
+                'income': -1000,
+                'energy_production': 1000,
+                'resident_happiness_multiplier': 0.5,
+                'images': [get_asset_path('SpecialBuildings', 'power_plant.png')]
+            }#,
+            # 1: {
+            #     'name': 'sun power plant',
+            #     'description': "Much more economical power plant with increased energy production - uses sunlight to create electricity.",
+            #     'maintenance': 50,
+            #     'income': -10000,
+            #     'energy_production': 8000,
+            #     'resident_happiness_multiplier': 1.5,
+            #     'upgrade_cost': 100000,
+            #     'images': []
+            # },
+            # 2: {
+            #     'name': 'nuclear power plant',
+            #     'description': "High tech, state of the art facility. Produces large amounts of energy but reduces residents happiness and risks critical failure.",
+            #     'income': -100000,
+            #     'maintenance': 100,
+            #     'energy_production': 100000,
+            #     'upgrade_cost': 1000000,
+            #     'resident_happiness_multiplier': 0.8,
+            #     'images': []
+            # }
+        }
+    }
     WATER_PUMP = {
         'max_level': 2,
         'cost': 1000,
@@ -448,6 +462,8 @@ class ConstructType(Enum):
                 'energy_consumption': 100,
                 'water_productioin': 1000,
                 'resident_happiness_multiplier': 1.1,
+                'fire_protection': 1,
+                'temperature_raise': 0,
                 'images': [get_asset_path('SpecialBuildings', 'waterpipe.png')]
             }
         }

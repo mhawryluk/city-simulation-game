@@ -32,11 +32,18 @@ def human_resource_management(lot):
 
 
 def gather_taxes(lot):
-    pass
+    pass  # to be implemented
 
 
 def update_events(lot):
-    pass
+    if lot.construct != None:
+        lot.current_events = []
+        if lot.construct.heat > FIRE_THRESHOLD:
+            lot.current_events.append('burning')
+
+
+def calculate_happyness(lot):
+    pass # to be implemented
 
 
 SIMULATIONS = [
@@ -46,9 +53,17 @@ SIMULATIONS = [
     human_resource_management
 ]
 
+
 # fire related constants
 HEAT_THRESHOLD = 20
 HEAT_EXPANSION = 3
 MAX_HEAT = 60
 MIN_HEAT = -5
 DEFAULT_TEMPERATURE_RAISE = 2
+FIRE_THRESHOLD = 50
+
+
+# events name list
+EVENTS = [
+    'burning'
+]
