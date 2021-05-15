@@ -60,6 +60,7 @@ def economy_change(lot, player_status):
         taxes_multiplier = min(lot.construct.happiness / HAPPYNESS_FOR_FULL_TAXES, 1) if not lot.construct.happiness is None else 1
         money_change *= (1 + player_status.data['taxation']) * taxes_multiplier
         money_change += lot.construct.get('income', 0)
+        # print(money_change)
         player_status.data['funds'] += int(money_change)
         player_status.data['funds'] = set_between(player_status.data['funds'], MIN_MONEY, MAX_MONEY)
 
@@ -94,6 +95,7 @@ SIMULATIONS = [
     energy,
     waste, 
     water,
+    economy_change,
     construct_specific_simulation
 ]
 
