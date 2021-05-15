@@ -97,6 +97,8 @@ class GameWindow(GameMode):
                 self.button_down = False
                 return
 
+        ##### only if mouse isn't above another panel #####
+
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = False
@@ -107,6 +109,9 @@ class GameWindow(GameMode):
 
         if event.type == pg.MOUSEBUTTONDOWN:
             bought = False
+            self.menu_panel.option_panel.disable()
+            self.menu_panel.stat_panel.disable()
+
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
                 if self.construct_to_buy:

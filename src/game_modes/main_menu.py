@@ -1,6 +1,6 @@
 from game_modes.game_mode import GameMode
 from game_engine_tools.save_manager import SaveManager
-from game_engine_tools import load_asset
+from game_engine_tools import load_asset, volume_up, volume_down
 import pygame as pg
 import pygame_menu as pgmen
 from random import choice
@@ -92,7 +92,8 @@ class MainMenu(GameMode):
     def make_settings_menu(self, width, height):
         self.settings_menu = pgmen.Menu(title='Settings', width=width, height=height, theme=self.get_theme(),
                                         mouse_enabled=True, mouse_motion_selection=True)
-
+        self.settings_menu.add.button('volume up', volume_up)
+        self.settings_menu.add.button('volume down', volume_down)
         self.settings_menu.add.button('Back', self.change_settings_menu_status)
 
     def create_warning_menu(self, message, if_yes, if_no, parent_width, parent_height):
