@@ -23,9 +23,9 @@ class ConstructType(Enum):
                 'name': 'small house',
                 'capacity': 3,  # in people
                 'base_resident_happiness': 0.45,  # in percentage
-                'energy_consumption': 3,  # in units
-                'water_consumption': 3,  # in units
-                'waste_production': 3,  # in units
+                'energy_consumption': 3,  # in units (UNIFY)
+                'water_consumption': 3,  # in units (UNIFY)
+                'waste_production': 3,  # in units (UNIFY)
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
                 'images': [get_asset_path('House', 'H01.png'), get_asset_path('House', 'H02.png'), get_asset_path('House', 'H03.png')]
             },
@@ -437,7 +437,7 @@ class ConstructType(Enum):
                 'description': 'A power plant which uses coal and converts heat to electrical power.',
                 'maintenance': 50,
                 'income': -1000,
-                'energy_production': 1000,
+                'energy_production': 2000,
                 'resident_happiness_multiplier': 0.5,
                 'images': [get_asset_path('SpecialBuildings', 'power_plant.png')]
             }#,

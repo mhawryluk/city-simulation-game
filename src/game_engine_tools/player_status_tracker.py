@@ -3,7 +3,12 @@ class PlayerStatus:
         self.data = save_source
         if save_source is None:
             self.data = {
-                'funds': 10000
+                'funds': 10000,
+                'resident_happyness': 1,
+                'power': 0,
+                'water': 0,
+                'sewage': 0,
+                'pollution': 0
             }
 
     def compress2save(self):

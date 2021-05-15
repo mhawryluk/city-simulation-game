@@ -76,11 +76,6 @@ MAX_CRIME = 50
 CRIME_THRESHOLD = 40
 
 
-SPECIFIC_SIMULATIONS = {
-
-}
-
-
 # events name list
 EVENTS = [
     'burning'
