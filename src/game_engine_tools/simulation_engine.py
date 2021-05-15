@@ -6,7 +6,7 @@ from .simulation_tools import SIMULATIONS, calculate_happyness
 
 class SimulationEngine:
 
-    FPS_PER_CYCLE = 60 * 3
+    FPS_PER_CYCLE = 60 * 2.5
 
     def __init__(self, city_space, save_data):
         self.player_status = PlayerStatus(save_data.get('world_state', None))
