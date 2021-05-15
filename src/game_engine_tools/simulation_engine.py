@@ -7,7 +7,7 @@ from .simulation_tools import SIMULATIONS, calculate_happyness
 class SimulationEngine:
     def __init__(self, city_space, save_data):
         world_state = save_data.get('world_state', {})
-        self.data = world_state.get('world', None)
+        self.data = world_state.get('world', {})
         self.player_status = PlayerStatus(world_state.get('player', None))
         self.city_space = city_space
         for row in self.city_space.lots:

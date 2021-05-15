@@ -43,7 +43,7 @@ def update_events(lot):
 
 
 def calculate_happyness(lot):
-    pass # to be implemented
+    return 1
 
 
 SIMULATIONS = [

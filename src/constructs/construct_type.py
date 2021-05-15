@@ -418,8 +418,7 @@ class ConstructType(Enum):
     POWER_PLANT = {
         'max_level': 2,
         'cost': 5000,
-        'constructor': CoalPowerPlant,
-        'types': {
+        'level': {
             0: {
                 'name': 'coal power plant',
                 'description': 'A power plant which uses coal and converts heat to electrical power.',

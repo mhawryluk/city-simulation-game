@@ -57,7 +57,7 @@ class CitySpaceGraphics:
             alpha = pg.Surface((scale, scale))
             alpha.set_alpha(128)
 
-            if not lot.can_place():
+            if not lot.can_place(construct_to_buy):
                 alpha.fill((255, 0, 0))
             else:
                 alpha.fill((50, 50, 50))
