@@ -24,7 +24,7 @@ class InfoPanel(Panel):
 
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))
-        happiness_label.add_draw_callback(self.update_label('happiness'))
+        happiness_label.add_draw_callback(self.update_label('resident_happyness'))
         res_demand_label.add_draw_callback(
             self.update_label('residential demand'))
         comm_demand_label.add_draw_callback(
