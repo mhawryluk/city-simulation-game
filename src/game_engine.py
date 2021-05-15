@@ -1,8 +1,9 @@
 from game_modes.game_window import GameWindow
 from game_engine_tools.save_manager import SaveManager
 import pygame as pg
+import os
 from game_modes.main_menu import MainMenu
-from game_engine_tools import FPS, WINDOW_SIZE
+from game_engine_tools import FPS, WINDOW_SIZE, load_asset
 
 
 class GameEngine:
@@ -10,6 +11,10 @@ class GameEngine:
         self.running = False
         pg.init()
         pg.display.set_caption('City Simulation Game')
+        pg.display.set_icon(load_asset('House', 'H01.png'))
+        pg.mixer.music.load(os.path.join('Assets', 'Music', 'background_music.ogg'))
+        pg.mixer.music.set_volume(0.2)
+        pg.mixer.music.play()
 
         self.window = pg.display.set_mode(WINDOW_SIZE)
         self.clock = pg.time.Clock()
