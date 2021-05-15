@@ -39,7 +39,7 @@ def waste(lot):
 def construct_specific_simulation(lot, player_status):
     if lot.construct != None:
         # sims common among all constructs
-        lot.construct.get('simulation', lambda x,y: None)(lot, player_status)
+        lot.construct.get('simulation_handler', lambda x,y: None)(lot, player_status)
 
 
 def update_events(lot):
