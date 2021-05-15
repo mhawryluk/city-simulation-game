@@ -205,6 +205,10 @@ POPULATION_HAPPYNESS_COEF = 0.25
 POPULATION_REDUCTION = 0.98
 
 
+# buldoze constants
+MONEY_RETURN_PERCENT = 0.78
+
+
 # events name list
 EVENTS = [
     'burning'
