@@ -50,7 +50,12 @@ def water(lot, player_status):
 def construct_specific_simulation(lot, player_status):
     if lot.construct != None:
         # sims common among all constructs
-        lot.construct.get('simulation_handler', lambda x,y: None)(lot, player_status)
+        def f(x, y):
+            pass # empty function
+        function = lot.construct.get('simulation_handler', None)
+        if function is None:
+            function = f
+        function(lot, player_status)
 
 
 def update_events(lot):

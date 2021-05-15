@@ -7,7 +7,7 @@ class PlayerStatus:
                 'resident_happyness': 1,
                 'power': 0,
                 'water': 0,
-                'sewage': 0,
+                'waste': 0,
                 'pollution': 0
             }
 
