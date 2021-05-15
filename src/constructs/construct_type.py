@@ -191,6 +191,7 @@ class ConstructType(Enum):
                 'waste_production': 5,
                 'resident_happiness_multiplier': 1.7,
                 'fire_protection': 1,
+                'security': 3,
                 'images': [get_asset_path('SpecialBuildings', 'police0.png')]
             },
             1: {
@@ -204,6 +205,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 1.8,
                 'upgrade_cost': 10000,
                 'fire_protection': 2,
+                'security': 5,
                 'images': [get_asset_path('SpecialBuildings', 'police1.png')]
             }
         }

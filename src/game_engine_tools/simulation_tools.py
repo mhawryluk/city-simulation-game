@@ -20,7 +20,15 @@ def fire(lot):
 
 
 def security(lot):
-    pass  # to be implemented
+    if lot.construct != None:
+        security = 0
+        coefficient = lot.construct.get('burglary_appeal', 1)
+        coefficient *= 1 if lot.construct.happiness is None else lot.construct.happiness
+        crime_appeal = BURGLARY_APPEAL * coefficient
+        for affected_by in lot.affected_by:
+            security += randint(0, affected_by.get('security', 1))
+        lot.crime_level += crime_appeal - security
+        lot.construct.crime_level = max(MIN_CRIME, min(MAX_CRIME, lot.construct.crime_level))
 
 
 def resource_management(lot):
@@ -40,6 +48,8 @@ def update_events(lot):
         lot.current_events = []
         if lot.construct.heat > FIRE_THRESHOLD:
             lot.current_events.append('burning')
+        if lot.construct.crime_level > CRIME_THRESHOLD:
+            lot.current_events.append('burglary')
 
 
 def calculate_happyness(lot):
@@ -61,6 +71,12 @@ MAX_HEAT = 60
 MIN_HEAT = -5
 DEFAULT_TEMPERATURE_RAISE = 2
 FIRE_THRESHOLD = 50
+
+
+BURGLARY_APPEAL = 2
+MIN_CRIME = 0
+MAX_CRIME = 50
+CRIME_THRESHOLD = 40
 
 
 # events name list
