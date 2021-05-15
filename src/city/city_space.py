@@ -26,7 +26,9 @@ class CitySpace:
             for x in range(self.width):
                 self.lots.append([])
                 for y in range(self.height):
-                    if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
+                    # if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
+                    #     self.lots[x].append(Lot(x, y, LotType.WATER))
+                    if x == 0 or x == self.height-1 or y == 0 or y == self.width-1:
                         self.lots[x].append(Lot(x, y, LotType.WATER))
                     else:
                         self.lots[x].append(Lot(x, y, LotType.GRASS))
