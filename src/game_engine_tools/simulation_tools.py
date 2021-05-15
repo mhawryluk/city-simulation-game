@@ -80,19 +80,32 @@ def health(lot, player_status):
             player_status.data['health'] *= 1 + PANDEMIC_COEF
 
 
-def produce(lot, player_status):
-    pass
-
+def produce_demand(lot, player_status):
+    if lot.construct != None:
+        player_status.data['produce'] += lot.construct.get('produce', 0) * player_status.density()
+        player_status.data['demand'] += lot.construct.get('demand', 0) * player_status.density()
+        normalize = min(player_status.data['produce'], player_status.data['demand'])
+        player_status.data['produce'] -= normalize
+        player_status.data['demand'] -= normalize
 
 def population(lot, player_status):
-    pass
+    if lot.construct != None:
+        capacity = player_status.data['capacity']
+        populus = player_status.data['population']
+        happyness = player_status.data['resident_happyness']
+        if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
+            populus = randint(populus, set_between(
+                capacity * POPULATION_HAPPYNESS_COEF * happyness, 
+                (population + capacity)//2, 
+                capacity
+                )
+                )
+            player_status.data['population'] = populus
+        if random > happyness:
+            player_status.data['population'] = int(player_status.data['population'] * POPULATION_REDUCTION)
 
 
 def employment(lot, player_status):
-    pass
-
-
-def demand(lot, player_status):
     pass
 
 
@@ -185,6 +198,12 @@ MIN_HEALTH = 0
 PANDEMIC_CHANCE = 0.1
 PANDEMIC_COEF = 0.01
 PANDEMIC_SEVERITY = 3
+
+
+# population happynes coeficient
+POPULATION_HAPPYNESS_COEF = 0.25
+POPULATION_REDUCTION = 0.98
+
 
 # events name list
 EVENTS = [
