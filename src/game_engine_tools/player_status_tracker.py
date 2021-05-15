@@ -8,7 +8,8 @@ class PlayerStatus:
                 'power': 0,
                 'water': 0,
                 'waste': 0,
-                'pollution': 0
+                'pollution': 0,
+                'taxation': 0.1
             }
 
     def compress2save(self):

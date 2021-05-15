@@ -5,21 +5,29 @@ from .simulation_tools import SIMULATIONS, calculate_happyness
 
 
 class SimulationEngine:
+
+    FPS_PER_CYCLE = 60 * 3
+
     def __init__(self, city_space, save_data):
         self.player_status = PlayerStatus(save_data.get('world_state', None))
         self.city_space = city_space
+        self.fps_in_cycle = 0
         for row in self.city_space.lots:
             for lot in row:
                 self.integrate_construct(lot)
 
     def simulate_cycle(self):
-        self.player_status.data['resident_happyness'] = 1
-        for row in self.city_space.lots:
-            for lot in row:
-                for simulation in SIMULATIONS:
-                    simulation(lot, self.player_status)
-                # construct_specific_simulation(lot, self.player_status)
-                self.player_status.data['resident_happyness'] *= calculate_happyness(lot)
+        if self.fps_in_cycle >= self.FPS_PER_CYCLE:
+            self.fps_in_cycle = 0
+            self.player_status.data['resident_happyness'] = 1
+            for row in self.city_space.lots:
+                for lot in row:
+                    for simulation in SIMULATIONS:
+                        simulation(lot, self.player_status)
+                    # construct_specific_simulation(lot, self.player_status)
+                    self.player_status.data['resident_happyness'] *= calculate_happyness(lot)
+        else:
+            self.fps_in_cycle += 1
 
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct

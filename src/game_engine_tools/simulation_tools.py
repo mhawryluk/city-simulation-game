@@ -55,7 +55,13 @@ def water(lot, player_status):
 
 
 def economy_change(lot, player_status):
-    pass
+    if lot.construct != None:
+        money_change = lot.construct.get('taxation', 0)
+        taxes_multiplier = min(lot.construct.happiness / HAPPYNESS_FOR_FULL_TAXES, 1) if not lot.construct.happiness is None else 1
+        money_change *= (1 + player_status.data['taxation']) * taxes_multiplier
+        money_change += lot.construct.get('income', 0)
+        player_status.data['funds'] += int(money_change)
+        player_status.data['funds'] = set_between(player_status.data['funds'], MIN_MONEY, MAX_MONEY)
 
 
 def construct_specific_simulation(lot, player_status):
@@ -130,6 +136,12 @@ MAX_WASTE_FREE_SPACE = -10000
 COSTS_REDUCED_ABOVE_WASTE_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
 WASTE_BORDERVAL = 0
+
+
+# hapynes to taxes calculator
+HAPPYNESS_FOR_FULL_TAXES = 2
+MIN_MONEY = 0
+MAX_MONEY = 1e9
 
 
 # events name list
