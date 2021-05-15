@@ -31,16 +31,10 @@ def security(lot):
         lot.construct.crime_level = max(MIN_CRIME, min(MAX_CRIME, lot.construct.crime_level))
 
 
-def resource_management(lot):
-    pass  # to be implemented
-
-
-def human_resource_management(lot):
-    pass  # to be implemented
-
-
-def gather_taxes(lot):
-    pass  # to be implemented
+def construct_specific_simulation(lot, player_status):
+    if lot.construct != None:
+        # sims common among all constructs
+        lot.construct.get('simulation', lambda x,y: None)(lot, player_status)
 
 
 def update_events(lot):
@@ -58,9 +52,7 @@ def calculate_happyness(lot):
 
 SIMULATIONS = [
     fire,
-    security,
-    resource_management,
-    human_resource_management
+    security
 ]
 
 

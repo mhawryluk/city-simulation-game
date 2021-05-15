@@ -1,7 +1,7 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
-from .simulation_tools import SIMULATIONS, calculate_happyness
+from .simulation_tools import SIMULATIONS, calculate_happyness, construct_specific_simulation
 
 
 class SimulationEngine:
@@ -21,6 +21,7 @@ class SimulationEngine:
                 for simulation in SIMULATIONS:
                     simulation(lot)
                 self.data['resident_happyness'] *= calculate_happyness(lot)
+                construct_specific_simulation(lot, self.player_status)
 
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct
