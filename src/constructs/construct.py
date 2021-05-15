@@ -10,7 +10,8 @@ class Construct:
             self.construct_level = int(construct_state['construct_level'])
             self.human_resources = int(construct_state['human_resouces'])
             self.users = int(construct_state['users'])
-            self.type = construct_state['type_value']
+            self.type_name = construct_state['type']
+            self.type = ConstructType[self.type_name].value
 
             self.happiness = None if construct_state['happiness'] is None else int(
                 construct_state['happiness'])
@@ -25,6 +26,7 @@ class Construct:
             self.construct_level = 0
             self.human_resources = 0
             self.users = 0
+            self.type_name = ''.join(str(construct_type).split('.')[1])
             self.type = construct_type.value
 
             self.happiness = self.type['level'][0].get(
@@ -66,7 +68,7 @@ class Construct:
             'construct_level': self.construct_level,
             'human_resouces': self.human_resources,
             'users': self.users,
-            'type_value': self.type,
+            'type': self.type_name,
             'happiness': self.happiness,
             'heat': self.heat,
             'crime_level': self.crime_level,
