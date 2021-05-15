@@ -21,6 +21,10 @@ class InfoPanel(Panel):
         res_demand_label = self.menu.add.label('residential demand')
         comm_demand_label = self.menu.add.label(' commercial demand')
         indu_demand_label = self.menu.add.label(' industrial demand')
+        water_label = self.menu.add.label('      water demand')
+        waste_label = self.menu.add.label('      waste demand')
+        power_label = self.menu.add.label('      power demand')
+        pollution_label = self.menu.add.label('         pollution')
 
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))
@@ -30,10 +34,19 @@ class InfoPanel(Panel):
         comm_demand_label.add_draw_callback(
             self.update_label('commercial demand'))
         indu_demand_label.add_draw_callback(
-            self.update_label('industrail demand'))
+            self.update_label('industrial demand'))
+        water_label.add_draw_callback(
+            self.update_label('water'))
+        waste_label.add_draw_callback(
+            self.update_label('waste'))
+        power_label.add_draw_callback(
+            self.update_label('power'))
+        pollution_label.add_draw_callback(
+            self.update_label('pollution'))
 
         self.labels = [funds_label, happiness_label,
-                       res_demand_label, comm_demand_label, indu_demand_label]
+                       res_demand_label, comm_demand_label, indu_demand_label,
+                       water_label, waste_label, power_label, pollution_label]
 
     def update_label(self, key):
         def update(widget, menu):
