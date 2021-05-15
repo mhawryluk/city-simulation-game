@@ -76,14 +76,14 @@ def health(lot, player_status):
         player_status.data['health'] = set_between(player_status.data['health'], MIN_HEALTH, None)
         if random() < PANDEMIC_CHANCE * player_status.density():
             for _ in range(PANDEMIC_SEVERITY):
-                lot.constunct.current_event.append('pandemic')
+                lot.current_events.append('pandemic')
             player_status.data['health'] *= 1 + PANDEMIC_COEF
 
 
 def produce_demand(lot, player_status):
     if lot.construct != None:
-        player_status.data['produce'] += lot.construct.get('produce', 0) * player_status.density()
-        player_status.data['demand'] += lot.construct.get('demand', 0) * player_status.density()
+        player_status.data['produce'] += lot.construct.get('produce', 0)
+        player_status.data['demand'] += min(lot.construct.get('demand', 0), BASE_DEMAND) * (1 + player_status.density())
         normalize = min(player_status.data['produce'], player_status.data['demand'])
         player_status.data['produce'] -= normalize
         player_status.data['demand'] -= normalize
@@ -103,10 +103,6 @@ def population(lot, player_status):
             player_status.data['population'] = populus
         if random > happyness:
             player_status.data['population'] = int(player_status.data['population'] * POPULATION_REDUCTION)
-
-
-def employment(lot, player_status):
-    pass
 
 
 def construct_specific_simulation(lot, player_status):
@@ -190,6 +186,10 @@ WASTE_BORDERVAL = 0
 HAPPYNESS_FOR_FULL_TAXES = 2
 MIN_MONEY = 0
 MAX_MONEY = 1e9
+
+
+#supply and demand constants
+BASE_DEMAND = 10
 
 
 # health constatnts

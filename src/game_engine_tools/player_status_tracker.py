@@ -16,9 +16,9 @@ class PlayerStatus:
                 'waste': 0,
                 'pollution': 0,
                 'taxation': 0.1,
-                'residential demand': 0,
-                'commercial demand': 0,
-                'industrial demand': 0
+                'residential demand': 'Very high',
+                'commercial demand': 'Very low',
+                'industrial demand': 'Very low'
             }
 
     def density(self):
