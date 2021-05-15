@@ -63,7 +63,7 @@ def update_events(lot):
 
 
 def calculate_happyness(lot):
-    return 1
+    return 1 if lot.construct is None or lot.construct.happiness is None else lot.construct.happiness
 
 
 SIMULATIONS = [
@@ -71,7 +71,8 @@ SIMULATIONS = [
     security,
     energy,
     waste, 
-    water
+    water,
+    construct_specific_simulation
 ]
 
 
