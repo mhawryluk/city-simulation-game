@@ -7,9 +7,11 @@ def fire(lot):
         threshold = lot.construct.heat // HEAT_THRESHOLD
         # calculating buildings fire protection
         for affected_by in lot.affected_by:
-            fire_protection += randint(0, affected_by.get('fire_protection', 0))
+            fire_protection += randint(0,
+                                       affected_by.get('fire_protection', 0))
         # adequately increasing temperature
-        lot.construct.heat += lot.construct.get('temperature_raise', DEFAULT_TEMPERATURE_RAISE) - fire_protection
+        lot.construct.heat += lot.construct.get(
+            'temperature_raise', DEFAULT_TEMPERATURE_RAISE) - fire_protection
         # if passed a threshold - expands additionaly
         if lot.construct.heat // HEAT_THRESHOLD > threshold:
             lot.construct.heat += randint(1, HEAT_EXPANSION)
@@ -18,15 +20,23 @@ def fire(lot):
 
 
 def security(lot):
-    pass # to be implemented
+    pass  # to be implemented
 
 
 def resource_management(lot):
-    pass # to be implemented
+    pass  # to be implemented
 
 
 def human_resource_management(lot):
-    pass # to be implemented
+    pass  # to be implemented
+
+
+def gather_taxes(lot):
+    pass
+
+
+def update_events(lot):
+    pass
 
 
 SIMULATIONS = [

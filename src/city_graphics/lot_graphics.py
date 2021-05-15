@@ -1,9 +1,11 @@
 from game_engine_tools import WINDOW_SIZE
 from city_graphics import ROAD_WIDTH_RATIO
+import game_engine_tools.simulation_tools as sim_consts
 import pygame as pg
 
 
 class LotGraphics:
+    frame = 0
     zone_highlighting = False
     zone_colors = {'residential': (61, 143, 102),
                    'commercial': (92, 153, 214),
@@ -51,3 +53,7 @@ class LotGraphics:
     @classmethod
     def get_draw_position(cls, lot, pov, scale):
         return pov[0] - scale*cls.map_dimensions[0]//2 + scale*lot.x, pov[1] - scale*cls.map_dimensions[1]//2 + scale*lot.y
+
+    @classmethod
+    def draw_simulation_effects(cls, lot, pov, scale):
+        events = lot.construct.get_current_events()

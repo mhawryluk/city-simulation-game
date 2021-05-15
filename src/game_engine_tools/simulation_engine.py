@@ -34,6 +34,7 @@ class SimulationEngine:
 
     def integrate_construct(self, lot, remove=False):
         construct = lot.construct
+        
         if not construct is None:
             # print(construct.get('name', None), construct.get('range', 0))
             construct_range = int(construct.get('range', 0))
@@ -66,7 +67,13 @@ class SimulationEngine:
                                 affected_lot.construct.happiness *= happiness_multiplier
         if not remove and (not lot.construct is None) and lot.construct.like('home'):
             for affecting_construct in list(lot.affected_by):
-                lot.construct.happiness *= affecting_construct.get('resident_happiness_multiplier', 1)
+                lot.construct.happiness *= affecting_construct.get(
+                    'resident_happiness_multiplier', 1)
+
+    def change_taxes(self):
+        # happiness
+        # multipliers
+        pass
 
     def get_data(self, key):
         return self.player_status.data.get(key, -1)

@@ -19,6 +19,8 @@ class Lot:
         self.affected_by = set()
         self.unpolluted = 1
 
+        self.current_events = []
+
         if not save_source is None:
             self.type = LotType(save_source['type_value'])
             self.seed = save_source['seed']
@@ -44,9 +46,13 @@ class Lot:
         self.construct_level = 0
         self.zone_type = None
 
-    def can_place(self):
+    def can_place(self, construct):
         '''zwraca True jeśli można ustawić construct na tym polu'''
-        return self.construct is None and self.type == LotType.GRASS
+        type = LotType.GRASS
+        if construct.like('water'):
+            type = LotType.WATER
+
+        return self.construct is None and self.type == type
 
     def compress2save(self):
         return {
@@ -54,6 +60,9 @@ class Lot:
             'type_value': self.type.value,
             'construct': None if self.construct is None else self.construct.compress2save()
         }
+
+    def get_current_events(self):
+        return self.current_events
 
     def show(self):
         return self.affected_by

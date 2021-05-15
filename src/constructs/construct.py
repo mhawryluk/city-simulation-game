@@ -91,5 +91,8 @@ class Construct:
             print(self.type)
         return level
 
+    def get_current_events(self):
+        return ['fire', '']
+
     def like(self, cmp_likeness):
         return cmp_likeness in self.get('likeness', [])

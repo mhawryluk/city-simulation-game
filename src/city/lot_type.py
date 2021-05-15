@@ -6,6 +6,4 @@ class LotType(Enum):
     WATER = 2
     ROCK = 3
     SAND = 4
-    HOUSE = 5
-    BUILDING = 6
         

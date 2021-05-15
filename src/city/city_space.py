@@ -56,7 +56,7 @@ class CitySpace:
 
     def buy_construct(self, construct, clicked_lot) -> bool:
         '''zwraca True jeśli powiódł się zakup budynku'''
-        if clicked_lot.can_place():
+        if clicked_lot.can_place(construct):
             clicked_lot.set_construct(construct)
             return clicked_lot
         return None
