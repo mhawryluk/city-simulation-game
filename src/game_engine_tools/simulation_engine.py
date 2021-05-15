@@ -20,8 +20,8 @@ class SimulationEngine:
             for lot in row:
                 for simulation in SIMULATIONS:
                     simulation(lot)
-                self.data['resident_happyness'] *= calculate_happyness(lot)
                 construct_specific_simulation(lot, self.player_status)
+                self.data['resident_happyness'] *= calculate_happyness(lot)
 
     def can_buy(self, construct=None, zone=None, level=0):
         building = construct

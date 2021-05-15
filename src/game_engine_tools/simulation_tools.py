@@ -1,4 +1,5 @@
 from random import randint
+from constructs.construct_type import ConstructType
 
 
 def fire(lot):
@@ -27,8 +28,12 @@ def security(lot):
         crime_appeal = BURGLARY_APPEAL * coefficient
         for affected_by in lot.affected_by:
             security += randint(0, affected_by.get('security', 1))
-        lot.crime_level += crime_appeal - security
+        lot.construct.crime_level += crime_appeal - security
         lot.construct.crime_level = max(MIN_CRIME, min(MAX_CRIME, lot.construct.crime_level))
+
+
+def waste(lot):
+    pass
 
 
 def construct_specific_simulation(lot, player_status):
@@ -69,6 +74,11 @@ BURGLARY_APPEAL = 2
 MIN_CRIME = 0
 MAX_CRIME = 50
 CRIME_THRESHOLD = 40
+
+
+SPECIFIC_SIMULATIONS = {
+
+}
 
 
 # events name list
