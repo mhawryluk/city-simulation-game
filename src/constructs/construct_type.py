@@ -27,7 +27,8 @@ class ConstructType(Enum):
                 'water_consumption': 3,  # in units (UNIFY)
                 'waste_change': 3,  # in units 
                 'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
-                'images': [get_asset_path('House', 'H01.png'), get_asset_path('House', 'H02.png'), get_asset_path('House', 'H03.png')]
+                'images': [get_asset_path('House', 'Hs01.png'), get_asset_path('House', 'Hs02.png'), get_asset_path('House', 'Hs03.png'),
+                            get_asset_path('House', 'Hs00.png')]
             },
             1: {
                 'name': 'family house',
