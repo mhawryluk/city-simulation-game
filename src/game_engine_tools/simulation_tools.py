@@ -45,11 +45,13 @@ def energy(lot, player_status):
 def waste(lot, player_status):
     if lot.construct != None:
         player_status.data['waste'] += lot.construct.get('waste_change', 0)
+        player_status.data['waste'] = set_between(player_status.data['waste'], MAX_WASTE_FREE_SPACE, MAX_WASTE_PILE_UP)
 
 
 def water(lot, player_status):
     if lot.construct != None:
         player_status.data['water'] += lot.construct.get('water_change', 0)
+        player_status.data['water'] = set_between(player_status.data['water'], MAX_WATER_DEMAND, MAX_WATER_SUPPLY)
 
 
 def economy_change(lot, player_status):
@@ -109,9 +111,25 @@ CRIME_THRESHOLD = 40
 # power cosntsatnts
 MAX_POWER_SUPPLY = 100000
 MAX_POWER_DEMAND = -10000
-COSTS_REDUCED_ABOVE_BORDERVAL = 0.5
-COSTS_INCREASED_BELOW_BORDERVAL = 1.2
-BORDERVAL = 0
+COSTS_REDUCED_ABOVE_POWER_BORDERVAL = 0.5
+COSTS_INCREASED_BELOW_PWOER_BORDERVAL = 1.2
+POWER_BORDERVAL = 0
+
+
+# water constants
+MAX_WATER_SUPPLY = 100000
+MAX_WATER_DEMAND = -10000
+COSTS_REDUCED_ABOVE_WATER_BORDERVAL = 0.5
+COSTS_INCREASED_BELOW_WATER_BORDERVAL = 1.2
+WATER_BORDERVAL = 0
+
+
+# waste constatnts
+MAX_WASTE_PILE_UP = 100000
+MAX_WASTE_FREE_SPACE = -10000
+COSTS_REDUCED_ABOVE_WASTE_BORDERVAL = 0.5
+COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
+WASTE_BORDERVAL = 0
 
 
 # events name list

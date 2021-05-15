@@ -21,9 +21,9 @@ class InfoPanel(Panel):
         res_demand_label = self.menu.add.label('residential demand')
         comm_demand_label = self.menu.add.label(' commercial demand')
         indu_demand_label = self.menu.add.label(' industrial demand')
-        water_label = self.menu.add.label('      water demand')
-        waste_label = self.menu.add.label('      waste demand')
-        power_label = self.menu.add.label('      power demand')
+        water_label = self.menu.add.label('      water supply')
+        waste_label = self.menu.add.label('      waste piled up')
+        power_label = self.menu.add.label('      power supply')
         pollution_label = self.menu.add.label('         pollution')
 
         funds_label.add_draw_callback(self.update_label('funds'))
