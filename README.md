@@ -16,11 +16,13 @@ project for Python programming class
 - [x] menu opcji (in-game - dotyczy budowy i zarządzania miastem przez gracza)
 
 #### (19.04 - 16.05):
-- [ ] symulacja procesów miejskich (odpowiednie funkcje programu symulujące zdarzenia jak ruch uliczny itp)
-- [ ] zdarzenia losowe
-- [ ] opcje zarządzania miastem i budynkami (w tym ulepszenia)
-- [ ] system potrzeb i zadowolenia mieszkańców
-- [ ] komunikaty dotyczące stanu miasta, statystyki oraz mechanizmy symulujące ekonomię
+- [x] symulacja procesów miejskich (odpowiednie funkcje programu symulujące zdarzenia jak ruch uliczny itp)
+- [x] zdarzenia losowe
+- [ ] opcje zarządzania miastem i budynkami
+- [ ] ulepszenia budynków
+- [x] system potrzeb i zadowolenia mieszkańców
+- [ ] komunikaty dotyczące stanu miasta, 
+- [x] statystyki oraz mechanizmy symulujące ekonomię
 
 
 ## obecne TODO:
