@@ -2,6 +2,7 @@ from city.lot import Lot
 from city.lot_type import LotType
 from city.road_system import RoadSystem
 from city_graphics.city_space_graphics import CitySpaceGraphics
+from constructs.construct_type import ConstructType
 
 
 class CitySpace:
@@ -43,7 +44,7 @@ class CitySpace:
         self.road_system.road_clicked()
 
     def add_to_zone(self, zone_type, clicked_lot):
-        if clicked_lot.can_place():
+        if clicked_lot.can_place(ConstructType.FAMILY_HOUSE):
             clicked_lot.set_zone(zone_type)
             self.zone.add(clicked_lot)
             return clicked_lot
