@@ -1,5 +1,5 @@
 # city-simulation-game
-project for Python programming class
+Project for Python programming class
 
 ## Plan pracy:
 #### (15.03 - 28.03):
@@ -27,19 +27,18 @@ project for Python programming class
 
 ## obecne TODO:
 - [ ] ustawianie strefy klikając, na razie jest tylko przeciągając
-- [ ] dom jest za duży
-- [ ] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
-- [ ] dźwięki gry
+- [x] dom jest za duży
+- [x] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
+- [x] dźwięki gry
 - [ ] menu opcji - więcej opcji wpływających na symulator
-- [ ] zonetypes - zmienić ze stringów w enumy/stałe
 - [ ] chowanie wszystkich paneli przy przyciśnięciu escape
 - [ ] zoom nie działa prawidłowo?
 - [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
-- [ ] okienko z pieniędzmi i satysfakcją 
+- [x] okienko z pieniędzmi i satysfakcją 
 - [ ] upgrade
 - [ ] bulldoze - wyłączyć przy zmianie trybu
-- [ ] okienko upgrade'u pojawia się np. przy wyburzaniu
-- [ ] zapisywanie stref
+- [x] okienko upgrade'u pojawia się np. przy wyburzaniu
+- [x] zapisywanie stref
 
 ## poprawki:
 - [x] rozdzielić GUI od logiki gry
@@ -52,7 +51,7 @@ project for Python programming class
 - [x] road_width_ratio -> zmienić w stałą
 - [ ] przenieść wszystko związane z assetami do wspólnej klasy
 - [x] pg.image.load...
-- [ ] CityImages - singleton?
+- [x] CityImages - singleton?
 - [ ] pickle
 - [x] snake_case nazw plików
 
