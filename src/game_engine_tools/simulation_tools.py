@@ -2,6 +2,10 @@ from random import randint
 from constructs.construct_type import ConstructType
 
 
+def set_between(value, min_value, max_value):
+    return max(min_value, min(max_value, value))
+
+
 def fire(lot, player_status):
     if lot.construct != None:
         fire_protection = 0
@@ -17,7 +21,7 @@ def fire(lot, player_status):
         if lot.construct.heat // HEAT_THRESHOLD > threshold:
             lot.construct.heat += randint(1, HEAT_EXPANSION)
         # setting heat to stay between min and max
-        lot.construct.heat = max(MIN_HEAT, min(MAX_HEAT, lot.construct.heat))
+        lot.construct.heat = set_between(lot.construct.heat, MIN_HEAT, MAX_HEAT)
 
 
 def security(lot, player_status):
@@ -29,12 +33,13 @@ def security(lot, player_status):
         for affected_by in lot.affected_by:
             security += randint(0, affected_by.get('security', 1))
         lot.construct.crime_level += crime_appeal - security
-        lot.construct.crime_level = max(MIN_CRIME, min(MAX_CRIME, lot.construct.crime_level))
+        lot.construct.crime_level = set_between(lot.construct.crime_level, MIN_CRIME, MAX_CRIME)
 
 
 def energy(lot, player_status):
     if lot.construct != None:
         player_status.data['power'] += lot.construct.get('energy_change', 0)
+        player_status.data['power'] = set_between(player_status.data['power'], MAX_POWER_DEMAND, MAX_POWER_SUPPLY)
 
 
 def waste(lot, player_status):
@@ -45,6 +50,10 @@ def waste(lot, player_status):
 def water(lot, player_status):
     if lot.construct != None:
         player_status.data['water'] += lot.construct.get('water_change', 0)
+
+
+def economy_change(lot, player_status):
+    pass
 
 
 def construct_specific_simulation(lot, player_status):
@@ -90,10 +99,19 @@ DEFAULT_TEMPERATURE_RAISE = 2
 FIRE_THRESHOLD = 50
 
 
+# security constatnts
 BURGLARY_APPEAL = 2
 MIN_CRIME = 0
 MAX_CRIME = 50
 CRIME_THRESHOLD = 40
+
+
+# power cosntsatnts
+MAX_POWER_SUPPLY = 100000
+MAX_POWER_DEMAND = -10000
+COSTS_REDUCED_ABOVE_BORDERVAL = 0.5
+COSTS_INCREASED_BELOW_BORDERVAL = 1.2
+BORDERVAL = 0
 
 
 # events name list
