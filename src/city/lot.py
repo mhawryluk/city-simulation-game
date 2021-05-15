@@ -38,8 +38,8 @@ class Lot:
         elif zone_type == 'industrial':
             self.construct = Construct(ConstructType.FACTORY)
 
-    def set_construct(self, construct):
-        self.construct = Construct(construct)
+    def set_construct(self, construct_type):
+        self.construct = Construct(construct_type)
         self.zone_type = None
 
     def remove_construct(self):

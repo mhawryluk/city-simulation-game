@@ -53,7 +53,7 @@ class GameWindow(GameMode):
         self.info_panel = InfoPanel(260, 250, (100, 0), self, self.simulator)
 
         self.upgrade_panel = UpgradePanel(
-            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self)
+            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self, simulation=self.simulator)
 
         self.sub_panels = [self.menu_panel, self.toggle_menu,
                            self.info_panel, self.upgrade_panel]
