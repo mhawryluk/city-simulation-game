@@ -48,7 +48,7 @@ class GameWindow(GameMode):
 
         # panels
         self.menu_panel = GameWindowPanel(
-            95, self.window.get_height(), self)
+            97, self.window.get_height(), self)
         self.toggle_menu = ToggleMenu(
             width=95, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
         self.info_panel = InfoPanel(

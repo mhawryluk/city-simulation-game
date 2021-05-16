@@ -20,4 +20,6 @@ class ToggleMenu(Panel):
     def get_theme(self):
         theme = super().get_theme()
         theme.background_color = (0, 0, 0, 0)
+        theme.widget_font_size -= 2
+        theme.widget_box_margin = (0, 0)
         return theme
