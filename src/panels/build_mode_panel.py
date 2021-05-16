@@ -2,6 +2,7 @@ import pygame_menu as pgmen
 from panels.panel import Panel
 from panels.special_buildings_panel import BuySpecialBuildingPanel
 from panels.zoning_panel import ZoningPanel
+from game_engine_tools import get_asset_path
 
 
 class BuildModePanel(Panel):
@@ -15,8 +16,8 @@ class BuildModePanel(Panel):
         self.menu = pgmen.Menu(title='BUILD - BUY',
                                width=width, height=height,
                                position=position,
-                               rows=1, columns=3,
                                theme=self.get_theme(),
+                               columns=10, rows=1,
                                enabled=False,
                                mouse_enabled=True, mouse_motion_selection=True)
 
@@ -33,10 +34,22 @@ class BuildModePanel(Panel):
             position=(100, 100-100*height/game_window.window.get_height()), game_window=game_window)
 
         # BUTTONS
+        scale = (0.075, 0.075)
+        self.menu.add.image(get_asset_path('Icons', 'modern-city.png'), scale=scale)
         self.zoning_button = self.menu.add.button(
             "zone buildings", self.zone_buildings)
+
+        self.menu.add.label(' ')
+        self.menu.add.label(' ')
+        
+        self.menu.add.image(get_asset_path('Icons', 'capitol.png'), scale=scale)
         self.buy_building_button = self.menu.add.button(
             "special buildings", self.special_buildings)
+
+        self.menu.add.label(' ')
+        self.menu.add.label(' ')
+
+        self.menu.add.image(get_asset_path('Icons', 'bulldozer.png'), scale=scale)
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
 
