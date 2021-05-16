@@ -32,24 +32,29 @@ class InfoPanel(Panel):
 
         scale = (0.05, 0.05)
         self.menu.add.label('')
-        self.menu.add.image(get_asset_path('Icons', 'banknote.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'heart-inside.png'), scale=scale)
+        self.menu.add.image(get_asset_path(
+            'Icons', 'banknote.png'), scale=scale)
+        self.menu.add.image(get_asset_path(
+            'Icons', 'heart-inside.png'), scale=scale)
         self.menu.add.image(get_asset_path('Icons', 'person.png'), scale=scale)
         self.menu.add.image(get_asset_path('Icons', 'drop.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'trash-can.png'), scale=scale)
+        self.menu.add.image(get_asset_path(
+            'Icons', 'trash-can.png'), scale=scale)
         self.menu.add.image(get_asset_path('Icons', 'plug.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'recycle.png'), scale=scale)
-        
+        self.menu.add.image(get_asset_path(
+            'Icons', 'recycle.png'), scale=scale)
+
         self.menu.add.label('')
         self.menu.add.image(get_asset_path('Icons', 'house.png'), scale=scale)
         self.menu.add.image(get_asset_path('Icons', 'shop.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'factory.png'), scale=scale)
-
+        self.menu.add.image(get_asset_path(
+            'Icons', 'factory.png'), scale=scale)
 
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))
-        happiness_label.add_draw_callback(self.update_label('resident_happyness'))
-        
+        happiness_label.add_draw_callback(
+            self.update_label('resident_happyness'))
+
         res_demand_label.add_draw_callback(
             self.update_label('residential demand'))
         comm_demand_label.add_draw_callback(
@@ -72,7 +77,11 @@ class InfoPanel(Panel):
     def update_label(self, key):
         def update(widget, menu):
             text = widget.get_title().split(':')[0]
-            widget.set_title(f'{text}: {self.simulator.get_data(key)}')
+            if text.strip() == 'happiness':
+                widget.set_title(
+                    f'happiness: {self.simulator.get_data(key):.1%}')
+            else:
+                widget.set_title(f'{text}: {self.simulator.get_data(key)}')
         return update
 
     def force_update_labels(self):
@@ -83,6 +92,6 @@ class InfoPanel(Panel):
         theme = super().get_theme()
         theme.widget_font_size = 26
         theme.widget_padding = 1
-        theme.widget_margin = (-30, 5)
+        theme.widget_margin = (-10, 0)
         theme.widget_alignment = pgmen.locals.ALIGN_RIGHT
         return theme

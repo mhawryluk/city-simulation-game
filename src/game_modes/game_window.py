@@ -50,7 +50,8 @@ class GameWindow(GameMode):
             120, self.window.get_height(), self)
         self.toggle_menu = ToggleMenu(
             width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
-        self.info_panel = InfoPanel(270, 400, (100, 0), self, self.simulator)
+        self.info_panel = InfoPanel(
+            250, 400, (100, 50), self, self.simulator)
 
         self.upgrade_panel = UpgradePanel(
             width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self, simulation=self.simulator)
