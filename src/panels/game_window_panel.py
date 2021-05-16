@@ -3,7 +3,7 @@ from panels.build_mode_panel import BuildModePanel
 from panels.option_panel import OptionPanel
 from panels.stat_panel import StatPanel
 from panels.panel import Panel
-from game_engine_tools import WINDOW_SIZE
+from game_engine_tools import WINDOW_SIZE, get_asset_path
 
 
 class GameWindowPanel(Panel):
@@ -32,14 +32,25 @@ class GameWindowPanel(Panel):
             width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=game_window)
 
         # BUTTONS
+        scale=(0.1, 0.1)
+        self.menu.add.image(get_asset_path('Icons', 'play-button.png'), scale=scale)
         self.play_button = self.menu.add.button("play", self.play)
+        self.menu.add.label(' ')
+
+        self.menu.add.image(get_asset_path('Icons', 'road.png'), scale=scale)
         self.road_button = self.menu.add.button("add roads", self.add_road)
+        self.menu.add.label(' ')
+        self.menu.add.image(get_asset_path('Icons', 'crane.png'), scale=scale)
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
+        self.menu.add.label(' ')
         # self.stats_button = self.menu.add.button(
         #     "stats", self.stats)
+
+        self.menu.add.image(get_asset_path('Icons', 'settings-knobs.png'), scale=scale)
         self.options_button = self.menu.add.button(
             "options", self.options)
+        self.menu.add.label(' ')
 
     def play(self):
         self.game_window.mode = "game_mode"
@@ -48,9 +59,9 @@ class GameWindowPanel(Panel):
             self.game_window.zoning = False
             self.game_window.zoning_type = None
 
-        self.game_window.toggle_zone_highlighting(False)
         self.game_window.upgrade_panel.disable()
         self.disable_subpanels()
+        self.game_window.toggle_zone_highlighting(False)
 
     def add_road(self):
         self.disable_subpanels()

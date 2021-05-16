@@ -8,7 +8,7 @@ class BuySpecialBuildingPanel(Panel):
         super().__init__(width, height, game_window)
         self.BUY_WINDOW_WIDTH = 500
         self.BUY_WINDOW_HEIGHT = 500
-        self.BUY_WINDOW_POSITION = (100, 50)
+        self.BUY_WINDOW_POSITION = (50, 50)
 
         self.enabled_window = None
         self.game_window = game_window

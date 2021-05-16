@@ -16,7 +16,7 @@ class InfoPanel(Panel):
                                )
 
         # info
-        self.menu.add.label('--stats--')
+        self.menu.add.label('-------resources------')
         funds_label = self.menu.add.label('             funds')
         happiness_label = self.menu.add.label('         happiness')
         population_label = self.menu.add.label('        population')
@@ -25,7 +25,7 @@ class InfoPanel(Panel):
         power_label = self.menu.add.label('      power supply')
         pollution_label = self.menu.add.label('         pollution')
 
-        self.menu.add.label('--demand--')
+        self.menu.add.label('--------demand-------')
         res_demand_label = self.menu.add.label('residential')
         comm_demand_label = self.menu.add.label(' commercial')
         indu_demand_label = self.menu.add.label(' industrial')

@@ -15,6 +15,7 @@ class ToggleMenu(Panel):
     def toggle(self):
         self.subpanel.disable_subpanels()
         self.subpanel.menu.toggle()
+        self.game_window.info_panel.menu.toggle()
 
     def get_theme(self):
         theme = super().get_theme()
