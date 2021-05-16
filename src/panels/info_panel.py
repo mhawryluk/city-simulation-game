@@ -1,5 +1,6 @@
 import pygame_menu as pgmen
 from panels.panel import Panel
+from game_engine_tools import get_asset_path
 
 
 class InfoPanel(Panel):
@@ -11,24 +12,44 @@ class InfoPanel(Panel):
         # menu
         self.menu = pgmen.Menu('your city: ', width=width,
                                height=height, position=position,
-                               theme=self.get_theme(),
+                               theme=self.get_theme(), columns=2, rows=12
                                )
 
         # info
+        self.menu.add.label('--stats--')
         funds_label = self.menu.add.label('             funds')
         happiness_label = self.menu.add.label('         happiness')
         population_label = self.menu.add.label('        population')
-        res_demand_label = self.menu.add.label('residential demand')
-        comm_demand_label = self.menu.add.label(' commercial demand')
-        indu_demand_label = self.menu.add.label(' industrial demand')
         water_label = self.menu.add.label('      water supply')
         waste_label = self.menu.add.label('      waste piled up')
         power_label = self.menu.add.label('      power supply')
         pollution_label = self.menu.add.label('         pollution')
 
+        self.menu.add.label('--demand--')
+        res_demand_label = self.menu.add.label('residential')
+        comm_demand_label = self.menu.add.label(' commercial')
+        indu_demand_label = self.menu.add.label(' industrial')
+
+        scale = (0.05, 0.05)
+        self.menu.add.label('')
+        self.menu.add.image(get_asset_path('Icons', 'banknote.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'heart-inside.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'person.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'drop.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'trash-can.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'plug.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'recycle.png'), scale=scale)
+        
+        self.menu.add.label('')
+        self.menu.add.image(get_asset_path('Icons', 'house.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'shop.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons', 'factory.png'), scale=scale)
+
+
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))
         happiness_label.add_draw_callback(self.update_label('resident_happyness'))
+        
         res_demand_label.add_draw_callback(
             self.update_label('residential demand'))
         comm_demand_label.add_draw_callback(
@@ -60,8 +81,8 @@ class InfoPanel(Panel):
 
     def get_theme(self):
         theme = super().get_theme()
-        theme.widget_font_size = 20
-        theme.widget_padding = 0
-        theme.widget_margin = (-30, 0)
+        theme.widget_font_size = 26
+        theme.widget_padding = 1
+        theme.widget_margin = (-30, 5)
         theme.widget_alignment = pgmen.locals.ALIGN_RIGHT
         return theme

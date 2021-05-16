@@ -36,8 +36,8 @@ class GameWindowPanel(Panel):
         self.road_button = self.menu.add.button("add roads", self.add_road)
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
-        self.stats_button = self.menu.add.button(
-            "stats", self.stats)
+        # self.stats_button = self.menu.add.button(
+        #     "stats", self.stats)
         self.options_button = self.menu.add.button(
             "options", self.options)
 
