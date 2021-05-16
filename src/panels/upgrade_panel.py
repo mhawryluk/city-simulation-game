@@ -28,6 +28,10 @@ class UpgradePanel(Panel):
                 continue
             self.menu.add.label(
                 f'{key.replace("_", " ")}: {value}', max_char=30)
+        self.menu.add.label(
+                'Heat: ' + str(lot.construct.heat), max_char=30)
+        self.menu.add.label(
+                'Crime: ' + str(lot.construct.crime_level), max_char=30)
 
         self.menu.add.label(
             f'COST: {lot.construct.type["cost"]}')
