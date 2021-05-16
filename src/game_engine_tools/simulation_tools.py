@@ -203,7 +203,7 @@ SIMULATIONS = [
 ]
 
 
-#evenr limit
+# event limit
 EVENTS_LIMIT = 10
 
 

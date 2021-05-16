@@ -19,7 +19,7 @@ Project for Python programming class
 - [x] symulacja procesów miejskich (odpowiednie funkcje programu symulujące zdarzenia jak ruch uliczny itp)
 - [x] zdarzenia losowe
 - [ ] opcje zarządzania miastem i budynkami
-- [ ] ulepszenia budynków
+- [x] ulepszenia budynków
 - [x] system potrzeb i zadowolenia mieszkańców
 - [ ] komunikaty dotyczące stanu miasta, 
 - [x] statystyki oraz mechanizmy symulujące ekonomię
