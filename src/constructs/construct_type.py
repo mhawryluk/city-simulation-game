@@ -263,7 +263,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'school',
                 'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
-                'people_involved': 4030,
+                'people_involved': 150,
                 'income': -1000,
                 'energy_change': -500,
                 'water_consumption': 500,
@@ -283,7 +283,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'school',
                 'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
-                'people_involved': 40500,
+                'people_involved': 300,
                 'income': -10000,
                 'energy_change': -1000,
                 'water_consumption': 1000,
@@ -296,23 +296,6 @@ class ConstructType(Enum):
         }
     }
 
-    # MUSEUM = {
-    #     'max_level': 0,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'museum',
-    #             'description': 'A multi-themed museum.',
-    #             'people_involved': 50,
-    #             'income': 10000,
-    #             'energy_change': -100,
-    #             'water_consumption': 50,
-    #             'waste_change': 60,
-    #             'resident_happiness_multiplier': 1.7,
-    #             'images': []
-    #         }
-    #     }
-    # }
     PARK = {  # upgraded to dog park
         'max_level': 1,
         'cost': 1000,
