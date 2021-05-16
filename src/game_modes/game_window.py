@@ -3,6 +3,7 @@ from panels.game_window_panel import GameWindowPanel
 from panels.toggle_menu import ToggleMenu
 from panels.info_panel import InfoPanel
 from panels.upgrade_panel import UpgradePanel
+from panels.warning_panel import WarningPanel
 from city.city_space import CitySpace
 from city.lot import Lot
 from city_graphics.lot_graphics import LotGraphics
@@ -49,9 +50,11 @@ class GameWindow(GameMode):
         self.menu_panel = GameWindowPanel(
             95, self.window.get_height(), self)
         self.toggle_menu = ToggleMenu(
-            width=120, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
+            width=95, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
         self.info_panel = InfoPanel(
             250, 400, (100, 50), self, self.simulator)
+
+        self.warning_panel = WarningPanel(self, 'hello!')
 
         self.upgrade_panel = UpgradePanel(
             width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self, simulation=self.simulator)
@@ -111,6 +114,10 @@ class GameWindow(GameMode):
         if event.type == pg.MOUSEBUTTONDOWN:
             bought = False
             self.menu_panel.option_panel.disable()
+            if self.warning_panel:
+                self.warning_panel.disable()
+                self.warning_panel = None
+
             # self.menu_panel.stat_panel.disable()
 
             if event.button == pg.BUTTON_LEFT:
@@ -166,6 +173,9 @@ class GameWindow(GameMode):
         for panel in self.sub_panels:
             panel.draw(self.window)
 
+        if self.warning_panel:
+            self.warning_panel.draw(self.window)
+
     def set_zoning(self, zoning_type):
         LotGraphics.zone_highlighting = True
         if not self.zoning:
@@ -202,3 +212,9 @@ class GameWindow(GameMode):
             return c2s
 
         self.save_manager.save(compress2save())
+
+    def show_warning(self, text):
+        if self.warning_panel:
+            self.warning_panel.disable()
+            self.warning_panel = None
+        self.warning_panel = WarningPanel(self, text)

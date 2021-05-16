@@ -12,7 +12,7 @@ class InfoPanel(Panel):
         # menu
         self.menu = pgmen.Menu('your city: ', width=width,
                                height=height, position=position,
-                               theme=self.get_theme(), columns=2, rows=12
+                               theme=self.get_theme(), columns=2, rows=13
                                )
 
         # info
@@ -25,6 +25,7 @@ class InfoPanel(Panel):
         power_label = self.menu.add.label('      power supply')
         pollution_label = self.menu.add.label('         pollution')
 
+        self.menu.add.label('')
         self.menu.add.label('--------demand-------')
         res_demand_label = self.menu.add.label('residential')
         comm_demand_label = self.menu.add.label(' commercial')
@@ -44,6 +45,7 @@ class InfoPanel(Panel):
         self.menu.add.image(get_asset_path(
             'Icons', 'recycle.png'), scale=scale)
 
+        self.menu.add.label('')
         self.menu.add.label('')
         self.menu.add.image(get_asset_path('Icons', 'house.png'), scale=scale)
         self.menu.add.image(get_asset_path('Icons', 'shop.png'), scale=scale)
