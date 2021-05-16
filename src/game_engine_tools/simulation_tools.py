@@ -16,8 +16,7 @@ def fire(lot, player_status):
         threshold = lot.construct.heat // HEAT_THRESHOLD
         # calculating buildings fire protection
         for affected_by in lot.affected_by:
-            fire_protection += randint(0,
-                                       affected_by.get('fire_protection', 0)//2) * 2
+            fire_protection += affected_by.get('fire_protection', 0)
         fire_protection += lot.construct.get('fire_protection', 0)
         # adequately increasing temperature
         lot.construct.heat += lot.construct.get(
@@ -77,7 +76,8 @@ def health(lot, player_status):
         player_status.data['health'] = set_between(player_status.data['health'], MIN_HEALTH, None)
         if random() < PANDEMIC_CHANCE * player_status.density():
             for _ in range(PANDEMIC_SEVERITY):
-                lot.current_events.append('pandemic')
+                if len(lot.current_events) < EVENTS_LIMIT:
+                    lot.current_events.append('pandemic')
             player_status.data['health'] *= 1 + PANDEMIC_COEF
 
 
@@ -121,17 +121,18 @@ def construct_specific_simulation(lot, player_status):
 
 def update_events(lot, player_status):
     if lot.construct != None:
-        lot.current_events = []
+        print(lot.current_events)
 
         if lot.construct.heat >= FIRE_THRESHOLD:
-            print('BURN BABY BURN')
-            lot.current_events.append('burning')
+            if len(lot.current_events) < EVENTS_LIMIT:
+                lot.current_events.append('burning')
             lot.construct.multiply_happiness(1/HAPPYNES_DIVISOR)
         elif 'burning' in lot.current_events:
             lot.current_events.remove('burning')
             lot.construct.multiply_happiness(HAPPYNES_DIVISOR)
         if lot.construct.crime_level >= CRIME_THRESHOLD:
-            lot.current_events.append('burglary')
+            if len(lot.current_events) < EVENTS_LIMIT:
+                lot.current_events.append('burglary')
             lot.construct.multiply_happiness(1/HAPPYNES_DIVISOR)
         elif 'burglary' in lot.current_events:
             lot.current_events.remove('burglary')
@@ -183,6 +184,10 @@ SIMULATIONS = [
     update_events,
     construct_specific_simulation
 ]
+
+
+#evenr limit
+EVENTS_LIMIT = 10
 
 
 # fire related constants

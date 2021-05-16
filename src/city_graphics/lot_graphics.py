@@ -69,7 +69,7 @@ class LotGraphics:
         events = lot.get_current_events()
         x, y = cls.get_draw_position(lot, pov, scale)
 
-        if 'fire' in events:
+        if 'burning' in events:
             size = scale
             image = cls.fire_images[cls.frame//cls.animation_speed%len(cls.fire_images)]
             scaled_image = pg.transform.scale(image, (size, size))
