@@ -66,7 +66,7 @@ class LotGraphics:
     @classmethod
     def draw_simulation_effects(cls, lot, pov, scale):
         cls.frame += 1
-        events = lot.construct.get_current_events()
+        events = lot.get_current_events()
         x, y = cls.get_draw_position(lot, pov, scale)
 
         if 'fire' in events:

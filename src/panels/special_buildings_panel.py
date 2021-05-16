@@ -18,7 +18,7 @@ class BuySpecialBuildingPanel(Panel):
         self.menu = pgmen.Menu(title='special building',
                                width=width, height=height+scroll_bar_height,
                                position=position,
-                               rows=1, columns=40,
+                               rows=1, columns=41,
                                theme=self.get_theme(),
                                enabled=False, mouse_motion_selection=True)
         for construct in ConstructType:
@@ -63,12 +63,18 @@ class BuyBuildingWindow(Panel):
         info = construct.value['level'][0]
         self.menu.add.image(info['images'][0], scale=(0.5, 0.5))
 
+        self.menu.add.label(f'|{info["name"]}|', max_char=30)
+        if "description" in info:
+            self.menu.add.label(f'{info["description"]}', max_char=30)
+        self.menu.add.label(' ')
+
         for key, value in info.items():
-            if key == 'images':
+            if key == 'images' or key == 'name' or key == 'description':
                 continue
             self.menu.add.label(
                 f'{key.replace("_", " ")}: {value}', max_char=30)
 
+        self.menu.add.label(' ')
         self.menu.add.label(f'COST: {construct.value["cost"]}')
 
         # BUTTONS

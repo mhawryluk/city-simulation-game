@@ -32,8 +32,9 @@ class GameWindowPanel(Panel):
             width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=game_window)
 
         # BUTTONS
-        scale=(0.1, 0.1)
-        self.menu.add.image(get_asset_path('Icons', 'play-button.png'), scale=scale)
+        scale = (0.1, 0.1)
+        self.menu.add.image(get_asset_path(
+            'Icons', 'play-button.png'), scale=scale)
         self.play_button = self.menu.add.button("play", self.play)
         self.menu.add.label(' ')
 
@@ -47,7 +48,8 @@ class GameWindowPanel(Panel):
         # self.stats_button = self.menu.add.button(
         #     "stats", self.stats)
 
-        self.menu.add.image(get_asset_path('Icons', 'settings-knobs.png'), scale=scale)
+        self.menu.add.image(get_asset_path(
+            'Icons', 'settings-knobs.png'), scale=scale)
         self.options_button = self.menu.add.button(
             "options", self.options)
         self.menu.add.label(' ')

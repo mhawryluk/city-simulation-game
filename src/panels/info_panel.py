@@ -30,7 +30,7 @@ class InfoPanel(Panel):
         comm_demand_label = self.menu.add.label(' commercial')
         indu_demand_label = self.menu.add.label(' industrial')
 
-        scale = (0.05, 0.05)
+        scale = (0.048, 0.048)
         self.menu.add.label('')
         self.menu.add.image(get_asset_path(
             'Icons', 'banknote.png'), scale=scale)
@@ -90,8 +90,7 @@ class InfoPanel(Panel):
 
     def get_theme(self):
         theme = super().get_theme()
-        theme.widget_font_size = 26
-        theme.widget_padding = 1
+        theme.widget_padding = 2
         theme.widget_margin = (-10, 0)
         theme.widget_alignment = pgmen.locals.ALIGN_RIGHT
         return theme

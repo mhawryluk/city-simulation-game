@@ -18,7 +18,7 @@ class Panel:
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)
-        theme.widget_font_size = 30
+        theme.widget_font_size = 25
         theme.widget_font_color = (255, 255, 255)
         # theme.widget_padding = 5
         return theme
