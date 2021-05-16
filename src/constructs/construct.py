@@ -23,7 +23,8 @@ class Construct:
             self.choose_image(path=self.past_images[-1])
         else:
             self.construct_level = 0
-            self.people_involved = construct_type.value.get('people_involved', 0)
+            self.people_involved = construct_type.value.get(
+                'people_involved', 0)
             self.type_name = ''.join(str(construct_type).split('.')[1])
             self.type = construct_type.value
 
@@ -89,9 +90,6 @@ class Construct:
             print("Error: invalid construct level structure")
             print(self.type)
         return level
-
-    def get_current_events(self):
-        return ['fire', 'unhappy', 'pandemic', 'burglary']
 
     def like(self, cmp_likeness):
         return cmp_likeness in self.get('likeness', [])

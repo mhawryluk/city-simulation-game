@@ -25,7 +25,8 @@ def fire(lot, player_status):
         if lot.construct.heat // HEAT_THRESHOLD > threshold:
             lot.construct.heat += randint(1, HEAT_EXPANSION)
         # setting heat to stay between min and max
-        lot.construct.heat = set_between(lot.construct.heat, MIN_HEAT, MAX_HEAT)
+        lot.construct.heat = set_between(
+            lot.construct.heat, MIN_HEAT, MAX_HEAT)
 
 
 def security(lot, player_status):
@@ -37,43 +38,52 @@ def security(lot, player_status):
         for affected_by in lot.affected_by:
             security += randint(0, affected_by.get('security', 1))
         lot.construct.crime_level += crime_appeal - security
-        lot.construct.crime_level = set_between(lot.construct.crime_level, MIN_CRIME, MAX_CRIME)
+        lot.construct.crime_level = set_between(
+            lot.construct.crime_level, MIN_CRIME, MAX_CRIME)
 
 
 def energy(lot, player_status):
     if lot.construct != None:
         player_status.data['power'] += lot.construct.get('energy_change', 0)
-        player_status.data['power'] = set_between(player_status.data['power'], MAX_POWER_DEMAND, MAX_POWER_SUPPLY)
+        player_status.data['power'] = set_between(
+            player_status.data['power'], MAX_POWER_DEMAND, MAX_POWER_SUPPLY)
 
 
 def waste(lot, player_status):
     if lot.construct != None:
         player_status.data['waste'] += lot.construct.get('waste_change', 0)
-        player_status.data['waste'] = set_between(player_status.data['waste'], MAX_WASTE_FREE_SPACE, MAX_WASTE_PILE_UP)
+        player_status.data['waste'] = set_between(
+            player_status.data['waste'], MAX_WASTE_FREE_SPACE, MAX_WASTE_PILE_UP)
 
 
 def water(lot, player_status):
     if lot.construct != None:
         player_status.data['water'] += lot.construct.get('water_change', 0)
-        player_status.data['water'] = set_between(player_status.data['water'], MAX_WATER_DEMAND, MAX_WATER_SUPPLY)
+        player_status.data['water'] = set_between(
+            player_status.data['water'], MAX_WATER_DEMAND, MAX_WATER_SUPPLY)
 
 
 def economy_change(lot, player_status):
     if lot.construct != None:
         money_change = lot.construct.get('taxation', 0)
-        taxes_multiplier = min(lot.construct.happiness / HAPPYNESS_FOR_FULL_TAXES, 1) if not lot.construct.happiness is None else 1
+        taxes_multiplier = min(lot.construct.happiness / HAPPYNESS_FOR_FULL_TAXES,
+                               1) if not lot.construct.happiness is None else 1
         money_change *= (1 + player_status.data['taxation']) * taxes_multiplier
         money_change += lot.construct.get('income', 0)
         # print(money_change)
         player_status.data['funds'] += int(money_change)
-        player_status.data['funds'] = set_between(player_status.data['funds'], MIN_MONEY, MAX_MONEY)
+        player_status.data['funds'] = set_between(
+            player_status.data['funds'], MIN_MONEY, MAX_MONEY)
 
 
 def health(lot, player_status):
     if lot.construct != None:
-        player_status.data['health'] += lot.construct.people_involved * player_status.density()
-        player_status.data['health'] -= lot.construct.get('patients', 0) * HEALING_FACTOR
-        player_status.data['health'] = set_between(player_status.data['health'], MIN_HEALTH, None)
+        player_status.data['health'] += lot.construct.people_involved * \
+            player_status.density()
+        player_status.data['health'] -= lot.construct.get(
+            'patients', 0) * HEALING_FACTOR
+        player_status.data['health'] = set_between(
+            player_status.data['health'], MIN_HEALTH, None)
         if random() < PANDEMIC_CHANCE * player_status.density():
             for _ in range(PANDEMIC_SEVERITY):
                 if len(lot.current_events) < EVENTS_LIMIT:
@@ -98,21 +108,22 @@ def population(lot, player_status):
         happyness = player_status.data['resident_happyness']
         if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
             populus = randint(populus, set_between(
-                capacity * POPULATION_HAPPYNESS_COEF * happyness, 
-                (population + capacity)//2, 
+                capacity * POPULATION_HAPPYNESS_COEF * happyness,
+                (population + capacity)//2,
                 capacity
-                )
-                )
+            )
+            )
             player_status.data['population'] = populus
         if random() > happyness:
-            player_status.data['population'] = int(player_status.data['population'] * POPULATION_REDUCTION)
+            player_status.data['population'] = int(
+                player_status.data['population'] * POPULATION_REDUCTION)
 
 
 def construct_specific_simulation(lot, player_status):
     if lot.construct != None:
         # sims common among all constructs
         def f(x, y):
-            pass # empty function
+            pass  # empty function
         function = lot.construct.get('simulation_handler', None)
         if function is None:
             function = f
@@ -143,17 +154,22 @@ def update_events(lot, player_status):
 
 
 def satisfy_demand(player_status):
-    normalize = min(player_status.data['produce'], player_status.data['demand'])
+    normalize = min(player_status.data['produce'],
+                    player_status.data['demand'])
     player_status.data['goods'] += int(normalize * PRODUCE_TO_GODS)
     player_status.data['produce'] -= normalize
     player_status.data['demand'] -= normalize
 
 
 def calculate_demands(player_status):
-    player_status.data['commercial demand'] = level_to_demand(player_status.data['produce'], PRODUCE_THRESHOLDS)
-    player_status.data['industrial demand'] = level_to_demand(player_status.data['demand'], DEMAND_THRESHOLDS)
-    player_status.data['population demand'] = 'Very high' if top_demand(player_status) else level_to_demand(player_status.data['population'] * GOODS_PER_PERSON - player_status.data['goods'], GOODS_THRESHOLDS)
-    player_status.data['goods'] = max(0,  player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
+    player_status.data['commercial demand'] = level_to_demand(
+        player_status.data['produce'], PRODUCE_THRESHOLDS)
+    player_status.data['industrial demand'] = level_to_demand(
+        player_status.data['demand'], DEMAND_THRESHOLDS)
+    player_status.data['population demand'] = 'Very high' if top_demand(player_status) else level_to_demand(
+        player_status.data['population'] * GOODS_PER_PERSON - player_status.data['goods'], GOODS_THRESHOLDS)
+    player_status.data['goods'] = max(
+        0,  player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
 
 
 def calculate_happyness(lot):
@@ -165,6 +181,7 @@ def level_to_demand(value, threshold):
         if value <= threshold * i or i == len(DEMAND_LEVEL)-1:
             return DEMAND_LEVEL[i]
 
+
 def top_demand(player_status):
     top_demands = DEMAND_LEVEL[-2:]
     return player_status.data['commercial demand'] in top_demands and player_status.data['industrial demand'] in top_demands
@@ -174,7 +191,7 @@ SIMULATIONS = [
     fire,
     security,
     energy,
-    waste, 
+    waste,
     water,
     economy_change,
     health,
@@ -254,7 +271,7 @@ POPULATION_REDUCTION = 0.98
 MONEY_RETURN_PERCENT = 0.78
 
 
-#supply and demand constants
+# supply and demand constants
 BASE_DEMAND = 10
 PRODUCE_TO_GODS = 1.5
 GOODS_PER_PERSON = 1.5
@@ -272,10 +289,4 @@ DEMAND_LEVEL = [
     'Medium high',
     'High',
     'Very high'
-]
-
-
-# events name list
-EVENTS = [
-    'burning'
 ]
