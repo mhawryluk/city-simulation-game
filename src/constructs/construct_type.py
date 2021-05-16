@@ -21,7 +21,7 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'small house',
-                'capacity': 3,  # in people
+                'people_involved': 3,  # in people
                 'base_resident_happiness': 0.45,  # in percentage
                 'energy_change': -3,  # in units 
                 'water_consumption': 3,  # in units (UNIFY)
@@ -32,7 +32,7 @@ class ConstructType(Enum):
             },
             1: {
                 'name': 'family house',
-                'capacity': 5,
+                'people_involved': 5,
                 'base_resident_happiness': 0.55,
                 'energy_change': -6,
                 'water_consumption': 5,
@@ -43,7 +43,7 @@ class ConstructType(Enum):
             },
             2: {
                 'name': 'large residence',
-                'capacity': 7,
+                'people_involved': 7,
                 'base_resident_happiness': 0.65,
                 'energy_change': -10,
                 'water_consumption': 10,
@@ -62,7 +62,7 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'regular block',
-                'capacity': 90,  # in people
+                'people_involved': 90,  # in people
                 'base_resident_happiness': 0.2,  # in percentage
                 'energy_change': -99,  # in units
                 'water_consumption': 90,  # in units
@@ -73,7 +73,7 @@ class ConstructType(Enum):
             },
             1: {
                 'name': 'big block',
-                'capacity': 200,
+                'people_involved': 200,
                 'base_resident_happiness': 0.3,
                 'energy_change': -230,
                 'water_consumption': 200,
@@ -85,7 +85,7 @@ class ConstructType(Enum):
             },
             2: {
                 'name': 'high end block',
-                'capacity': 200,
+                'people_involved': 200,
                 'base_resident_happiness': 0.5,
                 'energy_change': -250,
                 'water_consumption': 210,
@@ -105,9 +105,9 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'small shop',
-                'employees': 3,
-                'income': 1000,
-                'products': 2,
+                'people_involved': 3,
+                'income': 1300,
+                'demand': 5,
                 'energy_change': -10,
                 'water_consumption': 5,
                 'waste_change': 20,
@@ -117,9 +117,9 @@ class ConstructType(Enum):
             1: {
                 'name': 'shop',
                 'description': 'Larger shop, meant to sustain a larger neighbourhood, be it of houses of city blocks.',
-                'employees': 10,
-                'income': 2000,
-                'products': 5,
+                'people_involved': 10,
+                'income': 2700,
+                'demand': 7,
                 'energy_change': -20,
                 'water_consumption': 10,
                 'waste_change': 40,
@@ -137,9 +137,9 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'factory',
-                'employees': 50,
-                'income': -6000,
-                'products': 15,
+                'people_involved': 50,
+                'income': -2500,
+                'produce': 15,
                 'energy_change': -100,
                 'water_consumption': 20,
                 'waste_change': 70,
@@ -159,7 +159,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'clinic',
                 'description': 'Small clinic.',
-                'patients': 10,
+                'people_involved': 10,
                 'income': -1000,
                 'energy_change': -50,
                 'water_consumption': 30,
@@ -170,7 +170,7 @@ class ConstructType(Enum):
             1: {
                 'name': 'hospital',
                 'description': 'Small hospital. Can house more people.',
-                'patients': 200,
+                'people_involved': 200,
                 'income': -10000,
                 'energy_change': -500,
                 'water_consumption': 300,
@@ -190,7 +190,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'Police outpost.',
                 'description': 'Smaller scale police outpost.',
-                'policemen': 5,
+                'people_involved': 5,
                 'income': 500,
                 'energy_change': -10,
                 'water_consumption': 5,
@@ -203,7 +203,7 @@ class ConstructType(Enum):
             1: {
                 'name': 'Police station',
                 'description': 'Local police headquarters.',
-                'policemen': 20,
+                'people_involved': 20,
                 'income': 1000,
                 'energy_change': -50,
                 'water_consumption': 20,
@@ -222,7 +222,7 @@ class ConstructType(Enum):
     #     'level':{
     #         0:{
     #             'name':'prison',
-    #             'employees': 50,
+    #             'people_involved': 50,
     #             'inmates': 200,
     #             'income': -5000,
     #             'energy_change': -150,
@@ -240,7 +240,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'fire station',
                 'description': 'A fire station. Keeps people hape that tere is a way for their house to be saved from nurning down.',
-                'firemen': 20,
+                'people_involved': 20,
                 'income': -2000,
                 'energy_change': -80,
                 'water_consumption': 400,
@@ -263,15 +263,14 @@ class ConstructType(Enum):
             0: {
                 'name': 'school',
                 'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
-                'teachers': 30,
-                'students': 4000,
+                'people_involved': 4030,
                 'income': -1000,
                 'energy_change': -500,
                 'water_consumption': 500,
                 'waste_change': 500,
                 'range': 3,
                 'city_income_multiplier': 1.01,
-                'resident_happiness_multiplier': 1.5,
+                'resident_happiness_multiplier': 2,
                 'images': [get_asset_path('SpecialBuildings', 'school0.png')]
             }
         }
@@ -284,14 +283,13 @@ class ConstructType(Enum):
             0: {
                 'name': 'school',
                 'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
-                'teachers': 500,
-                'students': 40000,
+                'people_involved': 40500,
                 'income': -10000,
                 'energy_change': -1000,
                 'water_consumption': 1000,
                 'waste_change': 1000,
                 'city_income_multiplier': 1.05,
-                'resident_happiness_multiplier': 1.9,
+                'resident_happiness_multiplier': 3.5,
                 'temperature_raise': 2,
                 'images': [get_asset_path('SpecialBuildings', 'school1.png')]
             }
@@ -305,7 +303,7 @@ class ConstructType(Enum):
     #         0:{
     #             'name': 'museum',
     #             'description': 'A multi-themed museum.',
-    #             'employees': 50,
+    #             'people_involved': 50,
     #             'income': 10000,
     #             'energy_change': -100,
     #             'water_consumption': 50,
@@ -323,7 +321,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'park',
                 'description': 'A perfect place for people to relax.',
-                'gardeners': 2,
+                'people_involved': 2,
                 'income': -200,
                 'energy_change': -2,
                 'water_consumption': 100,
@@ -334,7 +332,7 @@ class ConstructType(Enum):
             1: {
                 'name': 'dog park',
                 'description': 'Perfect place to rela and walk your pupils <3',
-                'gardeners': 5,
+                'people_involved': 5,
                 'income': -200,
                 'energy_change': -5,
                 'water_consumption': 110,
@@ -371,7 +369,7 @@ class ConstructType(Enum):
     #         0:{
     #             'name': 'amusement park',
     #             'description': 'An amusement park - increases resident happiness.',
-    #             'employees': 100,
+    #             'people_involved': 100,
     #             'customers': 1000,
     #             'income': 50000,
     #             'energy_change': -5000,
@@ -383,7 +381,7 @@ class ConstructType(Enum):
     #         0:{
     #             'name': 'water park',
     #             'description': 'An amusement park enriched with big pools and water slides - greatly increases resident happiness.',
-    #             'employees': 100,
+    #             'people_involved': 100,
     #             'customers': 1000,
     #             'income': 100000,
     #             'energy_change': -5000,
@@ -404,7 +402,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'landfill',
                 'description': 'Building to store the waste.',
-                'employees': 10,
+                'people_involved': 10,
                 'income': -1000,
                 'waste_change': -1000,
                 'resident_happiness_multiplier': 0.2,
@@ -416,7 +414,7 @@ class ConstructType(Enum):
             1: {
                 'name': 'waste processing station',
                 'description': 'Disposes of the waste and turns it into power.',
-                'employees': [50],
+                'people_involved': [50],
                 'income': -5000,
                 'energy_change': 1000,
                 'waste_change': -2000,
@@ -437,7 +435,7 @@ class ConstructType(Enum):
             0: {
                 'name': 'coal power plant',
                 'description': 'A power plant which uses coal and converts heat to electrical power.',
-                'maintenance': 50,
+                'people_involved': 50,
                 'income': -1000,
                 'energy_change': 2000,
                 'resident_happiness_multiplier': 0.5,
@@ -446,7 +444,7 @@ class ConstructType(Enum):
             # 1: {
             #     'name': 'sun power plant',
             #     'description': "Much more economical power plant with increased energy production - uses sunlight to create electricity.",
-            #     'maintenance': 50,
+            #     'people_involved': 50,
             #     'income': -10000,
             #     'energy_production': 8000,
             #     'resident_happiness_multiplier': 1.5,
@@ -457,7 +455,7 @@ class ConstructType(Enum):
             #     'name': 'nuclear power plant',
             #     'description': "High tech, state of the art facility. Produces large amounts of energy but reduces residents happiness and risks critical failure.",
             #     'income': -100000,
-            #     'maintenance': 100,
+            #     'people_involved': 100,
             #     'energy_production': 100000,
             #     'upgrade_cost': 1000000,
             #     'resident_happiness_multiplier': 0.8,
@@ -490,7 +488,7 @@ class ConstructType(Enum):
     #         0:{
     #             'name': ,
     #             'description': ,
-    #             'patients': ,
+    #             'people_involved': ,
     #             'income': ,
     #             'energy_change': -,
     #             'water_consumption': ,

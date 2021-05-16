@@ -17,7 +17,8 @@ def fire(lot, player_status):
         # calculating buildings fire protection
         for affected_by in lot.affected_by:
             fire_protection += randint(0,
-                                       affected_by.get('fire_protection', 0))
+                                       affected_by.get('fire_protection', 0)//2) * 2
+        fire_protection += lot.construct.get('fire_protection', 0)
         # adequately increasing temperature
         lot.construct.heat += lot.construct.get(
             'temperature_raise', DEFAULT_TEMPERATURE_RAISE) - fire_protection
@@ -71,7 +72,7 @@ def economy_change(lot, player_status):
 
 def health(lot, player_status):
     if lot.construct != None:
-        player_status.data['health'] += lot.construct.people_involved() * player_status.density()
+        player_status.data['health'] += lot.construct.people_involved * player_status.density()
         player_status.data['health'] -= lot.construct.get('patients', 0) * HEALING_FACTOR
         player_status.data['health'] = set_between(player_status.data['health'], MIN_HEALTH, None)
         if random() < PANDEMIC_CHANCE * player_status.density():
@@ -80,13 +81,15 @@ def health(lot, player_status):
             player_status.data['health'] *= 1 + PANDEMIC_COEF
 
 
-def produce_demand(lot, player_status):
+def produce(lot, player_status):
     if lot.construct != None:
         player_status.data['produce'] += lot.construct.get('produce', 0)
-        player_status.data['demand'] += min(lot.construct.get('demand', 0), BASE_DEMAND) * (1 + player_status.density())
-        normalize = min(player_status.data['produce'], player_status.data['demand'])
-        player_status.data['produce'] -= normalize
-        player_status.data['demand'] -= normalize
+
+
+def demand(lot, player_status):
+    if lot.construct != None:
+        player_status.data['demand'] += lot.construct.get('demand', 0)
+
 
 def population(lot, player_status):
     if lot.construct != None:
@@ -101,7 +104,7 @@ def population(lot, player_status):
                 )
                 )
             player_status.data['population'] = populus
-        if random > happyness:
+        if random() > happyness:
             player_status.data['population'] = int(player_status.data['population'] * POPULATION_REDUCTION)
 
 
@@ -127,8 +130,32 @@ def update_events(lot):
         lot.current_events.remove('pandemic')
 
 
+def satisfy_demand(player_status):
+    normalize = min(player_status.data['produce'], player_status.data['demand'])
+    player_status.data['goods'] += int(normalize * PRODUCE_TO_GODS)
+    player_status.data['produce'] -= normalize
+    player_status.data['demand'] -= normalize
+
+
+def calculate_demands(player_status):
+    player_status.data['commercial demand'] = level_to_demand(player_status.data['produce'], PRODUCE_THRESHOLDS)
+    player_status.data['industrial demand'] = level_to_demand(player_status.data['demand'], DEMAND_THRESHOLDS)
+    player_status.data['population demand'] = 'Very high' if top_demand(player_status) else level_to_demand(player_status.data['population'] * GOODS_PER_PERSON - player_status.data['goods'], GOODS_THRESHOLDS)
+    player_status.data['goods'] = max(0,  player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
+
+
 def calculate_happyness(lot):
     return 1 if lot.construct is None or lot.construct.happiness is None else lot.construct.happiness
+
+
+def level_to_demand(value, threshold):
+    for i in range(len(DEMAND_LEVEL)):
+        if value <= threshold * i or i == len(DEMAND_LEVEL)-1:
+            return DEMAND_LEVEL[i]
+
+def top_demand(player_status):
+    top_demands = DEMAND_LEVEL[-2:]
+    return player_status.data['commercial demand'] in top_demands and player_status.data['industrial demand'] in top_demands
 
 
 SIMULATIONS = [
@@ -138,16 +165,20 @@ SIMULATIONS = [
     waste, 
     water,
     economy_change,
+    health,
+    produce,
+    demand,
+    population,
     construct_specific_simulation
 ]
 
 
 # fire related constants
 HEAT_THRESHOLD = 20
-HEAT_EXPANSION = 3
+HEAT_EXPANSION = 2
 MAX_HEAT = 60
 MIN_HEAT = -5
-DEFAULT_TEMPERATURE_RAISE = 2
+DEFAULT_TEMPERATURE_RAISE = 1
 FIRE_THRESHOLD = 50
 
 
@@ -188,10 +219,6 @@ MIN_MONEY = 0
 MAX_MONEY = 1e9
 
 
-#supply and demand constants
-BASE_DEMAND = 10
-
-
 # health constatnts
 HEALING_FACTOR = 5
 MIN_HEALTH = 0
@@ -207,6 +234,27 @@ POPULATION_REDUCTION = 0.98
 
 # buldoze constants
 MONEY_RETURN_PERCENT = 0.78
+
+
+#supply and demand constants
+BASE_DEMAND = 10
+PRODUCE_TO_GODS = 1.5
+GOODS_PER_PERSON = 1.5
+PRODUCE_THRESHOLDS = 25
+DEMAND_THRESHOLDS = 45
+GOODS_THRESHOLDS = 10
+
+
+# demand levels
+DEMAND_LEVEL = [
+    'Very low',
+    'Low',
+    'Satisfyable',
+    'Medium',
+    'Medium high',
+    'High',
+    'Very high'
+]
 
 
 # events name list

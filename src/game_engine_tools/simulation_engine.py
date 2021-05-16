@@ -1,7 +1,7 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
-from .simulation_tools import SIMULATIONS, calculate_happyness
+from .simulation_tools import SIMULATIONS, calculate_happyness, satisfy_demand, calculate_demands
 
 
 class SimulationEngine:
@@ -26,6 +26,8 @@ class SimulationEngine:
                         simulation(lot, self.player_status)
                     # construct_specific_simulation(lot, self.player_status)
                     self.player_status.data['resident_happyness'] *= calculate_happyness(lot)
+            satisfy_demand(self.player_status)
+            calculate_demands(self.player_status)
         else:
             self.fps_in_cycle += 1
 
@@ -45,6 +47,8 @@ class SimulationEngine:
         construct = lot.construct
         
         if not construct is None:
+            if construct.like('home'):
+                self.player_status.data['capacity'] += construct.people_involved if not remove else -construct.people_involved
             # print(construct.get('name', None), construct.get('range', 0))
             construct_range = int(construct.get('range', 0))
             pollution = float(construct.get('pollution', 0))

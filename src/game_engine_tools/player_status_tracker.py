@@ -9,6 +9,7 @@ class PlayerStatus:
                 'work places': 0,
                 'produce': 0,
                 'demand': 0,
+                'goods': 0,
                 'health': 0,
                 'resident_happyness': 1,
                 'power': 0,
