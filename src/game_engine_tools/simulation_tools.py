@@ -36,7 +36,7 @@ def security(lot, player_status):
         coefficient *= 1 if lot.construct.happiness is None else lot.construct.happiness
         crime_appeal = BURGLARY_APPEAL * coefficient
         for affected_by in lot.affected_by:
-            security += randint(0, affected_by.get('security', 1))
+            security += affected_by.get('security', 0.05)
         lot.construct.crime_level += crime_appeal - security
         lot.construct.crime_level = set_between(
             lot.construct.crime_level, MIN_CRIME, MAX_CRIME)
@@ -218,10 +218,10 @@ HAPPYNES_DIVISOR = 2
 
 
 # security constatnts
-BURGLARY_APPEAL = 2
+BURGLARY_APPEAL = 1.1
 MIN_CRIME = 0
 MAX_CRIME = 15
-CRIME_THRESHOLD = 10
+CRIME_THRESHOLD = 11
 
 
 # power cosntsatnts
