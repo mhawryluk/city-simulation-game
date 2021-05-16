@@ -93,3 +93,7 @@ class Construct:
 
     def like(self, cmp_likeness):
         return cmp_likeness in self.get('likeness', [])
+
+    def multiply_happiness(self, by):
+        if not self.happiness is None:
+            self.happiness *= by

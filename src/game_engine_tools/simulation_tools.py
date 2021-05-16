@@ -130,15 +130,26 @@ def construct_specific_simulation(lot, player_status):
         function(lot, player_status)
 
 
-def update_events(lot):
+def update_events(lot, player_status):
     if lot.construct != None:
         lot.current_events = []
-        if lot.construct.heat > FIRE_THRESHOLD:
-            lot.current_events.append('burning')
-        if lot.construct.crime_level > CRIME_THRESHOLD:
-            lot.current_events.append('burglary')
 
-        lot.current_events.remove('pandemic')
+        if lot.construct.heat >= FIRE_THRESHOLD:
+            print('BURN BABY BURN')
+            lot.current_events.append('burning')
+            lot.construct.multiply_happiness(1/HAPPYNES_DIVISOR)
+        elif 'burning' in lot.current_events:
+            lot.current_events.remove('burning')
+            lot.construct.multiply_happiness(HAPPYNES_DIVISOR)
+        if lot.construct.crime_level >= CRIME_THRESHOLD:
+            lot.current_events.append('burglary')
+            lot.construct.multiply_happiness(1/HAPPYNES_DIVISOR)
+        elif 'burglary' in lot.current_events:
+            lot.current_events.remove('burglary')
+            lot.construct.multiply_happiness(HAPPYNES_DIVISOR)
+
+        if 'pandemic' in lot.current_events:
+            lot.current_events.remove('pandemic')
 
 
 def satisfy_demand(player_status):
@@ -186,24 +197,26 @@ SIMULATIONS = [
     produce,
     demand,
     population,
+    update_events,
     construct_specific_simulation
 ]
 
 
 # fire related constants
-HEAT_THRESHOLD = 20
+HEAT_THRESHOLD = 5
 HEAT_EXPANSION = 2
-MAX_HEAT = 60
+MAX_HEAT = 15
 MIN_HEAT = -5
 DEFAULT_TEMPERATURE_RAISE = 1
-FIRE_THRESHOLD = 50
+FIRE_THRESHOLD = 10
+HAPPYNES_DIVISOR = 2
 
 
 # security constatnts
 BURGLARY_APPEAL = 2
 MIN_CRIME = 0
-MAX_CRIME = 50
-CRIME_THRESHOLD = 40
+MAX_CRIME = 15
+CRIME_THRESHOLD = 10
 
 
 # power cosntsatnts
