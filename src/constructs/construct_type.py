@@ -196,6 +196,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_change': 5,
                 'resident_happiness_multiplier': 1.7,
+                'range': 3,
                 'fire_protection': 1,
                 'security': 3,
                 'images': [get_asset_path('SpecialBuildings', 'police0.png')]
@@ -209,6 +210,7 @@ class ConstructType(Enum):
                 'water_consumption': 20,
                 'waste_change': 20,
                 'resident_happiness_multiplier': 1.8,
+                'range': 5,
                 'upgrade_cost': 10000,
                 'fire_protection': 2,
                 'security': 5,
