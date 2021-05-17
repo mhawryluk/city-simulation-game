@@ -37,6 +37,7 @@ def security(lot, player_status):
         crime_appeal = BURGLARY_APPEAL * coefficient
         for affected_by in lot.affected_by:
             security += affected_by.get('security', 0.05)
+        security += lot.construct.get('security', 0.05)
         lot.construct.crime_level += crime_appeal - security
         lot.construct.crime_level = set_between(
             lot.construct.crime_level, MIN_CRIME, MAX_CRIME)
