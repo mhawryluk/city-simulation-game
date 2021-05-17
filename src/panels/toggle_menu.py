@@ -10,7 +10,7 @@ class ToggleMenu(Panel):
         self.subpanel = panel
         self.menu = pgmen.Menu(
             title="toggle", theme=self.get_theme(), width=width, height=height, position=position)
-        self.menu.add.button("SHOW MENU", self.toggle)
+        self.menu.add.button("show menu", self.toggle)
 
     def toggle(self):
         self.subpanel.disable_subpanels()
@@ -20,4 +20,6 @@ class ToggleMenu(Panel):
     def get_theme(self):
         theme = super().get_theme()
         theme.background_color = (0, 0, 0, 0)
+        theme.widget_font_size -= 2
+        theme.widget_box_margin = (0, 0)
         return theme

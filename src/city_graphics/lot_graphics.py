@@ -96,7 +96,7 @@ class LotGraphics:
 
         if 'burglary' in events:
             icon_size = int(scale/2)
-            image = cls.burglary_images[cls.frame//3 %
+            image = cls.burglary_images[cls.frame//10 %
                                         len(cls.burglary_images)]
             scaled_image = pg.transform.scale(image, (icon_size, icon_size))
             cls.window.blit(scaled_image, (x + scale/2 -

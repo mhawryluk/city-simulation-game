@@ -45,6 +45,7 @@ class Lot:
     def remove_construct(self):
         self.construct = None
         self.construct_level = 0
+        self.current_events = []
         self.zone_type = None
 
     def can_place(self, construct):

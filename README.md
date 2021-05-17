@@ -18,15 +18,15 @@ Project for Python programming class
 #### (19.04 - 16.05):
 - [x] symulacja procesów miejskich (odpowiednie funkcje programu symulujące zdarzenia jak ruch uliczny itp)
 - [x] zdarzenia losowe
-- [ ] opcje zarządzania miastem i budynkami
-- [ ] ulepszenia budynków
+- [x] opcje zarządzania miastem i budynkami
+- [x] ulepszenia budynków
 - [x] system potrzeb i zadowolenia mieszkańców
-- [ ] komunikaty dotyczące stanu miasta, 
+- [x] komunikaty dotyczące stanu miasta, 
 - [x] statystyki oraz mechanizmy symulujące ekonomię
 
 
 ## obecne TODO:
-- [ ] ustawianie strefy klikając, na razie jest tylko przeciągając
+- [x] ustawianie strefy klikając, na razie jest tylko przeciągając
 - [x] dom jest za duży
 - [x] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
 - [x] dźwięki gry
@@ -35,8 +35,8 @@ Project for Python programming class
 - [ ] zoom nie działa prawidłowo?
 - [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
 - [x] okienko z pieniędzmi i satysfakcją 
-- [ ] upgrade
-- [ ] bulldoze - wyłączyć przy zmianie trybu
+- [x] upgrade
+- [x] bulldoze - wyłączyć przy zmianie trybu
 - [x] okienko upgrade'u pojawia się np. przy wyburzaniu
 - [x] zapisywanie stref
 

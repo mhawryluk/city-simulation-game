@@ -132,7 +132,7 @@ def construct_specific_simulation(lot, player_status):
 
 def update_events(lot, player_status):
     if lot.construct != None:
-        print(lot.current_events)
+        # print(lot.current_events)
 
         if lot.construct.heat >= FIRE_THRESHOLD:
             if len(lot.current_events) < EVENTS_LIMIT:
@@ -203,7 +203,7 @@ SIMULATIONS = [
 ]
 
 
-#evenr limit
+# event limit
 EVENTS_LIMIT = 10
 
 
