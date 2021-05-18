@@ -17,7 +17,7 @@ import pygame as pg
 
 
 class GameWindow(GameMode):
-    def __init__(self, window, save_manager, height, width):
+    def __init__(self, window, save_manager, height, width, map=None):
         super().__init__(window, save_manager)
 
         saved_data = save_manager.get_gameplay_data()
@@ -40,7 +40,7 @@ class GameWindow(GameMode):
         # befriended classes
         self.city_space = CitySpace(
             width, height,
-            save_source=saved_data.get('city_space', None))
+            save_source=saved_data.get('city_space', None), map=map)
         self.city_graphics = CitySpaceGraphics(self.city_space, width, height)
 
         self.simulator = SimulationEngine(self.city_space, saved_data)
