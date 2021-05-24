@@ -9,9 +9,9 @@ import pygame as pg
 class LotGraphics:
     frame = 0
     zone_highlighting = False
-    zone_colors = {'residential': (61, 143, 102),
-                   'commercial': (92, 153, 214),
-                   'industrial': (173, 102, 31)}
+    zone_colors = {'residential': 0x60d394,
+                   'commercial': 0x8fb8ed,
+                   'industrial': 0xffd97d}
     animation_speed = 50
 
     @classmethod
