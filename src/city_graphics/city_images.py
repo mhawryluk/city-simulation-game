@@ -70,6 +70,16 @@ class CityImages:
             ]
         }
 
+        self.vertical_road = load_asset('Streets', 'street_vertical.png')
+        self.horizontal_road = load_asset('Streets', 'street_horizontal.png')
+
+        self.animation_images = {
+            'fire': [load_asset('Animations', f'flame{i}.png') for i in range(5)],
+            'unhappy': [load_asset('Status', 'icon_sad.png'), load_asset('Status', 'icon_cry.png')],
+            'pandemic': [load_asset('Animations', f'coronavirus-red-rim-light-pulse_{i}.png') for i in range(7)],
+            'burglary': [load_asset('Animations', 'Roll jump', f'rj_{i:03}.png') for i in range(37)]
+        }
+
         self.scaled_main_images = self.main_images
         self.scaled_additional_images = self.additional_images
 
@@ -89,6 +99,17 @@ class CityImages:
 
     def get_icon(self, icon):
         return self.icons[icon]
+
+    def get_vertical_road(self, scale):
+        return pg.transform.scale(self.vertical_road, scale)
+
+    def get_horizontal_road(self, scale):
+        return pg.transform.scale(self.horizontal_road, scale)
+
+    def get_animation_image(self, animation_type, frame, size):
+        image = self.animation_images[animation_type][frame % len(
+            self.animation_images[animation_type])]
+        return pg.transform.scale(image, (size, size))
 
 
 CITY_IMAGES = CityImages()

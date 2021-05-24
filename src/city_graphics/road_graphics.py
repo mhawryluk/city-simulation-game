@@ -1,26 +1,20 @@
 from city_graphics import ROAD_WIDTH_RATIO
+from city_graphics.city_images import CITY_IMAGES
 from city import HORIZONTAL, VERTICAL
 from itertools import product
 import pygame as pg
-from game_engine_tools import load_asset
 
 
 class RoadGraphics:
-    vertical_picture = load_asset(
-        'Streets', 'street_vertical.png')
-    horizontal_picture = load_asset(
-        'Streets', 'street_horizontal.png')
 
     @classmethod
     def draw(cls, roads, pov, scale):
-        picture = pg.transform.scale(
-            cls.vertical_picture, cls.get_vertical_size(scale))
+        picture = CITY_IMAGES.get_vertical_road(cls.get_vertical_size(scale))
         for pos_x, pos_y in roads.vertical:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
-        picture = pg.transform.scale(
-            cls.horizontal_picture, cls.get_horizontal_size(scale))
-
+        picture = CITY_IMAGES.get_horizontal_road(
+            cls.get_horizontal_size(scale))
         for pos_x, pos_y in roads.horizontal:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
