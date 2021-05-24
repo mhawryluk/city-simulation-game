@@ -4,6 +4,7 @@ from panels.option_panel import OptionPanel
 from panels.stat_panel import StatPanel
 from panels.panel import Panel
 from game_engine_tools import WINDOW_SIZE, get_asset_path
+from city_graphics.city_images import CITY_IMAGES
 
 
 class GameWindowPanel(Panel):
@@ -33,23 +34,23 @@ class GameWindowPanel(Panel):
 
         # BUTTONS
         scale = (0.1, 0.1)
-        self.menu.add.image(get_asset_path(
-            'Icons2', 'play-button.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('play-button'), scale=scale)
         self.play_button = self.menu.add.button("play", self.play)
         self.menu.add.label(' ')
 
-        self.menu.add.image(get_asset_path('Icons2', 'road.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('road'), scale=scale)
         self.road_button = self.menu.add.button("add roads", self.add_road)
         self.menu.add.label(' ')
-        self.menu.add.image(get_asset_path('Icons2', 'crane.png'), scale=scale)
+
+        self.menu.add.image(CITY_IMAGES.get_icon('crane'), scale=scale)
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
         self.menu.add.label(' ')
         # self.stats_button = self.menu.add.button(
         #     "stats", self.stats)
 
-        self.menu.add.image(get_asset_path(
-            'Icons2', 'settings-knobs.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon(
+            'settings-knobs'), scale=scale)
         self.options_button = self.menu.add.button(
             "options", self.options)
         self.menu.add.label(' ')

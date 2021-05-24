@@ -3,6 +3,7 @@ from panels.panel import Panel
 from panels.special_buildings_panel import BuySpecialBuildingPanel
 from panels.zoning_panel import ZoningPanel
 from game_engine_tools import get_asset_path
+from city_graphics.city_images import CITY_IMAGES
 
 
 class BuildModePanel(Panel):
@@ -35,21 +36,21 @@ class BuildModePanel(Panel):
 
         # BUTTONS
         scale = (0.075, 0.075)
-        self.menu.add.image(get_asset_path('Icons', 'modern-city.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('modern-city'), scale=scale)
         self.zoning_button = self.menu.add.button(
             "zone buildings", self.zone_buildings)
 
         self.menu.add.label(' ')
         self.menu.add.label(' ')
-        
-        self.menu.add.image(get_asset_path('Icons', 'capitol.png'), scale=scale)
+
+        self.menu.add.image(CITY_IMAGES.get_icon('capitol'), scale=scale)
         self.buy_building_button = self.menu.add.button(
             "special buildings", self.special_buildings)
 
         self.menu.add.label(' ')
         self.menu.add.label(' ')
 
-        self.menu.add.image(get_asset_path('Icons', 'bulldozer.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('bulldozer'), scale=scale)
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
 

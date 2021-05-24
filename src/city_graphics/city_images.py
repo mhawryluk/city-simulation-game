@@ -2,7 +2,7 @@ from city.lot_type import LotType
 import pygame as pg
 import os
 from random import random, choice, seed
-from game_engine_tools import load_asset
+from game_engine_tools import load_asset, get_asset_path
 
 
 class CityImages:
@@ -48,6 +48,28 @@ class CityImages:
             LotType.WATER: 0.005
         }
 
+        self.icons = {
+            key: get_asset_path('Icons2', f'{key}.png') for key in [
+                'play-button',
+                'modern-city',
+                'capitol',
+                'bulldozer',
+                'road',
+                'crane',
+                'settings-knobs',
+                'banknote',
+                'heart-inside',
+                'person',
+                'drop',
+                'trash-can',
+                'plug',
+                'recycle',
+                'house',
+                'shop',
+                'factory'
+            ]
+        }
+
         self.scaled_main_images = self.main_images
         self.scaled_additional_images = self.additional_images
 
@@ -64,3 +86,9 @@ class CityImages:
         if lot_type in self.scaled_additional_images and random() < self.frequency[lot_type]:
             images += [choice(self.scaled_additional_images[lot_type])]
         return images
+
+    def get_icon(self, icon):
+        return self.icons[icon]
+
+
+CITY_IMAGES = CityImages()

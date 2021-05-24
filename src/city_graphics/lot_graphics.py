@@ -1,5 +1,6 @@
 from game_engine_tools import WINDOW_SIZE
 from city_graphics import ROAD_WIDTH_RATIO
+from city_graphics.city_images import CITY_IMAGES
 import game_engine_tools.simulation_tools as sim_consts
 from game_engine_tools import load_asset
 import pygame as pg
@@ -28,7 +29,7 @@ class LotGraphics:
             return
 
         # lot type pictures
-        for picture in cls.city_images.get_images(lot.type, lot.seed):
+        for picture in CITY_IMAGES.get_images(lot.type, lot.seed):
             cls.window.blit(picture, (x, y))
 
     @classmethod

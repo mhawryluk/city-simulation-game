@@ -1,6 +1,6 @@
 import pygame_menu as pgmen
 from panels.panel import Panel
-from game_engine_tools import get_asset_path
+from city_graphics.city_images import CITY_IMAGES
 
 
 class InfoPanel(Panel):
@@ -33,24 +33,19 @@ class InfoPanel(Panel):
 
         scale = (0.048, 0.048)
         self.menu.add.label('')
-        self.menu.add.image(get_asset_path(
-            'Icons', 'banknote.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'heart-inside.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'person.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'drop.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'trash-can.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'plug.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'recycle.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('banknote'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('heart-inside'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('person'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('drop'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('trash-can'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('plug'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('recycle'), scale=scale)
 
         self.menu.add.label('')
         self.menu.add.label('')
-        self.menu.add.image(get_asset_path('Icons', 'house.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'shop.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'factory.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('house'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('shop'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('factory'), scale=scale)
 
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))
