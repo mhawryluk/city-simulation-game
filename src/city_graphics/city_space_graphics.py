@@ -21,7 +21,7 @@ class CitySpaceGraphics:
         # pov - point of origin from which we're drawing
         self.pov_x = WINDOW_SIZE[0] // 2
         self.pov_y = WINDOW_SIZE[1] // 2
-        self.scale = 150  # defines the zoom
+        self.scale = 50  # defines the zoom
         self.move_speed = (0, 0)  # added to pov in each frame
 
         self.selected_lot = None  # square selected with lmb
@@ -112,12 +112,13 @@ class CitySpaceGraphics:
                 return
 
             hovered_lot = self.get_clicked_lot(pos)
-            hovered_lot.hovered = True
+            if hovered_lot:
+                hovered_lot.hovered = True
 
-            if self.hovered_lot and self.hovered_lot != hovered_lot:
-                self.hovered_lot.hovered = False
+                if self.hovered_lot and self.hovered_lot != hovered_lot:
+                    self.hovered_lot.hovered = False
 
-            self.hovered_lot = hovered_lot
+                self.hovered_lot = hovered_lot
 
     def add_move_speed(self, move_speed):
         self.move_speed = (
@@ -140,7 +141,8 @@ class CitySpaceGraphics:
              self.scale*self.width//2) // self.scale
         y = (mouse_pos[1] - self.pov_y +
              self.scale*self.height//2) // self.scale
-        return self.city_space.lots[x][y]
+        if x < self.width and y < self.height:
+            return self.city_space.lots[x][y]
 
     def get_clicked_road(self, mouse_pos):
         if mouse_pos is None:

@@ -24,6 +24,9 @@ class CitySpace:
         zastąpić wczytywaniem z save'a
         '''
         self.lots = []
+        print('width', self.width)
+        print('height', self.height)
+
         if save_source is None:
             if map is not None:
                 for x in range(self.width):

@@ -34,14 +34,14 @@ class GameWindowPanel(Panel):
         # BUTTONS
         scale = (0.1, 0.1)
         self.menu.add.image(get_asset_path(
-            'Icons', 'play-button.png'), scale=scale)
+            'Icons2', 'play-button.png'), scale=scale)
         self.play_button = self.menu.add.button("play", self.play)
         self.menu.add.label(' ')
 
-        self.menu.add.image(get_asset_path('Icons', 'road.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons2', 'road.png'), scale=scale)
         self.road_button = self.menu.add.button("add roads", self.add_road)
         self.menu.add.label(' ')
-        self.menu.add.image(get_asset_path('Icons', 'crane.png'), scale=scale)
+        self.menu.add.image(get_asset_path('Icons2', 'crane.png'), scale=scale)
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
         self.menu.add.label(' ')
@@ -49,7 +49,7 @@ class GameWindowPanel(Panel):
         #     "stats", self.stats)
 
         self.menu.add.image(get_asset_path(
-            'Icons', 'settings-knobs.png'), scale=scale)
+            'Icons2', 'settings-knobs.png'), scale=scale)
         self.options_button = self.menu.add.button(
             "options", self.options)
         self.menu.add.label(' ')

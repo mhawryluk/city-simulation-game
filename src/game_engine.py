@@ -25,7 +25,7 @@ class GameEngine:
         self.clock = pg.time.Clock()
         self.save_manager = SaveManager()
         self.game_mode = MainMenu(self.window, self.save_manager)
-        self.map_name = 'map1'
+        self.map_name = 'map2'
 
     def run(self):
         self.running = True
@@ -60,6 +60,6 @@ class GameEngine:
                     self.window, self.save_manager, 10, 10)
             else:
                 self.game_mode = GameWindow(
-                    self.window, self.save_manager, map['width'], map['height'], map['map'])
+                    self.window, self.save_manager, map['height'], map['width'], map['map'])
         else:
             self.game_mode = MainMenu(self.window, self.save_manager)
