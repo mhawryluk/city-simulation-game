@@ -70,8 +70,8 @@ class CityImages:
             ]
         }
 
-        self.vertical_road = load_asset('Streets', 'street_vertical.png')
-        self.horizontal_road = load_asset('Streets', 'street_horizontal.png')
+        self.vertical_road = load_asset('Streets', 'vertical.png')
+        self.horizontal_road = load_asset('Streets', 'horizontal.png')
 
         self.animation_images = {
             'fire': [load_asset('Animations', f'flame{i}.png') for i in range(5)],
