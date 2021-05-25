@@ -12,8 +12,7 @@ class InfoPanel(Panel):
         # menu
         self.menu = pgmen.Menu('your city: ', width=width,
                                height=height, position=position,
-                               theme=self.get_theme(), columns=2, rows=13
-                               )
+                               theme=self.get_theme(), columns=2, rows=13)
 
         # info
         self.menu.add.label('---- r e s o u r c e s ----')

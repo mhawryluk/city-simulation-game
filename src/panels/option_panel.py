@@ -12,7 +12,7 @@ class OptionPanel(Panel):
                                width=width, height=height,
                                position=(50, 50),
                                theme=self.get_theme(),
-                               mouse_enabled=True, mouse_motion_selection=True,
+                               mouse_enabled=True,
                                enabled=False)
         self.menu.add.button("save", self.save)
         self.menu.add.button("main menu", self.main_menu)
@@ -23,6 +23,7 @@ class OptionPanel(Panel):
         self.menu.add.label('')
 
         self.menu.add.button("test", test(game_window))
+        self.unselect_selected_widget()
 
     def main_menu(self):
         self.game_window.change_mode = True

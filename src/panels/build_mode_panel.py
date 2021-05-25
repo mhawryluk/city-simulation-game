@@ -20,7 +20,7 @@ class BuildModePanel(Panel):
                                theme=self.get_theme(),
                                columns=10, rows=1,
                                enabled=False,
-                               mouse_enabled=True, mouse_motion_selection=True)
+                               mouse_enabled=True)
 
         # ZONING PANEL
         self.zone_building_panel = ZoningPanel(
@@ -39,6 +39,8 @@ class BuildModePanel(Panel):
         self.menu.add.image(CITY_IMAGES.get_icon('modern-city'), scale=scale)
         self.zoning_button = self.menu.add.button(
             "zone buildings", self.zone_buildings)
+
+        self.zoning_button.select(False)
 
         self.menu.add.label(' ')
         self.menu.add.label(' ')
@@ -62,6 +64,7 @@ class BuildModePanel(Panel):
 
         if enabled:
             self.special_building_panel.disable()
+            self.unselect_selected_widget()
         else:
             self.special_building_panel.enable()
 
@@ -73,17 +76,19 @@ class BuildModePanel(Panel):
 
         if enabled:
             self.zone_building_panel.disable()
+            self.game_window.zoning = False
+            self.unselect_selected_widget()
         else:
             self.zone_building_panel.enable()
 
     def bulldoze(self):
         self.disable_subpanels()
-        self.game_window.bulldozing = True
+        if not self.game_window.bulldozing:
+            self.game_window.bulldozing = True
+            self.game_window.zoning = False
+        else:
+            self.game_window.bulldozing = False
+            self.unselect_selected_widget()
 
     def get_subpanels(self):
         return [self.special_building_panel, self.zone_building_panel]
-
-    def disable_subpanels(self):
-        super().disable_subpanels()
-        self.game_window.zoning = False
-        self.game_window.bulldozing = False

@@ -10,9 +10,14 @@ class ToggleMenu(Panel):
         self.subpanel = panel
         self.menu = pgmen.Menu(
             title="toggle", theme=self.get_theme(), width=width, height=height, position=position)
-        self.menu.add.button("show menu", self.toggle)
+        self.button = self.menu.add.button("show menu", self.toggle)
 
     def toggle(self):
+        if self.subpanel.menu.is_enabled():
+            self.button.select(False)
+        else:
+            self.button.select(True)
+
         self.subpanel.disable_subpanels()
         self.subpanel.menu.toggle()
         self.game_window.info_panel.menu.toggle()

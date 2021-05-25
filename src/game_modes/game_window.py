@@ -194,6 +194,8 @@ class GameWindow(GameMode):
         else:
             self.zoning = False
 
+        return self.zoning
+
     def toggle_zone_highlighting(self, set=None):
         if not set is None:
             LotGraphics.zone_highlighting = set

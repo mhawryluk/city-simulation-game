@@ -20,11 +20,12 @@ class BuySpecialBuildingPanel(Panel):
                                position=position,
                                rows=1, columns=41,
                                theme=self.get_theme(),
-                               enabled=False, mouse_motion_selection=True)
+                               enabled=False)
         for construct in ConstructType:
             if not construct.value.get('zone', None):
                 self.menu.add.button(
                     construct.name.replace('_', ' '), self.building_window_function(construct))
+        self.unselect_selected_widget()
 
     def building_window_function(self, construct):
         '''zwraca funkcje wywoływane przy kilnięciu na przycisk'''
@@ -38,13 +39,12 @@ class BuySpecialBuildingPanel(Panel):
                     self.BUY_WINDOW_POSITION, self.game_window, construct, self)
 
             else:
-                self.disable()
+                self.enabled_window.disable()
+                self.enabled_window = None
+                self.unselect_selected_widget()
 
         return func
 
-    def disable(self):
-        super().disable()
-        self.enabled_window = None
 
     def get_subpanels(self):
         return [self.enabled_window]
@@ -79,6 +79,7 @@ class BuyBuildingWindow(Panel):
 
         # BUTTONS
         self.menu.add.button('BUY', self.buy)
+        self.unselect_selected_widget()
 
     def buy(self):
         if self.game_window.simulator.can_buy(self.construct):

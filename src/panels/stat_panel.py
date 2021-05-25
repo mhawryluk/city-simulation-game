@@ -9,7 +9,7 @@ class StatPanel(Panel):
                                width=width, height=height,
                                position=(50, 50),
                                theme=self.get_theme(),
-                               mouse_enabled=True, mouse_motion_selection=True,
+                               mouse_enabled=True,
                                enabled=False)
 
     def get_theme(self):

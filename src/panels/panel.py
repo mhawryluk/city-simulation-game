@@ -87,3 +87,6 @@ class Panel:
         for panel in self.get_subpanels():
             if not panel is None:
                 panel.disable_all_panels()
+
+    def unselect_selected_widget(self):
+        self.menu.get_selected_widget().select(False)

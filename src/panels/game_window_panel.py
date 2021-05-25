@@ -16,7 +16,7 @@ class GameWindowPanel(Panel):
                                width=width, height=height,
                                position=(0, 0),
                                theme=self.get_theme(),
-                               mouse_enabled=True, mouse_motion_selection=True)
+                               mouse_enabled=True)
 
         # BUILD MODE PANEL
         self.build_mode_panel = BuildModePanel(
@@ -70,7 +70,13 @@ class GameWindowPanel(Panel):
 
     def add_road(self):
         self.disable_subpanels()
-        self.game_window.mode = "road_placing" if self.game_window.mode != "road_placing" else "game_mode"
+
+        if self.game_window.mode != "road_placing":
+            self.game_window.mode = "road_placing"
+        else:
+            self.game_window.mode = "game_mode"
+            self.unselect_selected_widget()
+
         self.game_window.zoning = False
         self.game_window.upgrade_panel.disable()
 
@@ -84,6 +90,7 @@ class GameWindowPanel(Panel):
 
         if enabled:
             self.stat_panel.disable()
+            self.unselect_selected_widget()
         else:
             self.stat_panel.enable()
 
@@ -95,6 +102,7 @@ class GameWindowPanel(Panel):
         self.disable_subpanels()
         if enabled:
             self.option_panel.disable()
+            self.unselect_selected_widget()
         else:
             self.option_panel.enable()
 
@@ -106,6 +114,8 @@ class GameWindowPanel(Panel):
 
         if enabled:
             self.build_mode_panel.disable()
+            self.unselect_selected_widget()
+            self.build_mode_panel.unselect_selected_widget()
         else:
             self.build_mode_panel.enable()
 
