@@ -4,6 +4,7 @@ from panels.toggle_menu import ToggleMenu
 from panels.info_panel import InfoPanel
 from panels.upgrade_panel import UpgradePanel
 from panels.warning_panel import WarningPanel
+from panels.speed_panel import SpeedPanel
 from city.city_space import CitySpace
 from city.lot import Lot
 from city_graphics.lot_graphics import LotGraphics
@@ -12,7 +13,6 @@ from city_graphics.city_space_graphics import CitySpaceGraphics
 from game_engine_tools import WINDOW_SIZE
 from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
-# from game_engine_tools.player_status_tracker import *
 import pygame as pg
 
 
@@ -47,20 +47,28 @@ class GameWindow(GameMode):
         # self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
 
         # panels
+        menu_panel_width = 97
+        menu_panel_height = self.window.get_height()
+
         self.menu_panel = GameWindowPanel(
-            97, self.window.get_height(), self)
+            menu_panel_width, menu_panel_height, self)
+
         self.toggle_menu = ToggleMenu(
-            width=95, height=window.get_height()//15, game_window=self, position=(0, 100), panel=self.menu_panel)
+            width=menu_panel_width, height=50, game_window=self, position=(0, 100), panel=self.menu_panel)
+
         self.info_panel = InfoPanel(
-            250, 400, (100, 50), self, self.simulator)
+            250, 400, (99, 50), self, self.simulator)
 
         self.warning_panel = WarningPanel(self, 'hello!')
 
         self.upgrade_panel = UpgradePanel(
             width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self, simulation=self.simulator)
 
+        self.speed_panel = SpeedPanel(
+            width=200, height=100, window=self, position=(99, 5), simulator=self.simulator)
+
         self.sub_panels = [self.menu_panel, self.toggle_menu,
-                           self.info_panel, self.upgrade_panel]
+                           self.info_panel, self.upgrade_panel, self.speed_panel]
 
     def update(self):
         self.simulator.simulate_cycle()

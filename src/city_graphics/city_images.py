@@ -66,7 +66,11 @@ class CityImages:
                 'recycle',
                 'house',
                 'shop',
-                'factory'
+                'factory',
+                'running-ninja',
+                'run',
+                'halt',
+                'walk'
             ]
         }
 

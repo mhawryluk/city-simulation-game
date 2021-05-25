@@ -1,0 +1,39 @@
+import pygame_menu as pgmen
+from panels.panel import Panel
+from city_graphics.city_images import CITY_IMAGES
+
+
+class SpeedPanel(Panel):
+    def __init__(self, width, height, position, window, simulator):
+        super().__init__(width, height, window)
+        self.menu = pgmen.Menu(title='speed',
+                               width=width, height=height,
+                               position=position,
+                               theme=self.get_theme(),
+                               rows=2, columns=4,
+                               mouse_enabled=True, mouse_motion_selection=True)
+        self.simulator = simulator
+
+        # icons
+        scale = (0.06, 0.06)
+        
+
+        # speed buttons
+        self.menu.add.image(CITY_IMAGES.get_icon('halt'), scale=scale)
+        self.menu.add.button('0x', self.set_speed(0))
+
+        self.menu.add.image(CITY_IMAGES.get_icon('walk'), scale=scale)
+        self.menu.add.button('1x', self.set_speed(1))
+        
+        self.menu.add.image(CITY_IMAGES.get_icon('run'), scale=scale)
+        self.menu.add.button('2x', self.set_speed(2))
+        
+        self.menu.add.image(CITY_IMAGES.get_icon('running-ninja'), scale=scale)
+        self.menu.add.button('3x', self.set_speed(3))
+
+
+
+    def set_speed(self, value):
+        def change_simulation_speed():
+            self.simulator.change_speed(value)
+        return change_simulation_speed

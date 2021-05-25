@@ -34,8 +34,10 @@ class GameWindowPanel(Panel):
 
         # BUTTONS
         scale = (0.1, 0.1)
-        self.menu.add.image(CITY_IMAGES.get_icon('play-button'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon(
+            'play-button'), scale=scale, onselect=self.play)
         self.play_button = self.menu.add.button("play", self.play)
+        self.play_button.set_controls()
         self.menu.add.label(' ')
 
         self.menu.add.image(CITY_IMAGES.get_icon('road'), scale=scale)
