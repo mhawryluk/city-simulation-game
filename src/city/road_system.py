@@ -30,6 +30,12 @@ class RoadSystem:
         elif direction == HORIZONTAL:
             self.horizontal.add(pos)
 
+    def has_road(self, x, y, vertical):
+        if vertical == VERTICAL:
+            return (x, y) in self.vertical
+        elif vertical == HORIZONTAL:
+            return (x, y) in self.horizontal
+
     def road_clicked(self):
         if self.hovered_road is None:
             return

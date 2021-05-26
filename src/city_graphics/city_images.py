@@ -1,4 +1,6 @@
 from city.lot_type import LotType
+from city_graphics import ROAD_WIDTH_RATIO
+from city import VERTICAL, HORIZONTAL
 import pygame as pg
 import os
 from random import random, choice, seed
@@ -78,7 +80,7 @@ class CityImages:
         self.horizontal_road = load_asset('Streets', 'horizontal.png')
 
         self.cars = {
-            'mini-truck': load_asset('Cars', 'Mini_truck.png')
+            'mini-truck': load_asset('Cars', 'mini-truck.png')
         }
 
         self.animation_images = {
@@ -97,7 +99,7 @@ class CityImages:
             v, (scale, scale)) for k, v in self.main_images.items()}
 
         self.scaled_cars = {k: pg.transform.scale(
-            v, (scale, scale)) for k, v in self.cars.items()}
+            v, (int(scale*ROAD_WIDTH_RATIO*1.1), int(scale*ROAD_WIDTH_RATIO*1.1))) for k, v in self.cars.items()}
 
         self.scaled_additional_images = {k: list(map(lambda x: pg.transform.scale(
             x, (scale, scale)), v)) for k, v in self.additional_images.items()}
@@ -111,6 +113,12 @@ class CityImages:
 
     def get_icon(self, icon):
         return self.icons[icon]
+
+    def get_scaled_car_image(self, car_type, road_direction, direction):
+        image = self.scaled_cars[car_type]
+        if road_direction == HORIZONTAL:
+            image = pg.transform.rotate(image, direction*90)
+        return image
 
     def get_vertical_road(self, scale):
         return pg.transform.scale(self.vertical_road, scale)

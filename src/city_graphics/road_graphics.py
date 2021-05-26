@@ -1,14 +1,19 @@
 from city_graphics import ROAD_WIDTH_RATIO
+from city_graphics.car import Car
 from city_graphics.city_images import CITY_IMAGES
 from city import HORIZONTAL, VERTICAL
 from itertools import product
 import pygame as pg
+from random import choice
 
 
 class RoadGraphics:
     HIGHLIGHT_COLOR = 0x6d597a
     PLACE_COLOR = 0xf7b267
     BLANK_COLOR = 0xeee2df
+
+    cars = set()
+    car_speed = 0.04
 
     @classmethod
     def draw(cls, roads, pov, scale):
@@ -79,5 +84,21 @@ class RoadGraphics:
                     roads.hovered_road[0], roads.hovered_road[1], pov, scale, alpha)
 
     @classmethod
-    def animate_cars(cls):
-        pass
+    def animate_cars(cls, roads, pov, scale):
+        cls.update_cars()
+        if not cls.cars:
+            if roads.vertical:
+                road = choice(list(roads.vertical))
+                cls.cars.add(Car(road, VERTICAL, roads, 'mini-truck'))
+            if roads.horizontal:
+                road = choice(list(roads.horizontal))
+                cls.cars.add(Car(road, HORIZONTAL, roads, 'mini-truck'))
+
+        for car in cls.cars:
+            image = CITY_IMAGES.get_scaled_car_image(car.image_type, car.road_direction, car.direction)
+            cls.draw_element(car.x, car.y, pov, scale, image)
+
+    @classmethod
+    def update_cars(cls):
+        for car in cls.cars:
+            car.move(cls.car_speed)

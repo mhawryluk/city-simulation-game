@@ -73,6 +73,9 @@ class CitySpaceGraphics:
                 LotGraphics.draw_construct(
                     lot, self.scale, (self.pov_x, self.pov_y))
 
+        # cars
+        RoadGraphics.animate_cars(self.city_space.road_system, (self.pov_x, self.pov_y), self.scale)
+
         # road placing drawing effect
         if mode == "road_placing":
             alpha = pg.Surface(WINDOW_SIZE)

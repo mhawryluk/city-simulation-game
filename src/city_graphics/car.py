@@ -1,6 +1,7 @@
-from city import VERTICAL, HORIZONTAL, ROAD_WIDTH_RATIO
+from city import VERTICAL, HORIZONTAL
 from math import floor
-from random import choice, randint
+from random import choice, randint, seed
+from time import time
 
 
 class Car:
@@ -13,39 +14,53 @@ class Car:
         self.image_type = image_type
 
     def move(self, amount):
+        # print(self.x, self.y)
         if self.road_direction == VERTICAL:
             self.y += self.direction*amount
+            if floor(self.y - self.direction*amount) != floor(self.y):
+                # print(self.x-amount, self.x)
+                self.crossing()
+                if self.road_direction == VERTICAL:
+                    self.y += 2*self.direction*amount
+                elif self.road_direction == HORIZONTAL:
+                    self.x += 2*self.direction*amount
         elif self.road_direction == HORIZONTAL:
             self.x += self.direction*amount
-
-        if floor(self.x - amount) != floor(self.x) or floor(self.y - amount) != floor(self.y):
-            return self.crossing()
-        else:
-            return True
+            if floor(self.x - self.direction*amount) != floor(self.x):
+                self.crossing()
+                if self.road_direction == VERTICAL:
+                    self.y += 2*self.direction*amount
+                elif self.road_direction == HORIZONTAL:
+                    self.x += 2*self.direction*amount
 
     def crossing(self):
-        x, y = round(self.x, self.y)
+        x, y = floor(self.x), floor(self.y)
+        # print('flooor', x, y)
+
+        if self.direction == -1:
+            if self.road_direction == VERTICAL:
+                y += 1
+            elif self.road_direction == HORIZONTAL:
+                x += 1
+
         available_roads = []
-        road = self.road_system.get_road(x, y, VERTICAL)
-        if road:
-            available_roads.append((road, VERTICAL, 1))
+        if self.road_system.has_road(x, y, VERTICAL):
+            available_roads.append((x, y, VERTICAL, 1))
 
-        road = self.road_system.get_road(x, y, HORIZONTAL)
-        if road:
-            available_roads.append((road, HORIZONTAL, 1))
+        if self.road_system.has_road(x, y, HORIZONTAL):
+            available_roads.append((x, y, HORIZONTAL, 1))
 
-        road = self.road_system.get_road(x, y, VERTICAL)
-        if road:
-            available_roads.append((road, VERTICAL, -1))
+        if self.road_system.has_road(x, y-1, VERTICAL):
+            available_roads.append((x, y, VERTICAL, -1))
 
-        road = self.road_system.get_road(x, y, HORIZONTAL)
-        if road:
-            available_roads.append((road, HORIZONTAL, 1))
+        if self.road_system.has_road(x-1, y, HORIZONTAL):
+            available_roads.append((x, y, HORIZONTAL, -1))
+
+        # print(available_roads)
+        seed(time())
 
         if not available_roads:
-            return False
-
-        road, self.road_direction, self.direction = choice(available_roads)
-        self.x = road[0]
-        self.y = road[1]
-        return True
+            self.direction *= -1
+        else:
+            self.x, self.y, self.road_direction, self.direction = choice(
+                available_roads)
