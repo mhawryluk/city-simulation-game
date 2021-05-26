@@ -13,20 +13,19 @@ class ZoningPanel(Panel):
                                rows=1, columns=50,
                                theme=self.get_theme(),
                                enabled=False,
-                               mouse_enabled=True, mouse_motion_selection=True)
+                               mouse_enabled=True)
 
         self.residential_zone_button = self.menu.add.button(
-            "residential zone", self.residential_zone)
+            "residential zone", self.set_zone('residential'))
         self.industrial_zone_button = self.menu.add.button(
-            "industrial zone", self.industrial_zone)
+            "industrial zone", self.set_zone('industrial'))
         self.commercial_zone_button = self.menu.add.button(
-            "commercial zone", self.commercial_zone)
+            "commercial zone", self.set_zone('commercial'))
 
-    def residential_zone(self):
-        self.game_window.set_zoning("residential")
+        self.unselect_selected_widget()
 
-    def industrial_zone(self):
-        self.game_window.set_zoning("industrial")
-
-    def commercial_zone(self):
-        self.game_window.set_zoning("commercial")
+    def set_zone(self, zone_type):
+        def change_zoning():
+            if not self.game_window.set_zoning(zone_type):
+                self.unselect_selected_widget()
+        return change_zoning

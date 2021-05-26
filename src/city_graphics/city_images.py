@@ -2,7 +2,7 @@ from city.lot_type import LotType
 import pygame as pg
 import os
 from random import random, choice, seed
-from game_engine_tools import load_asset
+from game_engine_tools import load_asset, get_asset_path
 
 
 class CityImages:
@@ -10,15 +10,34 @@ class CityImages:
 
     def __init__(self):
         self.main_images = {
-            LotType.GRASS: load_asset('LotType', 'grass.png'),
-            LotType.WATER: load_asset('LotType', 'water.png')}
+            # LotType.GRASS: load_asset('LotType', 'grass.png'),
+            LotType.GRASS: load_asset('LotType', 'PNG', 'rpgTile039.png'),
+            # LotType.WATER: load_asset('LotType', 'water.png')
+            LotType.WATER: load_asset('LotType', 'PNG', 'rpgTile029.png'),
+
+            LotType.WATER_RIGHT: load_asset('LotType', 'PNG', 'rpgTile030.png'),
+            LotType.WATER_LEFT: load_asset('LotType', 'PNG', 'rpgTile028.png'),
+            LotType.WATER_UP: load_asset('LotType', 'PNG', 'rpgTile011.png'),
+            LotType.WATER_DOWN: load_asset('LotType', 'PNG', 'rpgTile045.png'),
+
+            LotType.WATER_CORNER_LEFT_UP: load_asset('LotType', 'PNG', 'rpgTile032.png'),
+            LotType.WATER_CORNER_LEFT_DOWN: load_asset('LotType', 'PNG', 'rpgTile014.png'),
+            LotType.WATER_CORNER_RIGHT_UP: load_asset('LotType', 'PNG', 'rpgTile031.png'),
+            LotType.WATER_CORNER_RIGHT_DOWN: load_asset('LotType', 'PNG', 'rpgTile013.png'),
+
+            LotType.WATER_IN_CORNER_LEFT_UP: load_asset('LotType', 'PNG', 'rpgTile010.png'),
+            LotType.WATER_IN_CORNER_LEFT_DOWN: load_asset('LotType', 'PNG', 'rpgTile044.png'),
+            LotType.WATER_IN_CORNER_RIGHT_UP: load_asset('LotType', 'PNG', 'rpgTile012.png'),
+            LotType.WATER_IN_CORNER_RIGHT_DOWN: load_asset(
+                'LotType', 'PNG', 'rpgTile046.png')
+        }
 
         self.additional_images = {
             LotType.GRASS: [
-                load_asset('LotType', 'hills.png'),
-                load_asset('LotType', 'flowers.png'),
-                load_asset('LotType', 'small_hills.png'),
-                load_asset('LotType', 'stones.png')
+                load_asset('LotType', 'PNG', 'rpgTile155.png'),
+                load_asset('LotType', 'PNG', 'rpgTile156.png'),
+                load_asset('LotType', 'PNG', 'rpgTile160.png'),
+                load_asset('LotType', 'PNG', 'rpgTile158.png')
             ],
             LotType.WATER: [
                 load_asset('LotType', 'island.png')
@@ -27,6 +46,42 @@ class CityImages:
         self.frequency = {
             LotType.GRASS: 0.1,
             LotType.WATER: 0.005
+        }
+
+        self.icons = {
+            key: get_asset_path('Icons2', f'{key}.png') for key in [
+                'play-button',
+                'modern-city',
+                'capitol',
+                'bulldozer',
+                'road',
+                'crane',
+                'settings-knobs',
+                'banknote',
+                'heart-inside',
+                'person',
+                'drop',
+                'trash-can',
+                'plug',
+                'recycle',
+                'house',
+                'shop',
+                'factory',
+                'running-ninja',
+                'run',
+                'halt',
+                'walk'
+            ]
+        }
+
+        self.vertical_road = load_asset('Streets', 'vertical.png')
+        self.horizontal_road = load_asset('Streets', 'horizontal.png')
+
+        self.animation_images = {
+            'fire': [load_asset('Animations', f'flame{i}.png') for i in range(5)],
+            'unhappy': [load_asset('Status', 'icon_sad.png'), load_asset('Status', 'icon_cry.png')],
+            'pandemic': [load_asset('Animations', f'coronavirus-red-rim-light-pulse_{i}.png') for i in range(7)],
+            'burglary': [load_asset('Animations', 'Roll jump', f'rj_{i:03}.png') for i in range(37)]
         }
 
         self.scaled_main_images = self.main_images
@@ -45,3 +100,20 @@ class CityImages:
         if lot_type in self.scaled_additional_images and random() < self.frequency[lot_type]:
             images += [choice(self.scaled_additional_images[lot_type])]
         return images
+
+    def get_icon(self, icon):
+        return self.icons[icon]
+
+    def get_vertical_road(self, scale):
+        return pg.transform.scale(self.vertical_road, scale)
+
+    def get_horizontal_road(self, scale):
+        return pg.transform.scale(self.horizontal_road, scale)
+
+    def get_animation_image(self, animation_type, frame, size):
+        image = self.animation_images[animation_type][frame % len(
+            self.animation_images[animation_type])]
+        return pg.transform.scale(image, (size, size))
+
+
+CITY_IMAGES = CityImages()

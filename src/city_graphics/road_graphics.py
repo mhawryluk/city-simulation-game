@@ -1,26 +1,23 @@
 from city_graphics import ROAD_WIDTH_RATIO
+from city_graphics.city_images import CITY_IMAGES
 from city import HORIZONTAL, VERTICAL
 from itertools import product
 import pygame as pg
-from game_engine_tools import load_asset
 
 
 class RoadGraphics:
-    vertical_picture = load_asset(
-        'Streets', 'street_vertical.png')
-    horizontal_picture = load_asset(
-        'Streets', 'street_horizontal.png')
+    HIGHLIGHT_COLOR = 0x6d597a
+    PLACE_COLOR = 0xf7b267
+    BLANK_COLOR = 0xeee2df
 
     @classmethod
     def draw(cls, roads, pov, scale):
-        picture = pg.transform.scale(
-            cls.vertical_picture, cls.get_vertical_size(scale))
+        picture = CITY_IMAGES.get_vertical_road(cls.get_vertical_size(scale))
         for pos_x, pos_y in roads.vertical:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
-        picture = pg.transform.scale(
-            cls.horizontal_picture, cls.get_horizontal_size(scale))
-
+        picture = CITY_IMAGES.get_horizontal_road(
+            cls.get_horizontal_size(scale))
         for pos_x, pos_y in roads.horizontal:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
@@ -43,15 +40,15 @@ class RoadGraphics:
     def highlight_roads(cls, roads, pov, scale):
         # vertical
         alpha = pg.Surface(cls.get_vertical_size(scale))
-        alpha_level = 100
+        alpha_level = 150
         alpha.set_alpha(alpha_level)
 
-        alpha.fill((220, 220, 220))
+        alpha.fill(cls.BLANK_COLOR)
         for pos_x, pos_y in product(range(cls.map_dimensions[0]), range(cls.map_dimensions[1])):
             if not (pos_x, pos_y) in roads.vertical:
                 cls.draw_element(pos_x, pos_y, pov, scale, alpha)
 
-        alpha.fill((0, 0, 255))
+        alpha.fill(cls.HIGHLIGHT_COLOR)
         for pos_x, pos_y in roads.vertical:
             cls.draw_element(pos_x, pos_y, pov, scale, alpha)
 
@@ -59,24 +56,24 @@ class RoadGraphics:
         alpha = pg.Surface(cls.get_horizontal_size(scale))
         alpha.set_alpha(alpha_level)
 
-        alpha.fill((220, 220, 220))
+        alpha.fill(cls.BLANK_COLOR)
         for pos_x, pos_y in product(range(cls.map_dimensions[0]), range(cls.map_dimensions[1])):
             if not (pos_x, pos_y) in roads.horizontal:
                 cls.draw_element(pos_x, pos_y, pov, scale, alpha)
 
-        alpha.fill((0, 0, 255))
+        alpha.fill(cls.HIGHLIGHT_COLOR)
         for pos_x, pos_y in roads.horizontal:
             cls.draw_element(pos_x, pos_y, pov, scale, alpha)
 
         # hovered
         if roads.hovered_road:
             if roads.hovered_direction == HORIZONTAL:
-                alpha.fill((255, 0, 0))
+                alpha.fill(cls.PLACE_COLOR)
                 cls.draw_element(
                     roads.hovered_road[0], roads.hovered_road[1], pov, scale, alpha)
             elif roads.hovered_direction == VERTICAL:
                 alpha = pg.Surface(cls.get_vertical_size(scale))
                 alpha.set_alpha(alpha_level)
-                alpha.fill((255, 0, 0))
+                alpha.fill(cls.PLACE_COLOR)
                 cls.draw_element(
                     roads.hovered_road[0], roads.hovered_road[1], pov, scale, alpha)

@@ -3,6 +3,7 @@ from panels.panel import Panel
 from panels.special_buildings_panel import BuySpecialBuildingPanel
 from panels.zoning_panel import ZoningPanel
 from game_engine_tools import get_asset_path
+from city_graphics.city_images import CITY_IMAGES
 
 
 class BuildModePanel(Panel):
@@ -19,7 +20,7 @@ class BuildModePanel(Panel):
                                theme=self.get_theme(),
                                columns=10, rows=1,
                                enabled=False,
-                               mouse_enabled=True, mouse_motion_selection=True)
+                               mouse_enabled=True)
 
         # ZONING PANEL
         self.zone_building_panel = ZoningPanel(
@@ -35,21 +36,23 @@ class BuildModePanel(Panel):
 
         # BUTTONS
         scale = (0.075, 0.075)
-        self.menu.add.image(get_asset_path('Icons', 'modern-city.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('modern-city'), scale=scale)
         self.zoning_button = self.menu.add.button(
             "zone buildings", self.zone_buildings)
 
+        self.zoning_button.select(False)
+
         self.menu.add.label(' ')
         self.menu.add.label(' ')
-        
-        self.menu.add.image(get_asset_path('Icons', 'capitol.png'), scale=scale)
+
+        self.menu.add.image(CITY_IMAGES.get_icon('capitol'), scale=scale)
         self.buy_building_button = self.menu.add.button(
             "special buildings", self.special_buildings)
 
         self.menu.add.label(' ')
         self.menu.add.label(' ')
 
-        self.menu.add.image(get_asset_path('Icons', 'bulldozer.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('bulldozer'), scale=scale)
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
 
@@ -61,6 +64,7 @@ class BuildModePanel(Panel):
 
         if enabled:
             self.special_building_panel.disable()
+            self.unselect_selected_widget()
         else:
             self.special_building_panel.enable()
 
@@ -72,17 +76,19 @@ class BuildModePanel(Panel):
 
         if enabled:
             self.zone_building_panel.disable()
+            self.game_window.zoning = False
+            self.unselect_selected_widget()
         else:
             self.zone_building_panel.enable()
 
     def bulldoze(self):
         self.disable_subpanels()
-        self.game_window.bulldozing = True
+        if not self.game_window.bulldozing:
+            self.game_window.bulldozing = True
+            self.game_window.zoning = False
+        else:
+            self.game_window.bulldozing = False
+            self.unselect_selected_widget()
 
     def get_subpanels(self):
         return [self.special_building_panel, self.zone_building_panel]
-
-    def disable_subpanels(self):
-        super().disable_subpanels()
-        self.game_window.zoning = False
-        self.game_window.bulldozing = False

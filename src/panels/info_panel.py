@@ -1,6 +1,6 @@
 import pygame_menu as pgmen
 from panels.panel import Panel
-from game_engine_tools import get_asset_path
+from city_graphics.city_images import CITY_IMAGES
 
 
 class InfoPanel(Panel):
@@ -12,11 +12,10 @@ class InfoPanel(Panel):
         # menu
         self.menu = pgmen.Menu('your city: ', width=width,
                                height=height, position=position,
-                               theme=self.get_theme(), columns=2, rows=13
-                               )
+                               theme=self.get_theme(), columns=2, rows=13)
 
         # info
-        self.menu.add.label('-------resources------')
+        self.menu.add.label('---- r e s o u r c e s ----')
         funds_label = self.menu.add.label('             funds')
         happiness_label = self.menu.add.label('         happiness')
         population_label = self.menu.add.label('        population')
@@ -26,31 +25,26 @@ class InfoPanel(Panel):
         pollution_label = self.menu.add.label('         pollution')
 
         self.menu.add.label('')
-        self.menu.add.label('--------demand-------')
+        self.menu.add.label('----- d e m a n d -----')
         res_demand_label = self.menu.add.label('residential')
         comm_demand_label = self.menu.add.label(' commercial')
         indu_demand_label = self.menu.add.label(' industrial')
 
         scale = (0.048, 0.048)
         self.menu.add.label('')
-        self.menu.add.image(get_asset_path(
-            'Icons', 'banknote.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'heart-inside.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'person.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'drop.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'trash-can.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'plug.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'recycle.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('banknote'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('heart-inside'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('person'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('drop'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('trash-can'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('plug'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('recycle'), scale=scale)
 
         self.menu.add.label('')
         self.menu.add.label('')
-        self.menu.add.image(get_asset_path('Icons', 'house.png'), scale=scale)
-        self.menu.add.image(get_asset_path('Icons', 'shop.png'), scale=scale)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'factory.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('house'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('shop'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('factory'), scale=scale)
 
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))

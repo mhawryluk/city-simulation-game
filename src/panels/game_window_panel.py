@@ -4,6 +4,7 @@ from panels.option_panel import OptionPanel
 from panels.stat_panel import StatPanel
 from panels.panel import Panel
 from game_engine_tools import WINDOW_SIZE, get_asset_path
+from city_graphics.city_images import CITY_IMAGES
 
 
 class GameWindowPanel(Panel):
@@ -15,7 +16,7 @@ class GameWindowPanel(Panel):
                                width=width, height=height,
                                position=(0, 0),
                                theme=self.get_theme(),
-                               mouse_enabled=True, mouse_motion_selection=True)
+                               mouse_enabled=True)
 
         # BUILD MODE PANEL
         self.build_mode_panel = BuildModePanel(
@@ -33,23 +34,25 @@ class GameWindowPanel(Panel):
 
         # BUTTONS
         scale = (0.1, 0.1)
-        self.menu.add.image(get_asset_path(
-            'Icons', 'play-button.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon(
+            'play-button'), scale=scale, onselect=self.play)
         self.play_button = self.menu.add.button("play", self.play)
+        self.play_button.set_controls()
         self.menu.add.label(' ')
 
-        self.menu.add.image(get_asset_path('Icons', 'road.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon('road'), scale=scale)
         self.road_button = self.menu.add.button("add roads", self.add_road)
         self.menu.add.label(' ')
-        self.menu.add.image(get_asset_path('Icons', 'crane.png'), scale=scale)
+
+        self.menu.add.image(CITY_IMAGES.get_icon('crane'), scale=scale)
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
         self.menu.add.label(' ')
         # self.stats_button = self.menu.add.button(
         #     "stats", self.stats)
 
-        self.menu.add.image(get_asset_path(
-            'Icons', 'settings-knobs.png'), scale=scale)
+        self.menu.add.image(CITY_IMAGES.get_icon(
+            'settings-knobs'), scale=scale)
         self.options_button = self.menu.add.button(
             "options", self.options)
         self.menu.add.label(' ')
@@ -67,7 +70,13 @@ class GameWindowPanel(Panel):
 
     def add_road(self):
         self.disable_subpanels()
-        self.game_window.mode = "road_placing" if self.game_window.mode != "road_placing" else "game_mode"
+
+        if self.game_window.mode != "road_placing":
+            self.game_window.mode = "road_placing"
+        else:
+            self.game_window.mode = "game_mode"
+            self.unselect_selected_widget()
+
         self.game_window.zoning = False
         self.game_window.upgrade_panel.disable()
 
@@ -81,6 +90,7 @@ class GameWindowPanel(Panel):
 
         if enabled:
             self.stat_panel.disable()
+            self.unselect_selected_widget()
         else:
             self.stat_panel.enable()
 
@@ -92,6 +102,7 @@ class GameWindowPanel(Panel):
         self.disable_subpanels()
         if enabled:
             self.option_panel.disable()
+            self.unselect_selected_widget()
         else:
             self.option_panel.enable()
 
@@ -103,6 +114,8 @@ class GameWindowPanel(Panel):
 
         if enabled:
             self.build_mode_panel.disable()
+            self.unselect_selected_widget()
+            self.build_mode_panel.unselect_selected_widget()
         else:
             self.build_mode_panel.enable()
 

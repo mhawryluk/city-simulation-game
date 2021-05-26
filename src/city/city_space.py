@@ -8,31 +8,43 @@ from constructs.construct_type import ConstructType
 class CitySpace:
     '''main class representing the city'''
 
-    def __init__(self, width, height, save_source=None):
+    def __init__(self, width, height, save_source=None, map=None):
         self.height = height  # amount of fields to height
         self.width = width  # amount of fields to width
 
         self.road_system = RoadSystem(
             width, height, None if save_source is None else save_source['roads'])
-        self.reset_lots(None if save_source is None else save_source['lots'])
+        self.reset_lots(
+            None if save_source is None else save_source['lots'], map)
         self.zone = set()
 
-    def reset_lots(self, save_source=None):
+    def reset_lots(self, save_source=None, map=None):
         '''
         definiuje pustą mapę, tworzy Loty
         zastąpić wczytywaniem z save'a
         '''
         self.lots = []
+        print('width', self.width)
+        print('height', self.height)
+
         if save_source is None:
-            for x in range(self.width):
-                self.lots.append([])
-                for y in range(self.height):
-                    # if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
-                    #     self.lots[x].append(Lot(x, y, LotType.WATER))
-                    if x == 0 or x == self.height-1 or y == 0 or y == self.width-1:
-                        self.lots[x].append(Lot(x, y, LotType.WATER))
-                    else:
-                        self.lots[x].append(Lot(x, y, LotType.GRASS))
+            if map is not None:
+                for x in range(self.width):
+                    self.lots.append([])
+                    for y in range(self.height):
+                        self.lots[x].append(Lot(x, y, LotType(map[x][y])))
+
+            else:
+                for x in range(self.width):
+                    self.lots.append([])
+                    for y in range(self.height):
+                        # if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
+                        #     self.lots[x].append(Lot(x, y, LotType.WATER))
+                        if x == 0 or x == self.height-1 or y == 0 or y == self.width-1:
+                            self.lots[x].append(Lot(x, y, LotType.WATER))
+                        else:
+                            self.lots[x].append(Lot(x, y, LotType.GRASS))
+
         else:
             for x in range(self.width):
                 self.lots.append([])

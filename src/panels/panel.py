@@ -14,7 +14,8 @@ class Panel:
         theme.title_font = pgmen.font.FONT_FRANCHISE
         theme.title_font_size = 40
         theme.title_font_color = (230, 230, 230, 80)
-        theme.background_color = (48, 51, 107, 200)
+        # theme.background_color = (48, 51, 107, 200)
+        theme.background_color = (168, 218, 220, 200)
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)
@@ -86,3 +87,6 @@ class Panel:
         for panel in self.get_subpanels():
             if not panel is None:
                 panel.disable_all_panels()
+
+    def unselect_selected_widget(self):
+        self.menu.get_selected_widget().select(False)
