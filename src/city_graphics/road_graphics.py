@@ -77,3 +77,7 @@ class RoadGraphics:
                 alpha.fill(cls.PLACE_COLOR)
                 cls.draw_element(
                     roads.hovered_road[0], roads.hovered_road[1], pov, scale, alpha)
+
+    @classmethod
+    def animate_cars(cls):
+        pass

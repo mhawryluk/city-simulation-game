@@ -77,6 +77,10 @@ class CityImages:
         self.vertical_road = load_asset('Streets', 'vertical.png')
         self.horizontal_road = load_asset('Streets', 'horizontal.png')
 
+        self.cars = {
+            'mini-truck': load_asset('Cars', 'Mini_truck.png')
+        }
+
         self.animation_images = {
             'fire': [load_asset('Animations', f'flame{i}.png') for i in range(5)],
             'unhappy': [load_asset('Status', 'icon_sad.png'), load_asset('Status', 'icon_cry.png')],
@@ -86,10 +90,14 @@ class CityImages:
 
         self.scaled_main_images = self.main_images
         self.scaled_additional_images = self.additional_images
+        self.scaled_cars = self.additional_images
 
     def rescale(self, scale):
         self.scaled_main_images = {k: pg.transform.scale(
             v, (scale, scale)) for k, v in self.main_images.items()}
+
+        self.scaled_cars = {k: pg.transform.scale(
+            v, (scale, scale)) for k, v in self.cars.items()}
 
         self.scaled_additional_images = {k: list(map(lambda x: pg.transform.scale(
             x, (scale, scale)), v)) for k, v in self.additional_images.items()}
@@ -117,4 +125,3 @@ class CityImages:
 
 
 CITY_IMAGES = CityImages()
-

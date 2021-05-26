@@ -25,7 +25,7 @@ Project for Python programming class
 - [x] statystyki oraz mechanizmy symulujące ekonomię
 
 
-## obecne TODO:
+## more TODO:
 - [x] ustawianie strefy klikając, na razie jest tylko przeciągając
 - [x] dom jest za duży
 - [x] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
@@ -54,4 +54,9 @@ Project for Python programming class
 - [x] CityImages - singleton?
 - [ ] pickle
 - [x] snake_case nazw plików
+
+## TODO M:
+- [ ] animacja samochodów
+- [ ] zoom
+- [ ] rozmiar obrazków
 
