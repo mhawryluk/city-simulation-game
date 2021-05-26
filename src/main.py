@@ -12,7 +12,7 @@ def change_directory():
 
 
 def main():
-    change_directory()
+    change_directory() 
     game_engine = GameEngine()
     game_engine.run()
 
