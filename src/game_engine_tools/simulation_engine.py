@@ -6,7 +6,7 @@ from .simulation_tools import SIMULATIONS, calculate_happyness, satisfy_demand, 
 
 class SimulationEngine:
 
-    FPS_PER_CYCLE = 60 * 2.5
+    fps_per_cycle = 60 * 2.5
 
     def __init__(self, city_space, save_data):
         self.player_status = PlayerStatus(save_data.get('world_state', None))
@@ -17,7 +17,7 @@ class SimulationEngine:
                 self.integrate_construct(lot)
 
     def simulate_cycle(self):
-        if self.fps_in_cycle >= self.FPS_PER_CYCLE:
+        if self.fps_in_cycle >= self.fps_per_cycle:
             self.fps_in_cycle = 0
             self.player_status.data['resident_happyness'] = 1
             for row in self.city_space.lots:
@@ -25,8 +25,7 @@ class SimulationEngine:
                     for simulation in SIMULATIONS:
                         simulation(lot, self.player_status)
                     # construct_specific_simulation(lot, self.player_status)
-                    self.player_status.data['resident_happyness'] *= calculate_happyness(
-                        lot)
+                    self.player_status.data['resident_happyness'] *= calculate_happyness(lot)
             satisfy_demand(self.player_status)
             calculate_demands(self.player_status)
         else:
@@ -46,11 +45,10 @@ class SimulationEngine:
 
     def integrate_construct(self, lot, remove=False):
         construct = lot.construct
-
+        
         if not construct is None:
             if construct.like('home'):
-                self.player_status.data['capacity'] += construct.people_involved if not remove else - \
-                    construct.people_involved
+                self.player_status.data['capacity'] += construct.people_involved if not remove else -construct.people_involved
             # print(construct.get('name', None), construct.get('range', 0))
             construct_range = int(construct.get('range', 0))
             pollution = float(construct.get('pollution', 0))
@@ -80,7 +78,7 @@ class SimulationEngine:
                                 affected_lot.construct.happiness /= happiness_multiplier
                             else:
                                 affected_lot.construct.happiness *= happiness_multiplier
-
+                  
         if not remove and not lot.construct is None:
             self.funds_change_by(lot.construct)
             if lot.construct.like('home'):
@@ -92,9 +90,6 @@ class SimulationEngine:
         # happiness
         # multipliers
         pass
-
-    def change_speed(self, speed):
-        print(f'{speed}x')
 
     def get_data(self, key):
         return self.player_status.data.get(key, None)
