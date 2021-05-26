@@ -2,10 +2,17 @@ from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
 from .simulation_tools import SIMULATIONS, calculate_happyness, satisfy_demand, calculate_demands
+from math import inf
 
 
 class SimulationEngine:
 
+    FPS_PER_CYCLE_OPTIONS = [
+        inf,
+        60 * 2.5,
+        60 * 1.5,
+        60 * 0.5
+    ]
     fps_per_cycle = 60 * 2.5
 
     def __init__(self, city_space, save_data):
@@ -85,6 +92,9 @@ class SimulationEngine:
                 for affecting_construct in list(lot.affected_by):
                     lot.construct.happiness *= affecting_construct.get(
                         'resident_happiness_multiplier', 1)
+    
+    def change_speed(self, ind):
+        self.fps_per_cycle = self.FPS_PER_CYCLE_OPTIONS[ind]
 
     def change_taxes(self):
         # happiness

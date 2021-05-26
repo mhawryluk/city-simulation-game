@@ -117,3 +117,4 @@ class CityImages:
 
 
 CITY_IMAGES = CityImages()
+
