@@ -1,5 +1,5 @@
 from city import VERTICAL, HORIZONTAL
-from game_engine_tools import road_find_union as rfu
+from game_engine_tools.road_find_union import RoadSystemUnion
 
 
 class RoadSystem:
@@ -10,6 +10,7 @@ class RoadSystem:
         self.map_height = map_height
         self.hovered_road = None
         self.hovered_direction = VERTICAL
+        self.road_union = RoadSystemUnion(self)
 
         if not save_source is None:
             for road in save_source['vertical']:
