@@ -87,18 +87,27 @@ class RoadGraphics:
     def animate_cars(cls, roads, pov, scale):
         cls.update_cars()
         if not cls.cars:
-            if roads.vertical:
-                road = choice(list(roads.vertical))
-                cls.cars.add(Car(road, VERTICAL, roads, 'mini-truck'))
-            if roads.horizontal:
-                road = choice(list(roads.horizontal))
-                cls.cars.add(Car(road, HORIZONTAL, roads, 'mini-truck'))
+            cls.add_car('mini-truck', roads)
+            cls.add_car('audi', roads)
 
         for car in cls.cars:
-            image = CITY_IMAGES.get_scaled_car_image(car.image_type, car.road_direction, car.direction)
+            image = CITY_IMAGES.get_scaled_car_image(
+                car.image_type, car.road_direction, car.direction)
             cls.draw_element(car.x, car.y, pov, scale, image)
 
     @classmethod
     def update_cars(cls):
         for car in cls.cars:
             car.move(cls.car_speed)
+
+    @classmethod
+    def add_car(cls, car_type, roads, road=None, road_direction=None):
+        if road is None:
+            if (road_direction is None or road_direction == VERTICAL) and roads.vertical:
+                road = choice(list(roads.vertical))
+                cls.cars.add(Car(road, VERTICAL, roads, car_type))
+            elif (road_direction is None or road_direction == HORIZONTAL) and roads.horizontal:
+                road = choice(list(roads.horizontal))
+                cls.cars.add(Car(road, HORIZONTAL, roads, car_type))
+        else:
+            cls.cars.add(Car(road, road_direction, roads, car_type))

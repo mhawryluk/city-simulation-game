@@ -80,7 +80,8 @@ class CityImages:
         self.horizontal_road = load_asset('Streets', 'horizontal.png')
 
         self.cars = {
-            'mini-truck': load_asset('Cars', 'mini-truck.png')
+            'mini-truck': load_asset('Cars', 'mini-truck.png'),
+            'audi': load_asset('Cars', 'Audi.png')
         }
 
         self.animation_images = {
