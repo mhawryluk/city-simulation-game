@@ -9,7 +9,7 @@ class RoadSystem:
         self.map_height = map_height
         self.hovered_road = None
         self.hovered_direction = VERTICAL
-        self.road_union = RoadSystemUnion(self)
+        self.changes = False
 
         if not save_source is None:
             for road in save_source['vertical']:
@@ -18,12 +18,14 @@ class RoadSystem:
                 self.horizontal.add(tuple(road))
 
     def remove_road(self, direction, pos):
+        self.changes = True
         if direction == VERTICAL:
             self.vertical.remove(pos)
         elif direction == HORIZONTAL:
             self.horizontal.remove(pos)
 
     def add_road(self, direction, pos):
+        self.changes = True
         if direction == VERTICAL:
             self.vertical.add(pos)
         elif direction == HORIZONTAL:
