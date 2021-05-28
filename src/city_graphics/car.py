@@ -43,24 +43,17 @@ class Car:
             elif self.road_direction == HORIZONTAL:
                 x += 1
 
-        available_roads = []
-        if self.road_system.has_road(x, y, VERTICAL):
-            available_roads.append((x, y, VERTICAL, 1))
+        possible_turns = [[x, y, VERTICAL, 1], [x, y, HORIZONTAL, 1], [
+            x, y-1, VERTICAL, -1], [x-1, y, HORIZONTAL, -1]]
+        available_turns = []
 
-        if self.road_system.has_road(x, y, HORIZONTAL):
-            available_roads.append((x, y, HORIZONTAL, 1))
+        for turn in possible_turns:
+            if self.road_system.has_road(turn[0], turn[1], turn[2]) and turn[:3] != [self.x, self.y, self.road_direction]:
+                available_turns.append((x, y, turn[2], turn[3]))
 
-        if self.road_system.has_road(x, y-1, VERTICAL):
-            available_roads.append((x, y, VERTICAL, -1))
-
-        if self.road_system.has_road(x-1, y, HORIZONTAL):
-            available_roads.append((x, y, HORIZONTAL, -1))
-
-        # print(available_roads)
-        seed(time())
-
-        if not available_roads:
+        if not available_turns:
             self.direction *= -1
         else:
+            seed(time())
             self.x, self.y, self.road_direction, self.direction = choice(
-                available_roads)
+                available_turns)
