@@ -56,7 +56,9 @@ Project for Python programming class
 - [x] snake_case nazw plików
 
 ## TODO M:
-- [ ] animacja samochodów
+- [x] animacja samochodów
+- [ ] samochody powinny zawracać tylko jak muszą
 - [ ] zoom
-- [ ] rozmiar obrazków
-
+- [x] rozmiar obrazków w upgrade panel
+- [ ] rozmiar sklepów
+- [ ] komunikaty np. gdy brakuje pieniędzy na upgrade

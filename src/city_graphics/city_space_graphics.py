@@ -126,9 +126,14 @@ class CitySpaceGraphics:
             self.move_speed[0] + move_speed[0], self.move_speed[1] + move_speed[1])
 
     def zoom(self, zoom_value):
+        old_scale = self.scale
         self.scale += zoom_value
         self.scale = max([WINDOW_SIZE[1] // self.height + 1,
                          WINDOW_SIZE[0] // self.width + 1, self.scale])
+
+        mouse_x, mouse_y = pg.mouse.get_pos()
+        self.pov_x -= int((mouse_x - self.pov_x)*(self.scale/old_scale - 1))
+        self.pov_y -= int((mouse_y - self.pov_y)*(self.scale/old_scale - 1))
 
     def select_lot(self, mouse_pos):
         if self.selected_lot:
