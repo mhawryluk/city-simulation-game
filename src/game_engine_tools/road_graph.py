@@ -9,7 +9,7 @@ class RoadGraph:
             self.road_system.changes = False
             buildings = []
             r = -1
-            for row in (len(self.lots)):
+            for row in self.lots:
                 r += 1
                 c = -1
                 for lot in row:
@@ -40,7 +40,7 @@ class RoadGraph:
             (i,j) for i,j in hor if 
             i >= 0 and i <= len(self.lots) and
             j >= 0 and j < len(self.lots) and
-            self.road_system.horizontal[i][j]
+            (i, j) in self.road_system.horizontal
         ]
 
         # vertical roads
@@ -51,7 +51,7 @@ class RoadGraph:
             (i,j) for i,j in ver if 
             i >= 0 and i < len(self.lots) and
             j >= 0 and j <= len(self.lots) and
-            self.road_system.vertical[i][j]
+            (i, j) in self.road_system.vertical
         ]
 
         return hor, ver

@@ -37,6 +37,9 @@ class RoadSystem:
         elif vertical == HORIZONTAL:
             return (x, y) in self.horizontal
 
+    def get_road_count(self):
+        return len(self.vertical) + len(self.horizontal)
+
     def road_clicked(self):
         if self.hovered_road is None:
             return

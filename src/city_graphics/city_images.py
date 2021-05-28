@@ -4,6 +4,7 @@ from city import VERTICAL, HORIZONTAL
 import pygame as pg
 import os
 from random import random, choice, seed
+from time import time
 from game_engine_tools import load_asset, get_asset_path
 
 
@@ -120,6 +121,10 @@ class CityImages:
         if road_direction == HORIZONTAL:
             image = pg.transform.rotate(image, direction*90)
         return image
+
+    def get_random_car_type(self):
+        seed(time())
+        return choice(list(self.cars.keys()))
 
     def get_vertical_road(self, scale):
         return pg.transform.scale(self.vertical_road, scale)

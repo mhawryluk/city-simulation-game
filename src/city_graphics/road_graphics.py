@@ -12,6 +12,8 @@ class RoadGraphics:
     PLACE_COLOR = 0xf7b267
     BLANK_COLOR = 0xeee2df
 
+    CARS_TO_ROADS_RATIO = 0.1
+
     cars = set()
     car_speed = 0.04
 
@@ -86,9 +88,11 @@ class RoadGraphics:
     @classmethod
     def animate_cars(cls, roads, pov, scale):
         cls.update_cars()
-        if not cls.cars:
-            cls.add_car('mini-truck', roads)
-            cls.add_car('audi', roads)
+        if len(cls.cars) < cls.CARS_TO_ROADS_RATIO*(roads.get_road_count()):
+            cls.add_car(roads)
+
+        if len(cls.cars) > 2*cls.CARS_TO_ROADS_RATIO*(roads.get_road_count()):
+            cls.cars.pop()
 
         for car in cls.cars:
             image = CITY_IMAGES.get_scaled_car_image(
@@ -101,7 +105,9 @@ class RoadGraphics:
             car.move(cls.car_speed)
 
     @classmethod
-    def add_car(cls, car_type, roads, road=None, road_direction=None):
+    def add_car(cls, roads, car_type=None, road=None, road_direction=None):
+        if car_type is None:
+            car_type = CITY_IMAGES.get_random_car_type()
         if road is None:
             if (road_direction is None or road_direction == VERTICAL) and roads.vertical:
                 road = choice(list(roads.vertical))

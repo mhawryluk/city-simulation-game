@@ -32,7 +32,7 @@ Project for Python programming class
 - [x] dźwięki gry
 - [ ] menu opcji - więcej opcji wpływających na symulator
 - [ ] chowanie wszystkich paneli przy przyciśnięciu escape
-- [ ] zoom nie działa prawidłowo?
+- [x] zoom nie działa prawidłowo?
 - [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
 - [x] okienko z pieniędzmi i satysfakcją 
 - [x] upgrade
@@ -58,7 +58,7 @@ Project for Python programming class
 ## TODO M:
 - [x] animacja samochodów
 - [ ] samochody powinny zawracać tylko jak muszą
-- [ ] zoom
+- [x] zoom
 - [x] rozmiar obrazków w upgrade panel
 - [ ] rozmiar sklepów
 - [ ] komunikaty np. gdy brakuje pieniędzy na upgrade
