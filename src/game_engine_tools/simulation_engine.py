@@ -1,7 +1,8 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
-from .simulation_tools import SIMULATIONS, calculate_happyness, satisfy_demand, calculate_demands
+from city_graphics.city_space_graphics import CitySpaceGraphics
+from .simulation_tools import SIMULATIONS, calculate_happiness, satisfy_demand, calculate_demands
 from math import inf
 from .road_graph import RoadNetGraph
 
@@ -35,7 +36,7 @@ class SimulationEngine:
                     for simulation in SIMULATIONS:
                         simulation(lot, self.player_status)
                     # construct_specific_simulation(lot, self.player_status)
-                    self.player_status.data['resident_happyness'] *= calculate_happyness(lot)
+                    self.player_status.data['resident_happyness'] *= calculate_happiness(lot)
             satisfy_demand(self.player_status)
             calculate_demands(self.player_status)
         else:
@@ -97,6 +98,7 @@ class SimulationEngine:
     
     def change_speed(self, ind):
         self.fps_per_cycle = self.FPS_PER_CYCLE_OPTIONS[ind]
+        CitySpaceGraphics.set_speed(ind)
 
     def change_taxes(self):
         # happiness

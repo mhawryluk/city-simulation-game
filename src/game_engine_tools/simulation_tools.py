@@ -173,7 +173,7 @@ def calculate_demands(player_status):
         0,  player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
 
 
-def calculate_happyness(lot):
+def calculate_happiness(lot):
     return 1 if lot.construct is None or lot.construct.happiness is None else lot.construct.happiness
 
 

@@ -1,6 +1,7 @@
 from game_engine_tools import WINDOW_SIZE
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.city_images import CITY_IMAGES
+from math import floor
 import game_engine_tools.simulation_tools as sim_consts
 from game_engine_tools import load_asset
 import pygame as pg
@@ -12,7 +13,7 @@ class LotGraphics:
     zone_colors = {'residential': 0x60d394,
                    'commercial': 0x8fb8ed,
                    'industrial': 0xffd97d}
-    animation_speed = 50
+    animation_speed = 0.05
 
     @classmethod
     def draw_background(cls, lot, scale, pov):
@@ -62,32 +63,33 @@ class LotGraphics:
 
     @classmethod
     def draw_simulation_effects(cls, lot, pov, scale):
-        cls.frame += 1
+        cls.frame += cls.animation_speed
+
         events = lot.get_current_events()
         x, y = cls.get_draw_position(lot, pov, scale)
 
         if 'burning' in events:
             size = scale
             image = CITY_IMAGES.get_animation_image(
-                'fire', cls.frame//cls.animation_speed, size)
+                'fire', floor(cls.frame), size)
             cls.window.blit(image, (x + scale/2 - size/2, y))
 
         if 'unhappy' in events:
             size = int(scale/5)
             image = CITY_IMAGES.get_animation_image(
-                'unhappy', cls.frame//cls.animation_speed, size)
+                'unhappy', floor(cls.frame), size)
             cls.window.blit(image, (x + scale/2 - size/2, y))
 
         if 'pandemic' in events:
             size = int(scale/2)
             image = CITY_IMAGES.get_animation_image(
-                'pandemic', cls.frame//cls.animation_speed, size)
+                'pandemic', floor(cls.frame), size)
             cls.window.blit(
                 image, (x + scale/2 - size/2, y + scale/2 - size/2))
 
         if 'burglary' in events:
             size = int(scale/2)
             image = CITY_IMAGES.get_animation_image(
-                'burglary', cls.frame//10, size)
+                'burglary', floor(cls.frame), size)
             cls.window.blit(
                 image, (x + scale/2 - size/2, y + scale/2 - size/2))

@@ -24,6 +24,7 @@ class GameWindow(GameMode):
 
         # constants
         self.SCROLL_SPEED = 15
+        self.ZOOM_VALUE = 1.2
 
         LotGraphics.window = window
         RoadGraphics.window = window
@@ -117,7 +118,7 @@ class GameWindow(GameMode):
 
             # zooming in
             if event.button == 4:
-                self.city_graphics.zoom(self.SCROLL_SPEED)
+                self.city_graphics.zoom(self.ZOOM_VALUE)
 
         if event.type == pg.MOUSEBUTTONDOWN:
             bought = False
@@ -152,7 +153,7 @@ class GameWindow(GameMode):
 
             # zooming out
             if event.button == 5:
-                self.city_graphics.zoom(-self.SCROLL_SPEED)
+                self.city_graphics.zoom(1/self.ZOOM_VALUE)
 
         if event.type == pg.MOUSEMOTION or event.type or event.type == pg.MOUSEBUTTONDOWN:
             if self.button_down:

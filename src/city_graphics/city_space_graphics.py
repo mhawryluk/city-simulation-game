@@ -74,7 +74,8 @@ class CitySpaceGraphics:
                     lot, self.scale, (self.pov_x, self.pov_y))
 
         # cars
-        RoadGraphics.animate_cars(self.city_space.road_system, (self.pov_x, self.pov_y), self.scale)
+        RoadGraphics.animate_cars(
+            self.city_space.road_system, (self.pov_x, self.pov_y), self.scale)
 
         # road placing drawing effect
         if mode == "road_placing":
@@ -127,7 +128,7 @@ class CitySpaceGraphics:
 
     def zoom(self, zoom_value):
         old_scale = self.scale
-        self.scale += zoom_value
+        self.scale = int(self.scale * zoom_value)
         self.scale = max([WINDOW_SIZE[1] // self.height + 1,
                          WINDOW_SIZE[0] // self.width + 1, self.scale])
 
@@ -158,3 +159,8 @@ class CitySpaceGraphics:
         y = round((mouse_pos[1] - self.pov_y +
                   self.scale*self.height//2) / self.scale)
         return (x, y)
+
+    @staticmethod
+    def set_speed(speed):
+        LotGraphics.animation_speed = 0.05*speed
+        RoadGraphics.car_speed = 0.02*speed
