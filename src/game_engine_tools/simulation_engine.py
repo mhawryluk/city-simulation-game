@@ -1,6 +1,7 @@
 from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
+from city_graphics.city_space_graphics import CitySpaceGraphics
 from .simulation_tools import SIMULATIONS, calculate_happiness, satisfy_demand, calculate_demands
 from math import inf
 from .road_graph import RoadGraph
@@ -98,6 +99,7 @@ class SimulationEngine:
     
     def change_speed(self, ind):
         self.fps_per_cycle = self.FPS_PER_CYCLE_OPTIONS[ind]
+        CitySpaceGraphics.set_speed(ind)
 
     def change_taxes(self):
         # happiness

@@ -159,3 +159,8 @@ class CitySpaceGraphics:
         y = round((mouse_pos[1] - self.pov_y +
                   self.scale*self.height//2) / self.scale)
         return (x, y)
+
+    @staticmethod
+    def set_speed(speed):
+        LotGraphics.animation_speed = 0.05*speed
+        RoadGraphics.car_speed = 0.02*speed

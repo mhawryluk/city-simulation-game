@@ -31,7 +31,6 @@ Project for Python programming class
 - [x] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
 - [x] dźwięki gry
 - [ ] menu opcji - więcej opcji wpływających na symulator
-- [ ] chowanie wszystkich paneli przy przyciśnięciu escape
 - [x] zoom nie działa prawidłowo?
 - [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
 - [x] okienko z pieniędzmi i satysfakcją 
@@ -57,8 +56,9 @@ Project for Python programming class
 
 ## TODO M:
 - [x] animacja samochodów
-- [ ] samochody powinny zawracać tylko jak muszą
+- [x] samochody powinny zawracać tylko jak muszą
 - [x] zoom
 - [x] rozmiar obrazków w upgrade panel
 - [ ] rozmiar sklepów
 - [ ] komunikaty np. gdy brakuje pieniędzy na upgrade
+- [ ] wizualizacja wpływu budynków
