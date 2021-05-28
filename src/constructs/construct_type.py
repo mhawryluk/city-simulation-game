@@ -241,7 +241,7 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'fire station',
-                'description': 'A fire station. Keeps people hape that tere is a way for their house to be saved from nurning down.',
+                'description': 'A fire station. Keeps people happy that there is a way for their house to be saved from burning down.',
                 'people_involved': 20,
                 'income': -2000,
                 'energy_change': -80,

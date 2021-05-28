@@ -1,6 +1,7 @@
 from panels.panel import Panel
 from constructs.construct_type import ConstructType
 import pygame_menu as pgmen
+import pygame as pg
 
 
 class BuySpecialBuildingPanel(Panel):
@@ -45,28 +46,39 @@ class BuySpecialBuildingPanel(Panel):
 
         return func
 
-
     def get_subpanels(self):
         return [self.enabled_window]
 
 
 class BuyBuildingWindow(Panel):
+    IMAGE_SIZE = 100
+
     def __init__(self, width, height, position, game_window, construct, panel):
         super().__init__(width, height, game_window)
         self.construct = construct
         self.parent_panel = panel
         self.menu = pgmen.Menu(title=construct.value['level'][0]['name'], width=width,
-                               height=height, position=position, rows=50, columns=1,
+                               height=height, position=position,
                                theme=self.get_theme(), enabled=True)
 
         # IMAGE & INFO
         info = construct.value['level'][0]
-        self.menu.add.image(info['images'][0], scale=(0.5, 0.5))
+        image_width, image_height = pg.image.load(info['images'][0]).get_rect().size
+        self.menu.add.image(info['images'][0], 
+            scale=(self.IMAGE_SIZE/image_width, self.IMAGE_SIZE/image_height)
+        )
 
         self.menu.add.label(f'|{info["name"]}|', max_char=30)
+        self.menu.add.label(' ')
         if "description" in info:
             self.menu.add.label(f'{info["description"]}', max_char=30)
         self.menu.add.label(' ')
+
+        # BUY
+        self.menu.add.label(f'COST: {construct.value["cost"]}')
+        self.menu.add.button('BUY', self.buy)
+        self.menu.add.label(' ')
+
 
         for key, value in info.items():
             if key == 'images' or key == 'name' or key == 'description':
@@ -74,12 +86,6 @@ class BuyBuildingWindow(Panel):
             self.menu.add.label(
                 f'{key.replace("_", " ")}: {value}', max_char=30)
 
-        self.menu.add.label(' ')
-        self.menu.add.label(f'COST: {construct.value["cost"]}')
-
-        # BUTTONS
-        self.menu.add.button('BUY', self.buy)
-        self.unselect_selected_widget()
 
     def buy(self):
         if self.game_window.simulator.can_buy(self.construct):

@@ -5,7 +5,7 @@ from constructs.construct_type import ConstructType
 
 
 class UpgradePanel(Panel):
-    image_size = 100
+    IMAGE_SIZE = 100
     def __init__(self, width, height, game_window, simulation):
         super().__init__(width, height, game_window)
         self.menu = pgmen.Menu(title='LOT', width=width,
@@ -23,7 +23,7 @@ class UpgradePanel(Panel):
 
         self.menu.add.image(
             lot.construct.image_path,
-            scale=(self.image_size/lot.construct.image.get_width(), self.image_size/lot.construct.image.get_width())
+            scale=(self.IMAGE_SIZE/lot.construct.image.get_width(), self.IMAGE_SIZE/lot.construct.image.get_width())
         )
 
         if lot.construct_level + 1 in lot.construct.type['level']:
