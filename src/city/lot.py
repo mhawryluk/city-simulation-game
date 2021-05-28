@@ -17,6 +17,7 @@ class Lot:
         self.construct_level = 0
 
         self.affected_by = set()
+        self.affects = set()
         self.unpolluted = 1
 
         self.current_events = []

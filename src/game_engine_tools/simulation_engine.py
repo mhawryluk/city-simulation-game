@@ -3,7 +3,7 @@ from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
 from .simulation_tools import SIMULATIONS, calculate_happyness, satisfy_demand, calculate_demands
 from math import inf
-from .road_graph import RoadGraph
+from .road_graph import RoadNetGraph
 
 
 class SimulationEngine:
@@ -20,7 +20,7 @@ class SimulationEngine:
         self.player_status = PlayerStatus(save_data.get('world_state', None))
         self.city_space = city_space
         self.fps_in_cycle = 0
-        self.road_graph = RoadGraph(self.city_space.road_system, self.city_space.lots)
+        self.road_graph = RoadNetGraph(self.city_space.road_system, self.city_space.lots)
         for row in self.city_space.lots:
             for lot in row:
                 self.integrate_construct(lot)
@@ -50,9 +50,6 @@ class SimulationEngine:
     def funds_change_by(self, construct):
         self.player_status.data['funds'] -= construct.type['cost']
 
-    def upgraded(self, construct):
-        self.player_status.data['funds'] -= construct.get('upgrade_cost', 0)
-
     def integrate_construct(self, lot, remove=False):
         construct = lot.construct
         
@@ -64,6 +61,8 @@ class SimulationEngine:
             pollution = float(construct.get('pollution', 0))
             happiness_multiplier = float(construct.get(
                 'resident_happiness_multiplier', 1))
+
+            self.road_graph.update_lot(lot, remove)
 
             ind = [
                 (i, row.index(lot))
@@ -78,7 +77,7 @@ class SimulationEngine:
                     if r >= 0 and r < size and c >= 0 and c < size and (r != row or c != col):
                         # print('-->', r, c, size)
                         affected_lot = self.city_space.lots[r][c]
-                        affected_lot.affected_by.add(construct)
+                        # affected_lot.affected_by.add(construct)
                         if remove:
                             affected_lot.unpolluted /= (1-pollution)
                         else:
@@ -102,7 +101,7 @@ class SimulationEngine:
     def change_taxes(self):
         # happiness
         # multipliers
-        pass
+        pass # to be implemented
 
     def get_data(self, key):
         return self.player_status.data.get(key, None)

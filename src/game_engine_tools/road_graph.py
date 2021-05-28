@@ -1,57 +1,132 @@
-class RoadGraph:
+class RoadNetGraph:
     def __init__(self, road_system, lots):
         self.road_system = road_system
         self.lots = lots
-        self.rebuild_references()
+        self.rebuild_references(force=True)
     
-    def rebuild_references(self):
-        if self.road_system.changes:
+    def rebuild_references(self, force=False):
+        if self.road_system.changes or force:
             self.road_system.changes = False
-            buildings = []
-            r = -1
-            for row in self.lots:
-                r += 1
-                c = -1
-                for lot in row:
-                    c += 1
-                    if not lot.construct is None:
-                        radius = lot.construct.get('range', 0)
-                        horizontal, vertical = self.lot_adjecent_roads(r, c)
-                        for i,j in vertical:
-                            self.dfs(lot.construct, True, i, j, radius)
-                        for i,j in horizontal:
-                            self.dfs(lot.construct, False, i, j, radius)
+            lots_with_buildings = self.preprocess_lots()
+            for lot in lots_with_buildings:
+                self.update_lot(lot)
 
-    def dfs(self, construct, vertical, i, j, radius):
-        pass
+    def preprocess_lots(self):
+        lots_with_buildings = []
+        for row in self.lots:
+            for lot in row:
+                lot.affected_by = set()
+                lot.affects = set()
+                if not (lot.construct is None or lot.construct.get('renge', 0) == 0):
+                    lots_with_buildings.append(lot)
+        return lots_with_buildings
+    
+    def update_lot(self, lot, remove=False):
+        row, col = lot.y, lot.x
+        i, j = row+1, col
+        radius = lot.construct.get('range', 0)
+        if i >= 0 and i <= len(self.lots) and j >= 0 and j < len(self.lots) and (i, j) in self.road_system.horizontal:
+            self.dfs(lot.construct, False, i, j, radius, remove)
+
+    def dfs(self, lot, vertical, i, j, radius, remove=False):
+        construct = lot.construct
+        if radius > 0:
+            radius -= 1
+            hor_neighbors, ver_neighbors = self.edge_neighbors(i, j, vertical)
+            lot1, lot2 = self.road_adjecent_lots(i, j, vertical)
+            
+            if remove:
+                if construct in lot1.affected_by:
+                    lot1.affected_by.remove(construct)
+                if lot1 in lot.affects:
+                    lot.affects.remove(lot1)
+
+                if not lot2 is None:
+                    if construct in lot2.affected_by:
+                        lot2.affected_by.remove(construct)
+                    if lot2 in lot.affects:
+                        lot.affects.remove(lot2)
+            else:
+                lot1.affected_by.add(construct)
+                lot.affects.add(lot1)
+                if not lot2 is None:
+                    lot2.affected_by.add(construct)
+                    lot.affects.add(lot2)
+
+            for row, col in hor_neighbors:
+                self.dfs(lot, False, row, col, radius, remove)
+            for row, col in ver_neighbors:
+                self.dfs(lot, True, row, col, radius, remove)
 
     def road_adjecent_lots(self, i, j, vertical):
-        pass
+        second_lot = None
+        if vertical:
+            if j-1 >= 0:
+                second_lot = self.lots[i][j-1]
+        else:
+            if i-1 >= 0:
+                second_lot = self.lots[i-1][j]
+            
+        return self.lots[i][j], second_lot
 
     def edge_neighbors(self, i, j, vertical):
-        pass
+        ver, hor = [(i-1, j)], [(i, j-1)]
+        if vertical:
+            ver += [
+                (i+1, j)
+            ]
+            hor += [
+                (i, j),
+                (i+1, j-1),
+                (i+1, j)
+            ]
+        else:
+            ver += [
+                (i-1, j+1)
+                (i, j),
+                (i, j+1)
+            ]
+            hor += [
+                (i, j+1)
+            ]
+        return self.filter_neighbor_roads(hor, ver)
     
-    def lot_adjecent_roads(self, lot_i, lot_j):
-        # horizontal roads
-        hor = []
-        hor.append((lot_i, lot_j))
-        hor.append((lot_i+1, lot_j))
-        hor = [
+    def filter_neighbor_roads(self, hor=[], ver=[]):
+        horizontal =  [
             (i,j) for i,j in hor if 
             i >= 0 and i <= len(self.lots) and
             j >= 0 and j < len(self.lots) and
             (i, j) in self.road_system.horizontal
         ]
-
-        # vertical roads
-        ver = []
-        ver.append((lot_i, lot_j))
-        ver.append((lot_i, lot_j+1))
-        ver = [
+        vertical = [
             (i,j) for i,j in ver if 
             i >= 0 and i < len(self.lots) and
             j >= 0 and j <= len(self.lots) and
             (i, j) in self.road_system.vertical
         ]
+        return horizontal, vertical
+    
+    # def lot_adjecent_roads(self, lot_i, lot_j):
+    #     # horizontal roads
+    #     hor = []
+    #     hor.append((lot_i, lot_j))
+    #     hor.append((lot_i+1, lot_j))
+    #     hor = [
+    #         (i,j) for i,j in hor if 
+    #         i >= 0 and i <= len(self.lots) and
+    #         j >= 0 and j < len(self.lots) and
+    #         (i, j) in self.road_system.horizontal
+    #     ]
 
-        return hor, ver
+    #     # vertical roads
+    #     ver = []
+    #     ver.append((lot_i, lot_j))
+    #     ver.append((lot_i, lot_j+1))
+    #     ver = [
+    #         (i,j) for i,j in ver if 
+    #         i >= 0 and i < len(self.lots) and
+    #         j >= 0 and j <= len(self.lots) and
+    #         (i, j) in self.road_system.vertical
+    #     ]
+
+    #     return hor, ver
