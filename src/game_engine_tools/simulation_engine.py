@@ -3,6 +3,7 @@ from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
 from .simulation_tools import SIMULATIONS, calculate_happyness, satisfy_demand, calculate_demands
 from math import inf
+from .road_graph import RoadGraph
 
 
 class SimulationEngine:
@@ -19,12 +20,14 @@ class SimulationEngine:
         self.player_status = PlayerStatus(save_data.get('world_state', None))
         self.city_space = city_space
         self.fps_in_cycle = 0
+        self.road_graph = RoadGraph(self.city_space.road_system, self.city_space.lots)
         for row in self.city_space.lots:
             for lot in row:
                 self.integrate_construct(lot)
 
     def simulate_cycle(self):
         if self.fps_in_cycle >= self.fps_per_cycle:
+            self.road_graph.rebuild_references()
             self.fps_in_cycle = 0
             self.player_status.data['resident_happyness'] = 1
             for row in self.city_space.lots:

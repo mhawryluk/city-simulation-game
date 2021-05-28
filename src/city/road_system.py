@@ -1,5 +1,4 @@
 from city import VERTICAL, HORIZONTAL
-from game_engine_tools.road_find_union import RoadSystemUnion
 
 
 class RoadSystem:
