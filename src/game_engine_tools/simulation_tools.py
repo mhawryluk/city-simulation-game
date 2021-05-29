@@ -1,5 +1,6 @@
 from random import randint, random
 from constructs.construct_type import ConstructType
+import numpy as np
 
 
 def set_between(value, min_value, max_value):
@@ -64,13 +65,20 @@ def water(lot, player_status):
             player_status.data['water'], MAX_WATER_DEMAND, MAX_WATER_SUPPLY)
 
 
+def calculate_income(construct, player_status):
+    income = construct.get('income', 0)
+    if income > 0:
+        income *= 1 + np.abs(player_status.data['goods'] * GOODS_PER_PERSON - player_status.data['population']) / max(player_status.data['population'], 1)
+    return income
+
+
 def economy_change(lot, player_status):
     if lot.construct != None:
         money_change = lot.construct.get('taxation', 0)
         taxes_multiplier = min(lot.construct.happiness / HAPPYNESS_FOR_FULL_TAXES,
                                1) if not lot.construct.happiness is None else 1
         money_change *= (1 + player_status.data['taxation']) * taxes_multiplier
-        money_change += lot.construct.get('income', 0)
+        money_change += calculate_income(lot.construct, player_status)
         # print(money_change)
         player_status.data['funds'] += int(money_change)
         player_status.data['funds'] = set_between(
@@ -121,18 +129,6 @@ def population(lot, player_status):
         if random() > happyness:
             player_status.data['population'] = int(
                 player_status.data['population'] * POPULATION_REDUCTION)
-
-
-def construct_specific_simulation(lot, player_status):
-    if lot.construct != None:
-        # sims common among all constructs
-        def f(x, y):
-            pass  # empty function
-        function = lot.construct.get('simulation_handler', None)
-        if function is None:
-            function = f
-        function(lot, player_status)
-
 
 def update_events(lot, player_status):
     if lot.construct != None:
@@ -202,8 +198,7 @@ SIMULATIONS = [
     produce,
     demand,
     population,
-    update_events,
-    construct_specific_simulation
+    update_events
 ]
 
 
@@ -277,7 +272,7 @@ MONEY_RETURN_PERCENT = 0.78
 
 # supply and demand constants
 BASE_DEMAND = 10
-PRODUCE_TO_GODS = 1.5
+PRODUCE_TO_GODS = 2
 GOODS_PER_PERSON = 1.5
 PRODUCE_THRESHOLDS = 25
 DEMAND_THRESHOLDS = 45
