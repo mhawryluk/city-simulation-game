@@ -2,7 +2,7 @@ from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
 from city_graphics.city_space_graphics import CitySpaceGraphics
-from .simulation_tools import SIMULATIONS, calculate_happiness, satisfy_demand, calculate_demands
+from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, satisfy_demand, calculate_demands
 from math import inf
 from .road_graph import RoadNetGraph
 
@@ -48,8 +48,8 @@ class SimulationEngine:
             building = get_zone_construct_type(zone)
         return self.player_status.data['funds'] >= building.value['level'][level].get('upgrade_cost', building.value['cost'])
 
-    def funds_change_by(self, construct):
-        self.player_status.data['funds'] -= construct.type['cost']
+    def funds_change_by(self, construct, multiplier=1.):
+        self.player_status.data['funds'] -= construct.type['cost'] * multiplier
 
     def integrate_construct(self, lot, remove=False):
         construct = lot.construct
@@ -88,13 +88,16 @@ class SimulationEngine:
                                 affected_lot.construct.happiness /= happiness_multiplier
                             else:
                                 affected_lot.construct.happiness *= happiness_multiplier
-                  
-        if not remove and not lot.construct is None:
-            self.funds_change_by(lot.construct)
-            if lot.construct.like('home'):
-                for affecting_construct in list(lot.affected_by):
-                    lot.construct.happiness *= affecting_construct.get(
-                        'resident_happiness_multiplier', 1)
+        
+        if not lot.construct is None:
+            if remove:
+                self.funds_change_by(lot.construct, -MONEY_RETURN_PERCENT)
+            else:
+                self.funds_change_by(lot.construct)
+                if lot.construct.like('home'):
+                    for affecting_construct in list(lot.affected_by):
+                        lot.construct.happiness *= affecting_construct.get(
+                            'resident_happiness_multiplier', 1)
     
     def change_speed(self, ind):
         self.fps_per_cycle = self.FPS_PER_CYCLE_OPTIONS[ind]

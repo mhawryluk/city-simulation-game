@@ -26,7 +26,7 @@ class ConstructType(Enum):
                 'energy_change': -3,  # in units 
                 'water_consumption': 3,  # in units (UNIFY)
                 'waste_change': 3,  # in units 
-                'taxation': 2000,  # in dollars; per person; multiply by happiness to get actual income
+                'taxation': 2500,  # in dollars; per person; multiply by happiness to get actual income
                 'images': [get_asset_path('House', 'Hs01.png'), get_asset_path('House', 'Hs02.png'), get_asset_path('House', 'Hs03.png'),
                             get_asset_path('House', 'Hs00.png')]
             },
@@ -54,6 +54,7 @@ class ConstructType(Enum):
             }
         }
     }
+
     BLOCK = {
         'likeness': ['home'],
         'max_level': 3,
@@ -97,6 +98,7 @@ class ConstructType(Enum):
             }
         }
     }
+
     SHOP = {
         'max_level': 4,
         'cost': 1000,
@@ -129,6 +131,7 @@ class ConstructType(Enum):
             }
         }
     }
+
     FACTORY = {
         'max_level': 0,
         'cost': 1000,
@@ -218,22 +221,7 @@ class ConstructType(Enum):
             }
         }
     }
-    # PRISON = {
-    #     'max_level': 0,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name':'prison',
-    #             'people_involved': 50,
-    #             'inmates': 200,
-    #             'income': -5000,
-    #             'energy_change': -150,
-    #             'water_consumption': 250,
-    #             'waste_change': 200,
-    #             'resident_happiness_multiplier': 1.7
-    #         }
-    #     }
-    # }
+
     FIRE_STATION = {
         'max_level': 0,
         'cost': 1000,
@@ -243,11 +231,11 @@ class ConstructType(Enum):
                 'name': 'fire station',
                 'description': 'A fire station. Keeps people happy that there is a way for their house to be saved from burning down.',
                 'people_involved': 20,
-                'income': -2000,
+                'income': -1500,
                 'energy_change': -80,
                 'water_consumption': 400,
                 'waste_change': 80,
-                'range': 3,
+                'range': 8,
                 'upgrade_cost': 10000,
                 'resident_happiness_multiplier': 1.9,
                 'fire_protection': 5,
@@ -277,6 +265,7 @@ class ConstructType(Enum):
             }
         }
     }
+
     UNIVERSITY = {
         'max_level': 0,
         'cost': 1000,
@@ -329,6 +318,7 @@ class ConstructType(Enum):
             }
         }
     }
+
     STATUE = {
         'max_level': 0,
         'cost': 1000,
@@ -347,37 +337,6 @@ class ConstructType(Enum):
             }
         }
     }
-    # AMUSEMENT_PARK = { #upgraded to water park
-    #     'max_level': 1,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': 'amusement park',
-    #             'description': 'An amusement park - increases resident happiness.',
-    #             'people_involved': 100,
-    #             'customers': 1000,
-    #             'income': 50000,
-    #             'energy_change': -5000,
-    #             'water_consumption': 1000,
-    #             'waste_change': ,
-    #             'resident_happiness_multiplier': 2,
-    #             'images': []
-    #         },
-    #         0:{
-    #             'name': 'water park',
-    #             'description': 'An amusement park enriched with big pools and water slides - greatly increases resident happiness.',
-    #             'people_involved': 100,
-    #             'customers': 1000,
-    #             'income': 100000,
-    #             'energy_change': -5000,
-    #             'water_consumption': 10000,
-    #             'waste_change': 1200,
-    #             'resident_happiness_multiplier': 3,
-    #             'upgrade_cost': 100000,
-    #             'images': []
-    #         }
-    #     }
-    # }
 
     LANDFILL = {  # upgraded to waste processing plant
         'max_level': 1,
@@ -412,6 +371,7 @@ class ConstructType(Enum):
             }
         }
     }
+
     POWER_PLANT = {
         'max_level': 2,
         'cost': 5000,
@@ -425,29 +385,10 @@ class ConstructType(Enum):
                 'energy_change': 2000,
                 'resident_happiness_multiplier': 0.5,
                 'images': [get_asset_path('SpecialBuildings', 'power_plant.png')]
-            }#,
-            # 1: {
-            #     'name': 'sun power plant',
-            #     'description': "Much more economical power plant with increased energy production - uses sunlight to create electricity.",
-            #     'people_involved': 50,
-            #     'income': -10000,
-            #     'energy_production': 8000,
-            #     'resident_happiness_multiplier': 1.5,
-            #     'upgrade_cost': 100000,
-            #     'images': []
-            # },
-            # 2: {
-            #     'name': 'nuclear power plant',
-            #     'description': "High tech, state of the art facility. Produces large amounts of energy but reduces residents happiness and risks critical failure.",
-            #     'income': -100000,
-            #     'people_involved': 100,
-            #     'energy_production': 100000,
-            #     'upgrade_cost': 1000000,
-            #     'resident_happiness_multiplier': 0.8,
-            #     'images': []
-            # }
+            }
         }
     }
+
     WATER_PUMP = {
         'max_level': 2,
         'cost': 1000,
@@ -466,55 +407,6 @@ class ConstructType(Enum):
             }
         }
     }
-    # SWEWAGE_PUMP = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'level':{
-    #         0:{
-    #             'name': ,
-    #             'description': ,
-    #             'people_involved': ,
-    #             'income': ,
-    #             'energy_change': -,
-    #             'water_consumption': ,
-    #             'waste_change': ,
-    #             'resident_happiness_multiplier': ,
-    #             'images': [get_asset_path('SpecialBuildings', 's.png')]
-    #         }
-    #     }
-    # }
-    # SEWAGE_PROCESSING_STATION = {
-    #     'max_level': 2,
-    #     'cost': 1000,
-    #     'constructor': SewageProcessingStation,
-    #     'type': {
-    #         0: {
-    #             'name': 'standard',
-    #             'description': 'Station destined to process sewage produced by cisty buildings.',
-    #             'pollution_level': 0.75,
-    #             'range': 5,
-    #             'energy_change': -1
-    #         },
-    #         1: {
-    #             'name': 'industrial',
-    #             'description': 'Expanded sewage treatement station with double the processing power of the regular variant.',
-    #             'pollution_level': 0.75,
-    #             'range': 10,
-    #             'energy_change': -2,
-    #             'upgrade_cost': 10000,
-    #             'images': []
-    #         },
-    #         2: {
-    #             'name': 'economical',
-    #             'description': 'More economical version of the sewage treatment station. Decreases pollution by one third.',
-    #             'pollution_level': 0.5,
-    #             'range': 10,
-    #             'energy_change': -4,
-    #             'upgrade_cost': 50000,
-    #             'images': []
-    #         }
-    #     }
-    # }
 
     def get_info(self, type):
         return type.value

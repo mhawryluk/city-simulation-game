@@ -165,10 +165,11 @@ class GameWindow(GameMode):
                             self.simulator.integrate_construct(lot)
 
                 elif self.bulldozing:
-                    lot = self.city_space.bulldoze(
-                        self.city_graphics.get_clicked_lot(pg.mouse.get_pos()))
+                    lot = self.city_graphics.get_clicked_lot(pg.mouse.get_pos())
                     if lot:
                         self.simulator.integrate_construct(lot, remove=True)
+                    self.city_space.bulldoze(lot)
+                    
 
             else:
                 self.city_graphics.hovered(
