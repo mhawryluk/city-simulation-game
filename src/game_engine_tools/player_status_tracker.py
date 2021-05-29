@@ -17,6 +17,7 @@ class PlayerStatus:
                 'waste': 0,
                 'pollution': 0,
                 'taxation': 0.1,
+                'residences': 0,
                 'residential demand': 'Very high',
                 'commercial demand': 'Very low',
                 'industrial demand': 'Very low'
@@ -27,15 +28,3 @@ class PlayerStatus:
 
     def compress2save(self):
         return self.data
-
-    def get_funds(self):
-        pass
-
-    def funds_change(self, event):
-        pass
-
-    def get_satisfaction(self):
-        pass
-
-    def get_satisfaction_color(self):
-        pass

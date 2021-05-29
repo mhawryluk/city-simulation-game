@@ -182,7 +182,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 1.9,
                 'upgrade_cost': 10000,
                 'range': 18,
-                'image': [get_asset_path('SpecialBuildings', 'hospital.png')]
+                'images': [get_asset_path('SpecialBuildings', 'hospital.png')]
             }
         }
     }

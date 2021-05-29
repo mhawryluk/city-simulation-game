@@ -32,7 +32,7 @@ class RoadNetGraph:
 
     def dfs(self, lot, vertical, i, j, radius, remove, visited):
         # print("   ->", i, j, radius)
-        visited[(i,j)] = radius
+        visited[(i,j, vertical)] = radius
         construct = lot.construct
         if radius > 0:
             radius -= 1
@@ -61,10 +61,10 @@ class RoadNetGraph:
                     lot.affects.add(lot2)
 
             for row, col in hor_neighbors: 
-                if visited.get((row, col), 0) <= radius:
+                if visited.get((row, col, False), 0) <= radius:
                     self.dfs(lot, False, row, col, radius, remove, visited)
             for row, col in ver_neighbors: 
-                if visited.get((row, col), 0) <= radius:
+                if visited.get((row, col, True), 0) <= radius:
                     self.dfs(lot, True, row, col, radius, remove, visited)
 
     def road_adjecent_lots(self, i, j, vertical):
@@ -98,15 +98,14 @@ class RoadNetGraph:
             hor += [
                 (i, j+1)
             ]
+        # print('------------->>>>', len(ver), len(hor))
         return self.filter_neighbor_roads(hor, ver)
     
     def filter_neighbor_roads(self, hor=[], ver=[]):
         horizontal =  [
-            (i,j) for i,j in hor if 
-            (j, i) in self.road_system.horizontal
+            (i,j) for i, j in hor if (j, i) in self.road_system.horizontal
         ]
         vertical = [
-            (i,j) for i,j in ver if 
-            (j, i) in self.road_system.vertical
+            (i,j) for i,j in ver if (j, i) in self.road_system.vertical
         ]
         return horizontal, vertical

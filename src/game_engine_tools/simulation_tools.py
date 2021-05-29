@@ -116,13 +116,13 @@ def population(lot, player_status):
         capacity = player_status.data['capacity']
         populus = player_status.data['population']
         happyness = player_status.data['resident_happyness']
-        print("--POPULUS-->", player_status.data['population'])
+        # print("--POPULUS-->", player_status.data['population'])
         if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
-            populus = randint(populus, set_between(
+            populus = randint(populus, int(set_between(
                 capacity * POPULATION_HAPPYNESS_COEF * happyness,
                 (populus + capacity)//2,
                 capacity
-            )
+            ))
             )
             player_status.data['population'] = populus
         print("--POPULUS-->", player_status.data['population'])
@@ -173,7 +173,7 @@ def calculate_demands(player_status):
 
 
 def calculate_happiness(lot):
-    return 1 if lot.construct is None or lot.construct.happiness is None else lot.construct.happiness
+    return 0 if lot.construct is None or lot.construct.happiness is None else lot.construct.happiness
 
 
 def level_to_demand(value, threshold):
@@ -185,6 +185,12 @@ def level_to_demand(value, threshold):
 def top_demand(player_status):
     top_demands = DEMAND_LEVEL[-2:]
     return player_status.data['commercial demand'] in top_demands and player_status.data['industrial demand'] in top_demands
+
+
+def normalize_happyness(happyness):
+    empowered = happyness / TOP_HAPPYNESS
+    empowered =  empowered ** NORMALIZATION_POWER
+    return empowered
 
 
 SIMULATIONS = [
@@ -247,8 +253,13 @@ COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
 WASTE_BORDERVAL = 0
 
 
+#happyness constants
+TOP_HAPPYNESS = 400
+NORMALIZATION_POWER = 4
+
+
 # hapynes to taxes calculator
-HAPPYNESS_FOR_FULL_TAXES = 2
+HAPPYNESS_FOR_FULL_TAXES = 3 
 MIN_MONEY = 0
 MAX_MONEY = 1e9
 

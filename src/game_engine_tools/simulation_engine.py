@@ -3,7 +3,7 @@ from game_engine_tools.player_status_tracker import PlayerStatus
 from constructs.construct_type import ConstructType, get_zone_construct_type
 from random import randint
 from city_graphics.city_space_graphics import CitySpaceGraphics
-from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, satisfy_demand, calculate_demands
+from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, satisfy_demand, calculate_demands
 from math import inf
 from .road_graph import RoadNetGraph
 
@@ -31,13 +31,14 @@ class SimulationEngine:
         if self.fps_in_cycle >= self.fps_per_cycle:
             self.road_graph.rebuild_references()
             self.fps_in_cycle = 0
-            self.player_status.data['resident_happyness'] = 1
+            self.player_status.data['resident_happyness'] = 0
             for row in self.city_space.lots:
                 for lot in row:
                     for simulation in SIMULATIONS:
                         simulation(lot, self.player_status)
                     # construct_specific_simulation(lot, self.player_status)
-                    self.player_status.data['resident_happyness'] *= calculate_happiness(lot)
+                    self.player_status.data['resident_happyness'] += calculate_happiness(lot)
+            self.player_status.data['resident_happyness'] = normalize_happyness(self.player_status.data['resident_happyness'])
             satisfy_demand(self.player_status)
             calculate_demands(self.player_status)
         else:
@@ -57,6 +58,7 @@ class SimulationEngine:
         
         if not construct is None:
             self.road_graph.update_lot(lot, remove)
+            self.player_status.data['residences'] += (-1 if remove else 1) if construct.like('home') else 0
             if not from_save:
                 if construct.like('home'):
                     people_involved = construct.get('people_involved', 0)
