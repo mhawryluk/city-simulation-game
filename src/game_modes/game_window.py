@@ -66,7 +66,7 @@ class GameWindow(GameMode):
             width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self, simulation=self.simulator)
 
         self.speed_panel = SpeedPanel(
-            width=200, height=100, window=self, position=(99, 5), simulator=self.simulator)
+            width=250, height=100, window=self, position=(99, 8), simulator=self.simulator)
 
         self.sub_panels = [self.menu_panel, self.toggle_menu,
                            self.info_panel, self.upgrade_panel, self.speed_panel]
