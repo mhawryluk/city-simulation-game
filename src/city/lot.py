@@ -63,7 +63,8 @@ class Lot:
             'seed': self.seed,
             'type_value': self.type.value,
             'construct': None if self.construct is None else self.construct.compress2save(),
-            'zone_type': self.zone_type
+            'zone_type': self.zone_type,
+            'unpolluted': self.unpolluted
         }
 
     def get_current_events(self):

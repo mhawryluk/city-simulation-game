@@ -8,12 +8,10 @@ class Construct:
     def __init__(self, construct_type, construct_state=None):
         if construct_type is None:
             self.construct_level = int(construct_state['construct_level'])
-            self.people_involved = int(construct_state['people_involved'])
             self.type_name = construct_state['type']
             self.type = ConstructType[self.type_name].value
 
-            self.happiness = None if construct_state['happiness'] is None else int(
-                construct_state['happiness'])
+            self.happiness = None if construct_state['happiness'] is None else float(construct_state['happiness'])
             self.heat = bool(construct_state['heat'])
             self.crime_level = int(construct_state['crime_level'])
             self.waste = int(construct_state['waste'])
@@ -23,8 +21,6 @@ class Construct:
             self.choose_image(path=self.past_images[-1])
         else:
             self.construct_level = 0
-            self.people_involved = construct_type.value.get(
-                'people_involved', 0)
             self.type_name = ''.join(str(construct_type).split('.')[1])
             self.type = construct_type.value
 
@@ -65,7 +61,6 @@ class Construct:
     def compress2save(self):
         return {
             'construct_level': self.construct_level,
-            'people_involved': self.people_involved,
             'type': self.type_name,
             'happiness': self.happiness,
             'heat': self.heat,
