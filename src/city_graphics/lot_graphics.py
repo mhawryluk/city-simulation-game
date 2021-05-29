@@ -71,13 +71,13 @@ class LotGraphics:
         if 'burning' in events:
             size = scale
             image = CITY_IMAGES.get_animation_image(
-                'fire', floor(cls.frame), size)
+                'fire', floor(cls.frame)//5, size)
             cls.window.blit(image, (x + scale/2 - size/2, y))
 
         if 'unhappy' in events:
             size = int(scale/5)
             image = CITY_IMAGES.get_animation_image(
-                'unhappy', floor(cls.frame), size)
+                'unhappy', floor(cls.frame)//10, size)
             cls.window.blit(image, (x + scale/2 - size/2, y))
 
         if 'pandemic' in events:
