@@ -79,10 +79,9 @@ def economy_change(lot, player_status):
 
 def health(lot, player_status):
     if lot.construct != None:
-        player_status.data['health'] += lot.construct.people_involved * \
-            player_status.density()
-        player_status.data['health'] -= lot.construct.get(
-            'patients', 0) * HEALING_FACTOR
+        # print("--HEALTH-->",player_status.data['health'])
+        player_status.data['health'] += lot.construct.get('people_involved', 0) * player_status.density()
+        player_status.data['health'] -= lot.construct.get('patients', 0) * HEALING_FACTOR
         player_status.data['health'] = set_between(
             player_status.data['health'], MIN_HEALTH, None)
         if random() < PANDEMIC_CHANCE * player_status.density():
@@ -90,6 +89,8 @@ def health(lot, player_status):
                 if len(lot.current_events) < EVENTS_LIMIT:
                     lot.current_events.append('pandemic')
             player_status.data['health'] *= 1 + PANDEMIC_COEF
+        
+        # print("<--HEALTH--",player_status.data['health'])
 
 
 def produce(lot, player_status):
@@ -107,14 +108,16 @@ def population(lot, player_status):
         capacity = player_status.data['capacity']
         populus = player_status.data['population']
         happyness = player_status.data['resident_happyness']
+        print("--POPULUS-->", player_status.data['population'])
         if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
             populus = randint(populus, set_between(
                 capacity * POPULATION_HAPPYNESS_COEF * happyness,
-                (population + capacity)//2,
+                (populus + capacity)//2,
                 capacity
             )
             )
             player_status.data['population'] = populus
+        print("--POPULUS-->", player_status.data['population'])
         if random() > happyness:
             player_status.data['population'] = int(
                 player_status.data['population'] * POPULATION_REDUCTION)

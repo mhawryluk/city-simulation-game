@@ -21,7 +21,7 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'small house',
-                'people_involved': 3,  # in people
+                'people_involved': 5,  # in people
                 'base_resident_happiness': 0.45,  # in percentage
                 'energy_change': -3,  # in units 
                 'water_consumption': 3,  # in units (UNIFY)
@@ -32,7 +32,7 @@ class ConstructType(Enum):
             },
             1: {
                 'name': 'family house',
-                'people_involved': 5,
+                'people_involved': 8,
                 'base_resident_happiness': 0.55,
                 'energy_change': -6,
                 'water_consumption': 5,
@@ -43,7 +43,7 @@ class ConstructType(Enum):
             },
             2: {
                 'name': 'large residence',
-                'people_involved': 7,
+                'people_involved': 10,
                 'base_resident_happiness': 0.65,
                 'energy_change': -10,
                 'water_consumption': 10,
@@ -168,6 +168,7 @@ class ConstructType(Enum):
                 'water_consumption': 30,
                 'waste_change': 100,
                 'resident_happiness_multiplier': 1.6,
+                'range': 10,
                 'images': [get_asset_path('SpecialBuildings', 'hospital.png')]
             },
             1: {
@@ -180,6 +181,7 @@ class ConstructType(Enum):
                 'waste_change': 1000,
                 'resident_happiness_multiplier': 1.9,
                 'upgrade_cost': 10000,
+                'range': 18,
                 'image': [get_asset_path('SpecialBuildings', 'hospital.png')]
             }
         }
@@ -199,7 +201,7 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_change': 5,
                 'resident_happiness_multiplier': 1.7,
-                'range': 3,
+                'range': 8,
                 'fire_protection': 1,
                 'security': 3,
                 'images': [get_asset_path('SpecialBuildings', 'police0.png')]
@@ -213,7 +215,7 @@ class ConstructType(Enum):
                 'water_consumption': 20,
                 'waste_change': 20,
                 'resident_happiness_multiplier': 1.8,
-                'range': 5,
+                'range': 15,
                 'upgrade_cost': 10000,
                 'fire_protection': 2,
                 'security': 5,
@@ -235,7 +237,7 @@ class ConstructType(Enum):
                 'energy_change': -80,
                 'water_consumption': 400,
                 'waste_change': 80,
-                'range': 8,
+                'range': 10,
                 'upgrade_cost': 10000,
                 'resident_happiness_multiplier': 1.9,
                 'fire_protection': 5,
@@ -258,7 +260,7 @@ class ConstructType(Enum):
                 'energy_change': -500,
                 'water_consumption': 500,
                 'waste_change': 500,
-                'range': 3,
+                'range': 5,
                 'city_income_multiplier': 1.01,
                 'resident_happiness_multiplier': 2,
                 'images': [get_asset_path('SpecialBuildings', 'school0.png')]
@@ -282,6 +284,7 @@ class ConstructType(Enum):
                 'city_income_multiplier': 1.05,
                 'resident_happiness_multiplier': 3.5,
                 'temperature_raise': 2,
+                'range': 20,
                 'images': [get_asset_path('SpecialBuildings', 'school1.png')]
             }
         }
@@ -301,6 +304,7 @@ class ConstructType(Enum):
                 'water_consumption': 100,
                 'waste_change': 50,
                 'resident_happiness_multiplier': 1.5,
+                'range': 5,
                 'images': [get_asset_path('SpecialBuildings', 'park0.png')]
             },
             1: {
@@ -314,6 +318,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 2,
                 'upgrade_cost': 8000,
                 'temperature_raise': 2,
+                'range': 15,
                 'images': [get_asset_path('SpecialBuildings', 'park1.png')]
             }
         }
@@ -328,6 +333,7 @@ class ConstructType(Enum):
                 'description': 'Beauftiful statue - truly a sight to behold.',
                 'resident_happiness_multiplier': 1.6,
                 'temperature_raise': 0,
+                'range': 10,
                 'images': [
                     get_asset_path('SpecialBuildings', 'statue0.png'),
                     get_asset_path('SpecialBuildings', 'statue1.png'),
@@ -353,6 +359,7 @@ class ConstructType(Enum):
                 'pollution': 0.9,
                 'fire_protection': -1,
                 'temperature_raise': 6,
+                'range': 15,
                 'images': [get_asset_path('SpecialBuildings', 'landfill.png')]
             },
             1: {
@@ -367,6 +374,7 @@ class ConstructType(Enum):
                 'fire_protection': -1,
                 'upgrade_cost': 50000,
                 'temperature_raise': 3,
+                'range': 15,
                 'images': [get_asset_path('SpecialBuildings', 'wasteprocess.png')]
             }
         }
@@ -384,6 +392,7 @@ class ConstructType(Enum):
                 'income': -1000,
                 'energy_change': 2000,
                 'resident_happiness_multiplier': 0.5,
+                'range': 20,
                 'images': [get_asset_path('SpecialBuildings', 'power_plant.png')]
             }
         }
@@ -403,6 +412,7 @@ class ConstructType(Enum):
                 'resident_happiness_multiplier': 1.1,
                 'fire_protection': 1,
                 'temperature_raise': 0,
+                'range': 10,
                 'images': [get_asset_path('SpecialBuildings', 'waterpipe.png')]
             }
         }
