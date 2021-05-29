@@ -23,7 +23,8 @@ class CitySpaceGraphics:
         # pov - point of origin from which we're drawing
         self.pov_x = WINDOW_SIZE[0] // 2
         self.pov_y = WINDOW_SIZE[1] // 2
-        self.scale = 50  # defines the zoom
+        self.scale = max([WINDOW_SIZE[1] // self.height + 1,
+                         WINDOW_SIZE[0] // self.width + 1])  # defines the zoom
         self.move_speed = (0, 0)  # added to pov in each frame
 
         self.selected_lot = None  # square selected with lmb

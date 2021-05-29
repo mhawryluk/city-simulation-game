@@ -1,7 +1,7 @@
 import os
 import pygame as pg
 
-WINDOW_SIZE = (1200, 800)
+WINDOW_SIZE = (1920, 1020)
 FPS = 60
 
 def load_asset(*args):
