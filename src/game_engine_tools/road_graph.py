@@ -26,7 +26,7 @@ class RoadNetGraph:
         i, j = row+1, col
         radius = lot.construct.get('range', 0)
         print("==== ",i, j, self.road_system.horizontal)
-        if i >= 0 and i <= len(self.lots) and j >= 0 and j < len(self.lots[0]) and (j, i) in self.road_system.horizontal:
+        if (j, i) in self.road_system.horizontal:
             visited = dict()
             self.dfs(lot, False, i, j, radius, remove, visited)
 
@@ -70,12 +70,12 @@ class RoadNetGraph:
         second_lot = None
         if vertical:
             if j-1 >= 0:
-                second_lot = self.lots[i][j-1]
+                second_lot = self.lots[j-1][i]
         else:
             if i-1 >= 0:
-                second_lot = self.lots[i-1][j]
+                second_lot = self.lots[j][i-1]
             
-        return self.lots[i][j], second_lot
+        return self.lots[j][i], second_lot
 
     def edge_neighbors(self, i, j, vertical):
         ver, hor = [(i-1, j)], [(i, j-1)]
@@ -102,39 +102,10 @@ class RoadNetGraph:
     def filter_neighbor_roads(self, hor=[], ver=[]):
         horizontal =  [
             (i,j) for i,j in hor if 
-            i >= 0 and i <= len(self.lots) and
-            j >= 0 and j < len(self.lots[0]) and
             (j, i) in self.road_system.horizontal
         ]
         vertical = [
             (i,j) for i,j in ver if 
-            i >= 0 and i < len(self.lots) and
-            j >= 0 and j <= len(self.lots[0]) and
             (j, i) in self.road_system.vertical
         ]
         return horizontal, vertical
-    
-    # def lot_adjecent_roads(self, lot_i, lot_j):
-    #     # horizontal roads
-    #     hor = []
-    #     hor.append((lot_i, lot_j))
-    #     hor.append((lot_i+1, lot_j))
-    #     hor = [
-    #         (i,j) for i,j in hor if 
-    #         i >= 0 and i <= len(self.lots) and
-    #         j >= 0 and j < len(self.lots) and
-    #         (i, j) in self.road_system.horizontal
-    #     ]
-
-    #     # vertical roads
-    #     ver = []
-    #     ver.append((lot_i, lot_j))
-    #     ver.append((lot_i, lot_j+1))
-    #     ver = [
-    #         (i,j) for i,j in ver if 
-    #         i >= 0 and i < len(self.lots) and
-    #         j >= 0 and j <= len(self.lots) and
-    #         (i, j) in self.road_system.vertical
-    #     ]
-
-    #     return hor, ver
