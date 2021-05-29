@@ -7,6 +7,8 @@ import pygame as pg
 
 
 class CitySpaceGraphics:
+    GRAY = (192, 192, 192)
+
     def __init__(self, city_space, width, height):
         self.city_space = city_space
 
@@ -81,10 +83,16 @@ class CitySpaceGraphics:
         if mode == "road_placing":
             alpha = pg.Surface(WINDOW_SIZE)
             alpha.set_alpha(128)
-            alpha.fill((192, 192, 192))
+            alpha.fill(self.GRAY)
             window.blit(alpha, (0, 0))
             RoadGraphics.highlight_roads(
                 self.city_space.road_system, (self.pov_x, self.pov_y), self.scale)
+        
+        if mode == "access_highlighting":
+            alpha = pg.Surface(WINDOW_SIZE)
+            alpha.set_alpha(128)
+            alpha.fill(self.GRAY)
+            window.blit(alpha, (0, 0))
 
     def update(self):
         '''przesuwa mapę w każdej klatce'''

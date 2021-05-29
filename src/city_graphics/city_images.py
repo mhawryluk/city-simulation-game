@@ -73,7 +73,8 @@ class CityImages:
                 'running-ninja',
                 'run',
                 'halt',
-                'walk'
+                'walk',
+                'mesh-network'
             ]
         }
 

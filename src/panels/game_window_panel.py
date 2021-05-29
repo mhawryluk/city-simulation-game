@@ -51,6 +51,11 @@ class GameWindowPanel(Panel):
         # self.stats_button = self.menu.add.button(
         #     "stats", self.stats)
 
+        self.menu.add.image(CITY_IMAGES.get_icon('mesh-network'), scale=scale)
+        self.build_mode_button = self.menu.add.button(
+            "access", self.access)
+        self.menu.add.label(' ')
+
         self.menu.add.image(CITY_IMAGES.get_icon(
             'settings-knobs'), scale=scale)
         self.options_button = self.menu.add.button(
@@ -93,6 +98,18 @@ class GameWindowPanel(Panel):
             self.unselect_selected_widget()
         else:
             self.stat_panel.enable()
+
+    def access(self):
+        self.disable_subpanels()
+
+        if self.game_window.mode != "access_highlighting":
+            self.game_window.mode = "access_highlighting"
+        else:
+            self.game_window.mode = "game_mode"
+            self.unselect_selected_widget()
+
+        self.game_window.zoning = False
+        self.game_window.upgrade_panel.disable()
 
     def options(self):
         enabled = self.option_panel.is_enabled()

@@ -148,7 +148,7 @@ class GameWindow(GameMode):
             elif not self.zoning:
                 if event.button == pg.BUTTON_LEFT:
                     self.city_graphics.select_lot(pg.mouse.get_pos())
-                    if not self.bulldozing and not bought:
+                    if not self.bulldozing and not bought and self.mode != 'access_highlighting':
                         self.set_upgrade_panel()
 
             # zooming out
