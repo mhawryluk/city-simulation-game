@@ -8,6 +8,7 @@ class SaveManager:
         self.active_save = None
         self.sm_data = None
         self.saves_list = []
+        self.happiness_threshold = 3
         self.load_save_manager_data()
 
     def generate_save_manager_data_to(self, sm_data_file_path):
