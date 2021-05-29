@@ -8,6 +8,8 @@ import pygame as pg
 
 class CitySpaceGraphics:
     GRAY = (192, 192, 192)
+    AFFECTS_COLOR = 0xf4acb7
+    AFFECTED_COLOR = 0xffcad4
 
     def __init__(self, city_space, width, height):
         self.city_space = city_space
@@ -87,12 +89,13 @@ class CitySpaceGraphics:
             window.blit(alpha, (0, 0))
             RoadGraphics.highlight_roads(
                 self.city_space.road_system, (self.pov_x, self.pov_y), self.scale)
-        
+
         if mode == "access_highlighting":
             alpha = pg.Surface(WINDOW_SIZE)
             alpha.set_alpha(128)
             alpha.fill(self.GRAY)
             window.blit(alpha, (0, 0))
+            self.highlight_access(window)
 
     def update(self):
         '''przesuwa mapę w każdej klatce'''
@@ -148,14 +151,17 @@ class CitySpaceGraphics:
         if self.selected_lot:
             self.selected_lot.selected = False
         clicked_lot = self.get_clicked_lot(mouse_pos)
-        clicked_lot.selected = True
+        if clicked_lot:
+            clicked_lot.selected = True
         self.selected_lot = clicked_lot
 
     def get_clicked_lot(self, mouse_pos):
+        if mouse_pos is None:
+            return None
         x = (mouse_pos[0] - self.pov_x +
-             self.scale*self.width//2) // self.scale
+            self.scale*self.width//2) // self.scale
         y = (mouse_pos[1] - self.pov_y +
-             self.scale*self.height//2) // self.scale
+            self.scale*self.height//2) // self.scale
         if x < self.width and y < self.height:
             return self.city_space.lots[x][y]
 
@@ -167,6 +173,16 @@ class CitySpaceGraphics:
         y = round((mouse_pos[1] - self.pov_y +
                   self.scale*self.height//2) / self.scale)
         return (x, y)
+
+    def highlight_access(self, window):
+        if self.selected_lot is None or self.selected_lot.construct is None:
+            return
+
+        LotGraphics.highlight_lot(self.selected_lot, (self.pov_x, self.pov_y), self.scale, self.AFFECTS_COLOR)
+        
+        for lot in self.selected_lot.affects:
+            if lot == self.selected_lot: continue
+            LotGraphics.highlight_lot(lot, (self.pov_x, self.pov_y), self.scale, self.AFFECTED_COLOR)
 
     @staticmethod
     def set_speed(speed):

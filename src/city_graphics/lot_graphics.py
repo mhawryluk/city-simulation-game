@@ -52,14 +52,21 @@ class LotGraphics:
 
         # zone highlighting
         if cls.zone_highlighting and lot.zone_type:
-            alpha = pg.Surface((scale, scale))
-            alpha.set_alpha(128)
-            alpha.fill(cls.zone_colors[lot.zone_type])
-            cls.window.blit(alpha, (x, y))
+            cls.highlight_lot(lot, pov, scale, cls.zone_colors[lot.zone_type])
 
     @classmethod
     def get_draw_position(cls, lot, pov, scale):
         return pov[0] - scale*cls.map_dimensions[0]//2 + scale*lot.x, pov[1] - scale*cls.map_dimensions[1]//2 + scale*lot.y
+
+    @classmethod
+    def highlight_lot(cls, lot, pov, scale, color):
+        x, y = cls.get_draw_position(lot, pov, scale)
+        x += int(scale*ROAD_WIDTH_RATIO//2)
+        y += int(scale*ROAD_WIDTH_RATIO//2)
+        alpha = pg.Surface((scale, scale))
+        alpha.set_alpha(128)
+        alpha.fill(color)
+        cls.window.blit(alpha, (x, y))
 
     @classmethod
     def draw_simulation_effects(cls, lot, pov, scale):

@@ -61,4 +61,4 @@ Project for Python programming class
 - [x] rozmiar obrazków w upgrade panel
 - [ ] rozmiar sklepów
 - [ ] komunikaty np. gdy brakuje pieniędzy na upgrade
-- [ ] wizualizacja wpływu budynków
+- [x] wizualizacja wpływu budynków

@@ -104,11 +104,13 @@ class GameWindowPanel(Panel):
 
         if self.game_window.mode != "access_highlighting":
             self.game_window.mode = "access_highlighting"
+            self.game_window.city_graphics.select_lot(None)
         else:
             self.game_window.mode = "game_mode"
             self.unselect_selected_widget()
 
         self.game_window.zoning = False
+        self.game_window.toggle_zone_highlighting(False)
         self.game_window.upgrade_panel.disable()
 
     def options(self):
@@ -133,11 +135,12 @@ class GameWindowPanel(Panel):
             self.build_mode_panel.disable()
             self.unselect_selected_widget()
             self.build_mode_panel.unselect_selected_widget()
+            self.game_window.toggle_zone_highlighting(False)
         else:
             self.build_mode_panel.enable()
+            self.game_window.toggle_zone_highlighting(True)
 
         self.game_window.upgrade_panel.disable()
-        self.game_window.toggle_zone_highlighting()
 
         if self.game_window.mode == "build_mode":
             self.build_mode_panel.special_building_panel.disable()
