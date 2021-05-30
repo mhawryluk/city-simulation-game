@@ -255,8 +255,8 @@ WASTE_BORDERVAL = 0
 
 
 #happyness constants
-TOP_HAPPYNESS = 400
-NORMALIZATION_POWER = 4
+TOP_HAPPYNESS = 2000
+NORMALIZATION_POWER = 6
 
 
 # hapynes to taxes calculator
