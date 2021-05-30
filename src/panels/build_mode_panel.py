@@ -18,7 +18,7 @@ class BuildModePanel(Panel):
                                width=width, height=height,
                                position=position,
                                theme=self.get_theme(),
-                               columns=10, rows=1,
+                               columns=11, rows=1,
                                enabled=False,
                                mouse_enabled=True)
 
@@ -55,6 +55,8 @@ class BuildModePanel(Panel):
         self.menu.add.image(CITY_IMAGES.get_icon('bulldozer'), scale=scale)
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
+
+        self.menu.add.label(' ')
 
     def special_buildings(self):
         '''funkcja wywoływana przy przyciśnięciu przycisku "special building"'''
