@@ -19,9 +19,6 @@ class RoadGraphics:
 
     @classmethod
     def draw(cls, roads, pov, scale):
-        print(roads.horizontal)
-        print(roads.vertical)
-
         picture = CITY_IMAGES.get_vertical_road(cls.get_vertical_size(scale))
         for pos_x, pos_y in roads.vertical:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
