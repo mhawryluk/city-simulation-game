@@ -191,6 +191,8 @@ def normalize_happyness(happyness, old_happyness):
     happyness = (happyness * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
     happyness = (happyness + 1) ** 0.25
     happyness = -1 / happyness + 1
+    if happyness >= 0.9994:
+        happyness = 1
     return happyness
 
 
