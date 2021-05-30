@@ -19,6 +19,7 @@ class ToggleMenu(Panel):
             self.button.select(True)
 
         self.subpanel.disable_subpanels()
+        self.subpanel.unselect_selected_widget()
         self.subpanel.menu.toggle()
         self.game_window.info_panel.menu.toggle()
         self.game_window.speed_panel.menu.toggle()

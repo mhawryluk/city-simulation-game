@@ -78,6 +78,7 @@ class BuildModePanel(Panel):
 
         enabled = self.zone_building_panel.is_enabled()
         self.disable_subpanels()
+        self.zone_building_panel.unselect_selected_widget()
 
         if enabled:
             self.zone_building_panel.disable()

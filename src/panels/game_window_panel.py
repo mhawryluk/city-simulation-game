@@ -102,9 +102,9 @@ class GameWindowPanel(Panel):
         if enabled:
             self.build_mode_panel.disable()
             self.unselect_selected_widget()
-            self.game_window.mode = "build_mode"
-            self.game_window.game_resume()
+            self.game_window.mode = "game_mode"
         else:
+            self.game_window.mode = "build_mode"
             self.build_mode_panel.enable()
             self.game_window.toggle_zone_highlighting(True)
             self.build_mode_panel.unselect_selected_widget()

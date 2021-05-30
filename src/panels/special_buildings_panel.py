@@ -63,10 +63,12 @@ class BuyBuildingWindow(Panel):
 
         # IMAGE & INFO
         info = construct.value['level'][0]
-        image_width, image_height = pg.image.load(info['images'][0]).get_rect().size
-        self.menu.add.image(info['images'][0], 
-            scale=(self.IMAGE_SIZE/image_width, self.IMAGE_SIZE/image_height)
-        )
+        image_width, image_height = pg.image.load(
+            info['images'][0]).get_rect().size
+        self.menu.add.image(info['images'][0],
+                            scale=(self.IMAGE_SIZE/image_width,
+                                   self.IMAGE_SIZE/image_height)
+                            )
 
         self.menu.add.label(f'|{info["name"]}|', max_char=30)
         self.menu.add.label(' ')
@@ -79,13 +81,11 @@ class BuyBuildingWindow(Panel):
         self.menu.add.button('BUY', self.buy)
         self.menu.add.label(' ')
 
-
         for key, value in info.items():
             if key == 'images' or key == 'name' or key == 'description':
                 continue
             self.menu.add.label(
                 f'{key.replace("_", " ")}: {value}', max_char=30)
-
 
     def buy(self):
         if self.game_window.simulator.can_buy(self.construct):
