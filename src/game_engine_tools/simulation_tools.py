@@ -168,7 +168,7 @@ def calculate_demands(player_status):
         player_status.data['produce'], PRODUCE_THRESHOLDS)
     player_status.data['industrial demand'] = level_to_demand(
         player_status.data['demand'], DEMAND_THRESHOLDS)
-    player_status.data['population demand'] = 'Very high' if top_demand(player_status) else level_to_demand(
+    player_status.data['residential demand'] = 'Very high' if top_demand(player_status) else level_to_demand(
         player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON , GOODS_THRESHOLDS)
 
 
@@ -188,9 +188,10 @@ def top_demand(player_status):
 
 
 def normalize_happyness(happyness, old_happyness):
-    empowered = happyness / TOP_HAPPYNESS
-    empowered =  empowered ** NORMALIZATION_POWER
-    return (empowered * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
+    happyness = (happyness * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
+    happyness = (happyness + 1) ** 0.25
+    happyness = -1 / happyness + 1
+    return happyness
 
 
 SIMULATIONS = [
@@ -251,11 +252,6 @@ MAX_WASTE_FREE_SPACE = -10000
 COSTS_REDUCED_ABOVE_WASTE_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
 WASTE_BORDERVAL = 0
-
-
-#happyness constants
-TOP_HAPPYNESS = 2000
-NORMALIZATION_POWER = 6
 
 
 # hapynes to taxes calculator
