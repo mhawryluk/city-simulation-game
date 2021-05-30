@@ -31,6 +31,7 @@ class SimulationEngine:
         if self.fps_in_cycle >= self.fps_per_cycle:
             self.road_graph.rebuild_references()
             self.fps_in_cycle = 0
+            old_happiness = self.player_status.data['resident_happyness']
             self.player_status.data['resident_happyness'] = 0
             for row in self.city_space.lots:
                 for lot in row:
@@ -38,7 +39,7 @@ class SimulationEngine:
                         simulation(lot, self.player_status)
                     # construct_specific_simulation(lot, self.player_status)
                     self.player_status.data['resident_happyness'] += calculate_happiness(lot)
-            self.player_status.data['resident_happyness'] = normalize_happyness(self.player_status.data['resident_happyness'])
+            self.player_status.data['resident_happyness'] = normalize_happyness(self.player_status.data['resident_happyness'], old_happiness)
             satisfy_demand(self.player_status)
             calculate_demands(self.player_status)
         else:

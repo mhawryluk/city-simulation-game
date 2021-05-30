@@ -1,4 +1,5 @@
 from random import randint, random
+from typing import NewType
 from constructs.construct_type import ConstructType
 import numpy as np
 
@@ -33,7 +34,7 @@ def fire(lot, player_status):
 def security(lot, player_status):
     if lot.construct != None:
         security = 0
-        coefficient = lot.construct.get('burglary_appeal', 1)
+        coefficient = lot.construct.get('burglary_appeal', 0.5)
         coefficient *= 1 if lot.construct.happiness is None else lot.construct.happiness
         crime_appeal = BURGLARY_APPEAL * coefficient
         for affected_by in lot.affected_by:
@@ -125,7 +126,7 @@ def population(lot, player_status):
             ))
             )
             player_status.data['population'] = populus
-        print("--POPULUS-->", player_status.data['population'])
+        # print("--POPULUS-->", player_status.data['population'])
         if random() > happyness:
             player_status.data['population'] = int(
                 player_status.data['population'] * POPULATION_REDUCTION)
@@ -187,10 +188,10 @@ def top_demand(player_status):
     return player_status.data['commercial demand'] in top_demands and player_status.data['industrial demand'] in top_demands
 
 
-def normalize_happyness(happyness):
+def normalize_happyness(happyness, old_happyness):
     empowered = happyness / TOP_HAPPYNESS
     empowered =  empowered ** NORMALIZATION_POWER
-    return empowered
+    return (empowered * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
 
 
 SIMULATIONS = [
@@ -223,7 +224,7 @@ HAPPYNES_DIVISOR = 2
 
 
 # security constatnts
-BURGLARY_APPEAL = 1.1
+BURGLARY_APPEAL = 0.4
 MIN_CRIME = 0
 MAX_CRIME = 15
 CRIME_THRESHOLD = 7
@@ -272,9 +273,11 @@ PANDEMIC_COEF = 0.01
 PANDEMIC_SEVERITY = 3
 
 
-# population happynes coeficient
+# population happynes constatnts
 POPULATION_HAPPYNESS_COEF = 0.25
 POPULATION_REDUCTION = 0.98
+CURRENT_PERCENT_WEIGHT = 7
+NEW_PERCENT_WEIGHT = 1
 
 
 # buldoze constants
