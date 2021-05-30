@@ -104,7 +104,7 @@ class InfoPanel(Panel):
                 if value == 'Very high' and not image.red:
                     image.red = True
                     image.set_image(pgmen.baseimage.BaseImage(
-                        CITY_IMAGES.get_red_icon(image_key)).scale(*self.ICON_SCALE))
+                        CITY_IMAGES.get_warning_icon(image_key)).scale(*self.ICON_SCALE))
                 elif value != 'Very high' and image.red:
                     image.red = False
                     image.set_image(pgmen.baseimage.BaseImage(
@@ -113,7 +113,7 @@ class InfoPanel(Panel):
             elif value < 0.1 and text.strip() != 'pollution' and not image.red:
                 image.red = True
                 image.set_image(pgmen.baseimage.BaseImage(
-                    CITY_IMAGES.get_red_icon(image_key)).scale(*self.ICON_SCALE))
+                    CITY_IMAGES.get_warning_icon(image_key)).scale(*self.ICON_SCALE))
             elif value >= 0.1 and image.red:
                 image.red = False
                 image.set_image(pgmen.baseimage.BaseImage(

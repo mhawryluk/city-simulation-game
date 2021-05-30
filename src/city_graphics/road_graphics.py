@@ -55,23 +55,28 @@ class RoadGraphics:
         alpha_level = 150
         alpha.set_alpha(alpha_level)
 
+        ## road outline
         alpha.fill(cls.BLANK_COLOR)
         for pos_x, pos_y in product(range(cls.map_dimensions[0]), range(cls.map_dimensions[1])):
             if not (pos_x, pos_y) in roads.vertical:
                 cls.draw_element(pos_x, pos_y, pov, scale, alpha)
 
-        alpha.fill(cls.HIGHLIGHT_COLOR)
-        for pos_x, pos_y in roads.vertical:
-            cls.draw_element(pos_x, pos_y, pov, scale, alpha)
-
-        # horizontal
         alpha = pg.Surface(cls.get_horizontal_size(scale))
         alpha.set_alpha(alpha_level)
-
         alpha.fill(cls.BLANK_COLOR)
         for pos_x, pos_y in product(range(cls.map_dimensions[0]), range(cls.map_dimensions[1])):
             if not (pos_x, pos_y) in roads.horizontal:
                 cls.draw_element(pos_x, pos_y, pov, scale, alpha)
+
+        ## highlight
+        alpha = pg.Surface(cls.get_vertical_size(scale))
+        alpha.set_alpha(alpha_level)
+        alpha.fill(cls.HIGHLIGHT_COLOR)
+        for pos_x, pos_y in roads.vertical:
+            cls.draw_element(pos_x, pos_y, pov, scale, alpha)
+
+        alpha = pg.Surface(cls.get_horizontal_size(scale))
+        alpha.set_alpha(alpha_level)
 
         alpha.fill(cls.HIGHLIGHT_COLOR)
         for pos_x, pos_y in roads.horizontal:

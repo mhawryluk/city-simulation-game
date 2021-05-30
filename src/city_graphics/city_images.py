@@ -122,7 +122,7 @@ class CityImages:
     def get_icon(self, icon):
         return self.icons[icon]
 
-    def get_red_icon(self, icon):
+    def get_warning_icon(self, icon):
         return self.warning_icons[icon]
 
     def get_scaled_car_image(self, car_type, road_direction, direction):
