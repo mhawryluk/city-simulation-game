@@ -63,12 +63,15 @@ class BuildModePanel(Panel):
 
         enabled = self.special_building_panel.is_enabled()
         self.disable_subpanels()
+        self.special_building_panel.unselect_selected_widget()
 
         if enabled:
             self.special_building_panel.disable()
             self.unselect_selected_widget()
         else:
             self.special_building_panel.enable()
+            self.game_window.bulldozing = False
+            self.game_window.zoning = False
 
     def zone_buildings(self):
         '''funkcja wywoływana przy przyciśnięciu przycisku "zone building"'''
@@ -82,6 +85,8 @@ class BuildModePanel(Panel):
             self.unselect_selected_widget()
         else:
             self.zone_building_panel.enable()
+            self.game_window.bulldozing = False
+            self.game_window.zoning = False
 
     def bulldoze(self):
         self.disable_subpanels()
@@ -91,6 +96,14 @@ class BuildModePanel(Panel):
         else:
             self.game_window.bulldozing = False
             self.unselect_selected_widget()
-
+    
     def get_subpanels(self):
         return [self.special_building_panel, self.zone_building_panel]
+    
+    def disable(self):
+        super().disable()
+        self.unselect_selected_widget()
+        self.zone_building_panel.unselect_selected_widget()
+        self.special_building_panel.unselect_selected_widget()
+
+
