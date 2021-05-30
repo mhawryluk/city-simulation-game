@@ -78,6 +78,10 @@ class CityImages:
             ]
         }
 
+        self.warning_icons = {
+            path.name.split('.')[-2]: path.path for path in os.scandir(os.path.join("Assets", "WarningIcons"))
+        }
+
         self.vertical_road = load_asset('Streets', 'vertical.png')
         self.horizontal_road = load_asset('Streets', 'horizontal.png')
 
@@ -117,6 +121,9 @@ class CityImages:
 
     def get_icon(self, icon):
         return self.icons[icon]
+
+    def get_red_icon(self, icon):
+        return self.warning_icons[icon]
 
     def get_scaled_car_image(self, car_type, road_direction, direction):
         image = self.scaled_cars[car_type]

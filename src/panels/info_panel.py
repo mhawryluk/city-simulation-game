@@ -4,6 +4,8 @@ from city_graphics.city_images import CITY_IMAGES
 
 
 class InfoPanel(Panel):
+    ICON_SCALE = (0.048, 0.048)
+
     def __init__(self, width, height, position, game_window, simulator):
         super().__init__(width, height, game_window)
 
@@ -30,21 +32,33 @@ class InfoPanel(Panel):
         comm_demand_label = self.menu.add.label(' commercial')
         indu_demand_label = self.menu.add.label(' industrial')
 
-        scale = (0.048, 0.048)
         self.menu.add.label('')
-        self.menu.add.image(CITY_IMAGES.get_icon('banknote'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('heart-inside'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('person'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('drop'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('trash-can'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('plug'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('recycle'), scale=scale)
+
+        self.images = {}
+
+        self.images['funds'] = (self.menu.add.image(
+            CITY_IMAGES.get_icon('banknote'), scale=self.ICON_SCALE), 'banknote')
+        self.images['resident_happyness'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'heart-inside'), scale=self.ICON_SCALE), 'heart-inside')
+        self.images['population'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'person'), scale=self.ICON_SCALE), 'person')
+        self.images['water'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'drop'), scale=self.ICON_SCALE), 'drop')
+        self.images['waste'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'trash-can'), scale=self.ICON_SCALE), 'trash-can')
+        self.images['power'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'plug'), scale=self.ICON_SCALE), 'plug')
+        self.images['pollution'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'recycle'), scale=self.ICON_SCALE), 'recycle')
 
         self.menu.add.label('')
         self.menu.add.label('')
-        self.menu.add.image(CITY_IMAGES.get_icon('house'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('shop'), scale=scale)
-        self.menu.add.image(CITY_IMAGES.get_icon('factory'), scale=scale)
+        self.images['residential demand'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'house'), scale=self.ICON_SCALE), 'house')
+        self.images['commercial demand'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'shop'), scale=self.ICON_SCALE), 'shop')
+        self.images['industrial demand'] = (self.menu.add.image(CITY_IMAGES.get_icon(
+            'factory'), scale=self.ICON_SCALE), 'factory')
 
         funds_label.add_draw_callback(self.update_label('funds'))
         population_label.add_draw_callback(self.update_label('population'))
@@ -70,14 +84,41 @@ class InfoPanel(Panel):
                        res_demand_label, comm_demand_label, indu_demand_label,
                        water_label, waste_label, power_label, pollution_label]
 
+        for image in self.images.values():
+            image[0].red = False
+
     def update_label(self, key):
         def update(widget, menu):
             text = widget.get_title().split(':')[0]
+            value = self.simulator.get_data(key)
+
             if text.strip() == 'happiness':
                 widget.set_title(
-                    f'happiness: {self.simulator.get_data(key):.1%}')
+                    f'happiness: {value:.1%}')
             else:
-                widget.set_title(f'{text}: {self.simulator.get_data(key)}')
+                widget.set_title(f'{text}: {value}')
+
+            image, image_key = self.images[key]
+            # print(value)
+            if isinstance(value, (str)):
+                if value == 'Very high' and not image.red:
+                    image.red = True
+                    image.set_image(pgmen.baseimage.BaseImage(
+                        CITY_IMAGES.get_red_icon(image_key)).scale(*self.ICON_SCALE))
+                elif value != 'Very high' and image.red:
+                    image.red = False
+                    image.set_image(pgmen.baseimage.BaseImage(
+                        CITY_IMAGES.get_icon(image_key)).scale(*self.ICON_SCALE))
+
+            elif value < 0.1 and text.strip() != 'pollution' and not image.red:
+                image.red = True
+                image.set_image(pgmen.baseimage.BaseImage(
+                    CITY_IMAGES.get_red_icon(image_key)).scale(*self.ICON_SCALE))
+            elif value >= 0.1 and image.red:
+                image.red = False
+                image.set_image(pgmen.baseimage.BaseImage(
+                    CITY_IMAGES.get_icon(image_key)).scale(*self.ICON_SCALE))
+
         return update
 
     def force_update_labels(self):
