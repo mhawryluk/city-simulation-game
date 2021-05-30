@@ -18,6 +18,11 @@ class RoadGraphics:
     car_speed = 0.04
 
     @classmethod
+    def reset(cls):
+        cls.cars = set()
+        cls.car_speed = 0.04
+
+    @classmethod
     def draw(cls, roads, pov, scale):
         picture = CITY_IMAGES.get_vertical_road(cls.get_vertical_size(scale))
         for pos_x, pos_y in roads.vertical:

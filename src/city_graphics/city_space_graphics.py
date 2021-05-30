@@ -16,6 +16,8 @@ class CitySpaceGraphics:
 
         LotGraphics.map_dimensions = (width, height)
         RoadGraphics.map_dimensions = (width, height)
+        RoadGraphics.reset()
+        LotGraphics.reset()
 
         self.height = height  # amount of fields to height
         self.width = width  # amount of fields to width

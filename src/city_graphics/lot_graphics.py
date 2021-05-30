@@ -16,6 +16,10 @@ class LotGraphics:
     animation_speed = 0.05
 
     @classmethod
+    def reset(cls):
+        cls.animation_speed = 0.05
+
+    @classmethod
     def draw_background(cls, lot, scale, pov):
         x, y = cls.get_draw_position(lot, pov, scale)
 
