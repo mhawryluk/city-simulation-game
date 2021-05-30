@@ -212,9 +212,6 @@ class GameWindow(GameMode):
         else:
             self.upgrade_panel.disable()
 
-    def game_resume(self):
-        self.zoning = False
-        self.game_mode = 'game_mode'
 
     def save(self):
         def compress2save():

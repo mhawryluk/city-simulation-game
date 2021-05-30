@@ -10,7 +10,7 @@ from city_graphics.city_images import CITY_IMAGES
 class GameWindowPanel(Panel):
     '''main panel on the left side'''
 
-    def __init__(self, width, height, game_window):
+    def __init__(self, width, height, game_window, position=(100, 100)):
         super().__init__(width, height, game_window)
         self.menu = pgmen.Menu(title='CITY SIMULATION GAME',
                                width=width, height=height,
@@ -21,7 +21,7 @@ class GameWindowPanel(Panel):
         # BUILD MODE PANEL
         self.build_mode_panel = BuildModePanel(
             width=WINDOW_SIZE[0] - width, height=height//15,
-            position=(100, 100),
+            position=position,
             game_window=game_window)
 
         # OPTIONS PANEL
@@ -48,8 +48,6 @@ class GameWindowPanel(Panel):
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
         self.menu.add.label(' ')
-        # self.stats_button = self.menu.add.button(
-        #     "stats", self.stats)
 
         self.menu.add.image(CITY_IMAGES.get_icon('mesh-network'), scale=scale)
         self.build_mode_button = self.menu.add.button(
@@ -64,14 +62,7 @@ class GameWindowPanel(Panel):
 
     def play(self):
         self.game_window.mode = "game_mode"
-
-        if self.game_window.zoning:
-            self.game_window.zoning = False
-            self.game_window.zoning_type = None
-
-        self.game_window.upgrade_panel.disable()
         self.disable_subpanels()
-        self.game_window.toggle_zone_highlighting(False)
 
     def add_road(self):
         self.disable_subpanels()
@@ -81,23 +72,6 @@ class GameWindowPanel(Panel):
         else:
             self.game_window.mode = "game_mode"
             self.unselect_selected_widget()
-
-        self.game_window.zoning = False
-        self.game_window.upgrade_panel.disable()
-
-    def stats(self):
-        enabled = self.stat_panel.is_enabled()
-        self.game_window.mode = self.game_window.mode if self.game_window.mode != "road_placing" else "game_mode"
-        self.game_window.upgrade_panel.disable()
-
-        self.disable_subpanels()
-        self.stat_panel.menu.toggle()
-
-        if enabled:
-            self.stat_panel.disable()
-            self.unselect_selected_widget()
-        else:
-            self.stat_panel.enable()
 
     def access(self):
         self.disable_subpanels()
@@ -109,44 +83,38 @@ class GameWindowPanel(Panel):
             self.game_window.mode = "game_mode"
             self.unselect_selected_widget()
 
-        self.game_window.zoning = False
-        self.game_window.toggle_zone_highlighting(False)
-        self.game_window.upgrade_panel.disable()
-
     def options(self):
         enabled = self.option_panel.is_enabled()
-        self.game_window.mode = self.game_window.mode if self.game_window.mode != "road_placing" else "game_mode"
-        self.game_window.upgrade_panel.disable()
 
         self.disable_subpanels()
+
         if enabled:
             self.option_panel.disable()
             self.unselect_selected_widget()
         else:
+            self.game_window.mode = "game_mode"
             self.option_panel.enable()
 
     def build_mode(self):
         enabled = self.build_mode_panel.is_enabled()
-
-        for panel in self.get_subpanels():
-            panel.disable_all_panels()
+        self.disable_subpanels()
 
         if enabled:
             self.build_mode_panel.disable()
             self.unselect_selected_widget()
-            self.build_mode_panel.unselect_selected_widget()
-            self.game_window.toggle_zone_highlighting(False)
-        else:
-            self.build_mode_panel.enable()
-            self.game_window.toggle_zone_highlighting(True)
-
-        self.game_window.upgrade_panel.disable()
-
-        if self.game_window.mode == "build_mode":
-            self.build_mode_panel.special_building_panel.disable()
-            self.game_window.game_resume()
+            self.game_window.mode = "game_mode"
         else:
             self.game_window.mode = "build_mode"
+            self.build_mode_panel.enable()
+            self.game_window.toggle_zone_highlighting(True)
+            self.build_mode_panel.unselect_selected_widget()
 
     def get_subpanels(self):
-        return [self.build_mode_panel, self.option_panel, self.stat_panel]
+        return [self.build_mode_panel, self.option_panel, self.stat_panel, self.game_window.upgrade_panel]
+
+    def disable_subpanels(self):
+        super().disable_subpanels()
+        self.game_window.zoning = False
+        self.game_window.bulldozing = False
+        self.game_window.zoning_type = None
+        self.game_window.toggle_zone_highlighting(False)
