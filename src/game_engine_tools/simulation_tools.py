@@ -69,7 +69,7 @@ def water(lot, player_status):
 def calculate_income(construct, player_status):
     income = construct.get('income', 0)
     if income > 0:
-        income *= 1 + np.abs(player_status.data['goods'] * GOODS_PER_PERSON - player_status.data['population']) / max(player_status.data['population'], 1)
+        income /= 1 + np.abs(player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON) / max(player_status.data['population'] * GOODS_PER_PERSON, 1)
     return income
 
 
@@ -157,7 +157,8 @@ def update_events(lot, player_status):
 def satisfy_demand(player_status):
     normalize = min(player_status.data['produce'],
                     player_status.data['demand'])
-    player_status.data['goods'] += int(normalize * PRODUCE_TO_GODS)
+    player_status.data['goods'] = max(0, player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
+    player_status.data['goods'] += int(normalize * PRODUCE_TO_GOODS)
     player_status.data['produce'] -= normalize
     player_status.data['demand'] -= normalize
 
@@ -168,9 +169,7 @@ def calculate_demands(player_status):
     player_status.data['industrial demand'] = level_to_demand(
         player_status.data['demand'], DEMAND_THRESHOLDS)
     player_status.data['population demand'] = 'Very high' if top_demand(player_status) else level_to_demand(
-        player_status.data['population'] * GOODS_PER_PERSON - player_status.data['goods'], GOODS_THRESHOLDS)
-    player_status.data['goods'] = max(
-        0,  player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
+        player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON , GOODS_THRESHOLDS)
 
 
 def calculate_happiness(lot):
@@ -286,8 +285,8 @@ MONEY_RETURN_PERCENT = 0.78
 
 # supply and demand constants
 BASE_DEMAND = 10
-PRODUCE_TO_GODS = 2
-GOODS_PER_PERSON = 1.5
+PRODUCE_TO_GOODS = 2
+GOODS_PER_PERSON = 1
 PRODUCE_THRESHOLDS = 25
 DEMAND_THRESHOLDS = 45
 GOODS_THRESHOLDS = 10
