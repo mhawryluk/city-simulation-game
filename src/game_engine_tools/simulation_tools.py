@@ -34,7 +34,7 @@ def fire(lot, player_status):
 def security(lot, player_status):
     if lot.construct != None:
         security = 0
-        coefficient = lot.construct.get('burglary_appeal', 1)
+        coefficient = lot.construct.get('burglary_appeal', 0.5)
         coefficient *= 1 if lot.construct.happiness is None else lot.construct.happiness
         crime_appeal = BURGLARY_APPEAL * coefficient
         for affected_by in lot.affected_by:
@@ -126,7 +126,7 @@ def population(lot, player_status):
             ))
             )
             player_status.data['population'] = populus
-        print("--POPULUS-->", player_status.data['population'])
+        # print("--POPULUS-->", player_status.data['population'])
         if random() > happyness:
             player_status.data['population'] = int(
                 player_status.data['population'] * POPULATION_REDUCTION)
@@ -224,7 +224,7 @@ HAPPYNES_DIVISOR = 2
 
 
 # security constatnts
-BURGLARY_APPEAL = 1.1
+BURGLARY_APPEAL = 0.4
 MIN_CRIME = 0
 MAX_CRIME = 15
 CRIME_THRESHOLD = 7
