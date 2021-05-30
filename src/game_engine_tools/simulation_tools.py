@@ -1,4 +1,5 @@
 from random import randint, random
+from typing import NewType
 from constructs.construct_type import ConstructType
 import numpy as np
 
@@ -187,10 +188,10 @@ def top_demand(player_status):
     return player_status.data['commercial demand'] in top_demands and player_status.data['industrial demand'] in top_demands
 
 
-def normalize_happyness(happyness):
+def normalize_happyness(happyness, old_happyness):
     empowered = happyness / TOP_HAPPYNESS
     empowered =  empowered ** NORMALIZATION_POWER
-    return empowered
+    return (empowered * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
 
 
 SIMULATIONS = [
@@ -272,9 +273,11 @@ PANDEMIC_COEF = 0.01
 PANDEMIC_SEVERITY = 3
 
 
-# population happynes coeficient
+# population happynes constatnts
 POPULATION_HAPPYNESS_COEF = 0.25
 POPULATION_REDUCTION = 0.98
+CURRENT_PERCENT_WEIGHT = 7
+NEW_PERCENT_WEIGHT = 1
 
 
 # buldoze constants
