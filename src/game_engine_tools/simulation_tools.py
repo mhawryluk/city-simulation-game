@@ -165,11 +165,11 @@ def satisfy_demand(player_status):
 
 def calculate_demands(player_status):
     player_status.data['commercial demand'] = level_to_demand(
-        player_status.data['produce'], PRODUCE_THRESHOLDS)
+        player_status.data['produce'] +  max(0, player_status.data['population'] * GOODS_PER_PERSON - player_status.data['goods']) / PRODUCE_TO_GOODS, PRODUCE_THRESHOLDS)
     player_status.data['industrial demand'] = level_to_demand(
         player_status.data['demand'], DEMAND_THRESHOLDS)
     player_status.data['residential demand'] = 'Very high' if top_demand(player_status) else level_to_demand(
-        player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON , GOODS_THRESHOLDS)
+        player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON, GOODS_THRESHOLDS)
 
 
 def calculate_happiness(lot):
