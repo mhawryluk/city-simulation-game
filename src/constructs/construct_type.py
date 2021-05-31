@@ -114,6 +114,18 @@ class ConstructType(Enum):
                 'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'), get_asset_path('Shop', 'SH2.png')]
             },
             1: {
+                'name': 'small shop',
+                'people_involved': 3,
+                'income': 700,
+                'demand': 5,
+                'energy_change': -10,
+                'water_consumption': 5,
+                'waste_change': 20,
+                'upgrade_cost': 2000,
+                'resident_happiness_multiplier': 1.1,
+                'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'), get_asset_path('Shop', 'SH2.png')]
+            },
+            2: {
                 'name': 'shop',
                 'description': 'Larger shop, meant to sustain a larger neighbourhood, be it of houses of city blocks.',
                 'people_involved': 10,
