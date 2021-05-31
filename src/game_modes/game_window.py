@@ -36,7 +36,7 @@ class GameWindow(GameMode):
         self.zoning = False
         self.zoning_type = None
         self.bulldozing = False
-        self.construct_to_buy = None  # construct - wciśnięto buy ale jeszcze nie postawiono
+        self.construct_to_buy = None  # construct - buy button presset but purchase not yet confirmed
 
         # befriended classes
         self.city_space = CitySpace(

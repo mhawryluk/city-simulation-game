@@ -19,7 +19,7 @@ class GameEngine:
             pg.mixer.music.set_volume(0.2)
             pg.mixer.music.play()
         except:
-            pass  # if music drivers don't work dont play music
+            pass  # if music drivers don't work - don't play music
 
         self.window = pg.display.set_mode(WINDOW_SIZE)
         self.clock = pg.time.Clock()
