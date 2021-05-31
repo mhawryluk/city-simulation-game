@@ -101,7 +101,7 @@ class CitySpaceGraphics:
             self.highlight_access(window)
 
     def update(self):
-        '''przesuwa mapę w każdej klatce'''
+        '''moves the map in each frame'''
 
         self.pov_x += self.move_speed[0]
         self.pov_y += self.move_speed[1]

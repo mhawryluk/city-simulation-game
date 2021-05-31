@@ -50,7 +50,7 @@ class Lot:
         self.zone_type = None
 
     def can_place(self, construct):
-        '''zwraca True jeśli można ustawić construct na tym polu'''
+        '''returns True if a construct can be placed on curently highlighted lot'''
         construct = Construct(construct)
         type = LotType.GRASS
         if construct.like('water'):

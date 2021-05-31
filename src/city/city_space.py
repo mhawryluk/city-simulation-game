@@ -20,8 +20,8 @@ class CitySpace:
 
     def reset_lots(self, save_source=None, map=None):
         '''
-        definiuje pustą mapę, tworzy Loty
-        zastąpić wczytywaniem z save'a
+        If no save data avaliable - creates new lot grid.
+        Else - loads lots form memory.
         '''
         self.lots = []
 
@@ -67,8 +67,7 @@ class CitySpace:
         clicked_lot.remove_construct()
         return clicked_lot
 
-    def buy_construct(self, construct, clicked_lot) -> bool:
-        '''zwraca True jeśli powiódł się zakup budynku'''
+    def buy_construct(self, construct, clicked_lot):
         if clicked_lot.can_place(construct):
             clicked_lot.set_construct(construct)
             return clicked_lot
