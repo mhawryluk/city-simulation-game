@@ -6,6 +6,7 @@ from city_graphics.city_space_graphics import CitySpaceGraphics
 from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, satisfy_demand, calculate_demands
 from math import inf
 from .road_graph import RoadNetGraph
+from . import make_safe_range
 
 
 class SimulationEngine:
@@ -74,14 +75,14 @@ class SimulationEngine:
                     for i, row in enumerate(self.city_space.lots)
                     if lot in row
                 ]
-                row, col = ind[0]
-                # print('-->', ind)
-                r_size = len(self.city_space.lots)
-                c_size = len(self.city_space.lots[0])
-                for r in range(row-construct_range, row+construct_range+1):
-                    for c in range(col-construct_range, col+construct_range+1):
-                        if r >= 0 and r < r_size and c >= 0 and c < c_size and (r != row or c != col):
-                            affected_lot = self.city_space.lots[r][c]
+                current_row, current_column = ind[0]
+                
+                row_range = make_safe_range(0, len(self.city_space.lots))
+                col_range = make_safe_range(0, len(self.city_space.lots[0]))
+                for row in row_range(current_row-construct_range, current_row+construct_range+1):
+                    for col in col_range(current_column-construct_range, current_column+construct_range+1):
+                        if row != current_row or col != current_column:
+                            affected_lot = self.city_space.lots[row][col]
                             if remove:
                                 affected_lot.unpolluted /= (1-pollution)
                             else:

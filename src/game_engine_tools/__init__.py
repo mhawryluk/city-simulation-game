@@ -17,3 +17,10 @@ def volume_up():
 def volume_down():
     volume = pg.mixer.music.get_volume()
     pg.mixer.music.set_volume(max(0, volume - 0.1))
+
+def make_safe_range(minval, maxval):
+    def safe_range(since, to):
+        start = max(minval, since)
+        end = min(maxval, to)
+        return range(start, end)
+    return safe_range

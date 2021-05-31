@@ -16,7 +16,6 @@ class ConstructType(Enum):
         'likeness': ['home'],
         'max_level': 2,
         'cost': 1000,
-        'simulation_handler': None, #D
         'zone': 'residential',
         'level': {
             0: {
@@ -59,7 +58,6 @@ class ConstructType(Enum):
         'likeness': ['home'],
         'max_level': 3,
         'cost': 5000,
-        'simulation_handler': None, #D same as for family house
         'level': {
             0: {
                 'name': 'regular block',
@@ -103,7 +101,6 @@ class ConstructType(Enum):
         'max_level': 4,
         'cost': 1000,
         'zone': 'commercial',
-        'simulation_handler': None, #D
         'level': {
             0: {
                 'name': 'small shop',
@@ -136,7 +133,6 @@ class ConstructType(Enum):
         'max_level': 0,
         'cost': 1000,
         'zone': 'industrial',
-        'simulation_handler': None, #D
         'level': {
             0: {
                 'name': 'factory',
@@ -157,7 +153,6 @@ class ConstructType(Enum):
     HOSPITAL = {
         'max_level': 1,
         'cost': 1000,
-        'simulation_handler': None, #D
         'level': {
             0: {
                 'name': 'clinic',
@@ -190,7 +185,6 @@ class ConstructType(Enum):
     POLICE_STATION = {
         'max_level': 1,
         'cost': 1000,
-        'simulation_handler': None, #D
         'level': {
             0: {
                 'name': 'Police outpost.',
@@ -227,7 +221,6 @@ class ConstructType(Enum):
     FIRE_STATION = {
         'max_level': 0,
         'cost': 1000,
-        'simulation_handler': None, #D
         'level': {
             0: {
                 'name': 'fire station',
@@ -250,7 +243,6 @@ class ConstructType(Enum):
     SCHOOL = {
         'max_level': 0,
         'cost': 1000,
-        'simulation_handler': None, #M
         'level': {
             0: {
                 'name': 'school',
@@ -271,7 +263,6 @@ class ConstructType(Enum):
     UNIVERSITY = {
         'max_level': 0,
         'cost': 1000,
-        'simulation_handler': None, #M
         'level': {
             0: {
                 'name': 'school',
@@ -293,7 +284,6 @@ class ConstructType(Enum):
     PARK = {  # upgraded to dog park
         'max_level': 1,
         'cost': 1000,
-        'simulation_handler': None, #M
         'level': {
             0: {
                 'name': 'park',
@@ -347,7 +337,6 @@ class ConstructType(Enum):
     LANDFILL = {  # upgraded to waste processing plant
         'max_level': 1,
         'cost': 1000,
-        'simulation_handler': None, #M
         'level': {
             0: {
                 'name': 'landfill',
@@ -383,7 +372,6 @@ class ConstructType(Enum):
     POWER_PLANT = {
         'max_level': 2,
         'cost': 5000,
-        'simulation_handler': None, #M
         'level': {
             0: {
                 'name': 'coal power plant',
@@ -401,7 +389,6 @@ class ConstructType(Enum):
     WATER_PUMP = {
         'max_level': 2,
         'cost': 1000,
-        'simulation_handler': None, #M
         'level': {
             0: {
                 'name': 'water pump',
