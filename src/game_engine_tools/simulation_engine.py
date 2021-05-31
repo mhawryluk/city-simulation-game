@@ -38,7 +38,6 @@ class SimulationEngine:
                 for lot in row:
                     for simulation in SIMULATIONS:
                         simulation(lot, self.player_status)
-                    # construct_specific_simulation(lot, self.player_status)
                     self.player_status.data['resident_happyness'] += calculate_happiness(lot)
             self.player_status.data['resident_happyness'] = normalize_happyness(self.player_status.data['resident_happyness'], old_happiness)
             satisfy_demand(self.player_status)

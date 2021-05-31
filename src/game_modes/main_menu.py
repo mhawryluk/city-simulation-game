@@ -179,7 +179,6 @@ class MainMenu(GameMode):
         theme.background_color = (35, 35, 35, 60)
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)
-        # theme.widget_border_color = (220, 50, 60)
         theme.widget_border_width = 3
         theme.widget_background_color = (35, 35, 35)
         theme.widget_font_size = 44

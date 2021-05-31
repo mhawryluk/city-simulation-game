@@ -80,7 +80,6 @@ def economy_change(lot, player_status):
                                1) if not lot.construct.happiness is None else 1
         money_change *= (1 + player_status.data['taxation']) * taxes_multiplier
         money_change += calculate_income(lot.construct, player_status)
-        # print(money_change)
         player_status.data['funds'] += int(money_change)
         player_status.data['funds'] = set_between(
             player_status.data['funds'], MIN_MONEY, MAX_MONEY)
@@ -88,7 +87,6 @@ def economy_change(lot, player_status):
 
 def health(lot, player_status):
     if lot.construct != None:
-        # print("--HEALTH-->",player_status.data['health'])
         player_status.data['health'] += lot.construct.get('people_involved', 0) * player_status.density()
         player_status.data['health'] -= lot.construct.get('patients', 0) * HEALING_FACTOR
         player_status.data['health'] = set_between(
@@ -98,8 +96,6 @@ def health(lot, player_status):
                 if len(lot.current_events) < EVENTS_LIMIT:
                     lot.current_events.append('pandemic')
             player_status.data['health'] *= 1 + PANDEMIC_COEF
-        
-        # print("<--HEALTH--",player_status.data['health'])
 
 
 def produce(lot, player_status):
@@ -117,7 +113,6 @@ def population(lot, player_status):
         capacity = player_status.data['capacity']
         populus = player_status.data['population']
         happyness = player_status.data['resident_happyness']
-        # print("--POPULUS-->", player_status.data['population'])
         if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
             populus = randint(populus, int(set_between(
                 capacity * POPULATION_HAPPYNESS_COEF * happyness,
@@ -126,15 +121,12 @@ def population(lot, player_status):
             ))
             )
             player_status.data['population'] = populus
-        # print("--POPULUS-->", player_status.data['population'])
         if random() > happyness:
             player_status.data['population'] = int(
                 player_status.data['population'] * POPULATION_REDUCTION)
 
 def update_events(lot, player_status):
     if lot.construct != None:
-        # print(lot.current_events)
-
         if lot.construct.heat >= FIRE_THRESHOLD:
             if len(lot.current_events) < EVENTS_LIMIT:
                 lot.current_events.append('burning')
@@ -149,7 +141,6 @@ def update_events(lot, player_status):
         elif 'burglary' in lot.current_events:
             lot.current_events.remove('burglary')
             lot.construct.multiply_happiness(HAPPYNES_DIVISOR)
-
         if 'pandemic' in lot.current_events:
             lot.current_events.remove('pandemic')
 
