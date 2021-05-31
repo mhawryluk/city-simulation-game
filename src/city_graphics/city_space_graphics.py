@@ -145,6 +145,7 @@ class CitySpaceGraphics:
         self.scale = int(self.scale * zoom_value)
         self.scale = max([WINDOW_SIZE[1] // self.height + 1,
                          WINDOW_SIZE[0] // self.width + 1, self.scale])
+        self.scale = min(self.scale, 500)
 
         mouse_x, mouse_y = pg.mouse.get_pos()
         self.pov_x -= int((mouse_x - self.pov_x)*(self.scale/old_scale - 1))

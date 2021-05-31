@@ -83,7 +83,7 @@ class MainMenu(GameMode):
                 self.update(redraw=True)
 
         txt_input = self.save_menu.add.text_input(
-            title='New save name: ', default="[write save name here]")
+            title='New save name: ', default="new save")
         self.save_menu.add.button(
             'Create save', create_save)
 
