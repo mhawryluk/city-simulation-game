@@ -12,6 +12,7 @@ def get_zone_construct_type(zone_type):
 
 
 class ConstructType(Enum):
+    
     FAMILY_HOUSE = {
         'likeness': ['home'],
         'max_level': 2,
