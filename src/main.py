@@ -7,7 +7,7 @@ def change_directory():
     else:
         dir_name = path.dirname(path.dirname(__file__))
         if dir_name != '':
-            chdir(dir_name)
+            chdir(dir_name) 
 
 
 def main():
