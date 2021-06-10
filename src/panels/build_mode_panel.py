@@ -7,9 +7,7 @@ from city_graphics.city_images import CITY_IMAGES
 
 
 class BuildModePanel(Panel):
-    '''
-    panel enabled after clicking build mode
-    '''
+    ''' panel enabled after clicking build mode '''
 
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
@@ -59,7 +57,7 @@ class BuildModePanel(Panel):
         self.menu.add.label(' ')
 
     def special_buildings(self):
-        '''funkcja wywoływana przy przyciśnięciu przycisku "special building"'''
+        '''runs after the button tagged "special building" is pressed'''
 
         enabled = self.special_building_panel.is_enabled()
         self.disable_subpanels()
@@ -74,7 +72,7 @@ class BuildModePanel(Panel):
             self.game_window.zoning = False
 
     def zone_buildings(self):
-        '''funkcja wywoływana przy przyciśnięciu przycisku "zone building"'''
+        '''runs after the button tagged "zone building" is pressed'''
 
         enabled = self.zone_building_panel.is_enabled()
         self.disable_subpanels()

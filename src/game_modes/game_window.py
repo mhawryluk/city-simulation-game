@@ -36,7 +36,7 @@ class GameWindow(GameMode):
         self.zoning = False
         self.zoning_type = None
         self.bulldozing = False
-        self.construct_to_buy = None  # construct - buy button presset but purchase not yet confirmed
+        self.construct_to_buy = None  # construct - buy button pressed but the purchase is not yet confirmed
 
         # befriended classes
         self.city_space = CitySpace(
@@ -45,7 +45,6 @@ class GameWindow(GameMode):
         self.city_graphics = CitySpaceGraphics(self.city_space, width, height)
 
         self.simulator = SimulationEngine(self.city_space, saved_data)
-        # self.player_status = PlayerStatus(save_source=saved_data.get('player_status', None))
 
         # panels
         menu_panel_width = 97
@@ -211,7 +210,6 @@ class GameWindow(GameMode):
             self.upgrade_panel.enable()
         else:
             self.upgrade_panel.disable()
-
 
     def save(self):
         def compress2save():

@@ -22,7 +22,6 @@ class OptionPanel(Panel):
         self.menu.add.button('volume down', volume_down)
         self.menu.add.label('')
 
-        # self.menu.add.button("test", test(game_window))
         self.unselect_selected_widget()
 
     def main_menu(self):

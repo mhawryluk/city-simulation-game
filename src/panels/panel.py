@@ -14,14 +14,12 @@ class Panel:
         theme.title_font = pgmen.font.FONT_FRANCHISE
         theme.title_font_size = 40
         theme.title_font_color = (230, 230, 230, 80)
-        # theme.background_color = (48, 51, 107, 200)
         theme.background_color = (168, 218, 220, 200)
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_NONE
         theme.widget_font = pgmen.font.FONT_FRANCHISE
         theme.cursor_color = (200, 75, 100)
         theme.widget_font_size = 25
         theme.widget_font_color = (255, 255, 255)
-        # theme.widget_padding = 5
         return theme
 
     def draw(self, window):
@@ -33,7 +31,7 @@ class Panel:
                 panel.draw(window)
 
     def handle(self, event):
-        '''obsługa zdarzeń'''
+        '''events handling function'''
         if self.menu.is_enabled():
             self.menu.update([event])
 
@@ -54,7 +52,7 @@ class Panel:
                 panel.disable()
 
     def collide(self):
-        '''zwraca True jeśli kursor nachodzi na ten panel'''
+        '''returns True if the mouse is hovering above this tile'''
         if not self.menu.is_enabled():
             return False
 
@@ -77,12 +75,12 @@ class Panel:
         return []
 
     def disable_subpanels(self):
-        '''chowa wszystkie panele pochodne'''
+        '''hides all children/deriving panels'''
         for panel in self.get_subpanels():
             panel.disable_all_panels()
 
     def disable_all_panels(self):
-        '''chowa wszystkie panele począwszy od tego, na którym wywołujemy i wszystkie pochodne'''
+        '''hides all panels including the one this function is called in and all of its children/deriving panels'''
         self.menu.disable()
         for panel in self.get_subpanels():
             if not panel is None:

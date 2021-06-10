@@ -1,6 +1,4 @@
 from random import randint, random
-from typing import NewType
-from constructs.construct_type import ConstructType
 import numpy as np
 
 
@@ -187,6 +185,7 @@ def normalize_happyness(happyness, old_happyness):
     return happyness
 
 
+# constant listing all simulation functions to be called in a complete cycle
 SIMULATIONS = [
     fire,
     security,
@@ -216,14 +215,14 @@ FIRE_THRESHOLD = 7
 HAPPYNES_DIVISOR = 2
 
 
-# security constatnts
+# security related constatnts
 BURGLARY_APPEAL = 0.4
 MIN_CRIME = 0
 MAX_CRIME = 15
 CRIME_THRESHOLD = 7
 
 
-# power cosntsatnts
+# power related cosntsatnts
 MAX_POWER_SUPPLY = 100000
 MAX_POWER_DEMAND = -10000
 COSTS_REDUCED_ABOVE_POWER_BORDERVAL = 0.5
@@ -231,7 +230,7 @@ COSTS_INCREASED_BELOW_PWOER_BORDERVAL = 1.2
 POWER_BORDERVAL = 0
 
 
-# water constants
+# water related constants
 MAX_WATER_SUPPLY = 100000
 MAX_WATER_DEMAND = -10000
 COSTS_REDUCED_ABOVE_WATER_BORDERVAL = 0.5
@@ -239,7 +238,7 @@ COSTS_INCREASED_BELOW_WATER_BORDERVAL = 1.2
 WATER_BORDERVAL = 0
 
 
-# waste constatnts
+# waste related constatnts
 MAX_WASTE_PILE_UP = 100000
 MAX_WASTE_FREE_SPACE = -10000
 COSTS_REDUCED_ABOVE_WASTE_BORDERVAL = 0.5
@@ -247,13 +246,7 @@ COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
 WASTE_BORDERVAL = 0
 
 
-# hapynes to taxes calculator
-HAPPYNESS_FOR_FULL_TAXES = 3 
-MIN_MONEY = 0
-MAX_MONEY = 1e9
-
-
-# health constatnts
+# health related constatnts
 HEALING_FACTOR = 5
 MIN_HEALTH = 0
 PANDEMIC_CHANCE = 0.1
@@ -268,11 +261,17 @@ CURRENT_PERCENT_WEIGHT = 7
 NEW_PERCENT_WEIGHT = 1
 
 
-# buldoze constants
+# hapynes and taxes corelation constants
+HAPPYNESS_FOR_FULL_TAXES = 3 
+MIN_MONEY = 0
+MAX_MONEY = 1e9
+
+
+# buldozing related constants
 MONEY_RETURN_PERCENT = 0.78
 
 
-# supply and demand constants
+# supply and demand balance related constants
 BASE_DEMAND = 10
 PRODUCE_TO_GOODS = 2
 GOODS_PER_PERSON = 1
@@ -281,7 +280,7 @@ DEMAND_THRESHOLDS = 45
 GOODS_THRESHOLDS = 10
 
 
-# demand levels
+# demand levels in verbos
 DEMAND_LEVEL = [
     'Very low',
     'Low',

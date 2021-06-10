@@ -24,7 +24,6 @@ class InfoPanel(Panel):
         water_label = self.menu.add.label('      water supply')
         waste_label = self.menu.add.label('      waste piled up')
         power_label = self.menu.add.label('      power supply')
-        # pollution_label = self.menu.add.label('         pollution')
 
         self.menu.add.label('')
         self.menu.add.label('----- d e m a n d -----')
@@ -48,8 +47,6 @@ class InfoPanel(Panel):
             'trash-can'), scale=self.ICON_SCALE), 'trash-can')
         self.images['power'] = (self.menu.add.image(CITY_IMAGES.get_icon(
             'plug'), scale=self.ICON_SCALE), 'plug')
-        # self.images['unpolluted'] = (self.menu.add.image(CITY_IMAGES.get_icon(
-        #     'recycle'), scale=self.ICON_SCALE), 'recycle')
 
         self.menu.add.label('')
         self.menu.add.label('')
@@ -77,13 +74,10 @@ class InfoPanel(Panel):
             self.update_label('waste'))
         power_label.add_draw_callback(
             self.update_label('power'))
-        # pollution_label.add_draw_callback(
-        #     self.update_label('unpolluted'))
 
         self.labels = [funds_label, happiness_label,
                        res_demand_label, comm_demand_label, indu_demand_label,
                        water_label, waste_label, power_label]
-                       #pollution_label]
 
         for image in self.images.values():
             image[0].red = False
@@ -100,7 +94,6 @@ class InfoPanel(Panel):
                 widget.set_title(f'{text}: {value}')
 
             image, image_key = self.images[key]
-            # print(value)
             if isinstance(value, (str)):
                 if value == 'Very high' and not image.red:
                     image.red = True

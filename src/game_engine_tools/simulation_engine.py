@@ -105,11 +105,6 @@ class SimulationEngine:
         self.fps_per_cycle = self.FPS_PER_CYCLE_OPTIONS[ind]
         CitySpaceGraphics.set_speed(ind)
 
-    def change_taxes(self):
-        # happiness
-        # multipliers
-        pass # to be implemented
-
     def get_data(self, key):
         return self.player_status.data.get(key, None)
 

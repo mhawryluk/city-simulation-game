@@ -29,7 +29,7 @@ class BuySpecialBuildingPanel(Panel):
         self.unselect_selected_widget()
 
     def building_window_function(self, construct):
-        '''zwraca funkcje wywoływane przy kilnięciu na przycisk'''
+        '''returns function called upon the clicking of the button'''
         def func():
             if not self.enabled_window or self.enabled_window.construct != construct:
                 if self.enabled_window:

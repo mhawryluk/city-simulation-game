@@ -20,9 +20,6 @@ class SaveManager:
         with open(sm_data_file_path, 'w') as new_sm_data_file:
             js.dump(sm_data, new_sm_data_file)
 
-    def get_game_save(self):
-        pass
-
     def load_save_manager_data(self):
         sm_data_file_path = os.path.join(
             'SaveFiles', 'save_manager_data.json')
