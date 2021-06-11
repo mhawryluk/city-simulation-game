@@ -13,6 +13,7 @@ class UpgradePanel(Panel):
                                theme=self.get_theme(), enabled=False)
 
         self.simulation = simulation
+        self.control = False
 
     def set_lot(self, lot):
         self.lot = lot
@@ -50,7 +51,8 @@ class UpgradePanel(Panel):
         self.menu.force_surface_cache_update()
 
     def upgrade(self):
-        if self.simulation.can_buy(construct=ConstructType[self.lot.construct.type_name], level=self.lot.construct_level):
+        self.control = not self.control
+        if self.control and self.simulation.can_buy(construct=ConstructType[self.lot.construct.type_name], level=self.lot.construct_level + 1):
             self.simulation.integrate_construct(self.lot, remove=True)
             self.lot.construct.level_up()
             self.simulation.integrate_construct(self.lot)
