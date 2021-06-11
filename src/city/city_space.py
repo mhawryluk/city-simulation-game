@@ -27,28 +27,19 @@ class CitySpace:
 
         if save_source is None:
             if map is not None:
-                for x in range(self.width):
-                    self.lots.append([])
-                    for y in range(self.height):
-                        self.lots[x].append(Lot(x, y, LotType(map[x][y])))
+                self.lots = [
+                    [Lot(x, y, LotType(map[x][y])) for y in range(self.height)] for x in range(self.width)
+                ]
 
             else:
-                for x in range(self.width):
-                    self.lots.append([])
-                    for y in range(self.height):
-                        # if not ((self.width // 5 < x < 4*self.width//5) and (self.height // 5 < y < 4*self.height//5)):
-                        #     self.lots[x].append(Lot(x, y, LotType.WATER))
-                        if x == 0 or x == self.height-1 or y == 0 or y == self.width-1:
-                            self.lots[x].append(Lot(x, y, LotType.WATER))
-                        else:
-                            self.lots[x].append(Lot(x, y, LotType.GRASS))
+                self.lots = [
+                    [Lot(x, y, LotType.WATER if x == 0 or x == self.height-1 or y == 0 or y == self.width-1 else LotType.GRASS) for y in range(self.height)] for x in range(self.width)
+                ]
 
         else:
-            for x in range(self.width):
-                self.lots.append([])
-                for y in range(self.height):
-                    self.lots[x].append(
-                        Lot(x, y, None, save_source=save_source[x][y]))
+            self.lots = [
+                [Lot(x, y, None, save_source=save_source[x][y]) for y in range(self.height)] for x in range(self.width)
+            ]
 
     def road_clicked(self):
         self.road_system.road_clicked()
@@ -75,12 +66,10 @@ class CitySpace:
 
     def compress2save(self):
         c2s = {
-            'lots': [],
+            'lots': [
+                [lot.compress2save() for lot in row] for row in self.lots
+            ],
             'roads': self.road_system.compress2save()
         }
-        for row in self.lots:
-            c2s['lots'].append([])
-            for lot in row:
-                c2s['lots'][-1].append(lot.compress2save())
 
         return c2s
