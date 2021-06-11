@@ -37,10 +37,7 @@ class CityImages:
 
         self.additional_images = {
             LotType.GRASS: [
-                load_asset('LotType', 'PNG', 'rpgTile155.png'),
-                load_asset('LotType', 'PNG', 'rpgTile156.png'),
-                load_asset('LotType', 'PNG', 'rpgTile160.png'),
-                load_asset('LotType', 'PNG', 'rpgTile158.png')
+                load_asset('LotType', 'PNG', f'rpgTile{i}.png') for i in [155, 156, 158, 160]
             ],
             LotType.WATER: [
                 load_asset('LotType', 'island.png')
@@ -52,30 +49,7 @@ class CityImages:
         }
 
         self.icons = {
-            key: get_asset_path('Icons2', f'{key}.png') for key in [
-                'play-button',
-                'modern-city',
-                'capitol',
-                'bulldozer',
-                'road',
-                'crane',
-                'settings-knobs',
-                'banknote',
-                'heart-inside',
-                'person',
-                'drop',
-                'trash-can',
-                'plug',
-                'recycle',
-                'house',
-                'shop',
-                'factory',
-                'running-ninja',
-                'run',
-                'halt',
-                'walk',
-                'mesh-network'
-            ]
+            path.name.split('.')[-2]: path.path for path in os.scandir(os.path.join("Assets", "Icons2"))
         }
 
         self.warning_icons = {
