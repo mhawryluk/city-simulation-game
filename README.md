@@ -13,7 +13,7 @@
 
 
 ## General Information
-Created as a project for a Python Programming class at the AGH University, City Simulation Game is a 2D game, that lets you design, build and manage a city. 
+Created as a project for a Python Programming class at the AGH UST, **City Simulation Game** (or **CSG** for short) is a 2D sandbox game that lets you design, build and manage your own city. 
 
 
 ## Technologies Used
@@ -23,13 +23,14 @@ Created as a project for a Python Programming class at the AGH University, City 
 - numpy - version 1.20.3
 
 
-## Features
+## Premise and Features
 - Place residential, commercial and industrial buildings by drawing special zones.
-- Buy other special buildings that affect city's statistics such as residents' happiness.
+- Buy other special buildings that affect city's statistics such as residents' happiness or city resources.
 - Add roads that connect constructs on the map and introduce traffic.
-- Upgrade your infrastructure to increase city wellbeing.
-- Try to prevent unwanted events such as fires, burglaries, pandemics...
+- Upgrade the infrastructure to increase city's wellbeing.
+- Do your best to prevent unwanted events such as fires, burglaries or pandemics...
 - Monitor your funds, city's population and current demand for construct types and utilities.
+- Have fun with CSG's sandbox-type gameplay.
 
 
 ## Screenshots
@@ -51,6 +52,9 @@ All requirements are listed in the requirements.txt file. You can download every
 
 Created by:
 [@mhawryluk](https://www.github.com/mhawryluk) and [@Singularity23x0](https://www.github.com/Singularity23x0)
+
+Game graphics created from modification of assets aquired at:
+- https://opengameart.org/
 
 <!-- Some images by:
 
