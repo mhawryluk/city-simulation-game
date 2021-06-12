@@ -11,7 +11,8 @@ class Construct:
             self.type_name = construct_state['type']
             self.type = ConstructType[self.type_name].value
 
-            self.happiness = None if construct_state['happiness'] is None else float(construct_state['happiness'])
+            self.happiness = None if construct_state['happiness'] is None else float(
+                construct_state['happiness'])
             self.heat = bool(construct_state['heat'])
             self.crime_level = int(construct_state['crime_level'])
             self.waste = int(construct_state['waste'])
@@ -44,9 +45,9 @@ class Construct:
 
     def level_up(self, level_up_by=1):
         prev = self.construct_level
-        print(prev)
+        max_level = len(self.type['level'])-1
         self.construct_level = min(
-            self.type['max_level'], self.construct_level + level_up_by)
+            max_level, self.construct_level + level_up_by)
         if self.construct_level != prev:
             self.choose_image()
         print(self.construct_level)

@@ -15,7 +15,6 @@ class ConstructType(Enum):
     
     FAMILY_HOUSE = {
         'likeness': ['home'],
-        'max_level': 2,
         'cost': 1000,
         'zone': 'residential',
         'level': {
@@ -57,7 +56,6 @@ class ConstructType(Enum):
 
     BLOCK = {
         'likeness': ['home'],
-        'max_level': 3,
         'cost': 5000,
         'level': {
             0: {
@@ -99,7 +97,6 @@ class ConstructType(Enum):
     }
 
     SHOP = {
-        'max_level': 4,
         'cost': 1000,
         'zone': 'commercial',
         'level': {
@@ -143,7 +140,6 @@ class ConstructType(Enum):
     }
 
     FACTORY = {
-        'max_level': 0,
         'cost': 1000,
         'zone': 'industrial',
         'level': {
@@ -164,7 +160,6 @@ class ConstructType(Enum):
     }
 
     HOSPITAL = {
-        'max_level': 1,
         'cost': 1000,
         'level': {
             0: {
@@ -196,7 +191,6 @@ class ConstructType(Enum):
     }
 
     POLICE_STATION = {
-        'max_level': 1,
         'cost': 1000,
         'level': {
             0: {
@@ -232,7 +226,6 @@ class ConstructType(Enum):
     }
 
     FIRE_STATION = {
-        'max_level': 0,
         'cost': 1000,
         'level': {
             0: {
@@ -254,7 +247,6 @@ class ConstructType(Enum):
     }
 
     SCHOOL = {
-        'max_level': 0,
         'cost': 1000,
         'level': {
             0: {
@@ -274,7 +266,6 @@ class ConstructType(Enum):
     }
 
     UNIVERSITY = {
-        'max_level': 0,
         'cost': 1000,
         'level': {
             0: {
@@ -295,7 +286,6 @@ class ConstructType(Enum):
     }
 
     PARK = {  # upgraded to dog park
-        'max_level': 1,
         'cost': 1000,
         'level': {
             0: {
@@ -328,7 +318,6 @@ class ConstructType(Enum):
     }
 
     STATUE = {
-        'max_level': 0,
         'cost': 1000,
         'level': {
             0: {
@@ -348,7 +337,6 @@ class ConstructType(Enum):
     }
 
     LANDFILL = {  # upgraded to waste processing plant
-        'max_level': 1,
         'cost': 1000,
         'level': {
             0: {
@@ -383,7 +371,6 @@ class ConstructType(Enum):
     }
 
     POWER_PLANT = {
-        'max_level': 2,
         'cost': 5000,
         'level': {
             0: {
@@ -400,7 +387,6 @@ class ConstructType(Enum):
     }
 
     WATER_PUMP = {
-        'max_level': 2,
         'cost': 1000,
         'level': {
             0: {
