@@ -1,4 +1,5 @@
 import os
+
 import pygame as pg
 
 WINDOW_SIZE = (1920, 1020)
@@ -28,6 +29,7 @@ def make_safe_range(minval, maxval):
         start = max(minval, since)
         end = min(maxval, to)
         return range(start, end)
+
     return safe_range
 
 

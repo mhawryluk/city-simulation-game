@@ -1,10 +1,10 @@
 import pygame_menu as pgmen
+from city_graphics.city_images import CityImages
+from game_engine_tools import WINDOW_SIZE
 from panels.build_mode_panel import BuildModePanel
 from panels.option_panel import OptionPanel
-from panels.stat_panel import StatPanel
 from panels.panel import Panel
-from game_engine_tools import WINDOW_SIZE, get_asset_path
-from city_graphics.city_images import CityImages
+from panels.stat_panel import StatPanel
 
 
 class GameWindowPanel(Panel):
@@ -21,17 +21,17 @@ class GameWindowPanel(Panel):
 
         # BUILD MODE PANEL
         self.build_mode_panel = BuildModePanel(
-            width=WINDOW_SIZE[0] - width, height=height//15,
+            width=WINDOW_SIZE[0] - width, height=height // 15,
             position=position,
             game_window=game_window)
 
         # OPTIONS PANEL
         self.option_panel = OptionPanel(
-            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=game_window)
+            width=WINDOW_SIZE[0] // 2, height=WINDOW_SIZE[1] // 2, game_window=game_window)
 
         # STAT PANEL
         self.stat_panel = StatPanel(
-            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=game_window)
+            width=WINDOW_SIZE[0] // 2, height=WINDOW_SIZE[1] // 2, game_window=game_window)
 
         # BUTTONS
         scale = (0.1, 0.1)

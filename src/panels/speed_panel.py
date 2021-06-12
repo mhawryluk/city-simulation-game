@@ -1,6 +1,6 @@
 import pygame_menu as pgmen
-from panels.panel import Panel
 from city_graphics.city_images import CityImages
+from panels.panel import Panel
 
 
 class SpeedPanel(Panel):
@@ -38,4 +38,5 @@ class SpeedPanel(Panel):
     def set_speed(self, value):
         def change_simulation_speed():
             self.simulator.change_speed(value)
+
         return change_simulation_speed

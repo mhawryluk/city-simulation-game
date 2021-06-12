@@ -1,10 +1,11 @@
+from itertools import product
+from random import choice
+
+import pygame as pg
+from city import HORIZONTAL, VERTICAL
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.car import Car
 from city_graphics.city_images import CityImages
-from city import HORIZONTAL, VERTICAL
-from itertools import product
-import pygame as pg
-from random import choice
 
 
 class RoadGraphics:
@@ -36,18 +37,18 @@ class RoadGraphics:
 
     @classmethod
     def draw_element(cls, pos_x, pos_y, pov, scale, element):
-        x = pov[0] - scale*cls.map_dimensions[0]//2 + scale*pos_x
-        y = pov[1] - scale*cls.map_dimensions[1]//2 + scale*pos_y
+        x = pov[0] - scale * cls.map_dimensions[0] // 2 + scale * pos_x
+        y = pov[1] - scale * cls.map_dimensions[1] // 2 + scale * pos_y
         if -scale < x < cls.window.get_width() and -scale < y < cls.window.get_height():
             cls.window.blit(element, (x, y))
 
     @staticmethod
     def get_vertical_size(scale):
-        return int(scale*ROAD_WIDTH_RATIO), int(scale+scale*ROAD_WIDTH_RATIO)
+        return int(scale * ROAD_WIDTH_RATIO), int(scale + scale * ROAD_WIDTH_RATIO)
 
     @staticmethod
     def get_horizontal_size(scale):
-        return int(scale+scale*ROAD_WIDTH_RATIO), int(scale*ROAD_WIDTH_RATIO)
+        return int(scale + scale * ROAD_WIDTH_RATIO), int(scale * ROAD_WIDTH_RATIO)
 
     @classmethod
     def highlight_roads(cls, roads, pov, scale):
@@ -99,10 +100,10 @@ class RoadGraphics:
     @classmethod
     def animate_cars(cls, roads, pov, scale):
         cls.update_cars()
-        if len(cls.cars) < cls.CARS_TO_ROADS_RATIO*(roads.get_road_count()):
+        if len(cls.cars) < cls.CARS_TO_ROADS_RATIO * (roads.get_road_count()):
             cls.add_car(roads)
 
-        if len(cls.cars) > 2*cls.CARS_TO_ROADS_RATIO*(roads.get_road_count()):
+        if len(cls.cars) > 2 * cls.CARS_TO_ROADS_RATIO * (roads.get_road_count()):
             cls.cars.pop()
 
         for car in cls.cars:

@@ -9,7 +9,7 @@ class LotType(Enum):
     WATER_LEFT = 4
     WATER_UP = 5
     WATER_DOWN = 6
-    
+
     WATER_CORNER_LEFT_UP = 7
     WATER_CORNER_LEFT_DOWN = 8
     WATER_CORNER_RIGHT_UP = 9

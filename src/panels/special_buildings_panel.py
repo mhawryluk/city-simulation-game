@@ -1,7 +1,7 @@
-from panels.panel import Panel
-from constructs.construct_type import ConstructType
-import pygame_menu as pgmen
 import pygame as pg
+import pygame_menu as pgmen
+from constructs.construct_type import ConstructType
+from panels.panel import Panel
 
 
 class BuySpecialBuildingPanel(Panel):
@@ -14,10 +14,10 @@ class BuySpecialBuildingPanel(Panel):
         self.enabled_window = None
         self.game_window = game_window
         scroll_bar_height = 4
-        position = (position[0], position[1]-100 *
-                    scroll_bar_height/game_window.window.get_height())
+        position = (position[0], position[1] - 100 *
+                    scroll_bar_height / game_window.window.get_height())
         self.menu = pgmen.Menu(title='special building',
-                               width=width, height=height+scroll_bar_height,
+                               width=width, height=height + scroll_bar_height,
                                position=position,
                                rows=1, columns=41,
                                theme=self.get_theme(),
@@ -30,6 +30,7 @@ class BuySpecialBuildingPanel(Panel):
 
     def building_window_function(self, construct):
         '''returns function called upon the clicking of the button'''
+
         def func():
             if not self.enabled_window or self.enabled_window.construct != construct:
                 if self.enabled_window:
@@ -66,8 +67,8 @@ class BuyBuildingWindow(Panel):
         image_width, image_height = pg.image.load(
             info['images'][0]).get_rect().size
         self.menu.add.image(info['images'][0],
-                            scale=(self.IMAGE_SIZE/image_width,
-                                   self.IMAGE_SIZE/image_height)
+                            scale=(self.IMAGE_SIZE / image_width,
+                                   self.IMAGE_SIZE / image_height)
                             )
 
         self.menu.add.label(f'|{info["name"]}|', max_char=30)

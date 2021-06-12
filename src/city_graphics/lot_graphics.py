@@ -1,10 +1,9 @@
-from game_engine_tools import WINDOW_SIZE
+from math import floor
+
+import pygame as pg
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.city_images import CityImages
-from math import floor
-import game_engine_tools.simulation_tools as sim_consts
-from game_engine_tools import load_asset
-import pygame as pg
+from game_engine_tools import WINDOW_SIZE
 
 
 class LotGraphics:
@@ -40,12 +39,12 @@ class LotGraphics:
 
         # construct
         if lot.construct:
-            offset = int(ROAD_WIDTH_RATIO*scale)
-            new_scale = int(scale*(1 - ROAD_WIDTH_RATIO))
+            offset = int(ROAD_WIDTH_RATIO * scale)
+            new_scale = int(scale * (1 - ROAD_WIDTH_RATIO))
             image = lot.construct.image
             width, height = image.get_width(), image.get_height()
-            ratio = new_scale/width
-            new_width, new_height = int(width*ratio), int(height*ratio)
+            ratio = new_scale / width
+            new_width, new_height = int(width * ratio), int(height * ratio)
             new_x = x + offset
             new_y = y - new_height + new_scale + offset
             pic = pg.transform.scale(
@@ -61,13 +60,14 @@ class LotGraphics:
 
     @classmethod
     def get_draw_position(cls, lot, pov, scale):
-        return pov[0] - scale*cls.map_dimensions[0]//2 + scale*lot.x, pov[1] - scale*cls.map_dimensions[1]//2 + scale*lot.y
+        return pov[0] - scale * cls.map_dimensions[0] // 2 + scale * lot.x, pov[1] - scale * cls.map_dimensions[
+            1] // 2 + scale * lot.y
 
     @classmethod
     def highlight_lot(cls, lot, pov, scale, color):
         x, y = cls.get_draw_position(lot, pov, scale)
-        x += int(scale*ROAD_WIDTH_RATIO//2)
-        y += int(scale*ROAD_WIDTH_RATIO//2)
+        x += int(scale * ROAD_WIDTH_RATIO // 2)
+        y += int(scale * ROAD_WIDTH_RATIO // 2)
         alpha = pg.Surface((scale, scale))
         alpha.set_alpha(128)
         alpha.fill(color)
@@ -83,25 +83,25 @@ class LotGraphics:
         if 'burning' in events:
             size = scale
             image = cls.city_images.get_animation_image(
-                'fire', floor(cls.frame)//5, size)
-            cls.window.blit(image, (x + scale/2 - size/2, y))
+                'fire', floor(cls.frame) // 5, size)
+            cls.window.blit(image, (x + scale / 2 - size / 2, y))
 
         if 'unhappy' in events:
-            size = int(scale/5)
+            size = int(scale / 5)
             image = cls.city_images.get_animation_image(
-                'unhappy', floor(cls.frame)//10, size)
-            cls.window.blit(image, (x + scale/2 - size/2, y))
+                'unhappy', floor(cls.frame) // 10, size)
+            cls.window.blit(image, (x + scale / 2 - size / 2, y))
 
         if 'pandemic' in events:
-            size = int(scale/2)
+            size = int(scale / 2)
             image = cls.city_images.get_animation_image(
                 'pandemic', floor(cls.frame), size)
             cls.window.blit(
-                image, (x + scale/2 - size/2, y + scale/2 - size/2))
+                image, (x + scale / 2 - size / 2, y + scale / 2 - size / 2))
 
         if 'burglary' in events:
-            size = int(scale/2)
+            size = int(scale / 2)
             image = cls.city_images.get_animation_image(
                 'burglary', floor(cls.frame), size)
             cls.window.blit(
-                image, (x + scale/2 - size/2, y + scale/2 - size/2))
+                image, (x + scale / 2 - size / 2, y + scale / 2 - size / 2))

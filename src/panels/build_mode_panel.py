@@ -1,13 +1,12 @@
 import pygame_menu as pgmen
+from city_graphics.city_images import CityImages
 from panels.panel import Panel
 from panels.special_buildings_panel import BuySpecialBuildingPanel
 from panels.zoning_panel import ZoningPanel
-from game_engine_tools import get_asset_path
-from city_graphics.city_images import CityImages
 
 
 class BuildModePanel(Panel):
-    ''' panel enabled after clicking build mode '''
+    ''' panel enabled after clicking the build mode button'''
 
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
@@ -25,17 +24,18 @@ class BuildModePanel(Panel):
         self.zone_building_panel = ZoningPanel(
             width=width,
             height=height,
-            position=(100, 100-100*height/game_window.window.get_height()-0.3), game_window=game_window)
+            position=(100, 100 - 100 * height / game_window.window.get_height() - 0.3), game_window=game_window)
 
         # BUY A SPECIAL BUILDING PANEL
         self.special_building_panel = BuySpecialBuildingPanel(
             width=width,
             height=height,
-            position=(100, 100-100*height/game_window.window.get_height()), game_window=game_window)
+            position=(100, 100 - 100 * height / game_window.window.get_height()), game_window=game_window)
 
         # BUTTONS
         scale = (0.075, 0.075)
-        self.menu.add.image(self.city_images.get_icon('modern-city'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon(
+            'modern-city'), scale=scale)
         self.zoning_button = self.menu.add.button(
             "zone buildings", self.zone_buildings)
 
@@ -51,7 +51,8 @@ class BuildModePanel(Panel):
         self.menu.add.label(' ')
         self.menu.add.label(' ')
 
-        self.menu.add.image(self.city_images.get_icon('bulldozer'), scale=scale)
+        self.menu.add.image(
+            self.city_images.get_icon('bulldozer'), scale=scale)
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
 
@@ -89,6 +90,7 @@ class BuildModePanel(Panel):
             self.game_window.zoning = False
 
     def bulldoze(self):
+        '''function called by bulldoze button'''
         self.disable_subpanels()
         if not self.game_window.bulldozing:
             self.game_window.bulldozing = True
@@ -96,14 +98,14 @@ class BuildModePanel(Panel):
         else:
             self.game_window.bulldozing = False
             self.unselect_selected_widget()
-    
+
     def get_subpanels(self):
+        '''overrides one from Panel'''
         return [self.special_building_panel, self.zone_building_panel]
-    
+
     def disable(self):
+        '''overrides one from Panel'''
         super().disable()
         self.unselect_selected_widget()
         self.zone_building_panel.unselect_selected_widget()
         self.special_building_panel.unselect_selected_widget()
-
-

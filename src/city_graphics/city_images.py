@@ -1,11 +1,12 @@
-from city.lot_type import LotType
-from city_graphics import ROAD_WIDTH_RATIO
-from city import VERTICAL, HORIZONTAL
-import pygame as pg
 import os
 from random import random, choice, seed
 from time import time_ns
-from game_engine_tools import load_asset, get_asset_path, Singleton
+
+import pygame as pg
+from city import HORIZONTAL
+from city.lot_type import LotType
+from city_graphics import ROAD_WIDTH_RATIO
+from game_engine_tools import load_asset, Singleton
 
 
 class CityImages(metaclass=Singleton):
@@ -79,7 +80,8 @@ class CityImages(metaclass=Singleton):
             v, (scale, scale)) for k, v in self.main_images.items()}
 
         self.scaled_cars = {k: pg.transform.scale(
-            v, (int(scale*ROAD_WIDTH_RATIO*1.1), int(scale*ROAD_WIDTH_RATIO*1.1))) for k, v in self.cars.items()}
+            v, (int(scale * ROAD_WIDTH_RATIO * 1.1), int(scale * ROAD_WIDTH_RATIO * 1.1))) for k, v in
+            self.cars.items()}
 
         self.scaled_additional_images = {k: list(map(lambda x: pg.transform.scale(
             x, (scale, scale)), v)) for k, v in self.additional_images.items()}
@@ -100,7 +102,7 @@ class CityImages(metaclass=Singleton):
     def get_scaled_car_image(self, car_type, road_direction, direction):
         image = self.scaled_cars[car_type]
         if road_direction == HORIZONTAL:
-            image = pg.transform.rotate(image, -direction*90)
+            image = pg.transform.rotate(image, -direction * 90)
         return image
 
     def get_random_car_type(self):

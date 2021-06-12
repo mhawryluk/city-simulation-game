@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from game_engine_tools.save_manager import SaveManager
 
 

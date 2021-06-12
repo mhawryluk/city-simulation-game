@@ -1,8 +1,6 @@
 import pygame_menu as pgmen
-from panels.panel import Panel
-from test import test
-import pygame as pg
 from game_engine_tools import volume_up, volume_down
+from panels.panel import Panel
 
 
 class OptionPanel(Panel):

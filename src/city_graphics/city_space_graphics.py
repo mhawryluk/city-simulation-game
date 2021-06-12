@@ -1,10 +1,9 @@
+import pygame as pg
 from city_graphics import ROAD_WIDTH_RATIO
-from city import VERTICAL
-from game_engine_tools import WINDOW_SIZE
+from city_graphics.city_images import CityImages
 from city_graphics.lot_graphics import LotGraphics
 from city_graphics.road_graphics import RoadGraphics
-from city_graphics.city_images import CityImages
-import pygame as pg
+from game_engine_tools import WINDOW_SIZE
 
 
 class CitySpaceGraphics:
@@ -28,7 +27,7 @@ class CitySpaceGraphics:
         self.pov_x = WINDOW_SIZE[0] // 2
         self.pov_y = WINDOW_SIZE[1] // 2
         self.scale = max([WINDOW_SIZE[1] // self.height + 1,
-                         WINDOW_SIZE[0] // self.width + 1])  # defines the zoom
+                          WINDOW_SIZE[0] // self.width + 1])  # defines the zoom
         self.move_speed = (0, 0)  # added to pov in each frame
 
         self.selected_lot = None  # square selected with lmb
@@ -52,11 +51,11 @@ class CitySpaceGraphics:
             x, y = LotGraphics.get_draw_position(
                 lot, (self.pov_x, self.pov_y), self.scale)
 
-            offset = int(ROAD_WIDTH_RATIO*self.scale)
-            scale = int(self.scale*(1 - ROAD_WIDTH_RATIO))
+            offset = int(ROAD_WIDTH_RATIO * self.scale)
+            scale = int(self.scale * (1 - ROAD_WIDTH_RATIO))
             width, height = image.get_width(), image.get_height()
-            ratio = scale/width
-            new_width, new_height = int(width*ratio), int(height*ratio)
+            ratio = scale / width
+            new_width, new_height = int(width * ratio), int(height * ratio)
             x = x + offset
             y = y - new_height + scale + offset
             image = pg.transform.scale(image, (new_width, new_height))
@@ -110,11 +109,11 @@ class CitySpaceGraphics:
 
         # border:
         self.pov_x = max(self.pov_x, WINDOW_SIZE[0] -
-                         self.scale*self.width//2)
-        self.pov_x = min(self.pov_x, self.scale*self.width//2)
-        self.pov_y = min(self.pov_y, self.scale*self.height//2)
+                         self.scale * self.width // 2)
+        self.pov_x = min(self.pov_x, self.scale * self.width // 2)
+        self.pov_y = min(self.pov_y, self.scale * self.height // 2)
         self.pov_y = max(self.pov_y, WINDOW_SIZE[1] -
-                         self.scale*self.height//2)
+                         self.scale * self.height // 2)
 
     def hovered(self, pos, mode):
         '''hovered lot highlighting:'''
@@ -145,12 +144,12 @@ class CitySpaceGraphics:
         old_scale = self.scale
         self.scale = int(self.scale * zoom_value)
         self.scale = max([WINDOW_SIZE[1] // self.height + 1,
-                         WINDOW_SIZE[0] // self.width + 1, self.scale])
+                          WINDOW_SIZE[0] // self.width + 1, self.scale])
         self.scale = min(self.scale, 500)
 
         mouse_x, mouse_y = pg.mouse.get_pos()
-        self.pov_x -= int((mouse_x - self.pov_x)*(self.scale/old_scale - 1))
-        self.pov_y -= int((mouse_y - self.pov_y)*(self.scale/old_scale - 1))
+        self.pov_x -= int((mouse_x - self.pov_x) * (self.scale / old_scale - 1))
+        self.pov_y -= int((mouse_y - self.pov_y) * (self.scale / old_scale - 1))
 
     def select_lot(self, mouse_pos):
         if self.selected_lot:
@@ -164,9 +163,9 @@ class CitySpaceGraphics:
         if mouse_pos is None:
             return None
         x = (mouse_pos[0] - self.pov_x +
-             self.scale*self.width//2) // self.scale
+             self.scale * self.width // 2) // self.scale
         y = (mouse_pos[1] - self.pov_y +
-             self.scale*self.height//2) // self.scale
+             self.scale * self.height // 2) // self.scale
         if 0 <= x < self.width and 0 <= y < self.height:
             return self.city_space.lots[x][y]
 
@@ -174,9 +173,9 @@ class CitySpaceGraphics:
         if mouse_pos is None:
             return
         x = (mouse_pos[0] - self.pov_x +
-             self.scale*(self.width/2 - ROAD_WIDTH_RATIO/2)) / self.scale
+             self.scale * (self.width / 2 - ROAD_WIDTH_RATIO / 2)) / self.scale
         y = (mouse_pos[1] - self.pov_y +
-             self.scale*(self.height/2 - ROAD_WIDTH_RATIO/2)) / self.scale
+             self.scale * (self.height / 2 - ROAD_WIDTH_RATIO / 2)) / self.scale
         return x, y
 
     def highlight_access(self, window):
@@ -194,5 +193,5 @@ class CitySpaceGraphics:
 
     @staticmethod
     def set_speed(speed):
-        LotGraphics.animation_speed = 0.05*speed
-        RoadGraphics.car_speed = 0.02*speed
+        LotGraphics.animation_speed = 0.05 * speed
+        RoadGraphics.car_speed = 0.02 * speed

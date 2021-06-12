@@ -1,4 +1,5 @@
 from enum import Enum
+
 from game_engine_tools import get_asset_path
 
 
@@ -12,7 +13,6 @@ def get_zone_construct_type(zone_type):
 
 
 class ConstructType(Enum):
-    
     FAMILY_HOUSE = {
         'likeness': ['home'],
         'cost': 1000,
@@ -26,8 +26,9 @@ class ConstructType(Enum):
                 'water_consumption': 3,  # in units (UNIFY)
                 'waste_change': 3,  # in units 
                 'taxation': 1200,  # in dollars; per person; multiply by happiness to get actual income
-                'images': [get_asset_path('House', 'Hs01.png'), get_asset_path('House', 'Hs02.png'), get_asset_path('House', 'Hs03.png'),
-                            get_asset_path('House', 'Hs00.png')]
+                'images': [get_asset_path('House', 'Hs01.png'), get_asset_path('House', 'Hs02.png'),
+                           get_asset_path('House', 'Hs03.png'),
+                           get_asset_path('House', 'Hs00.png')]
             },
             1: {
                 'name': 'family house',
@@ -109,7 +110,8 @@ class ConstructType(Enum):
                 'water_consumption': 5,
                 'waste_change': 20,
                 'resident_happiness_multiplier': 1.1,
-                'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'), get_asset_path('Shop', 'SH2.png')]
+                'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'),
+                           get_asset_path('Shop', 'SH2.png')]
             },
             1: {
                 'name': 'small shop',
@@ -121,7 +123,8 @@ class ConstructType(Enum):
                 'waste_change': 20,
                 'upgrade_cost': 2000,
                 'resident_happiness_multiplier': 1.1,
-                'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'), get_asset_path('Shop', 'SH2.png')]
+                'images': [get_asset_path('Shop', 'SH0.png'), get_asset_path('Shop', 'SH1.png'),
+                           get_asset_path('Shop', 'SH2.png')]
             },
             2: {
                 'name': 'shop',

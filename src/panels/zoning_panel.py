@@ -1,5 +1,5 @@
-from panels.panel import Panel
 import pygame_menu as pgmen
+from panels.panel import Panel
 
 
 class ZoningPanel(Panel):
@@ -28,4 +28,5 @@ class ZoningPanel(Panel):
         def change_zoning():
             if not self.game_window.set_zoning(zone_type):
                 self.unselect_selected_widget()
+
         return change_zoning

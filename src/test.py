@@ -6,4 +6,5 @@ def test(game_window):
         print('TEST')
         ps = game_window.simulator.player_status
         print(ps.data['goods'], ps.data['population'], ps.data['goods'] - ps.data['population'] * GOODS_PER_PERSON)
+
     return tst

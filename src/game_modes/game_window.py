@@ -1,19 +1,17 @@
-from game_modes.game_mode import GameMode
-from panels.game_window_panel import GameWindowPanel
-from panels.toggle_menu import ToggleMenu
-from panels.info_panel import InfoPanel
-from panels.upgrade_panel import UpgradePanel
-from panels.warning_panel import WarningPanel
-from panels.speed_panel import SpeedPanel
+import pygame as pg
 from city.city_space import CitySpace
-from city.lot import Lot
+from city_graphics.city_space_graphics import CitySpaceGraphics
 from city_graphics.lot_graphics import LotGraphics
 from city_graphics.road_graphics import RoadGraphics
-from city_graphics.city_space_graphics import CitySpaceGraphics
 from game_engine_tools import WINDOW_SIZE
-from game_engine_tools.save_manager import SaveManager
 from game_engine_tools.simulation_engine import SimulationEngine
-import pygame as pg
+from game_modes.game_mode import GameMode
+from panels.game_window_panel import GameWindowPanel
+from panels.info_panel import InfoPanel
+from panels.speed_panel import SpeedPanel
+from panels.toggle_menu import ToggleMenu
+from panels.upgrade_panel import UpgradePanel
+from panels.warning_panel import WarningPanel
 
 
 class GameWindow(GameMode):
@@ -62,7 +60,7 @@ class GameWindow(GameMode):
         self.warning_panel = WarningPanel(self, 'hello!')
 
         self.upgrade_panel = UpgradePanel(
-            width=WINDOW_SIZE[0]//2, height=WINDOW_SIZE[1]//2, game_window=self, simulation=self.simulator)
+            width=WINDOW_SIZE[0] // 2, height=WINDOW_SIZE[1] // 2, game_window=self, simulation=self.simulator)
 
         self.speed_panel = SpeedPanel(
             width=250, height=100, window=self, position=(99, 8), simulator=self.simulator)
@@ -126,8 +124,6 @@ class GameWindow(GameMode):
                 self.warning_panel.disable()
                 self.warning_panel = None
 
-            # self.menu_panel.stat_panel.disable()
-
             if event.button == pg.BUTTON_LEFT:
                 self.button_down = True
                 if self.construct_to_buy:
@@ -152,7 +148,7 @@ class GameWindow(GameMode):
 
             # zooming out
             if event.button == 5:
-                self.city_graphics.zoom(1/self.ZOOM_VALUE)
+                self.city_graphics.zoom(1 / self.ZOOM_VALUE)
 
         if event.type == pg.MOUSEMOTION or event.type or event.type == pg.MOUSEBUTTONDOWN:
             if self.button_down:
@@ -167,8 +163,7 @@ class GameWindow(GameMode):
                     lot = self.city_graphics.get_clicked_lot(pg.mouse.get_pos())
                     if lot:
                         self.simulator.integrate_construct(lot, remove=True)
-                    self.city_space.bulldoze(lot)
-                    
+                    lot.remove_construct()
 
             else:
                 self.city_graphics.hovered(

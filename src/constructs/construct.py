@@ -1,7 +1,8 @@
 from random import choice, seed
 from time import time
-from constructs.construct_type import ConstructType
+
 import pygame as pg
+from constructs.construct_type import ConstructType
 
 
 class Construct:
@@ -45,7 +46,7 @@ class Construct:
 
     def level_up(self, level_up_by=1):
         prev = self.construct_level
-        max_level = len(self.type['level'])-1
+        max_level = len(self.type['level']) - 1
         self.construct_level = min(
             max_level, self.construct_level + level_up_by)
         if self.construct_level != prev:
@@ -92,5 +93,5 @@ class Construct:
         return cmp_likeness in self.get('likeness', [])
 
     def multiply_happiness(self, by):
-        if not self.happiness is None:
+        if self.happiness is not None:
             self.happiness *= by

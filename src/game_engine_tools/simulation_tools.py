@@ -1,4 +1,5 @@
 from random import randint, random
+
 import numpy as np
 
 
@@ -67,7 +68,8 @@ def water(lot, player_status):
 def calculate_income(construct, player_status):
     income = construct.get('income', 0)
     if income > 0:
-        income /= 1 + np.abs(player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON) / max(player_status.data['population'] * GOODS_PER_PERSON, 1)
+        income /= 1 + np.abs(player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON) / max(
+            player_status.data['population'] * GOODS_PER_PERSON, 1)
     return income
 
 
@@ -114,28 +116,29 @@ def population(lot, player_status):
         if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
             populus = randint(populus, int(set_between(
                 capacity * POPULATION_HAPPYNESS_COEF * happyness,
-                (populus + capacity)//2,
+                (populus + capacity) // 2,
                 capacity
             ))
-            )
+                              )
             player_status.data['population'] = populus
         if random() > happyness:
             player_status.data['population'] = int(
                 player_status.data['population'] * POPULATION_REDUCTION)
+
 
 def update_events(lot, player_status):
     if lot.construct != None:
         if lot.construct.heat >= FIRE_THRESHOLD:
             if len(lot.current_events) < EVENTS_LIMIT:
                 lot.current_events.append('burning')
-            lot.construct.multiply_happiness(1/HAPPYNES_DIVISOR)
+            lot.construct.multiply_happiness(1 / HAPPYNES_DIVISOR)
         elif 'burning' in lot.current_events:
             lot.current_events.remove('burning')
             lot.construct.multiply_happiness(HAPPYNES_DIVISOR)
         if lot.construct.crime_level >= CRIME_THRESHOLD:
             if len(lot.current_events) < EVENTS_LIMIT:
                 lot.current_events.append('burglary')
-            lot.construct.multiply_happiness(1/HAPPYNES_DIVISOR)
+            lot.construct.multiply_happiness(1 / HAPPYNES_DIVISOR)
         elif 'burglary' in lot.current_events:
             lot.current_events.remove('burglary')
             lot.construct.multiply_happiness(HAPPYNES_DIVISOR)
@@ -146,7 +149,8 @@ def update_events(lot, player_status):
 def satisfy_demand(player_status):
     normalize = min(player_status.data['produce'],
                     player_status.data['demand'])
-    player_status.data['goods'] = max(0, player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
+    player_status.data['goods'] = max(0,
+                                      player_status.data['goods'] - player_status.data['population'] * GOODS_PER_PERSON)
     player_status.data['goods'] += int(normalize * PRODUCE_TO_GOODS)
     player_status.data['produce'] -= normalize
     player_status.data['demand'] -= normalize
@@ -154,7 +158,8 @@ def satisfy_demand(player_status):
 
 def calculate_demands(player_status):
     player_status.data['commercial demand'] = level_to_demand(
-        player_status.data['produce'] +  max(0, player_status.data['population'] * GOODS_PER_PERSON - player_status.data['goods']) / PRODUCE_TO_GOODS, PRODUCE_THRESHOLDS)
+        player_status.data['produce'] + max(0, player_status.data['population'] * GOODS_PER_PERSON - player_status.data[
+            'goods']) / PRODUCE_TO_GOODS, PRODUCE_THRESHOLDS)
     player_status.data['industrial demand'] = level_to_demand(
         player_status.data['demand'], DEMAND_THRESHOLDS)
     player_status.data['residential demand'] = 'Very high' if top_demand(player_status) else level_to_demand(
@@ -167,17 +172,19 @@ def calculate_happiness(lot):
 
 def level_to_demand(value, threshold):
     for i in range(len(DEMAND_LEVEL)):
-        if value <= threshold * i or i == len(DEMAND_LEVEL)-1:
+        if value <= threshold * i or i == len(DEMAND_LEVEL) - 1:
             return DEMAND_LEVEL[i]
 
 
 def top_demand(player_status):
     top_demands = DEMAND_LEVEL[-2:]
-    return player_status.data['commercial demand'] in top_demands and player_status.data['industrial demand'] in top_demands
+    return player_status.data['commercial demand'] in top_demands and player_status.data[
+        'industrial demand'] in top_demands
 
 
 def normalize_happyness(happyness, old_happyness):
-    happyness = (happyness * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
+    happyness = (happyness * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (
+                NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
     happyness = (happyness + 1) ** 0.25
     happyness = -1 / happyness + 1
     if happyness >= 0.9994:
@@ -200,10 +207,8 @@ SIMULATIONS = [
     update_events
 ]
 
-
 # event limit
 EVENTS_LIMIT = 10
-
 
 # fire related constants
 HEAT_THRESHOLD = 5
@@ -214,13 +219,11 @@ DEFAULT_TEMPERATURE_RAISE = 1
 FIRE_THRESHOLD = 7
 HAPPYNES_DIVISOR = 2
 
-
 # security related constatnts
 BURGLARY_APPEAL = 0.4
 MIN_CRIME = 0
 MAX_CRIME = 15
 CRIME_THRESHOLD = 7
-
 
 # power related cosntsatnts
 MAX_POWER_SUPPLY = 100000
@@ -229,14 +232,12 @@ COSTS_REDUCED_ABOVE_POWER_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_PWOER_BORDERVAL = 1.2
 POWER_BORDERVAL = 0
 
-
 # water related constants
 MAX_WATER_SUPPLY = 100000
 MAX_WATER_DEMAND = -10000
 COSTS_REDUCED_ABOVE_WATER_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_WATER_BORDERVAL = 1.2
 WATER_BORDERVAL = 0
-
 
 # waste related constatnts
 MAX_WASTE_PILE_UP = 100000
@@ -245,7 +246,6 @@ COSTS_REDUCED_ABOVE_WASTE_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
 WASTE_BORDERVAL = 0
 
-
 # health related constatnts
 HEALING_FACTOR = 5
 MIN_HEALTH = 0
@@ -253,23 +253,19 @@ PANDEMIC_CHANCE = 0.1
 PANDEMIC_COEF = 0.01
 PANDEMIC_SEVERITY = 3
 
-
 # population happynes constatnts
 POPULATION_HAPPYNESS_COEF = 0.25
 POPULATION_REDUCTION = 0.98
 CURRENT_PERCENT_WEIGHT = 7
 NEW_PERCENT_WEIGHT = 1
 
-
 # hapynes and taxes corelation constants
-HAPPYNESS_FOR_FULL_TAXES = 3 
+HAPPYNESS_FOR_FULL_TAXES = 3
 MIN_MONEY = 0
 MAX_MONEY = 1e9
 
-
 # buldozing related constants
 MONEY_RETURN_PERCENT = 0.78
-
 
 # supply and demand balance related constants
 BASE_DEMAND = 10
@@ -278,7 +274,6 @@ GOODS_PER_PERSON = 1
 PRODUCE_THRESHOLDS = 25
 DEMAND_THRESHOLDS = 45
 GOODS_THRESHOLDS = 10
-
 
 # demand levels in verbos
 DEMAND_LEVEL = [

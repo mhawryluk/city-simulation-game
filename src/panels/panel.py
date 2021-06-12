@@ -1,5 +1,5 @@
-import pygame_menu as pgmen
 import pygame as pg
+import pygame_menu as pgmen
 
 
 class Panel:
@@ -59,7 +59,8 @@ class Panel:
         position = self.menu.get_position()
         mouse_pos = pg.mouse.get_pos()
 
-        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
+        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[
+            1] + self.menu.get_height():
             return True
 
         for panel in self.get_subpanels():

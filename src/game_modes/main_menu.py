@@ -1,9 +1,10 @@
-from game_modes.game_mode import GameMode
-from game_engine_tools.save_manager import SaveManager
-from game_engine_tools import load_asset, volume_up, volume_down
+from random import choice
+
 import pygame as pg
 import pygame_menu as pgmen
-from random import choice
+from game_engine_tools import load_asset, volume_up, volume_down
+from game_engine_tools.save_manager import SaveManager
+from game_modes.game_mode import GameMode
 
 
 class MainMenu(GameMode):
@@ -32,10 +33,11 @@ class MainMenu(GameMode):
     def make_main_menu(self):
         width, height = self.window.get_size()
 
-        self.menu = pgmen.Menu(title='City Simulation Game', width=width*0.6, height=height*0.85, theme=self.get_theme(),
+        self.menu = pgmen.Menu(title='City Simulation Game', width=width * 0.6, height=height * 0.85,
+                               theme=self.get_theme(),
                                mouse_enabled=True, mouse_motion_selection=True)
 
-        if(self.save_manager.has_active_save()):
+        if (self.save_manager.has_active_save()):
             self.play_button = self.menu.add.button('Play', self.play)
             self.save_button = self.menu.add.button(
                 'Choose save', self.change_save_menu_status)
@@ -98,7 +100,7 @@ class MainMenu(GameMode):
     def create_warning_menu(self, message, if_yes, if_no, parent_width, parent_height):
         theme = self.get_theme()
         theme.title_bar_style = pgmen.widgets.MENUBAR_STYLE_UNDERLINE
-        warning = pgmen.Menu(title=message, width=parent_width, height=parent_height*0.6, theme=theme,
+        warning = pgmen.Menu(title=message, width=parent_width, height=parent_height * 0.6, theme=theme,
                              mouse_enabled=True, mouse_motion_selection=True)
         warning.add.button('YES', if_yes)
         warning.add.button('NO', if_no)

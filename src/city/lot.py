@@ -1,7 +1,8 @@
 from random import randint
-from constructs.construct_type import ConstructType
-from constructs.construct import Construct
+
 from city.lot_type import LotType
+from constructs.construct import Construct
+from constructs.construct_type import ConstructType
 
 
 class Lot:
@@ -44,10 +45,14 @@ class Lot:
         self.zone_type = None
 
     def remove_construct(self):
+        if self.construct is None:
+            return None
+
         self.construct = None
         self.construct_level = 0
         self.current_events = []
         self.zone_type = None
+        return self
 
     def can_place(self, construct):
         '''returns True if a construct can be placed on curently highlighted lot'''

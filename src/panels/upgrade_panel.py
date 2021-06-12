@@ -1,7 +1,6 @@
-from panels.panel import Panel
-from game_engine_tools import WINDOW_SIZE
 import pygame_menu as pgmen
 from constructs.construct_type import ConstructType
+from panels.panel import Panel
 
 
 class UpgradePanel(Panel):
@@ -25,8 +24,8 @@ class UpgradePanel(Panel):
 
         self.menu.add.image(
             lot.construct.image_path,
-            scale=(self.IMAGE_SIZE/lot.construct.image.get_width(),
-                   self.IMAGE_SIZE/lot.construct.image.get_width())
+            scale=(self.IMAGE_SIZE / lot.construct.image.get_width(),
+                   self.IMAGE_SIZE / lot.construct.image.get_width())
         )
 
         if lot.construct_level + 1 in lot.construct.type['level']:
@@ -55,7 +54,8 @@ class UpgradePanel(Panel):
 
     def upgrade(self):
         self.control = not self.control
-        if self.control and self.simulation.can_buy(construct=ConstructType[self.lot.construct.type_name], level=self.lot.construct_level + 1):
+        if self.control and self.simulation.can_buy(construct=ConstructType[self.lot.construct.type_name],
+                                                    level=self.lot.construct_level + 1):
             self.simulation.integrate_construct(self.lot, remove=True)
             self.lot.construct.level_up()
             self.lot.construct_level += 1

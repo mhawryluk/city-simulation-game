@@ -1,16 +1,24 @@
-from time import perf_counter
 from game_engine_tools.player_status_tracker import PlayerStatus
-from constructs.construct_type import ConstructType, get_zone_construct_type
-from random import randint
+from constructs.construct_type import get_zone_construct_type
 from city_graphics.city_space_graphics import CitySpaceGraphics
-from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, satisfy_demand, calculate_demands
+from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, \
+    satisfy_demand, calculate_demands
 from math import inf
 from .road_graph import RoadNetGraph
 from . import make_safe_range
+from math import inf
+
+from city_graphics.city_space_graphics import CitySpaceGraphics
+from constructs.construct_type import get_zone_construct_type
+from game_engine_tools.player_status_tracker import PlayerStatus
+
+from . import make_safe_range
+from .road_graph import RoadNetGraph
+from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, \
+    satisfy_demand, calculate_demands
 
 
 class SimulationEngine:
-
     FPS_PER_CYCLE_OPTIONS = [
         inf,
         60 * 2.5,
@@ -39,7 +47,8 @@ class SimulationEngine:
                     for simulation in SIMULATIONS:
                         simulation(lot, self.player_status)
                     self.player_status.data['resident_happyness'] += calculate_happiness(lot)
-            self.player_status.data['resident_happyness'] = normalize_happyness(self.player_status.data['resident_happyness'], old_happiness)
+            self.player_status.data['resident_happyness'] = normalize_happyness(
+                self.player_status.data['resident_happyness'], old_happiness)
             satisfy_demand(self.player_status)
             calculate_demands(self.player_status)
         else:
@@ -49,14 +58,15 @@ class SimulationEngine:
         building = construct
         if building is None:
             building = get_zone_construct_type(zone)
-        return self.player_status.data['funds'] >= building.value['level'][level].get('upgrade_cost', building.value['cost'])
+        return self.player_status.data['funds'] >= building.value['level'][level].get('upgrade_cost',
+                                                                                      building.value['cost'])
 
     def funds_change_by(self, construct, multiplier=1.):
         self.player_status.data['funds'] -= construct.type['cost'] * multiplier
 
     def integrate_construct(self, lot, remove=False, from_save=False):
         construct = lot.construct
-        
+
         if not construct is None:
             self.road_graph.update_lot(lot, remove)
             self.player_status.data['residences'] += (-1 if remove else 1) if construct.like('home') else 0
@@ -75,23 +85,23 @@ class SimulationEngine:
                     if lot in row
                 ]
                 current_row, current_column = ind[0]
-                
+
                 row_range = make_safe_range(0, len(self.city_space.lots))
                 col_range = make_safe_range(0, len(self.city_space.lots[0]))
-                for row in row_range(current_row-construct_range, current_row+construct_range+1):
-                    for col in col_range(current_column-construct_range, current_column+construct_range+1):
+                for row in row_range(current_row - construct_range, current_row + construct_range + 1):
+                    for col in col_range(current_column - construct_range, current_column + construct_range + 1):
                         if row != current_row or col != current_column:
                             affected_lot = self.city_space.lots[row][col]
                             if remove:
-                                affected_lot.unpolluted /= (1-pollution)
+                                affected_lot.unpolluted /= (1 - pollution)
                             else:
-                                affected_lot.unpolluted *= (1-pollution)
+                                affected_lot.unpolluted *= (1 - pollution)
                             if affected_lot.construct != None and affected_lot.construct.happiness != None:
                                 if remove:
                                     affected_lot.construct.happiness /= happiness_multiplier
                                 else:
                                     affected_lot.construct.happiness *= happiness_multiplier
-            
+
                 if remove:
                     self.funds_change_by(lot.construct, -MONEY_RETURN_PERCENT)
                 else:
@@ -100,7 +110,7 @@ class SimulationEngine:
                         for affecting_construct in list(lot.affected_by):
                             lot.construct.happiness *= affecting_construct.get(
                                 'resident_happiness_multiplier', 1)
-    
+
     def change_speed(self, ind):
         self.fps_per_cycle = self.FPS_PER_CYCLE_OPTIONS[ind]
         CitySpaceGraphics.set_speed(ind)

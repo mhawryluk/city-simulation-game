@@ -1,6 +1,6 @@
 import pygame_menu as pgmen
-from panels.panel import Panel
 from city_graphics.city_images import CityImages
+from panels.panel import Panel
 
 
 class InfoPanel(Panel):

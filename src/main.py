@@ -1,4 +1,4 @@
-from os import chdir, path, getcwd, environ
+from os import chdir, path, environ
 
 
 def change_directory():
@@ -7,13 +7,13 @@ def change_directory():
     else:
         dir_name = path.dirname(path.dirname(__file__))
         if dir_name != '':
-            chdir(dir_name) 
+            chdir(dir_name)
 
 
 def main():
     environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-    from game_engine import GameEngine
     change_directory()
+    from game_engine import GameEngine
     game_engine = GameEngine()
     game_engine.run()
 

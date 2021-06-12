@@ -1,7 +1,6 @@
 from city.lot import Lot
 from city.lot_type import LotType
 from city.road_system import RoadSystem
-from city_graphics.city_space_graphics import CitySpaceGraphics
 from constructs.construct_type import ConstructType
 
 
@@ -33,7 +32,9 @@ class CitySpace:
 
             else:
                 self.lots = [
-                    [Lot(x, y, LotType.WATER if x == 0 or x == self.height-1 or y == 0 or y == self.width-1 else LotType.GRASS) for y in range(self.height)] for x in range(self.width)
+                    [Lot(x, y,
+                         LotType.WATER if x == 0 or x == self.height - 1 or y == 0 or y == self.width - 1 else LotType.GRASS)
+                     for y in range(self.height)] for x in range(self.width)
                 ]
 
         else:
@@ -50,13 +51,6 @@ class CitySpace:
             self.zone.add(clicked_lot)
             return clicked_lot
         return None
-
-    def bulldoze(self, clicked_lot):
-        if clicked_lot.construct is None:
-            return None
-
-        clicked_lot.remove_construct()
-        return clicked_lot
 
     def buy_construct(self, construct, clicked_lot):
         if clicked_lot.can_place(construct):
