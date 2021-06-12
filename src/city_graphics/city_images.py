@@ -5,10 +5,10 @@ import pygame as pg
 import os
 from random import random, choice, seed
 from time import time_ns
-from game_engine_tools import load_asset, get_asset_path
+from game_engine_tools import load_asset, get_asset_path, Singleton
 
 
-class CityImages:
+class CityImages(metaclass=Singleton):
     '''scaled and original background lot images'''
 
     def __init__(self):
@@ -117,6 +117,3 @@ class CityImages:
         image = self.animation_images[animation_type][frame % len(
             self.animation_images[animation_type])]
         return pg.transform.scale(image, (size, size))
-
-
-CITY_IMAGES = CityImages()

@@ -8,8 +8,6 @@
   - [Features](#features)
   - [Screenshots](#screenshots)
   - [Setup](#setup)
-  - [Project Status](#project-status)
-  - [Room for Improvement](#room-for-improvement)
   - [Credits](#credits)
 <!-- * [License](#license) -->
 
@@ -45,13 +43,8 @@ All requirements are listed in the requirements.txt file. You can download every
 `pip install -r requirements.txt`. Run the game with `python src/main.py`
 
 
-
-## Project Status
-Project is _in progress_.
-
-
-## Room for Improvement
-* 
+<!-- ## Room for Improvement
+*  -->
 
 
 ## Credits
@@ -59,6 +52,6 @@ Project is _in progress_.
 Created by:
 [@mhawryluk](https://www.github.com/mhawryluk) and [@Singularity23x0](https://www.github.com/Singularity23x0)
 
-Some images by:
+<!-- Some images by:
 
-Music by:
+Music by: -->

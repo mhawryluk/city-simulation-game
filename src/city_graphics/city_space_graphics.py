@@ -2,7 +2,7 @@ from city_graphics import ROAD_WIDTH_RATIO
 from game_engine_tools import WINDOW_SIZE
 from city_graphics.lot_graphics import LotGraphics
 from city_graphics.road_graphics import RoadGraphics
-from city_graphics.city_images import CITY_IMAGES
+from city_graphics.city_images import CityImages
 import pygame as pg
 
 
@@ -13,6 +13,7 @@ class CitySpaceGraphics:
 
     def __init__(self, city_space, width, height):
         self.city_space = city_space
+        self.city_images = CityImages()
 
         LotGraphics.map_dimensions = (width, height)
         RoadGraphics.map_dimensions = (width, height)
@@ -34,7 +35,7 @@ class CitySpaceGraphics:
 
     def draw(self, mode, construct_to_buy, window):
         # rescaling
-        CITY_IMAGES.rescale(self.scale)
+        self.city_images.rescale(self.scale)
 
         # draw lots
         for row in self.city_space.lots:

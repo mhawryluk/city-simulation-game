@@ -4,11 +4,12 @@ from panels.option_panel import OptionPanel
 from panels.stat_panel import StatPanel
 from panels.panel import Panel
 from game_engine_tools import WINDOW_SIZE, get_asset_path
-from city_graphics.city_images import CITY_IMAGES
+from city_graphics.city_images import CityImages
 
 
 class GameWindowPanel(Panel):
     '''main panel on the left side'''
+    city_images = CityImages()
 
     def __init__(self, width, height, game_window, position=(100, 100)):
         super().__init__(width, height, game_window)
@@ -34,27 +35,28 @@ class GameWindowPanel(Panel):
 
         # BUTTONS
         scale = (0.1, 0.1)
-        self.menu.add.image(CITY_IMAGES.get_icon(
+        self.menu.add.image(self.city_images.get_icon(
             'play-button'), scale=scale, onselect=self.play)
         self.play_button = self.menu.add.button("play", self.play)
         self.play_button.set_controls()
         self.menu.add.label(' ')
 
-        self.menu.add.image(CITY_IMAGES.get_icon('road'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon('road'), scale=scale)
         self.road_button = self.menu.add.button("add roads", self.add_road)
         self.menu.add.label(' ')
 
-        self.menu.add.image(CITY_IMAGES.get_icon('crane'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon('crane'), scale=scale)
         self.build_mode_button = self.menu.add.button(
             "build mode", self.build_mode)
         self.menu.add.label(' ')
 
-        self.menu.add.image(CITY_IMAGES.get_icon('mesh-network'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon(
+            'mesh-network'), scale=scale)
         self.build_mode_button = self.menu.add.button(
             "access", self.access)
         self.menu.add.label(' ')
 
-        self.menu.add.image(CITY_IMAGES.get_icon(
+        self.menu.add.image(self.city_images.get_icon(
             'settings-knobs'), scale=scale)
         self.options_button = self.menu.add.button(
             "options", self.options)

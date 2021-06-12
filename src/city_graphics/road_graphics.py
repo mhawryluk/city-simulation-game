@@ -1,6 +1,6 @@
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.car import Car
-from city_graphics.city_images import CITY_IMAGES
+from city_graphics.city_images import CityImages
 from city import HORIZONTAL, VERTICAL
 from itertools import product
 import pygame as pg
@@ -16,6 +16,7 @@ class RoadGraphics:
 
     cars = set()
     car_speed = 0.04
+    city_images = CityImages()
 
     @classmethod
     def reset(cls):
@@ -24,11 +25,11 @@ class RoadGraphics:
 
     @classmethod
     def draw(cls, roads, pov, scale):
-        picture = CITY_IMAGES.get_vertical_road(cls.get_vertical_size(scale))
+        picture = cls.city_images.get_vertical_road(cls.get_vertical_size(scale))
         for pos_x, pos_y in roads.vertical:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
-        picture = CITY_IMAGES.get_horizontal_road(
+        picture = cls.city_images.get_horizontal_road(
             cls.get_horizontal_size(scale))
         for pos_x, pos_y in roads.horizontal:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
@@ -105,7 +106,7 @@ class RoadGraphics:
             cls.cars.pop()
 
         for car in cls.cars:
-            image = CITY_IMAGES.get_scaled_car_image(
+            image = cls.city_images.get_scaled_car_image(
                 car.image_type, car.road_direction, car.direction)
             cls.draw_element(car.x, car.y, pov, scale, image)
 
@@ -117,7 +118,7 @@ class RoadGraphics:
     @classmethod
     def add_car(cls, roads, car_type=None, road=None, road_direction=None):
         if car_type is None:
-            car_type = CITY_IMAGES.get_random_car_type()
+            car_type = cls.city_images.get_random_car_type()
         if road is None:
             if (road_direction is None or road_direction == VERTICAL) and roads.vertical:
                 road = choice(list(roads.vertical))

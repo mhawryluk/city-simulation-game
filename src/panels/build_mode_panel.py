@@ -3,7 +3,7 @@ from panels.panel import Panel
 from panels.special_buildings_panel import BuySpecialBuildingPanel
 from panels.zoning_panel import ZoningPanel
 from game_engine_tools import get_asset_path
-from city_graphics.city_images import CITY_IMAGES
+from city_graphics.city_images import CityImages
 
 
 class BuildModePanel(Panel):
@@ -11,6 +11,7 @@ class BuildModePanel(Panel):
 
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
+        self.city_images = CityImages()
 
         self.menu = pgmen.Menu(title='BUILD - BUY',
                                width=width, height=height,
@@ -34,7 +35,7 @@ class BuildModePanel(Panel):
 
         # BUTTONS
         scale = (0.075, 0.075)
-        self.menu.add.image(CITY_IMAGES.get_icon('modern-city'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon('modern-city'), scale=scale)
         self.zoning_button = self.menu.add.button(
             "zone buildings", self.zone_buildings)
 
@@ -43,14 +44,14 @@ class BuildModePanel(Panel):
         self.menu.add.label(' ')
         self.menu.add.label(' ')
 
-        self.menu.add.image(CITY_IMAGES.get_icon('capitol'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon('capitol'), scale=scale)
         self.buy_building_button = self.menu.add.button(
             "special buildings", self.special_buildings)
 
         self.menu.add.label(' ')
         self.menu.add.label(' ')
 
-        self.menu.add.image(CITY_IMAGES.get_icon('bulldozer'), scale=scale)
+        self.menu.add.image(self.city_images.get_icon('bulldozer'), scale=scale)
         self.bulldoze_button = self.menu.add.button(
             "bulldoze", self.bulldoze)
 
