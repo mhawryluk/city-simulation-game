@@ -35,7 +35,6 @@ class Car:
 
     def crossing(self):
         x, y = floor(self.x), floor(self.y)
-        # print('flooor', x, y)
 
         if self.direction == -1:
             if self.road_direction == VERTICAL:
@@ -48,7 +47,7 @@ class Car:
         available_turns = []
 
         for turn in possible_turns:
-            if self.road_system.has_road(turn[0], turn[1], turn[2]) and turn[:3] != [self.x, self.y, self.road_direction]:
+            if self.road_system.has_road(turn[0], turn[1], turn[2]) and turn[2:] != [self.road_direction, -self.direction]:
                 available_turns.append((x, y, turn[2], turn[3]))
 
         if not available_turns:
