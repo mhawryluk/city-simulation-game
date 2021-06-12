@@ -13,9 +13,7 @@ class CityImages:
 
     def __init__(self):
         self.main_images = {
-            # LotType.GRASS: load_asset('LotType', 'grass.png'),
             LotType.GRASS: load_asset('LotType', 'PNG', 'rpgTile039.png'),
-            # LotType.WATER: load_asset('LotType', 'water.png')
             LotType.WATER: load_asset('LotType', 'PNG', 'rpgTile029.png'),
 
             LotType.WATER_RIGHT: load_asset('LotType', 'PNG', 'rpgTile030.png'),

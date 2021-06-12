@@ -1,64 +1,64 @@
-# city-simulation-game
-Project for Python programming class
+# City Simulation Game
 
-## Plan pracy:
-#### (15.03 - 28.03):
-- [x] zarys implementacji klas (deklaracja nazw i dziedziczenia)
-- [x] game engine - funkcje do zarządzania grą (game loop, obsługa menu, interakcji gracza z programem)
-- [x] mapa (grid: pola to działki do budowy budynków, krawędzie to drogi), wraz z wizualizacją
-- [x] główne menu i okno gry (mapa i menu jej dotyczące)
-- [x] ulice (budowanie)
-
-#### (29.03 - 18.04):
-- [x] implementacja budynków (wraz z mechanizmami budowania i wizualizacją)
-- [x] implementacja obszarów zabudowania (ich wyznaczanie i wizualizacja)
-- [x] mechanika budowy i zakupów (odpowiednie menu oraz mechanizm zapisu mapy)
-- [x] menu opcji (in-game - dotyczy budowy i zarządzania miastem przez gracza)
-
-#### (19.04 - 16.05):
-- [x] symulacja procesów miejskich (odpowiednie funkcje programu symulujące zdarzenia jak ruch uliczny itp)
-- [x] zdarzenia losowe
-- [x] opcje zarządzania miastem i budynkami
-- [x] ulepszenia budynków
-- [x] system potrzeb i zadowolenia mieszkańców
-- [x] komunikaty dotyczące stanu miasta, 
-- [x] statystyki oraz mechanizmy symulujące ekonomię
+## Table of Contents
+- [City Simulation Game](#city-simulation-game)
+  - [Table of Contents](#table-of-contents)
+  - [General Information](#general-information)
+  - [Technologies Used](#technologies-used)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+  - [Setup](#setup)
+  - [Project Status](#project-status)
+  - [Room for Improvement](#room-for-improvement)
+  - [Credits](#credits)
+<!-- * [License](#license) -->
 
 
-## more TODO:
-- [x] ustawianie strefy klikając, na razie jest tylko przeciągając
-- [x] dom jest za duży
-- [x] mechanizm pieniędzy - okienko przedstawiające stan konta, sprawdzanie czy można zbudować budynek, wydawanie pieniędzy
-- [x] dźwięki gry
-- [ ] menu opcji - więcej opcji wpływających na symulator
-- [x] zoom nie działa prawidłowo?
-- [ ] wizualizacja poziomów zanieczyszczenia, dostępu do zasobów
-- [x] okienko z pieniędzmi i satysfakcją 
-- [x] upgrade
-- [x] bulldoze - wyłączyć przy zmianie trybu
-- [x] okienko upgrade'u pojawia się np. przy wyburzaniu
-- [x] zapisywanie stref
+## General Information
+Created as a project for a Python Programming class at the AGH University, City Simulation Game is a 2D game, that lets you design, build and manage a city. 
 
-## poprawki:
-- [x] rozdzielić GUI od logiki gry
-- [x] zoptymalizować kod highlight_roads
-- [x] zastąpić import *
-- [x] GameEngine - stałe w konstruktorze
-- [x] WINDOW -> window
-- [x] MEASUREMENTS -> usunąłem to pole
-- [x] __init__.py
-- [x] road_width_ratio -> zmienić w stałą
-- [ ] przenieść wszystko związane z assetami do wspólnej klasy
-- [x] pg.image.load...
-- [x] CityImages - singleton?
-- [ ] pickle
-- [x] snake_case nazw plików
 
-## TODO M:
-- [x] animacja samochodów
-- [x] samochody powinny zawracać tylko jak muszą
-- [x] zoom
-- [x] rozmiar obrazków w upgrade panel
-- [ ] rozmiar sklepów
-- [ ] komunikaty np. gdy brakuje pieniędzy na upgrade
-- [x] wizualizacja wpływu budynków
+## Technologies Used
+- **Python - version 3.9.5**
+- pygame - version 2.0.1
+- pygame-menu - verson 4.1.0
+- numpy - version 1.20.3
+
+
+## Features
+- Place residential, commercial and industrial buildings by drawing special zones.
+- Buy other special buildings that affect city's statistics such as residents' happiness.
+- Add roads that connect constructs on the map and introduce traffic.
+- Upgrade your infrastructure to increase city wellbeing.
+- Try to prevent unwanted events such as fires, burglaries, pandemics...
+- Monitor your funds, city's population and current demand for construct types and utilities.
+
+
+## Screenshots
+![Example screenshot 1](./Assets/Screenshot1.png)
+![Example screenshot 2](./Assets/Screenshot2.png)
+<!-- If you have screenshots you'd like to share, include them here. -->
+
+
+## Setup
+All requirements are listed in the requirements.txt file. You can download everything necessary by executing:
+`pip install -r requirements.txt`. Run the game with `python src/main.py`
+
+
+
+## Project Status
+Project is _in progress_.
+
+
+## Room for Improvement
+* 
+
+
+## Credits
+
+Created by:
+[@mhawryluk](https://www.github.com/mhawryluk) and [@Singularity23x0](https://www.github.com/Singularity23x0)
+
+Some images by:
+
+Music by:
