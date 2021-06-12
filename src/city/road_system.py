@@ -50,6 +50,17 @@ class RoadSystem:
         else:
             self.add_road(self.hovered_direction, self.hovered_road)
 
+    def hovered(self, road):
+        if self.hovered_direction == VERTICAL:
+            round_x, round_y = round, int
+        else:
+            round_x, round_y = int, round
+        if road is not None:
+            x, y = road
+            self.hovered_road = round_x(x), round_y(y)
+        else:
+            self.hovered_road = None
+
     def compress2save(self):
         return {
             'vertical': list(self.vertical),
