@@ -6,6 +6,7 @@ from constructs.construct_type import ConstructType
 
 class UpgradePanel(Panel):
     IMAGE_SIZE = 100
+
     def __init__(self, width, height, game_window, simulation):
         super().__init__(width, height, game_window)
         self.menu = pgmen.Menu(title='LOT', width=width,
@@ -24,7 +25,8 @@ class UpgradePanel(Panel):
 
         self.menu.add.image(
             lot.construct.image_path,
-            scale=(self.IMAGE_SIZE/lot.construct.image.get_width(), self.IMAGE_SIZE/lot.construct.image.get_width())
+            scale=(self.IMAGE_SIZE/lot.construct.image.get_width(),
+                   self.IMAGE_SIZE/lot.construct.image.get_width())
         )
 
         if lot.construct_level + 1 in lot.construct.type['level']:
@@ -38,6 +40,7 @@ class UpgradePanel(Panel):
                 continue
             self.menu.add.label(
                 f'{key.replace("_", " ")}: {value}', max_char=30)
+        self.menu.add.label(f'max level: {len(lot.construct.type["level"])}')
         self.menu.add.label(
             'Heat: ' + str(lot.construct.heat), max_char=30)
         self.menu.add.label(
@@ -55,7 +58,9 @@ class UpgradePanel(Panel):
         if self.control and self.simulation.can_buy(construct=ConstructType[self.lot.construct.type_name], level=self.lot.construct_level + 1):
             self.simulation.integrate_construct(self.lot, remove=True)
             self.lot.construct.level_up()
+            self.lot.construct_level += 1
             self.simulation.integrate_construct(self.lot)
+            self.menu.disable()
 
     def get_theme(self):
         theme = super().get_theme()

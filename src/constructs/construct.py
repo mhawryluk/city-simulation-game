@@ -50,7 +50,6 @@ class Construct:
             max_level, self.construct_level + level_up_by)
         if self.construct_level != prev:
             self.choose_image()
-        print(self.construct_level)
         return self.construct_level - prev
 
     def delevel(self, delevel_by):
