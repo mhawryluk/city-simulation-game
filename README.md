@@ -41,7 +41,7 @@ Created as a project for a Python Programming class at the AGH UST, **City Simul
 
 ## Setup
 All requirements are listed in the requirements.txt file. You can download everything necessary by executing:
-`pip install -r requirements.txt`. Run the game with `python src/main.py`
+`pip install -r requirements.txt`. Run the game with `python src/main.py`.
 
 
 <!-- ## Room for Improvement
