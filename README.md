@@ -40,7 +40,10 @@ Created as a project for a Python Programming class at the AGH UST, **City Simul
 
 
 ## Setup
-All requirements are listed in the requirements.txt file. You can download everything necessary by executing:
+**To run the game you have to run the 'City Simulation Game' lnk file.**
+
+**Alternatively** you can run it via src/main.py file - to do so u have to meet some requirements.
+All of them are listed in the requirements.txt file. You can download everything necessary by executing:
 `pip install -r requirements.txt`. Run the game with `python src/main.py`.
 
 
