@@ -1,5 +1,6 @@
 .vscode
 SaveFiles/*.json
+CitySimulationGame/exe.win-amd64-3.9/SaveFiles/*.json
 .idea
 
 # Byte-compiled / optimized / DLL files
