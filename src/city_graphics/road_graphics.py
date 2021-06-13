@@ -29,12 +29,11 @@ class RoadGraphics:
 
     @classmethod
     def draw(cls, roads, pov, scale):
-        picture = cls.city_images.get_vertical_road(cls.get_vertical_size(scale))
+        picture = cls.city_images.scaled_vertical
         for pos_x, pos_y in roads.vertical:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
-        picture = cls.city_images.get_horizontal_road(
-            cls.get_horizontal_size(scale))
+        picture = cls.city_images.scaled_horizontal
         for pos_x, pos_y in roads.horizontal:
             cls.draw_element(pos_x, pos_y, pov, scale, picture)
 
@@ -111,7 +110,7 @@ class RoadGraphics:
 
         for car in cls.cars:
             image = cls.city_images.get_scaled_car_image(
-                car.image_type, car.road_direction, car.direction)
+                car.image_type, car.road_direction, car.car_direction)
             cls.draw_element(car.x, car.y, pov, scale, image)
 
     @classmethod

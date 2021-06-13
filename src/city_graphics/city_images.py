@@ -7,7 +7,7 @@ import pygame as pg
 from city import HORIZONTAL
 from city.lot_type import LotType
 from city_graphics import ROAD_WIDTH_RATIO
-from game_engine_tools import load_asset, Singleton
+from game_engine_tools import load_asset, get_asset_path, Singleton
 
 
 class CityImages(metaclass=Singleton):
@@ -43,17 +43,18 @@ class CityImages(metaclass=Singleton):
                 load_asset('LotType', 'island.png')
             ]}
 
+        # chance of adding an addition image on specific lot type:
         self.frequency = {
             LotType.GRASS: 0.1,
             LotType.WATER: 0.005
         }
 
         self.icons = {
-            path.name.split('.')[-2]: path.path for path in os.scandir(os.path.join("Assets", "Icons2"))
+            path.name.split('.')[-2]: path.path for path in os.scandir(get_asset_path("Icons2"))
         }
 
         self.warning_icons = {
-            path.name.split('.')[-2]: path.path for path in os.scandir(os.path.join("Assets", "WarningIcons"))
+            path.name.split('.')[-2]: path.path for path in os.scandir(get_asset_path("WarningIcons"))
         }
 
         self.vertical_road = load_asset('Streets', 'vertical.png')
@@ -75,6 +76,8 @@ class CityImages(metaclass=Singleton):
         self.scaled_main_images = self.main_images
         self.scaled_additional_images = self.additional_images
         self.scaled_cars = self.additional_images
+        self.scaled_vertical = self.vertical_road
+        self.scaled_horizontal = self.horizontal_road
 
     def rescale(self, scale):
         self.scaled_main_images = {k: pg.transform.scale(
@@ -86,6 +89,9 @@ class CityImages(metaclass=Singleton):
 
         self.scaled_additional_images = {k: list(map(lambda x: pg.transform.scale(
             x, (scale, scale)), v)) for k, v in self.additional_images.items()}
+
+        self.scaled_vertical = pg.transform.scale(self.vertical_road, (int(scale * ROAD_WIDTH_RATIO), int(scale + scale * ROAD_WIDTH_RATIO)))
+        self.scaled_horizontal = pg.transform.scale(self.horizontal_road, (int(scale + scale * ROAD_WIDTH_RATIO), int(scale * ROAD_WIDTH_RATIO)))
 
     def get_images(self, lot_type, lot_seed):
         seed(lot_seed)
@@ -109,12 +115,6 @@ class CityImages(metaclass=Singleton):
     def get_random_car_type(self):
         seed(time_ns())
         return choice(list(self.cars.keys()))
-
-    def get_vertical_road(self, scale):
-        return pg.transform.scale(self.vertical_road, scale)
-
-    def get_horizontal_road(self, scale):
-        return pg.transform.scale(self.horizontal_road, scale)
 
     def get_animation_image(self, animation_type, frame, size):
         image = self.animation_images[animation_type][frame % len(
