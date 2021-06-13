@@ -12,6 +12,7 @@ from game_engine_tools import load_asset, get_asset_path, Singleton
 
 class CityImages(metaclass=Singleton):
     """scaled and original background lot images"""
+    current_scale = -1
 
     def __init__(self):
         self.main_images = {
@@ -80,6 +81,10 @@ class CityImages(metaclass=Singleton):
         self.scaled_horizontal = self.horizontal_road
 
     def rescale(self, scale):
+        if scale == self.current_scale:
+            return
+        self.current_scale = scale
+
         self.scaled_main_images = {k: pg.transform.scale(
             v, (scale, scale)) for k, v in self.main_images.items()}
 

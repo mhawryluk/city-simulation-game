@@ -25,9 +25,6 @@ class GameWindow(GameMode):
         self.SCROLL_SPEED = 15
         self.ZOOM_VALUE = 1.2
 
-        LotGraphics.window = window
-        RoadGraphics.window = window
-
         # current state variables
         self.change_mode = False
         self.mode = "game_mode"
