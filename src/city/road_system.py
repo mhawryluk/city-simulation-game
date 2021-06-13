@@ -2,15 +2,19 @@ from city import VERTICAL, HORIZONTAL
 
 
 class RoadSystem:
-    def __init__(self, map_width, map_height, save_source=None):
+    def __init__(self, save_source=None):
+
+        # roads in sets of tuples divided according to their directions:
         self.vertical = set()
         self.horizontal = set()
-        self.map_width = map_width
-        self.map_height = map_height
+
+        # mouse hovering
         self.hovered_road = None
         self.hovered_direction = VERTICAL
-        self.changes = False
 
+        self.changes = False  # whether roads were recently modified (for rebuilding the graph)
+
+        # reading from save file
         if save_source is not None:
             for road in save_source['vertical']:
                 self.vertical.add(tuple(road))

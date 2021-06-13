@@ -11,8 +11,7 @@ class CitySpace:
         self.width = width  # amount of fields in width
 
         # roads
-        self.road_system = RoadSystem(
-            width, height, None if save_source is None else save_source['roads'])
+        self.road_system = RoadSystem(None if save_source is None else save_source['roads'])
 
         # lots
         self.lots = []
