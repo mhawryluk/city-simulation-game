@@ -39,7 +39,7 @@ Created as a project for a Python Programming class at the AGH UST, **City Simul
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
-## Setup
+## Setup and run
 **To run the game you have to run the 'City Simulation Game' lnk file.**
 
 **Alternatively** you can run it via src/main.py file - to do so u have to meet some requirements.
