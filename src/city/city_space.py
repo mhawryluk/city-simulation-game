@@ -1,7 +1,6 @@
 from city.lot import Lot
 from city.lot_type import LotType
 from city.road_system import RoadSystem
-from constructs.construct_type import ConstructType
 
 
 class CitySpace:
@@ -11,9 +10,11 @@ class CitySpace:
         self.height = height  # amount of fields in height
         self.width = width  # amount of fields in width
 
+        # roads
         self.road_system = RoadSystem(
             width, height, None if save_source is None else save_source['roads'])
 
+        # lots
         self.lots = []
         self.reset_lots(
             None if save_source is None else save_source['lots'], map)
@@ -43,6 +44,7 @@ class CitySpace:
             ]
 
     def road_clicked(self):
+        """informs the road system that a road was clicked"""
         self.road_system.road_clicked()
 
     def compress2save(self):
@@ -52,5 +54,4 @@ class CitySpace:
             ],
             'roads': self.road_system.compress2save()
         }
-
         return c2s

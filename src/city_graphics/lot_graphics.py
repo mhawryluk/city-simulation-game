@@ -80,7 +80,7 @@ class LotGraphics:
     def draw_simulation_effects(cls, lot, pov, scale):
         cls.frame += cls.animation_speed
 
-        events = lot.get_current_events()
+        events = lot.current_events
         x, y = cls.get_draw_position(lot, pov, scale)
 
         if 'burning' in events:

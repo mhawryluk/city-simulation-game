@@ -151,18 +151,15 @@ class GameWindow(GameMode):
                 self.city_graphics.zoom(1 / self.ZOOM_VALUE)
 
         if event.type == pg.MOUSEMOTION or event.type or event.type == pg.MOUSEBUTTONDOWN:
+            clicked_lot = self.city_graphics.get_clicked_lot(pg.mouse.get_pos())
             if self.button_down:
-                if self.zoning:
-                    if self.simulator.can_buy(zone=self.zoning_type):
-                        clicked_lot = self.city_graphics.get_clicked_lot(pg.mouse.get_pos())
-                        if clicked_lot.set_zone(self.zoning_type):
-                            self.simulator.integrate_construct(clicked_lot)
+                if self.zoning and self.simulator.can_buy(zone=self.zoning_type):
+                    if clicked_lot and clicked_lot.set_zone(self.zoning_type):
+                        self.simulator.integrate_construct(clicked_lot)
 
                 elif self.bulldozing:
-                    lot = self.city_graphics.get_clicked_lot(pg.mouse.get_pos())
-                    if lot:
-                        self.simulator.integrate_construct(lot, remove=True)
-                    lot.remove_construct()
+                    if clicked_lot and clicked_lot.remove_construct():
+                        self.simulator.integrate_construct(clicked_lot, remove=True)
 
             else:
                 self.city_graphics.hovered(
