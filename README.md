@@ -9,7 +9,6 @@
   - [Screenshots](#screenshots)
   - [Setup](#setup)
   - [Credits](#credits)
-<!-- * [License](#license) -->
 
 
 ## General Information
@@ -36,7 +35,6 @@ Created as a project for a Python Programming class at the AGH UST, **City Simul
 ## Screenshots
 ![Example screenshot 1](./Assets/Screenshot1.png)
 ![Example screenshot 2](./Assets/Screenshot2.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
 
 
 ## Setup and run
@@ -58,7 +56,3 @@ Created by:
 
 Game graphics created from modification of assets aquired at:
 - https://opengameart.org/
-
-<!-- Some images by:
-
-Music by: -->

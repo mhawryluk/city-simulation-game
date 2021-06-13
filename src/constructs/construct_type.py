@@ -1,15 +1,5 @@
 from enum import Enum
-
 from game_engine_tools import get_asset_path
-
-
-def get_zone_construct_type(zone_type):
-    if zone_type == 'residential':
-        return ConstructType.FAMILY_HOUSE
-    if zone_type == 'commercial':
-        return ConstructType.SHOP
-    if zone_type == 'industrial':
-        return ConstructType.FACTORY
 
 
 class ConstructType(Enum):
@@ -233,7 +223,8 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'fire station',
-                'description': 'A fire station. Keeps people happy that there is a way for their house to be saved from burning down.',
+                'description': 'A fire station. Keeps people happy that there is a way for their house to be saved '
+                               'from burning down.',
                 'people_involved': 20,
                 'income': -600,
                 'energy_change': -80,
@@ -254,7 +245,8 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'school',
-                'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
+                'description': 'Building that houses kindergarten, primary and secondary school as well as a high '
+                               'school.',
                 'people_involved': 150,
                 'income': -500,
                 'energy_change': -500,
@@ -273,7 +265,8 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'school',
-                'description': 'Building that houses kindergarten, primary and secondary school as well as a high school.',
+                'description': 'Building that houses kindergarten, primary and secondary school as well as a high '
+                               'school.',
                 'people_involved': 300,
                 'income': -7500,
                 'energy_change': -1000,
@@ -407,6 +400,11 @@ class ConstructType(Enum):
         }
     }
 
-    @staticmethod
-    def get_info(type):
-        return type.value
+
+def get_zone_construct_type(zone_type):
+    if zone_type == 'residential':
+        return ConstructType.FAMILY_HOUSE
+    if zone_type == 'commercial':
+        return ConstructType.SHOP
+    if zone_type == 'industrial':
+        return ConstructType.FACTORY

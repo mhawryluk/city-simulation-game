@@ -3,7 +3,6 @@ import pygame as pg
 from city.city_space import CitySpace
 from city_graphics.city_space_graphics import CitySpaceGraphics
 from city_graphics.lot_graphics import LotGraphics
-from city_graphics.road_graphics import RoadGraphics
 from game_engine_tools import WINDOW_SIZE
 from game_engine_tools.simulation_engine import SimulationEngine
 from game_modes.game_mode import GameMode
@@ -35,9 +34,7 @@ class GameWindow(GameMode):
         self.construct_to_buy = None  # construct - buy button pressed but the purchase is not yet confirmed
 
         # befriended classes
-        self.city_space = CitySpace(
-            width, height,
-            save_source=saved_data.get('city_space', None), map=map)
+        self.city_space = CitySpace( width, height, save_source=saved_data.get('city_space', None), map=map)
         self.city_graphics = CitySpaceGraphics(self.city_space, width, height)
 
         self.simulator = SimulationEngine(self.city_space, saved_data)

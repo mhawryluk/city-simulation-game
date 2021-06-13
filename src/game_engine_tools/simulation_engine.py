@@ -60,9 +60,9 @@ class SimulationEngine:
 
         if construct is not None:
             self.road_graph.update_lot(lot, remove)
-            self.player_status.data['residences'] += (-1 if remove else 1) if construct.like('home') else 0
+            self.player_status.data['residences'] += (-1 if remove else 1) if construct.likes('home') else 0
             if not from_save:
-                if construct.like('home'):
+                if construct.likes('home'):
                     people_involved = construct.get('people_involved', 0)
                     self.player_status.data['capacity'] += people_involved if not remove else -people_involved
                 construct_range = int(construct.get('range', 0))
@@ -97,7 +97,7 @@ class SimulationEngine:
                     self.funds_change_by(lot.construct, -MONEY_RETURN_PERCENT)
                 else:
                     self.funds_change_by(lot.construct)
-                    if lot.construct.like('home'):
+                    if lot.construct.likes('home'):
                         for affecting_construct in list(lot.affected_by):
                             lot.construct.happiness *= affecting_construct.get(
                                 'resident_happiness_multiplier', 1)

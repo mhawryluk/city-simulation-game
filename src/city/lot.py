@@ -34,8 +34,7 @@ class Lot:
             self.zone_type = save_source['zone_type']
             self.seed = save_source['seed']
             if not save_source['construct'] is None:
-                self.construct = Construct(
-                    None, construct_state=save_source['construct'])
+                self.construct = Construct(construct_state=save_source['construct'])
                 self.construct_level = save_source.get('construct_level', 0)
 
     def set_zone(self, zone_type):
@@ -80,11 +79,11 @@ class Lot:
         self.zone_type = None
         return True
 
-    def can_place(self, construct):
+    def can_place(self, construct_type):
         """returns True if a construct can be placed on currently highlighted lot"""
-        construct = Construct(construct)
+        construct = Construct(construct_type=construct_type)
         type = LotType.GRASS
-        if construct.like('water'):
+        if construct.likes('water'):
             type = LotType.WATER
 
         return self.construct is None and self.type == type
