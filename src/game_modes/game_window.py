@@ -1,4 +1,5 @@
 import pygame as pg
+
 from city.city_space import CitySpace
 from city_graphics.city_space_graphics import CitySpaceGraphics
 from city_graphics.lot_graphics import LotGraphics
@@ -107,7 +108,7 @@ class GameWindow(GameMode):
                 self.button_down = False
                 return
 
-        ##### only if mouse isn't above another panel #####
+        # !!! only if mouse isn't above another panel !!!#
 
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == pg.BUTTON_LEFT:
@@ -192,8 +193,9 @@ class GameWindow(GameMode):
 
         return self.zoning
 
-    def toggle_zone_highlighting(self, set=None):
-        if not set is None:
+    @staticmethod
+    def toggle_zone_highlighting(set=None):
+        if set is not None:
             LotGraphics.zone_highlighting = set
         else:
             LotGraphics.zone_highlighting = not LotGraphics.zone_highlighting
@@ -208,9 +210,7 @@ class GameWindow(GameMode):
 
     def save(self):
         def compress2save():
-            c2s = {}
-            c2s['city_space'] = self.city_space.compress2save()
-            c2s['world_state'] = self.simulator.compress2save()
+            c2s = {'city_space': self.city_space.compress2save(), 'world_state': self.simulator.compress2save()}
             return c2s
 
         self.save_manager.save(compress2save())

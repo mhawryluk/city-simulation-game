@@ -1,4 +1,5 @@
 import pygame_menu as pgmen
+
 from city_graphics.city_images import CityImages
 from game_engine_tools import WINDOW_SIZE
 from panels.build_mode_panel import BuildModePanel
@@ -8,7 +9,7 @@ from panels.stat_panel import StatPanel
 
 
 class GameWindowPanel(Panel):
-    '''main panel on the left side'''
+    """main panel on the left side"""
     city_images = CityImages()
 
     def __init__(self, width, height, game_window, position=(100, 100)):

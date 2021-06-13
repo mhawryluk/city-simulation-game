@@ -1,4 +1,5 @@
 import pygame_menu as pgmen
+
 from city_graphics.city_images import CityImages
 from panels.panel import Panel
 from panels.special_buildings_panel import BuySpecialBuildingPanel
@@ -6,7 +7,7 @@ from panels.zoning_panel import ZoningPanel
 
 
 class BuildModePanel(Panel):
-    ''' panel enabled after clicking the build mode button'''
+    """ panel enabled after clicking the build mode button"""
 
     def __init__(self, width, height, position, game_window):
         super().__init__(width, height, game_window)
@@ -59,7 +60,7 @@ class BuildModePanel(Panel):
         self.menu.add.label(' ')
 
     def special_buildings(self):
-        '''runs after the button tagged "special building" is pressed'''
+        """runs after the button tagged "special building" is pressed"""
 
         enabled = self.special_building_panel.is_enabled()
         self.disable_subpanels()
@@ -74,7 +75,7 @@ class BuildModePanel(Panel):
             self.game_window.zoning = False
 
     def zone_buildings(self):
-        '''runs after the button tagged "zone building" is pressed'''
+        """runs after the button tagged "zone building" is pressed"""
 
         enabled = self.zone_building_panel.is_enabled()
         self.disable_subpanels()
@@ -90,7 +91,7 @@ class BuildModePanel(Panel):
             self.game_window.zoning = False
 
     def bulldoze(self):
-        '''function called by bulldoze button'''
+        """function called by bulldoze button"""
         self.disable_subpanels()
         if not self.game_window.bulldozing:
             self.game_window.bulldozing = True
@@ -100,11 +101,11 @@ class BuildModePanel(Panel):
             self.unselect_selected_widget()
 
     def get_subpanels(self):
-        '''overrides one from Panel'''
+        """overrides one from Panel"""
         return [self.special_building_panel, self.zone_building_panel]
 
     def disable(self):
-        '''overrides one from Panel'''
+        """overrides one from Panel"""
         super().disable()
         self.unselect_selected_widget()
         self.zone_building_panel.unselect_selected_widget()

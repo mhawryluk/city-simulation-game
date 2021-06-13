@@ -1,5 +1,6 @@
 import pygame as pg
 import pygame_menu as pgmen
+
 from constructs.construct_type import ConstructType
 from panels.panel import Panel
 
@@ -29,7 +30,7 @@ class BuySpecialBuildingPanel(Panel):
         self.unselect_selected_widget()
 
     def building_window_function(self, construct):
-        '''returns function called upon the clicking of the button'''
+        """returns function called upon the clicking of the button"""
 
         def func():
             if not self.enabled_window or self.enabled_window.construct != construct:

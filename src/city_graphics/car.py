@@ -1,6 +1,7 @@
 from math import floor
 from random import choice, seed
 from time import time
+
 from city import VERTICAL, HORIZONTAL
 
 

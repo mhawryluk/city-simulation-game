@@ -12,7 +12,7 @@ def set_between(value, min_value, max_value):
 
 
 def fire(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         fire_protection = 0
         threshold = lot.construct.heat // HEAT_THRESHOLD
         # calculating buildings fire protection
@@ -22,7 +22,7 @@ def fire(lot, player_status):
         # adequately increasing temperature
         lot.construct.heat += lot.construct.get(
             'temperature_raise', DEFAULT_TEMPERATURE_RAISE) - fire_protection
-        # if passed a threshold - expands additionaly
+        # if passed a threshold - expands additionally
         if lot.construct.heat // HEAT_THRESHOLD > threshold:
             lot.construct.heat += randint(1, HEAT_EXPANSION)
         # setting heat to stay between min and max
@@ -31,7 +31,7 @@ def fire(lot, player_status):
 
 
 def security(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         security = 0
         coefficient = lot.construct.get('burglary_appeal', 0.5)
         coefficient *= 1 if lot.construct.happiness is None else lot.construct.happiness
@@ -45,21 +45,21 @@ def security(lot, player_status):
 
 
 def energy(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         player_status.data['power'] += lot.construct.get('energy_change', 0)
         player_status.data['power'] = set_between(
             player_status.data['power'], MAX_POWER_DEMAND, MAX_POWER_SUPPLY)
 
 
 def waste(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         player_status.data['waste'] += lot.construct.get('waste_change', 0)
         player_status.data['waste'] = set_between(
             player_status.data['waste'], MAX_WASTE_FREE_SPACE, MAX_WASTE_PILE_UP)
 
 
 def water(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         player_status.data['water'] += lot.construct.get('water_change', 0)
         player_status.data['water'] = set_between(
             player_status.data['water'], MAX_WATER_DEMAND, MAX_WATER_SUPPLY)
@@ -74,7 +74,7 @@ def calculate_income(construct, player_status):
 
 
 def economy_change(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         money_change = lot.construct.get('taxation', 0)
         taxes_multiplier = min(lot.construct.happiness / HAPPYNESS_FOR_FULL_TAXES,
                                1) if not lot.construct.happiness is None else 1
@@ -86,7 +86,7 @@ def economy_change(lot, player_status):
 
 
 def health(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         player_status.data['health'] += lot.construct.get('people_involved', 0) * player_status.density()
         player_status.data['health'] -= lot.construct.get('patients', 0) * HEALING_FACTOR
         player_status.data['health'] = set_between(
@@ -99,23 +99,23 @@ def health(lot, player_status):
 
 
 def produce(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         player_status.data['produce'] += lot.construct.get('produce', 0)
 
 
 def demand(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         player_status.data['demand'] += lot.construct.get('demand', 0)
 
 
 def population(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         capacity = player_status.data['capacity']
         populus = player_status.data['population']
         happyness = player_status.data['resident_happyness']
-        if populus < capacity and random() < POPULATION_HAPPYNESS_COEF * happyness:
+        if populus < capacity and random() < POPULATION_HAPPINESS_COEF * happyness:
             populus = randint(populus, int(set_between(
-                capacity * POPULATION_HAPPYNESS_COEF * happyness,
+                capacity * POPULATION_HAPPINESS_COEF * happyness,
                 (populus + capacity) // 2,
                 capacity
             ))
@@ -127,7 +127,7 @@ def population(lot, player_status):
 
 
 def update_events(lot, player_status):
-    if lot.construct != None:
+    if lot.construct is not None:
         if lot.construct.heat >= FIRE_THRESHOLD:
             if len(lot.current_events) < EVENTS_LIMIT:
                 lot.current_events.append('burning')
@@ -184,7 +184,7 @@ def top_demand(player_status):
 
 def normalize_happyness(happyness, old_happyness):
     happyness = (happyness * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (
-                NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
+            NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
     happyness = (happyness + 1) ** 0.25
     happyness = -1 / happyness + 1
     if happyness >= 0.9994:
@@ -219,17 +219,17 @@ DEFAULT_TEMPERATURE_RAISE = 1
 FIRE_THRESHOLD = 7
 HAPPYNES_DIVISOR = 2
 
-# security related constatnts
+# security related constants
 BURGLARY_APPEAL = 0.4
 MIN_CRIME = 0
 MAX_CRIME = 15
 CRIME_THRESHOLD = 7
 
-# power related cosntsatnts
+# power related constants
 MAX_POWER_SUPPLY = 100000
 MAX_POWER_DEMAND = -10000
 COSTS_REDUCED_ABOVE_POWER_BORDERVAL = 0.5
-COSTS_INCREASED_BELOW_PWOER_BORDERVAL = 1.2
+COSTS_INCREASED_BELOW_POWER_BORDERVAL = 1.2
 POWER_BORDERVAL = 0
 
 # water related constants
@@ -239,32 +239,32 @@ COSTS_REDUCED_ABOVE_WATER_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_WATER_BORDERVAL = 1.2
 WATER_BORDERVAL = 0
 
-# waste related constatnts
+# waste related constants
 MAX_WASTE_PILE_UP = 100000
 MAX_WASTE_FREE_SPACE = -10000
 COSTS_REDUCED_ABOVE_WASTE_BORDERVAL = 0.5
 COSTS_INCREASED_BELOW_WASTE_BORDERVAL = 1.2
 WASTE_BORDERVAL = 0
 
-# health related constatnts
+# health related constants
 HEALING_FACTOR = 5
 MIN_HEALTH = 0
 PANDEMIC_CHANCE = 0.1
 PANDEMIC_COEF = 0.01
 PANDEMIC_SEVERITY = 3
 
-# population happynes constatnts
-POPULATION_HAPPYNESS_COEF = 0.25
+# population happiness constants
+POPULATION_HAPPINESS_COEF = 0.25
 POPULATION_REDUCTION = 0.98
 CURRENT_PERCENT_WEIGHT = 7
 NEW_PERCENT_WEIGHT = 1
 
-# hapynes and taxes corelation constants
+# happiness and taxes correlation constants
 HAPPYNESS_FOR_FULL_TAXES = 3
 MIN_MONEY = 0
 MAX_MONEY = 1e9
 
-# buldozing related constants
+# bulldozing related constants
 MONEY_RETURN_PERCENT = 0.78
 
 # supply and demand balance related constants
@@ -275,11 +275,11 @@ PRODUCE_THRESHOLDS = 25
 DEMAND_THRESHOLDS = 45
 GOODS_THRESHOLDS = 10
 
-# demand levels in verbos
+# demand levels in verbose
 DEMAND_LEVEL = [
     'Very low',
     'Low',
-    'Satisfyable',
+    'Satisfiable',
     'Medium',
     'Medium high',
     'High',

@@ -23,13 +23,14 @@ class Lot:
 
         self.current_events = []
 
-        if not save_source is None:
+        if save_source is not None:
             self.type = LotType(save_source['type_value'])
             self.zone_type = save_source['zone_type']
             self.seed = save_source['seed']
             if not save_source['construct'] is None:
                 self.construct = Construct(
                     None, construct_state=save_source['construct'])
+                self.construct_level = save_source.get('construct_level', 0)
 
     def set_zone(self, zone_type):
         self.zone_type = zone_type
@@ -55,7 +56,7 @@ class Lot:
         return self
 
     def can_place(self, construct):
-        '''returns True if a construct can be placed on curently highlighted lot'''
+        """returns True if a construct can be placed on currently highlighted lot"""
         construct = Construct(construct)
         type = LotType.GRASS
         if construct.like('water'):
@@ -68,6 +69,7 @@ class Lot:
             'seed': self.seed,
             'type_value': self.type.value,
             'construct': None if self.construct is None else self.construct.compress2save(),
+            'construct_level': self.construct_level,
             'zone_type': self.zone_type,
             'unpolluted': self.unpolluted
         }

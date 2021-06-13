@@ -1,17 +1,8 @@
-from game_engine_tools.player_status_tracker import PlayerStatus
-from constructs.construct_type import get_zone_construct_type
-from city_graphics.city_space_graphics import CitySpaceGraphics
-from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, \
-    satisfy_demand, calculate_demands
-from math import inf
-from .road_graph import RoadNetGraph
-from . import make_safe_range
 from math import inf
 
 from city_graphics.city_space_graphics import CitySpaceGraphics
 from constructs.construct_type import get_zone_construct_type
 from game_engine_tools.player_status_tracker import PlayerStatus
-
 from . import make_safe_range
 from .road_graph import RoadNetGraph
 from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, \
@@ -67,7 +58,7 @@ class SimulationEngine:
     def integrate_construct(self, lot, remove=False, from_save=False):
         construct = lot.construct
 
-        if not construct is None:
+        if construct is not None:
             self.road_graph.update_lot(lot, remove)
             self.player_status.data['residences'] += (-1 if remove else 1) if construct.like('home') else 0
             if not from_save:
@@ -96,7 +87,7 @@ class SimulationEngine:
                                 affected_lot.unpolluted /= (1 - pollution)
                             else:
                                 affected_lot.unpolluted *= (1 - pollution)
-                            if affected_lot.construct != None and affected_lot.construct.happiness != None:
+                            if affected_lot.construct is not None and affected_lot.construct.happiness is not None:
                                 if remove:
                                     affected_lot.construct.happiness /= happiness_multiplier
                                 else:

@@ -1,6 +1,7 @@
 from math import floor
 
 import pygame as pg
+
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.city_images import CityImages
 from game_engine_tools import WINDOW_SIZE
@@ -14,6 +15,8 @@ class LotGraphics:
                    'industrial': 0xffd97d}
     animation_speed = 0.05
     city_images = CityImages()
+    window = None
+    map_dimensions = None
 
     @classmethod
     def reset(cls):

@@ -35,7 +35,7 @@ class RoadNetGraph:
         if radius > 0:
             radius -= 1
             hor_neighbors, ver_neighbors = self.edge_neighbors(i, j, vertical)
-            lot1, lot2 = self.road_adjecent_lots(i, j, vertical)
+            lot1, lot2 = self.road_adjacent_lots(i, j, vertical)
 
             if remove:
                 if construct in lot1.affected_by:
@@ -43,7 +43,7 @@ class RoadNetGraph:
                 if lot1 in lot.affects:
                     lot.affects.remove(lot1)
 
-                if not lot2 is None:
+                if lot2 is not None:
                     if construct in lot2.affected_by:
                         lot2.affected_by.remove(construct)
                     if lot2 in lot.affects:
@@ -51,7 +51,7 @@ class RoadNetGraph:
             else:
                 lot1.affected_by.add(construct)
                 lot.affects.add(lot1)
-                if not lot2 is None:
+                if lot2 is not None:
                     lot2.affected_by.add(construct)
                     lot.affects.add(lot2)
 
@@ -62,7 +62,7 @@ class RoadNetGraph:
                 if visited.get((row, col, True), 0) <= radius:
                     self.dfs(lot, True, row, col, radius, remove, visited)
 
-    def road_adjecent_lots(self, i, j, vertical):
+    def road_adjacent_lots(self, i, j, vertical):
         second_lot = None
         if vertical:
             if j - 1 >= 0:

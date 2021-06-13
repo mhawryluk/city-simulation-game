@@ -1,4 +1,5 @@
 import pygame_menu as pgmen
+
 from panels.panel import Panel
 
 

@@ -1,4 +1,5 @@
 import pygame as pg
+
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.city_images import CityImages
 from city_graphics.lot_graphics import LotGraphics
@@ -99,10 +100,10 @@ class CitySpaceGraphics:
             alpha.set_alpha(128)
             alpha.fill(self.GRAY)
             window.blit(alpha, (0, 0))
-            self.highlight_access(window)
+            self.highlight_access()
 
     def update(self):
-        '''moves the map in each frame'''
+        """moves the map in each frame"""
 
         self.pov_x += self.move_speed[0]
         self.pov_y += self.move_speed[1]
@@ -116,7 +117,7 @@ class CitySpaceGraphics:
                          self.scale * self.height // 2)
 
     def hovered(self, pos, mode):
-        '''hovered lot highlighting:'''
+        """hovered lot highlighting:"""
         if mode == "road_placing":
             self.city_space.road_system.hovered(self.get_clicked_road(pos))
 
@@ -178,7 +179,7 @@ class CitySpaceGraphics:
              self.scale * (self.height / 2 - ROAD_WIDTH_RATIO / 2)) / self.scale
         return x, y
 
-    def highlight_access(self, window):
+    def highlight_access(self):
         if self.selected_lot is None or self.selected_lot.construct is None:
             return
 

@@ -11,7 +11,7 @@ class RoadSystem:
         self.hovered_direction = VERTICAL
         self.changes = False
 
-        if not save_source is None:
+        if save_source is not None:
             for road in save_source['vertical']:
                 self.vertical.add(tuple(road))
             for road in save_source['horizontal']:

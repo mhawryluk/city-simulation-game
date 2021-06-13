@@ -1,4 +1,5 @@
 import pygame_menu as pgmen
+
 from city_graphics.city_images import CityImages
 from panels.panel import Panel
 
@@ -34,20 +35,16 @@ class InfoPanel(Panel):
 
         self.menu.add.label('')
 
-        self.images = {}
-
-        self.images['funds'] = (self.menu.add.image(
-            self.city_images.get_icon('banknote'), scale=self.ICON_SCALE), 'banknote')
-        self.images['resident_happyness'] = (self.menu.add.image(self.city_images.get_icon(
-            'heart-inside'), scale=self.ICON_SCALE), 'heart-inside')
-        self.images['population'] = (self.menu.add.image(self.city_images.get_icon(
-            'person'), scale=self.ICON_SCALE), 'person')
-        self.images['water'] = (self.menu.add.image(self.city_images.get_icon(
-            'drop'), scale=self.ICON_SCALE), 'drop')
-        self.images['waste'] = (self.menu.add.image(self.city_images.get_icon(
-            'trash-can'), scale=self.ICON_SCALE), 'trash-can')
-        self.images['power'] = (self.menu.add.image(self.city_images.get_icon(
-            'plug'), scale=self.ICON_SCALE), 'plug')
+        self.images = {
+            'funds': (self.menu.add.image(self.city_images.get_icon('banknote'), scale=self.ICON_SCALE), 'banknote'),
+            'resident_happyness': (self.menu.add.image(self.city_images.get_icon('heart-inside'), scale=self.ICON_SCALE), 'heart-inside'),
+            'population': (self.menu.add.image(self.city_images.get_icon('person'), scale=self.ICON_SCALE), 'person'),
+            'water': (self.menu.add.image(self.city_images.get_icon('drop'), scale=self.ICON_SCALE), 'drop'),
+            'waste': (self.menu.add.image(self.city_images.get_icon(
+                'trash-can'), scale=self.ICON_SCALE), 'trash-can'),
+            'power': (self.menu.add.image(self.city_images.get_icon(
+                'plug'), scale=self.ICON_SCALE), 'plug')
+        }
 
         self.menu.add.label('')
         self.menu.add.label('')
@@ -95,7 +92,7 @@ class InfoPanel(Panel):
                 widget.set_title(f'{text}: {value}')
 
             image, image_key = self.images[key]
-            if isinstance(value, (str)):
+            if isinstance(value, str):
                 if value == 'Very high' and not image.red:
                     image.red = True
                     image.set_image(pgmen.baseimage.BaseImage(

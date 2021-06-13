@@ -3,6 +3,7 @@ from random import random, choice, seed
 from time import time_ns
 
 import pygame as pg
+
 from city import HORIZONTAL
 from city.lot_type import LotType
 from city_graphics import ROAD_WIDTH_RATIO
@@ -10,7 +11,7 @@ from game_engine_tools import load_asset, Singleton
 
 
 class CityImages(metaclass=Singleton):
-    '''scaled and original background lot images'''
+    """scaled and original background lot images"""
 
     def __init__(self):
         self.main_images = {

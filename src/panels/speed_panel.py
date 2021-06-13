@@ -1,4 +1,5 @@
 import pygame_menu as pgmen
+
 from city_graphics.city_images import CityImages
 from panels.panel import Panel
 

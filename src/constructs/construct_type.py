@@ -305,7 +305,7 @@ class ConstructType(Enum):
             },
             1: {
                 'name': 'dog park',
-                'description': 'Perfect place to rela and walk your pupils <3',
+                'description': 'Perfect place to relax and walk your pupils <3',
                 'people_involved': 5,
                 'income': -200,
                 'energy_change': -5,
@@ -325,7 +325,7 @@ class ConstructType(Enum):
         'level': {
             0: {
                 'name': 'statue',
-                'description': 'Beauftiful statue - truly a sight to behold.',
+                'description': 'Beautiful statue - truly a sight to behold.',
                 'resident_happiness_multiplier': 1.6,
                 'temperature_raise': 0,
                 'range': 10,
@@ -397,7 +397,7 @@ class ConstructType(Enum):
                 'description': 'Increases water amount in the storage and provides water for all residents in range.',
                 'income': -500,
                 'energy_change': -100,
-                'water_productioin': 1000,
+                'water_production': 1000,
                 'resident_happiness_multiplier': 1.1,
                 'fire_protection': 1,
                 'temperature_raise': 0,
@@ -407,5 +407,6 @@ class ConstructType(Enum):
         }
     }
 
-    def get_info(self, type):
+    @staticmethod
+    def get_info(type):
         return type.value

@@ -1,9 +1,10 @@
 import pygame_menu as pgmen
+
 from panels.panel import Panel
 
 
 class ToggleMenu(Panel):
-    '''menu with the button that hides GamewindowPanel (the panel on the left)'''
+    """menu with the button that hides GameWindowPanel (the panel on the left)"""
 
     def __init__(self, width, height, position, game_window, panel):
         super().__init__(width, height, game_window)

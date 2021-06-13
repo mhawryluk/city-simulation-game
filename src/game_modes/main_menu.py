@@ -2,6 +2,7 @@ from random import choice
 
 import pygame as pg
 import pygame_menu as pgmen
+
 from game_engine_tools import load_asset, volume_up, volume_down
 from game_engine_tools.save_manager import SaveManager
 from game_modes.game_mode import GameMode
@@ -37,7 +38,7 @@ class MainMenu(GameMode):
                                theme=self.get_theme(),
                                mouse_enabled=True, mouse_motion_selection=True)
 
-        if (self.save_manager.has_active_save()):
+        if self.save_manager.has_active_save():
             self.play_button = self.menu.add.button('Play', self.play)
             self.save_button = self.menu.add.button(
                 'Choose save', self.change_save_menu_status)
@@ -162,7 +163,6 @@ class MainMenu(GameMode):
             self.settings_menu.draw(self.window)
         else:
             if redraw:
-                width, height = self.menu.get_size()
                 self.make_main_menu()
             self.menu.draw(self.window)
 
@@ -171,7 +171,8 @@ class MainMenu(GameMode):
 
         pg.display.update()
 
-    def get_theme(self):
+    @staticmethod
+    def get_theme():
         theme = pgmen.themes.THEME_DARK.copy()
         theme.title_font = pgmen.font.FONT_FRANCHISE
         theme.title_font_size = 70

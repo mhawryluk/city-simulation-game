@@ -1,9 +1,10 @@
 import pygame_menu as pgmen
+
 from panels.panel import Panel
 
 
 class WarningPanel(Panel):
-    '''popup panel displaying specified text'''
+    """popup panel displaying specified text"""
 
     def __init__(self, window, text):
         width = 500

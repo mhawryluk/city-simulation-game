@@ -27,11 +27,11 @@ class Panel:
             self.menu.draw(window)
 
         for panel in self.get_subpanels():
-            if not panel is None:
+            if panel is not None:
                 panel.draw(window)
 
     def handle(self, event):
-        '''events handling function'''
+        """events handling function"""
         if self.menu.is_enabled():
             self.menu.update([event])
 
@@ -52,15 +52,14 @@ class Panel:
                 panel.disable()
 
     def collide(self):
-        '''returns True if the mouse is hovering above this tile'''
+        """returns True if the mouse is hovering above this tile"""
         if not self.menu.is_enabled():
             return False
 
         position = self.menu.get_position()
         mouse_pos = pg.mouse.get_pos()
 
-        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[
-            1] + self.menu.get_height():
+        if position[0] < mouse_pos[0] < position[0] + self.menu.get_width() and position[1] <= mouse_pos[1] <= position[1] + self.menu.get_height():
             return True
 
         for panel in self.get_subpanels():
@@ -72,19 +71,19 @@ class Panel:
         return False
 
     def get_subpanels(self):
-        '''returns all panels attached to this panel'''
+        """returns all panels attached to this panel"""
         return []
 
     def disable_subpanels(self):
-        '''hides all children/deriving panels'''
+        """hides all children/deriving panels"""
         for panel in self.get_subpanels():
             panel.disable_all_panels()
 
     def disable_all_panels(self):
-        '''hides all panels including the one this function is called in and all of its children/deriving panels'''
+        """hides all panels including the one this function is called in and all of its children/deriving panels"""
         self.menu.disable()
         for panel in self.get_subpanels():
-            if not panel is None:
+            if panel is not None:
                 panel.disable_all_panels()
 
     def unselect_selected_widget(self):

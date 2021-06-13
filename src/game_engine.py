@@ -21,7 +21,7 @@ class GameEngine:
             pg.mixer.music.set_volume(0.2)
             pg.mixer.music.play()
         except:
-            pass  # if music drivers don't work - don't play music
+            pass  # if music drivers don't work - don't play the music
 
         self.window = pg.display.set_mode(WINDOW_SIZE)
         self.clock = pg.time.Clock()
@@ -46,7 +46,8 @@ class GameEngine:
                     if self.game_mode.change_mode:
                         self.change_mode()
 
-    def get_map(self, map_name):
+    @staticmethod
+    def get_map(map_name):
         try:
             with open(f'Maps/{map_name}.json', 'r') as f:
                 map = js.load(f)

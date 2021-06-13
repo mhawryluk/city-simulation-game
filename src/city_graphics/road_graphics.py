@@ -2,6 +2,7 @@ from itertools import product
 from random import choice
 
 import pygame as pg
+
 from city import HORIZONTAL, VERTICAL
 from city_graphics import ROAD_WIDTH_RATIO
 from city_graphics.car import Car
@@ -18,6 +19,8 @@ class RoadGraphics:
     cars = set()
     car_speed = 0.04
     city_images = CityImages()
+    map_dimensions = None
+    window = None
 
     @classmethod
     def reset(cls):
@@ -57,7 +60,7 @@ class RoadGraphics:
         alpha_level = 150
         alpha.set_alpha(alpha_level)
 
-        ## road outline
+        # road outline
         alpha.fill(cls.BLANK_COLOR)
         for pos_x, pos_y in product(range(cls.map_dimensions[0]), range(cls.map_dimensions[1])):
             if not (pos_x, pos_y) in roads.vertical:
@@ -70,7 +73,7 @@ class RoadGraphics:
             if not (pos_x, pos_y) in roads.horizontal:
                 cls.draw_element(pos_x, pos_y, pov, scale, alpha)
 
-        ## highlight
+        # highlight
         alpha = pg.Surface(cls.get_vertical_size(scale))
         alpha.set_alpha(alpha_level)
         alpha.fill(cls.HIGHLIGHT_COLOR)

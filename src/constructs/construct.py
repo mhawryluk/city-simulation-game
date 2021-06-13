@@ -2,6 +2,7 @@ from random import choice, seed
 from time import time
 
 import pygame as pg
+
 from constructs.construct_type import ConstructType
 
 

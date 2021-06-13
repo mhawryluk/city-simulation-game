@@ -11,7 +11,8 @@ class SaveManager:
         self.happiness_threshold = 3
         self.load_save_manager_data()
 
-    def generate_save_manager_data_to(self, sm_data_file_path):
+    @staticmethod
+    def generate_save_manager_data_to(sm_data_file_path):
         sm_data = dict()
         sm_data['active_save'] = None
         sm_data['max_saves_amount'] = 500
@@ -38,7 +39,7 @@ class SaveManager:
             js.dump(self.sm_data, sm_data)
 
     def has_active_save(self):
-        return self.sm_data['active_save'] != None
+        return self.sm_data['active_save'] is not None
 
     def create_save(self, name):
         free_save_id = self.sm_data['free_save_id_list']
@@ -112,7 +113,7 @@ class SaveManager:
         list_of_saves = []
         free_save_id = [int(id) for id in self.sm_data['free_save_id_list']]
         save_ids = [str(id) for id in range(
-            1, self.sm_data['max_save_id'] + 1) if not id in free_save_id]
+            1, self.sm_data['max_save_id'] + 1) if id not in free_save_id]
         for key in save_ids:
             list_of_saves.append(
                 ('[ ' + self.sm_data[key] + ' ] id: ' + str(key), key))

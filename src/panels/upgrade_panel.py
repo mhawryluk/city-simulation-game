@@ -1,4 +1,5 @@
 import pygame_menu as pgmen
+
 from constructs.construct_type import ConstructType
 from panels.panel import Panel
 
@@ -14,6 +15,7 @@ class UpgradePanel(Panel):
 
         self.simulation = simulation
         self.control = False
+        self.lot = None
 
     def set_lot(self, lot):
         self.lot = lot

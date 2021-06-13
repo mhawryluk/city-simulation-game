@@ -5,7 +5,7 @@ from constructs.construct_type import ConstructType
 
 
 class CitySpace:
-    '''main class representing the city'''
+    """main class representing the city"""
 
     def __init__(self, width, height, save_source=None, map=None):
         self.height = height  # amount of fields to height
@@ -19,7 +19,7 @@ class CitySpace:
 
     def reset_lots(self, save_source=None, map=None):
         '''
-        If no save data avaliable - creates new lot grid.
+        If no save data available - creates new lot grid.
         Else - loads lots form memory.
         '''
         self.lots = []
@@ -52,7 +52,8 @@ class CitySpace:
             return clicked_lot
         return None
 
-    def buy_construct(self, construct, clicked_lot):
+    @staticmethod
+    def buy_construct(construct, clicked_lot):
         if clicked_lot.can_place(construct):
             clicked_lot.set_construct(construct)
             return clicked_lot
