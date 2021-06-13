@@ -1,15 +1,16 @@
 from math import inf
-
 from city_graphics.city_space_graphics import CitySpaceGraphics
 from constructs.construct_type import get_zone_construct_type
 from game_engine_tools.player_status_tracker import PlayerStatus
 from . import make_safe_range
 from .road_graph import RoadNetGraph
-from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happyness, \
+from .simulation_tools import MONEY_RETURN_PERCENT, SIMULATIONS, calculate_happiness, normalize_happiness, \
     satisfy_demand, calculate_demands
 
 
 class SimulationEngine:
+    """ class managing simulation progress, updating statistics and demand"""
+
     FPS_PER_CYCLE_OPTIONS = [
         inf,
         60 * 2.5,
@@ -38,7 +39,7 @@ class SimulationEngine:
                     for simulation in SIMULATIONS:
                         simulation(lot, self.player_status)
                     self.player_status.data['resident_happyness'] += calculate_happiness(lot)
-            self.player_status.data['resident_happyness'] = normalize_happyness(
+            self.player_status.data['resident_happyness'] = normalize_happiness(
                 self.player_status.data['resident_happyness'], old_happiness)
             satisfy_demand(self.player_status)
             calculate_demands(self.player_status)

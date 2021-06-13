@@ -182,14 +182,14 @@ def top_demand(player_status):
         'industrial demand'] in top_demands
 
 
-def normalize_happyness(happyness, old_happyness):
-    happyness = (happyness * NEW_PERCENT_WEIGHT + old_happyness * CURRENT_PERCENT_WEIGHT) / (
+def normalize_happiness(happiness, old_happiness):
+    happiness = (happiness * NEW_PERCENT_WEIGHT + old_happiness * CURRENT_PERCENT_WEIGHT) / (
             NEW_PERCENT_WEIGHT + CURRENT_PERCENT_WEIGHT)
-    happyness = (happyness + 1) ** 0.25
-    happyness = -1 / happyness + 1
-    if happyness >= 0.9994:
-        happyness = 1
-    return happyness
+    happiness = (happiness + 1) ** 0.25
+    happiness = -1 / happiness + 1
+    if happiness >= 0.9994:
+        happiness = 1
+    return happiness
 
 
 # constant listing all simulation functions to be called in a complete cycle

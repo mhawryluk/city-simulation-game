@@ -1,4 +1,6 @@
 class PlayerStatus:
+    """class representing city's current statistics"""
+
     def __init__(self, save_source=None):
         self.data = save_source
         if save_source is None:

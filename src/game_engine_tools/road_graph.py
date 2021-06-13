@@ -1,4 +1,6 @@
 class RoadNetGraph:
+    """ class used as to find connection between lots through road system"""
+
     def __init__(self, road_system, lots):
         self.road_system = road_system
         self.lots = lots
@@ -95,7 +97,12 @@ class RoadNetGraph:
             ]
         return self.filter_neighbor_roads(hor, ver)
 
-    def filter_neighbor_roads(self, hor=[], ver=[]):
+    def filter_neighbor_roads(self, hor=None, ver=None):
+        if ver is None:
+            ver = []
+        if hor is None:
+            hor = []
+
         horizontal = [
             (i, j) for i, j in hor if (j, i) in self.road_system.horizontal
         ]

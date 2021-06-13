@@ -1,5 +1,4 @@
 import os
-
 import pygame as pg
 
 WINDOW_SIZE = (1920, 1020)
