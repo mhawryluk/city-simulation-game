@@ -2,6 +2,8 @@
 SaveFiles/*.json
 CitySimulationGame/exe.win-amd64-3.9/SaveFiles/*.json
 .idea
+CitySimulationGame/
+City Simulation Game.lnk
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
