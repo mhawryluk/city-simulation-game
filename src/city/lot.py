@@ -33,6 +33,13 @@ class Lot:
                 self.construct_level = save_source.get('construct_level', 0)
 
     def set_zone(self, zone_type):
+        """
+            sets zone type as well as a construct according to it
+            returns True if could place the building, False otherwise
+        """
+        if not self.can_place(ConstructType.FAMILY_HOUSE):
+            return False
+
         self.zone_type = zone_type
         if zone_type == 'residential':
             self.construct = Construct(ConstructType.FAMILY_HOUSE)
@@ -41,9 +48,18 @@ class Lot:
         elif zone_type == 'industrial':
             self.construct = Construct(ConstructType.FACTORY)
 
+        return True
+
     def set_construct(self, construct_type):
+        """
+            sets bought construct with specified type if lot available
+            returns True if could place the building, False otherwise
+        """
+        if not self.can_place(construct_type):
+            return False
         self.construct = Construct(construct_type)
         self.zone_type = None
+        return True
 
     def remove_construct(self):
         if self.construct is None:

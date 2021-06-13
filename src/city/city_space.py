@@ -8,21 +8,21 @@ class CitySpace:
     """main class representing the city"""
 
     def __init__(self, width, height, save_source=None, map=None):
-        self.height = height  # amount of fields to height
-        self.width = width  # amount of fields to width
+        self.height = height  # amount of fields in height
+        self.width = width  # amount of fields in width
 
         self.road_system = RoadSystem(
             width, height, None if save_source is None else save_source['roads'])
+
+        self.lots = []
         self.reset_lots(
             None if save_source is None else save_source['lots'], map)
-        self.zone = set()
 
     def reset_lots(self, save_source=None, map=None):
-        '''
+        """
         If no save data available - creates new lot grid.
         Else - loads lots form memory.
-        '''
-        self.lots = []
+        """
 
         if save_source is None:
             if map is not None:
@@ -44,20 +44,6 @@ class CitySpace:
 
     def road_clicked(self):
         self.road_system.road_clicked()
-
-    def add_to_zone(self, zone_type, clicked_lot):
-        if clicked_lot.can_place(ConstructType.FAMILY_HOUSE):
-            clicked_lot.set_zone(zone_type)
-            self.zone.add(clicked_lot)
-            return clicked_lot
-        return None
-
-    @staticmethod
-    def buy_construct(construct, clicked_lot):
-        if clicked_lot.can_place(construct):
-            clicked_lot.set_construct(construct)
-            return clicked_lot
-        return None
 
     def compress2save(self):
         c2s = {
