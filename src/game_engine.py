@@ -5,7 +5,7 @@ import pygame as pg
 
 from game_engine_tools import FPS, WINDOW_SIZE, load_asset
 from game_engine_tools.save_manager import SaveManager
-from game_modes.game_mode import GameMode
+from game_modes.gameplay_mode import GameplayMode
 from game_modes.main_menu import MainMenu
 
 
@@ -59,10 +59,10 @@ class GameEngine:
         if isinstance(self.game_mode, MainMenu):
             map_ = self.get_map(self.map_name)
             if map_ is None:
-                self.game_mode = GameMode(
+                self.game_mode = GameplayMode(
                     self.window, self.save_manager, 10, 10)
             else:
-                self.game_mode = GameMode(
+                self.game_mode = GameplayMode(
                     self.window, self.save_manager, map_['height'], map_['width'], map_['map'])
         else:
             self.game_mode = MainMenu(self.window, self.save_manager)

@@ -5,10 +5,10 @@ import pygame_menu as pgmen
 
 from game_engine_tools import load_asset, volume_up, volume_down
 from game_engine_tools.save_manager import SaveManager
-from game_modes.mode import Mode
+from game_modes.game_mode import GameMode
 
 
-class MainMenu(Mode):
+class MainMenu(GameMode):
     def __init__(self, window, save: SaveManager):
         super().__init__(window, save)
         self.change_mode = False
